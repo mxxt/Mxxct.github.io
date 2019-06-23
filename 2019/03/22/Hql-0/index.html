@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Linux,Docker,">
+  <meta name="keywords" content="Hadoop,Hive,">
 
 
 
@@ -123,20 +123,18 @@
 
 
 
-<meta name="description" content="管理员权限！！！ 查看docker版本 1docker -v  启动 1service docker start  关闭 1service docker stop  重启 1service docker restart  测试 hello world 1[root@docker mxxd]# docker run hub.c.163.com/library/busybox:latest echo">
-<meta name="keywords" content="Linux,Docker">
+<meta name="description" content="Hive SQL的一些使用说明1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  select A1, A2, A3, max(B) from test gr">
+<meta name="keywords" content="Hadoop,Hive">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker指令整理">
-<meta property="og:url" content="http://yoursite.com/2018/11/18/Docker-3/index.html">
+<meta property="og:title" content="Hive SQL的一些使用说明">
+<meta property="og:url" content="http://yoursite.com/2019/03/22/Hql-0/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="管理员权限！！！ 查看docker版本 1docker -v  启动 1service docker start  关闭 1service docker stop  重启 1service docker restart  测试 hello world 1[root@docker mxxd]# docker run hub.c.163.com/library/busybox:latest echo">
+<meta property="og:description" content="Hive SQL的一些使用说明1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  select A1, A2, A3, max(B) from test gr">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/c9lGJ1y.png">
-<meta property="og:updated_time" content="2018-11-18T03:09:28.000Z">
+<meta property="og:updated_time" content="2019-06-18T02:45:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker指令整理">
-<meta name="twitter:description" content="管理员权限！！！ 查看docker版本 1docker -v  启动 1service docker start  关闭 1service docker stop  重启 1service docker restart  测试 hello world 1[root@docker mxxd]# docker run hub.c.163.com/library/busybox:latest echo">
-<meta name="twitter:image" content="https://i.imgur.com/c9lGJ1y.png">
+<meta name="twitter:title" content="Hive SQL的一些使用说明">
+<meta name="twitter:description" content="Hive SQL的一些使用说明1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  select A1, A2, A3, max(B) from test gr">
 
 
 
@@ -166,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/18/Docker-3/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/22/Hql-0/">
 
 
 
 
 
-  <title>Docker指令整理 | 猫熊小才天の书院</title>
+  <title>Hive SQL的一些使用说明 | 猫熊小才天の书院</title>
   
 
 
@@ -333,7 +331,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/18/Docker-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/Hql-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mxxct">
@@ -350,7 +348,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker指令整理</h1>
+          <h1 class="post-title" itemprop="name headline">Hive SQL的一些使用说明</h1>
         
 
         <div class="post-meta">
@@ -364,8 +362,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-18T11:09:28+08:00">
-                2018-11-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-22T17:02:37+08:00">
+                2019-03-22
               </time>
             
 
@@ -389,8 +387,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
                   </a>
                 </span>
 
@@ -400,8 +398,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/Hadoop/Hive/" itemprop="url" rel="index">
+                    <span itemprop="name">Hive</span>
                   </a>
                 </span>
 
@@ -418,8 +416,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/18/Docker-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/18/Docker-3/" itemprop="commentCount"></span>
+                <a href="/2019/03/22/Hql-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/22/Hql-0/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -427,7 +425,7 @@
 
           
           
-             <span id="/2018/11/18/Docker-3/" class="leancloud_visitors" data-flag-title="Docker指令整理">
+             <span id="/2019/03/22/Hql-0/" class="leancloud_visitors" data-flag-title="Hive SQL的一些使用说明">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -460,60 +458,93 @@
       
 
       
-        <p><strong>管理员权限！！！</strong></p>
-<p>查看docker版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br></pre></td></tr></table></figure>
+        <h2 id="Hive-SQL的一些使用说明"><a href="#Hive-SQL的一些使用说明" class="headerlink" title="Hive SQL的一些使用说明"></a>Hive SQL的一些使用说明</h2><h4 id="1-distinct-和-group-by"><a href="#1-distinct-和-group-by" class="headerlink" title="1. distinct 和 group by"></a>1. distinct 和 group by</h4><p>distinct 只能返回去重的列</p>
+<p>group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的</p>
+<p>select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg： </p>
+<pre><code>select A1, A2, A3, max(B) from test group by A1, A2, A3</code></pre><p><code>select distinct(A), B from test</code> 和 <code>select distinct A, B from test</code> 返回的是一样的，返回的都是 A 和 B 的组合值没有重复的结果</p>
+<p>如果需要去重的话，<code>select 需要的列 from A, (select min(主键) from A group by 要去重的列)B where A.主键 = B.主键</code></p>
+<h4 id="2-left-join"><a href="#2-left-join" class="headerlink" title="2. left join"></a>2. left join</h4><p><code>A left join B on A.a1 = B.b and A.a2 = &#39;val&#39;</code> 保留 A 的所有结果，同时 on 后面的结果只针对这一条 left join 语句，不会影响最后的筛选，所以如果要保留所有 A.a2 = ‘val’ 的数据的话，应该在最后写 <code>where A.a2 = &#39;val&#39;</code></p>
+<h4 id="3-if-和-case-when"><a href="#3-if-和-case-when" class="headerlink" title="3. if 和 case when"></a>3. if 和 case when</h4><p>一层： <code>if(A.a = &#39;key&#39;, val1, val2)</code></p>
+<p>两层： <code>if(A.a = &#39;key1&#39;, val1, if(A.a = &#39;key2&#39;, val2, val3))</code></p>
+<pre><code>case A.a 
+when &apos;key1&apos; then &apos;val1&apos; 
+when &apos;key2&apos; then &apos;val2&apos; 
+else &apos;val3&apos; 
+end </code></pre><h5 id="4-regexp-replace"><a href="#4-regexp-replace" class="headerlink" title="4. regexp_replace"></a>4. regexp_replace</h5><p>替换掉 A.a 字段中的点 <code>regexp_replace(A.a, &quot;\\.&quot;, &quot;&quot;)</code></p>
+<h5 id="5-cast"><a href="#5-cast" class="headerlink" title="5. cast"></a>5. cast</h5><p>cast(A.a as int)</p>
+<h5 id="6-concat"><a href="#6-concat" class="headerlink" title="6. concat"></a>6. concat</h5><p>concat(A.a,’-01-01’)</p>
+<h5 id="7-concat-ws-行转列"><a href="#7-concat-ws-行转列" class="headerlink" title="7. concat_ws 行转列"></a>7. concat_ws 行转列</h5><p>concat_ws(‘/‘, collect_set(label_name))label_name group by key</p>
+<h5 id="8-regexp"><a href="#8-regexp" class="headerlink" title="8. regexp"></a>8. regexp</h5><p>where trim(A.a) regexp ‘^[1-9 | A-E]’</p>
+<h5 id="9-from-unixtime"><a href="#9-from-unixtime" class="headerlink" title="9. from_unixtime"></a>9. from_unixtime</h5><p>from_unixtime(unix_timestamp(),’yyyy-MM-dd hh:mm:ss’) update_time</p>
+<h5 id="10-索引"><a href="#10-索引" class="headerlink" title="10. 索引"></a>10. 索引</h5><p>索引基数： 数据列所包含的不同值的数量。索引的基数相对于数据表行数较高（即列中包含很多不同的值，重复的值很少），这个时候创建的索引效果更好。因为查询优化器如果发现某个值出现在表的数据行中的百分比很高的时候，可能会忽略索引直接进行全盘扫描。</p>
+<h5 id="11-row-number"><a href="#11-row-number" class="headerlink" title="11. row_number()"></a>11. row_number()</h5><p>row_number() over(partition by 主键 order by 字段1 desc)as r</p>
+<h5 id="12-多个条件"><a href="#12-多个条件" class="headerlink" title="12.多个条件"></a>12.多个条件</h5><p>if(boolean, res1, if(boolean, res2, if(boolean, res3,……)))</p>
+<h5 id="13-nvl"><a href="#13-nvl" class="headerlink" title="13.nvl"></a>13.nvl</h5><p>nvl(a,b) 如果a为null 那就取b 只能判断null  不能判断空</p>
+<h5 id="14-decimal"><a href="#14-decimal" class="headerlink" title="14.decimal"></a>14.decimal</h5><p>cast(round((sum(an) * 100 / sum(tn)),2) as decimal(20,2))</p>
+<p>round((sum(an) * 100 / sum(tn)),2) 可能会出现 84.6599999999 的数据，可能只是 hue 上的 bug，需要再处理一下</p>
+<h5 id="15-补零"><a href="#15-补零" class="headerlink" title="15.补零"></a>15.补零</h5><p>if(substr(bp, 1, 1) != ‘X’ and bp is not null and trim(bp) != ‘null’ and trim(bp) != ‘’ and trim(bp) != ‘*’, lpad(bp, 10, ‘0’), bp)as temp </p>
+<h5 id="16-推数编码出错"><a href="#16-推数编码出错" class="headerlink" title="16.推数编码出错"></a>16.推数编码出错</h5><p>Incorrect string value: ‘\xF0\xAF\xA0\xA5’ for column ‘customer_txt’ at row 45</p>
+<p>修改字符集为 utf8mb4</p>
+<h5 id="17-去重"><a href="#17-去重" class="headerlink" title="17.去重"></a>17.去重</h5><p>select distinct t1.objnr<br>from jest t1<br>where t1.stat = ‘I0002’<br>and t1.objnr not in (select distinct objnr from jest where stat = ‘I0076’);</p>
+<p>==&gt; </p>
+<p>select * from<br>(select objnr, min(if(stat = ‘I0002’, 0, 1))a, max(if(stat = ‘I0076’, 1, 0))b<br>from jest group by objnr)t where t.a = 0 and t.b = 1;</p>
+<h5 id="18-插入数据"><a href="#18-插入数据" class="headerlink" title="18.插入数据"></a>18.插入数据</h5><p>insert into table values (‘05:00’,’6’) ,(‘06:00’,’7’),<br>(‘07:00’,’8’), (‘08:00’,’9’), (‘09:00’,’10’), (‘10:00’,’11’), (‘11:00’,’12’), (‘12:00’,’13’),<br>(‘13:00’,’14’);</p>
+<h5 id="19-每隔N小时取数分组求和"><a href="#19-每隔N小时取数分组求和" class="headerlink" title="19.每隔N小时取数分组求和"></a>19.每隔N小时取数分组求和</h5><p>通过截取字符串，获取时间，除以N保留整数位，分组</p>
+<h5 id="20-正则表达式的匹配"><a href="#20-正则表达式的匹配" class="headerlink" title="20.正则表达式的匹配"></a>20.正则表达式的匹配</h5><pre><code>select regexp_replace(&apos;[3]&apos;,&apos;]&apos;,&apos;a&apos;)    不识别
+select regexp_replace(&apos;[3]&apos;,&apos;\]&apos;,&apos;a&apos;)    不识别
+select regexp_replace(&apos;[3]&apos;,&apos;\\]&apos;,&apos;a&apos;)    识别
+select regexp_replace(&apos;[3]&apos;,&apos;]&apos;,&apos;a&apos;)    识别
+select regexp_replace(&apos;[3]&apos;,&apos;\]&apos;,&apos;a&apos;)    识别
+select regexp_replace(&apos;[3]&apos;,&apos;\\]&apos;,&apos;a&apos;)    识别
+select regexp_replace(&apos;[3,.]&apos;,&apos;,&apos;,&apos;a&apos;)    识别
+select regexp_replace(&apos;[3,.]&apos;,&apos;.&apos;,&apos;a&apos;)    aaaaa    .会识别为通配符
+select regexp_replace(&apos;[3,.]&apos;,&apos;\.&apos;,&apos;a&apos;)    不识别
+select regexp_replace(&apos;[3,.]&apos;,&apos;\\.&apos;,&apos;a&apos;)    [3,a]    识别</code></pre><h5 id="21-空字符串关联"><a href="#21-空字符串关联" class="headerlink" title="21.空字符串关联"></a>21.空字符串关联</h5><ol>
+<li>(NULL) 在 join on 的时候不会被关联出来</li>
+<li>‘’ ‘ ‘ 在 join on 的时候会相互关联，只要有匹配项就会关联出来</li>
+<li>(NULL) 只在 left jion 的时候可以出来</li>
+</ol>
+<h4 id="22-lateral-view-explode-列转行"><a href="#22-lateral-view-explode-列转行" class="headerlink" title="22.lateral view explode 列转行"></a>22.lateral view explode 列转行</h4><pre><code>select gid, assist 
+from origin_ennenergy_intelligent_operation.wo_baseinfo  
+lateral view explode
+(split(split(split(regexp_replace(assist_man, &apos;&quot;&apos;,&quot;&quot;), &quot;\\[&quot;)[1],&quot;\\]&quot;)[0], &quot;,&quot;)) aa as assist</code></pre><h4 id="23-userids-包含-gid"><a href="#23-userids-包含-gid" class="headerlink" title="23. userids 包含 gid"></a>23. userids 包含 gid</h4><pre><code>find_in_set(gid, userids)  # userids 需要用逗号分隔
+instr(userids, gid) 会让 (&apos;2,11&apos;, &apos;1&apos;) 也被筛选出来</code></pre><h4 id="24-pmod-a-b-取模（取余）运算"><a href="#24-pmod-a-b-取模（取余）运算" class="headerlink" title="24.pmod(a, b) 取模（取余）运算"></a>24.pmod(a, b) 取模（取余）运算</h4><pre><code>pmod(7, 4) -&gt; 3
+pmod(9, -4) -&gt; -3
+# 9 mod -4 商可以取 -2 或 -3，因为 -3 &lt; 2，所以商取 -3，-4 * -3 = 12, 9 - 12 = -3，所以最终结果是 -3
+pmod(-9, 4) -&gt; 3
+# -9 mod 4 商可以取 -2 或 -3，因为 -3 &lt; 2，所以商取 -3，4 * -3 = -12, -9 - （-12） = 3，所以最终结果是 3</code></pre><h4 id="25-insert-和-insert-overwrite"><a href="#25-insert-和-insert-overwrite" class="headerlink" title="25.insert 和 insert overwrite"></a>25.insert 和 insert overwrite</h4><p>insert overwrite 本质是先覆盖原先的表，再把新的数据插入</p>
+<h4 id="26-insert-和-insert-into"><a href="#26-insert-和-insert-into" class="headerlink" title="26.insert 和 insert into"></a>26.insert 和 insert into</h4><p>insert table user(id, name) values(1, ‘zhangsan’);</p>
+<p>insert into table user values(1, ‘zhangsan’);</p>
+<h4 id="27-max-if-或者-max-case-when-行转列"><a href="#27-max-if-或者-max-case-when-行转列" class="headerlink" title="27.max(if) 或者 max(case when) 行转列"></a>27.max(if) 或者 max(case when) 行转列</h4><pre><code>select id, 
+max(if(name = &apos;buss&apos;, pass, &apos;&apos;)) as buss, 
+max(if(name = &apos;record&apos;, pass, &apos;&apos;)) as record, 
+max(if(name = &apos;stock&apos;, pass, &apos;&apos;)) as stock, 
+max(if(name = &apos;client&apos;, pass, &apos;&apos;)) as client
+from test0610 
+group by id;
 
-<p>启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker start</span><br></pre></td></tr></table></figure>
-
-<p>关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker stop</span><br></pre></td></tr></table></figure>
-
-<p>重启</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
-
-<p>测试 hello world</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker mxxd]# docker run hub.c.163.com/library/busybox:latest echo helloworld</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.imgur.com/c9lGJ1y.png" alt></p>
-<p>查看信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
-
-<p>查看镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-
-<p>列出run的容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a 查看所有容器，包括已经停止的</span><br><span class="line">docker ps -l 查看刚刚启动的容器</span><br><span class="line">docker ps -q 只显示容器ID</span><br><span class="line">docker ps -l-q 返回刚刚启动的容器ID</span><br></pre></td></tr></table></figure>
-
-<p>下载docker镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull *****</span><br><span class="line">镜像文件保存在本地的 /var/lib/docker 文件夹下</span><br></pre></td></tr></table></figure>
-
-<p>运行docker容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run *****</span><br><span class="line">docker run -p 8080:80 -name 自定义名称 -it 镜像名称  /bin/bash</span><br><span class="line">run  = create + start 第一次创建完容器可以用run，之后再启动就用start</span><br></pre></td></tr></table></figure>
-
-<p>退出docker容器但不停止运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+P+Q</span><br></pre></td></tr></table></figure>
-
-<p>停止docker容器运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop *****（ContainerID）</span><br></pre></td></tr></table></figure>
-
-<p>删除docker容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm *****（ContainerID）</span><br></pre></td></tr></table></figure>
-
-<p>删除docker镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi *****（imageID）</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除镜像之前必须要保证镜像所在的容器是停止的，并且要先删除容器之后才能删除镜像文件</strong></p>
-<p>启动docker容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start *****（ContainerID）</span><br></pre></td></tr></table></figure>
-
-<p>打包镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o ./test.zip image名称</span><br></pre></td></tr></table></figure>
-
-<p>导入镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load &lt; test.zip</span><br></pre></td></tr></table></figure>
-
+select id, 
+MAX(CASE WHEN name = &apos;buss&apos; THEN pass END) AS buss,
+MAX(CASE WHEN name = &apos;record&apos; THEN pass END) AS record,
+MAX(CASE WHEN name = &apos;stock&apos; THEN pass END) AS stock,
+MAX(CASE WHEN name = &apos;client&apos; THEN pass END) AS client
+from test0610 
+group by id;</code></pre><h4 id="28-复制表结构-但不复制数据"><a href="#28-复制表结构-但不复制数据" class="headerlink" title="28.复制表结构 但不复制数据"></a>28.复制表结构 但不复制数据</h4><p>create table Test2 like Test1;</p>
+<h4 id="29-两个限制条件"><a href="#29-两个限制条件" class="headerlink" title="29.两个限制条件"></a>29.两个限制条件</h4><p>要让每一条数据都满足 balance &lt; 0，gas &gt; 0，转换成 count(if(balance &gt;= 0, 1, 0)) as a, count(if(gas &lt;= 0, 1, 0)) as b，然后 where 中取 a = 0 and b = 0 的数据</p>
+<h4 id="30-join优化"><a href="#30-join优化" class="headerlink" title="30.join优化"></a>30.join优化</h4><ol>
+<li><p>多表join，其中有一个是最大的表</p>
+<p> select /*+ STREAMTABLE(table1) */ tabl1.a, table1.b, table2.c<br> from table1 join table2 on ……</p>
+<blockquote>
+<p>hive会假定查询中最后一个表是最大的表。在对每行记录进行连接操作的时候，会尝试将其他表缓存起来，然后扫描最后那个表进行计算。通过 <code>/*+ STREAMTABLE(table1) */</code> 可以显式地指出最大的表是哪一个，hive会将其作为驱动表，哪怕它不是在 join 的最后面</p>
+</blockquote>
+</li>
+<li><p>多表join，其中有一个是最小的表</p>
+<p> select /*+ MAPJOIN(table1) */ tabl1.a, table1.b, table2.c<br> from table1 join table2 on ……</p>
+<blockquote>
+<p>如果所有表中只有一张表是小表，那么可以在最大的表通过mapper的时候将小表完全放到内存中。Hive可以在map端执行连接过程（称为map-side JOIN），这是因为hive可以和内存中的小表进行逐一匹配，从而省略掉常规连接操作所需要的reduce过程。</p>
+</blockquote>
+</li>
+</ol>
 
       
     </div>
@@ -531,9 +562,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+            <a href="/tags/Hadoop/" rel="tag"><i class="fa fa-tag"></i> Hadoop</a>
           
-            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+            <a href="/tags/Hive/" rel="tag"><i class="fa fa-tag"></i> Hive</a>
           
         </div>
       
@@ -546,8 +577,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/18/Docker-2/" rel="next" title="Linux下安装Docker">
-                <i class="fa fa-chevron-left"></i> Linux下安装Docker
+              <a href="/2019/03/21/QlikSense-2/" rel="next" title="Qlik Sense学习笔记">
+                <i class="fa fa-chevron-left"></i> Qlik Sense学习笔记
               </a>
             
           </div>
@@ -556,8 +587,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/18/Linux-2/" rel="prev" title="Linux下安装Tomcat">
-                Linux下安装Tomcat <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/24/QlikSenseSSO/" rel="prev" title="Qlik Sense学习笔记">
+                Qlik Sense学习笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -615,8 +646,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -732,6 +772,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive-SQL的一些使用说明"><span class="nav-number">1.</span> <span class="nav-text">Hive SQL的一些使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-distinct-和-group-by"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. distinct 和 group by</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-left-join"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. left join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-if-和-case-when"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. if 和 case when</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-regexp-replace"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">4. regexp_replace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-cast"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">5. cast</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-concat"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">6. concat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-concat-ws-行转列"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">7. concat_ws 行转列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-regexp"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">8. regexp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-from-unixtime"><span class="nav-number">1.0.3.6.</span> <span class="nav-text">9. from_unixtime</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-索引"><span class="nav-number">1.0.3.7.</span> <span class="nav-text">10. 索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-row-number"><span class="nav-number">1.0.3.8.</span> <span class="nav-text">11. row_number()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-多个条件"><span class="nav-number">1.0.3.9.</span> <span class="nav-text">12.多个条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13-nvl"><span class="nav-number">1.0.3.10.</span> <span class="nav-text">13.nvl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14-decimal"><span class="nav-number">1.0.3.11.</span> <span class="nav-text">14.decimal</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15-补零"><span class="nav-number">1.0.3.12.</span> <span class="nav-text">15.补零</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16-推数编码出错"><span class="nav-number">1.0.3.13.</span> <span class="nav-text">16.推数编码出错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17-去重"><span class="nav-number">1.0.3.14.</span> <span class="nav-text">17.去重</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18-插入数据"><span class="nav-number">1.0.3.15.</span> <span class="nav-text">18.插入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19-每隔N小时取数分组求和"><span class="nav-number">1.0.3.16.</span> <span class="nav-text">19.每隔N小时取数分组求和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20-正则表达式的匹配"><span class="nav-number">1.0.3.17.</span> <span class="nav-text">20.正则表达式的匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21-空字符串关联"><span class="nav-number">1.0.3.18.</span> <span class="nav-text">21.空字符串关联</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-lateral-view-explode-列转行"><span class="nav-number">1.0.4.</span> <span class="nav-text">22.lateral view explode 列转行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#23-userids-包含-gid"><span class="nav-number">1.0.5.</span> <span class="nav-text">23. userids 包含 gid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#24-pmod-a-b-取模（取余）运算"><span class="nav-number">1.0.6.</span> <span class="nav-text">24.pmod(a, b) 取模（取余）运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#25-insert-和-insert-overwrite"><span class="nav-number">1.0.7.</span> <span class="nav-text">25.insert 和 insert overwrite</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#26-insert-和-insert-into"><span class="nav-number">1.0.8.</span> <span class="nav-text">26.insert 和 insert into</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#27-max-if-或者-max-case-when-行转列"><span class="nav-number">1.0.9.</span> <span class="nav-text">27.max(if) 或者 max(case when) 行转列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#28-复制表结构-但不复制数据"><span class="nav-number">1.0.10.</span> <span class="nav-text">28.复制表结构 但不复制数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#29-两个限制条件"><span class="nav-number">1.0.11.</span> <span class="nav-text">29.两个限制条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-join优化"><span class="nav-number">1.0.12.</span> <span class="nav-text">30.join优化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
