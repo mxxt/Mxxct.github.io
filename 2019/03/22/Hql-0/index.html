@@ -545,7 +545,22 @@ group by id;</code></pre><h4 id="28-复制表结构-但不复制数据"><a href=
 </blockquote>
 </li>
 </ol>
-
+<h4 id="31-导出mysql数据库的注释"><a href="#31-导出mysql数据库的注释" class="headerlink" title="31.导出mysql数据库的注释"></a>31.导出mysql数据库的注释</h4><pre><code>SELECT
+    COLUMN_NAME 列名,
+    COLUMN_TYPE 数据类型,
+    DATA_TYPE 字段类型,
+    CHARACTER_MAXIMUM_LENGTH 长度,
+    IS_NULLABLE 是否为空,
+    COLUMN_DEFAULT 默认值,
+    COLUMN_COMMENT 备注 
+FROM
+    INFORMATION_SCHEMA.COLUMNS 
+    table_schema = &apos;库名&apos; 
+    AND 
+-- 如果不写的话，默认会查询出所有表中的数据，这样可能就分不清到底哪些字段是哪张表中的了，所以还是建议写上要导出的名名称
+    table_name = &apos;表名&apos;</code></pre><h4 id="32-count"><a href="#32-count" class="headerlink" title="32.count()"></a>32.count()</h4><pre><code>count(*)：所有行进行统计，包括NULL行
+count(1)：所有行进行统计，包括NULL行
+count(column)：统计column所有非NULL行</code></pre>
       
     </div>
     
@@ -673,7 +688,7 @@ group by id;</code></pre><h4 id="28-复制表结构-但不复制数据"><a href=
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -684,7 +699,7 @@ group by id;</code></pre><h4 id="28-复制表结构-但不复制数据"><a href=
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -695,7 +710,7 @@ group by id;</code></pre><h4 id="28-复制表结构-但不复制数据"><a href=
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -760,7 +775,7 @@ group by id;</code></pre><h4 id="28-复制表结构-但不复制数据"><a href=
           </li>
         
           <li>
-            <a href="/2019/04/19/ReadingNotes-1/" title="挪威的森林" target="_blank">挪威的森林</a>
+            <a href="/2019/05/06/Qlik Sense-3/" title="Qlik Sense学习笔记" target="_blank">Qlik Sense学习笔记</a>
           </li>
         
       </ul>
@@ -782,7 +797,7 @@ group by id;</code></pre><h4 id="28-复制表结构-但不复制数据"><a href=
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive-SQL的一些使用说明"><span class="nav-number">1.</span> <span class="nav-text">Hive SQL的一些使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-distinct-和-group-by"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. distinct 和 group by</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-left-join"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. left join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-if-和-case-when"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. if 和 case when</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-regexp-replace"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">4. regexp_replace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-cast"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">5. cast</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-concat"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">6. concat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-concat-ws-行转列"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">7. concat_ws 行转列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-regexp"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">8. regexp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-from-unixtime"><span class="nav-number">1.0.3.6.</span> <span class="nav-text">9. from_unixtime</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-索引"><span class="nav-number">1.0.3.7.</span> <span class="nav-text">10. 索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-row-number"><span class="nav-number">1.0.3.8.</span> <span class="nav-text">11. row_number()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-多个条件"><span class="nav-number">1.0.3.9.</span> <span class="nav-text">12.多个条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13-nvl"><span class="nav-number">1.0.3.10.</span> <span class="nav-text">13.nvl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14-decimal"><span class="nav-number">1.0.3.11.</span> <span class="nav-text">14.decimal</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15-补零"><span class="nav-number">1.0.3.12.</span> <span class="nav-text">15.补零</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16-推数编码出错"><span class="nav-number">1.0.3.13.</span> <span class="nav-text">16.推数编码出错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17-去重"><span class="nav-number">1.0.3.14.</span> <span class="nav-text">17.去重</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18-插入数据"><span class="nav-number">1.0.3.15.</span> <span class="nav-text">18.插入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19-每隔N小时取数分组求和"><span class="nav-number">1.0.3.16.</span> <span class="nav-text">19.每隔N小时取数分组求和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20-正则表达式的匹配"><span class="nav-number">1.0.3.17.</span> <span class="nav-text">20.正则表达式的匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21-空字符串关联"><span class="nav-number">1.0.3.18.</span> <span class="nav-text">21.空字符串关联</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-lateral-view-explode-列转行"><span class="nav-number">1.0.4.</span> <span class="nav-text">22.lateral view explode 列转行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#23-userids-包含-gid"><span class="nav-number">1.0.5.</span> <span class="nav-text">23. userids 包含 gid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#24-pmod-a-b-取模（取余）运算"><span class="nav-number">1.0.6.</span> <span class="nav-text">24.pmod(a, b) 取模（取余）运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#25-insert-和-insert-overwrite"><span class="nav-number">1.0.7.</span> <span class="nav-text">25.insert 和 insert overwrite</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#26-insert-和-insert-into"><span class="nav-number">1.0.8.</span> <span class="nav-text">26.insert 和 insert into</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#27-max-if-或者-max-case-when-行转列"><span class="nav-number">1.0.9.</span> <span class="nav-text">27.max(if) 或者 max(case when) 行转列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#28-复制表结构-但不复制数据"><span class="nav-number">1.0.10.</span> <span class="nav-text">28.复制表结构 但不复制数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#29-两个限制条件"><span class="nav-number">1.0.11.</span> <span class="nav-text">29.两个限制条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-join优化"><span class="nav-number">1.0.12.</span> <span class="nav-text">30.join优化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive-SQL的一些使用说明"><span class="nav-number">1.</span> <span class="nav-text">Hive SQL的一些使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-distinct-和-group-by"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. distinct 和 group by</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-left-join"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. left join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-if-和-case-when"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. if 和 case when</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-regexp-replace"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">4. regexp_replace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-cast"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">5. cast</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-concat"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">6. concat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-concat-ws-行转列"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">7. concat_ws 行转列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-regexp"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">8. regexp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-from-unixtime"><span class="nav-number">1.0.3.6.</span> <span class="nav-text">9. from_unixtime</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-索引"><span class="nav-number">1.0.3.7.</span> <span class="nav-text">10. 索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-row-number"><span class="nav-number">1.0.3.8.</span> <span class="nav-text">11. row_number()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-多个条件"><span class="nav-number">1.0.3.9.</span> <span class="nav-text">12.多个条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13-nvl"><span class="nav-number">1.0.3.10.</span> <span class="nav-text">13.nvl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14-decimal"><span class="nav-number">1.0.3.11.</span> <span class="nav-text">14.decimal</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15-补零"><span class="nav-number">1.0.3.12.</span> <span class="nav-text">15.补零</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16-推数编码出错"><span class="nav-number">1.0.3.13.</span> <span class="nav-text">16.推数编码出错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17-去重"><span class="nav-number">1.0.3.14.</span> <span class="nav-text">17.去重</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18-插入数据"><span class="nav-number">1.0.3.15.</span> <span class="nav-text">18.插入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19-每隔N小时取数分组求和"><span class="nav-number">1.0.3.16.</span> <span class="nav-text">19.每隔N小时取数分组求和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20-正则表达式的匹配"><span class="nav-number">1.0.3.17.</span> <span class="nav-text">20.正则表达式的匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21-空字符串关联"><span class="nav-number">1.0.3.18.</span> <span class="nav-text">21.空字符串关联</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-lateral-view-explode-列转行"><span class="nav-number">1.0.4.</span> <span class="nav-text">22.lateral view explode 列转行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#23-userids-包含-gid"><span class="nav-number">1.0.5.</span> <span class="nav-text">23. userids 包含 gid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#24-pmod-a-b-取模（取余）运算"><span class="nav-number">1.0.6.</span> <span class="nav-text">24.pmod(a, b) 取模（取余）运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#25-insert-和-insert-overwrite"><span class="nav-number">1.0.7.</span> <span class="nav-text">25.insert 和 insert overwrite</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#26-insert-和-insert-into"><span class="nav-number">1.0.8.</span> <span class="nav-text">26.insert 和 insert into</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#27-max-if-或者-max-case-when-行转列"><span class="nav-number">1.0.9.</span> <span class="nav-text">27.max(if) 或者 max(case when) 行转列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#28-复制表结构-但不复制数据"><span class="nav-number">1.0.10.</span> <span class="nav-text">28.复制表结构 但不复制数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#29-两个限制条件"><span class="nav-number">1.0.11.</span> <span class="nav-text">29.两个限制条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-join优化"><span class="nav-number">1.0.12.</span> <span class="nav-text">30.join优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#31-导出mysql数据库的注释"><span class="nav-number">1.0.13.</span> <span class="nav-text">31.导出mysql数据库的注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-count"><span class="nav-number">1.0.14.</span> <span class="nav-text">32.count()</span></a></li></ol></li></ol></div>
             
 
           </div>
