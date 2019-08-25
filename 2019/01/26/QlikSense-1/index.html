@@ -655,10 +655,10 @@ define([
 <li><p>在获取 Object 的时候，必须要有高度，尽量不要用 min-height，没有高度会不显示，但是可以没有宽度，但是如果要保证换行效果的话，需要加上宽度限制，不然切换到手机屏幕的时候宽度会根据图表的宽度来自动匹配，有可能会导致失去图表效果</p>
 </li>
 <li><p>getObject() 的呈现效果和 visualization.get() 的呈现效果是一样的，都是获取 object 并且呈现，但是 visualization.get() 如果不 show 的话，vis 会一直存在，并且 vis 保存的是整个 object 的一个 datamodal 形式，可以查看到 object 的相关信息，比如图表的类型，组合模式，标题等等，在 layout – qHyperCube 下，可以查看 object 的数据内容，可以单独拿出这部分的数据来单独呈现或生成表格等等。</p>
-<pre><code>var app = qlik.openApp(&apos;数据E精灵热点分析.qvf&apos;,config);
+<pre><code>var app = qlik.openApp(&apos;xxxName.qvf&apos;,config);
     app.getObject(&apos;QV01&apos;, &apos;TT&apos;);
 
-var app = qlik.openApp(&apos;数据E精灵热点分析.qvf&apos;,config);
+var app = qlik.openApp(&apos;xxxName.qvf&apos;,config);
     app.visualization.get(&apos;TT&apos;).then(function(vis){
         vis.show(&quot;QV01&quot;);
     });</code></pre></li>
@@ -667,7 +667,7 @@ var app = qlik.openApp(&apos;数据E精灵热点分析.qvf&apos;,config);
 </ol>
 <p>方式一：<br>button 后面添加函数：onclick=”window.fn.getFirst()”，需要把函数写到静态中，然后在主JS文件中写入函数体。</p>
 <p>方式二：<br>通过 jQuery 来绑定 button 的点击事件</p>
-<pre><code>var app = qlik.openApp(&apos;数据E精灵热点分析.qvf&apos;,config);
+<pre><code>var app = qlik.openApp(&apos;xxxName.qvf&apos;,config);
 
 var chart = [];
 var promises = [];
@@ -706,7 +706,7 @@ Promise.all(promises).then(function () {
 // 需要注意的是，如果在获取 &apos;TT&apos;、&apos;EJpVXek&apos; 之间也存在因为数据量而产生先后顺序错乱的问题，可以固定数组下标来保证先后顺序一致，推荐修改为下面的形式：
 
 
-var app = qlik.openApp(&apos;数据E精灵热点分析.qvf&apos;,config);
+var app = qlik.openApp(&apos;xxxName.qvf&apos;,config);
 
 var chart = [];
 var promises = [];
