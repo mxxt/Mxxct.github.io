@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="Hive SQL的一些使用说明1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
+<meta name="description" content="Hive Sql的日常使用笔记1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
 <meta name="keywords" content="Hadoop,Hive">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hive SQL的一些使用说明">
+<meta property="og:title" content="Hive Sql的日常使用笔记">
 <meta property="og:url" content="http://yoursite.com/2019/03/22/Hql-0/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Hive SQL的一些使用说明1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
+<meta property="og:description" content="Hive Sql的日常使用笔记1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-27T01:07:00.000Z">
+<meta property="og:updated_time" content="2019-08-30T02:44:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hive SQL的一些使用说明">
-<meta name="twitter:description" content="Hive SQL的一些使用说明1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
+<meta name="twitter:title" content="Hive Sql的日常使用笔记">
+<meta name="twitter:description" content="Hive Sql的日常使用笔记1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
 
 
 
@@ -170,7 +170,7 @@
 
 
 
-  <title>Hive SQL的一些使用说明 | 猫熊小才天の书院</title>
+  <title>Hive Sql的日常使用笔记 | 猫熊小才天の书院</title>
   
 
 
@@ -348,7 +348,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hive SQL的一些使用说明</h1>
+          <h1 class="post-title" itemprop="name headline">Hive Sql的日常使用笔记</h1>
         
 
         <div class="post-meta">
@@ -425,7 +425,7 @@
 
           
           
-             <span id="/2019/03/22/Hql-0/" class="leancloud_visitors" data-flag-title="Hive SQL的一些使用说明">
+             <span id="/2019/03/22/Hql-0/" class="leancloud_visitors" data-flag-title="Hive Sql的日常使用笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -458,7 +458,7 @@
       
 
       
-        <h2 id="Hive-SQL的一些使用说明"><a href="#Hive-SQL的一些使用说明" class="headerlink" title="Hive SQL的一些使用说明"></a>Hive SQL的一些使用说明</h2><h3 id="1-distinct-和-group-by"><a href="#1-distinct-和-group-by" class="headerlink" title="1. distinct 和 group by"></a>1. distinct 和 group by</h3><p>distinct 只能返回去重的列</p>
+        <h2 id="Hive-Sql的日常使用笔记"><a href="#Hive-Sql的日常使用笔记" class="headerlink" title="Hive Sql的日常使用笔记"></a>Hive Sql的日常使用笔记</h2><h3 id="1-distinct-和-group-by"><a href="#1-distinct-和-group-by" class="headerlink" title="1. distinct 和 group by"></a>1. distinct 和 group by</h3><p>distinct 只能返回去重的列</p>
 <p>group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的</p>
 <p>select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select A1, A2, A3, max(B) from test group by A1, A2, A3</span><br></pre></td></tr></table></figure>
@@ -530,12 +530,15 @@
 </blockquote>
 <h3 id="31-导出mysql数据库的注释"><a href="#31-导出mysql数据库的注释" class="headerlink" title="31.导出mysql数据库的注释"></a>31.导出mysql数据库的注释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	COLUMN_NAME 列名,</span><br><span class="line">	COLUMN_TYPE 数据类型,</span><br><span class="line">	DATA_TYPE 字段类型,</span><br><span class="line">	CHARACTER_MAXIMUM_LENGTH 长度,</span><br><span class="line">	IS_NULLABLE 是否为空,</span><br><span class="line">	COLUMN_DEFAULT 默认值,</span><br><span class="line">	COLUMN_COMMENT 备注 </span><br><span class="line">FROM</span><br><span class="line">	INFORMATION_SCHEMA.COLUMNS </span><br><span class="line">	table_schema = &apos;库名&apos; </span><br><span class="line">	AND </span><br><span class="line">-- 如果不写的话，默认会查询出所有表中的数据，这样可能就分不清到底哪些字段是哪张表中的了，所以还是建议写上要导出的名名称</span><br><span class="line">	table_name = &apos;表名&apos;</span><br></pre></td></tr></table></figure>
 
-<h3 id="32-count"><a href="#32-count" class="headerlink" title="32.count()"></a>32.count()</h3><pre><code>count(*)：所有行进行统计，包括NULL行
+<h3 id="32-count"><a href="#32-count" class="headerlink" title="32. count()"></a>32. count()</h3><pre><code>count(*)：所有行进行统计，包括NULL行
 count(1)：所有行进行统计，包括NULL行
 count(column)：统计column所有非NULL行</code></pre><h3 id="33-sum-if…-和-count-if…"><a href="#33-sum-if…-和-count-if…" class="headerlink" title="33. sum(if…) 和 count(if…)"></a>33. sum(if…) 和 count(if…)</h3><p>在计数的时候，以下两种方式是等效的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sum(if(条件判断, 1, 0))</span><br><span class="line"></span><br><span class="line">count(if(条件判断, 字段, NULL))</span><br></pre></td></tr></table></figure>
 
 <p>原因在于 NULL 并不参加任何计算（但是升序排序的时候 NULL 是第一个，因为ASC码最小）。</p>
+<h3 id="34-sum-over-…"><a href="#34-sum-over-…" class="headerlink" title="34. sum() over(…)"></a>34. sum() over(…)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sum() over(partition by year) 计算结果是按照 year 分组来 sum 的总和</span><br><span class="line">sum() over(partition by year order by month) 计算结果是按照 year 分组，1月算的是1月的和，2月算的是 1 - 2月的和， 3月算的是 1 - 3月的和</span><br></pre></td></tr></table></figure>
+
+<p>同理适用于其他的窗口函数</p>
 
       
     </div>
@@ -664,7 +667,7 @@ count(column)：统计column所有非NULL行</code></pre><h3 id="33-sum-if…-�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -743,15 +746,15 @@ count(column)：统计column所有非NULL行</code></pre><h3 id="33-sum-if…-�
         
         
           <li>
+            <a href="/2019/08/30/Hql-1/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/07/Kafka-0/" title="Kafka概念" target="_blank">Kafka概念</a>
           </li>
         
           <li>
             <a href="/2019/08/07/Scala-1/" title="Scala编程 笔记" target="_blank">Scala编程 笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/01/Scala-0/" title="Scala 特殊符号含义" target="_blank">Scala 特殊符号含义</a>
           </li>
         
       </ul>
@@ -773,7 +776,7 @@ count(column)：统计column所有非NULL行</code></pre><h3 id="33-sum-if…-�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive-SQL的一些使用说明"><span class="nav-number">1.</span> <span class="nav-text">Hive SQL的一些使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-distinct-和-group-by"><span class="nav-number">1.1.</span> <span class="nav-text">1. distinct 和 group by</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-left-join"><span class="nav-number">1.2.</span> <span class="nav-text">2. left join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-if-和-case-when"><span class="nav-number">1.3.</span> <span class="nav-text">3. if 和 case when</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-regexp-replace"><span class="nav-number">1.4.</span> <span class="nav-text">4. regexp_replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-cast"><span class="nav-number">1.5.</span> <span class="nav-text">5. cast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-concat"><span class="nav-number">1.6.</span> <span class="nav-text">6. concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-concat-ws-行转列"><span class="nav-number">1.7.</span> <span class="nav-text">7. concat_ws 行转列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-regexp"><span class="nav-number">1.8.</span> <span class="nav-text">8. regexp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-from-unixtime"><span class="nav-number">1.9.</span> <span class="nav-text">9. from_unixtime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-索引"><span class="nav-number">1.10.</span> <span class="nav-text">10. 索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-row-number"><span class="nav-number">1.11.</span> <span class="nav-text">11. row_number()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-多个条件"><span class="nav-number">1.12.</span> <span class="nav-text">12.多个条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-nvl"><span class="nav-number">1.13.</span> <span class="nav-text">13.nvl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-decimal"><span class="nav-number">1.14.</span> <span class="nav-text">14.decimal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-补零"><span class="nav-number">1.15.</span> <span class="nav-text">15.补零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-推数编码出错"><span class="nav-number">1.16.</span> <span class="nav-text">16.推数编码出错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-去重"><span class="nav-number">1.17.</span> <span class="nav-text">17.去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-插入数据"><span class="nav-number">1.18.</span> <span class="nav-text">18.插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-每隔N小时取数分组求和"><span class="nav-number">1.19.</span> <span class="nav-text">19.每隔N小时取数分组求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-正则表达式的匹配"><span class="nav-number">1.20.</span> <span class="nav-text">20.正则表达式的匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-空字符串关联"><span class="nav-number">1.21.</span> <span class="nav-text">21.空字符串关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-lateral-view-explode-列转行"><span class="nav-number">1.22.</span> <span class="nav-text">22.lateral view explode 列转行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-userids-包含-gid"><span class="nav-number">1.23.</span> <span class="nav-text">23. userids 包含 gid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-pmod-a-b-取模（取余）运算"><span class="nav-number">1.24.</span> <span class="nav-text">24.pmod(a, b) 取模（取余）运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-insert-和-insert-overwrite"><span class="nav-number">1.25.</span> <span class="nav-text">25.insert 和 insert overwrite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-insert-和-insert-into"><span class="nav-number">1.26.</span> <span class="nav-text">26.insert 和 insert into</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-max-if-或者-max-case-when-行转列"><span class="nav-number">1.27.</span> <span class="nav-text">27.max(if) 或者 max(case when) 行转列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-复制表结构-但不复制数据"><span class="nav-number">1.28.</span> <span class="nav-text">28.复制表结构 但不复制数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-两个限制条件"><span class="nav-number">1.29.</span> <span class="nav-text">29.两个限制条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-join优化"><span class="nav-number">1.30.</span> <span class="nav-text">30.join优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-导出mysql数据库的注释"><span class="nav-number">1.31.</span> <span class="nav-text">31.导出mysql数据库的注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-count"><span class="nav-number">1.32.</span> <span class="nav-text">32.count()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-sum-if…-和-count-if…"><span class="nav-number">1.33.</span> <span class="nav-text">33. sum(if…) 和 count(if…)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive-Sql的日常使用笔记"><span class="nav-number">1.</span> <span class="nav-text">Hive Sql的日常使用笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-distinct-和-group-by"><span class="nav-number">1.1.</span> <span class="nav-text">1. distinct 和 group by</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-left-join"><span class="nav-number">1.2.</span> <span class="nav-text">2. left join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-if-和-case-when"><span class="nav-number">1.3.</span> <span class="nav-text">3. if 和 case when</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-regexp-replace"><span class="nav-number">1.4.</span> <span class="nav-text">4. regexp_replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-cast"><span class="nav-number">1.5.</span> <span class="nav-text">5. cast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-concat"><span class="nav-number">1.6.</span> <span class="nav-text">6. concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-concat-ws-行转列"><span class="nav-number">1.7.</span> <span class="nav-text">7. concat_ws 行转列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-regexp"><span class="nav-number">1.8.</span> <span class="nav-text">8. regexp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-from-unixtime"><span class="nav-number">1.9.</span> <span class="nav-text">9. from_unixtime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-索引"><span class="nav-number">1.10.</span> <span class="nav-text">10. 索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-row-number"><span class="nav-number">1.11.</span> <span class="nav-text">11. row_number()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-多个条件"><span class="nav-number">1.12.</span> <span class="nav-text">12.多个条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-nvl"><span class="nav-number">1.13.</span> <span class="nav-text">13.nvl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-decimal"><span class="nav-number">1.14.</span> <span class="nav-text">14.decimal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-补零"><span class="nav-number">1.15.</span> <span class="nav-text">15.补零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-推数编码出错"><span class="nav-number">1.16.</span> <span class="nav-text">16.推数编码出错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-去重"><span class="nav-number">1.17.</span> <span class="nav-text">17.去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-插入数据"><span class="nav-number">1.18.</span> <span class="nav-text">18.插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-每隔N小时取数分组求和"><span class="nav-number">1.19.</span> <span class="nav-text">19.每隔N小时取数分组求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-正则表达式的匹配"><span class="nav-number">1.20.</span> <span class="nav-text">20.正则表达式的匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-空字符串关联"><span class="nav-number">1.21.</span> <span class="nav-text">21.空字符串关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-lateral-view-explode-列转行"><span class="nav-number">1.22.</span> <span class="nav-text">22.lateral view explode 列转行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-userids-包含-gid"><span class="nav-number">1.23.</span> <span class="nav-text">23. userids 包含 gid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-pmod-a-b-取模（取余）运算"><span class="nav-number">1.24.</span> <span class="nav-text">24.pmod(a, b) 取模（取余）运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-insert-和-insert-overwrite"><span class="nav-number">1.25.</span> <span class="nav-text">25.insert 和 insert overwrite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-insert-和-insert-into"><span class="nav-number">1.26.</span> <span class="nav-text">26.insert 和 insert into</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-max-if-或者-max-case-when-行转列"><span class="nav-number">1.27.</span> <span class="nav-text">27.max(if) 或者 max(case when) 行转列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-复制表结构-但不复制数据"><span class="nav-number">1.28.</span> <span class="nav-text">28.复制表结构 但不复制数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-两个限制条件"><span class="nav-number">1.29.</span> <span class="nav-text">29.两个限制条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-join优化"><span class="nav-number">1.30.</span> <span class="nav-text">30.join优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-导出mysql数据库的注释"><span class="nav-number">1.31.</span> <span class="nav-text">31.导出mysql数据库的注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-count"><span class="nav-number">1.32.</span> <span class="nav-text">32. count()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-sum-if…-和-count-if…"><span class="nav-number">1.33.</span> <span class="nav-text">33. sum(if…) 和 count(if…)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-sum-over-…"><span class="nav-number">1.34.</span> <span class="nav-text">34. sum() over(…)</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1428,6 +1431,21 @@ count(column)：统计column所有非NULL行</code></pre><h3 id="33-sum-if…-�
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   
