@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="9jbEn2n4xq">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Algorithm,LeetCode,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="LeetCode刷题Type：Mediumhttps://leetcode-cn.com/problemset/all/ #8 字符串转换整数需要注意几个测试用例 &amp;quot;  +0 123&amp;quot; &amp;quot; 0012&amp;quot; &amp;quot;3.14&amp;quot;先判断是否有正负号，然后循环数组，需要记得把 Character.isDigit(sc[i]) 加在循环条件里，保证只有当下一">
+<meta name="keywords" content="Algorithm,LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode刷题（Medium）">
+<meta property="og:url" content="http://yoursite.com/2018/12/05/LeetCode-1/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="LeetCode刷题Type：Mediumhttps://leetcode-cn.com/problemset/all/ #8 字符串转换整数需要注意几个测试用例 &amp;quot;  +0 123&amp;quot; &amp;quot; 0012&amp;quot; &amp;quot;3.14&amp;quot;先判断是否有正负号，然后循环数组，需要记得把 Character.isDigit(sc[i]) 加在循环条件里，保证只有当下一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-22T02:45:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode刷题（Medium）">
+<meta name="twitter:description" content="LeetCode刷题Type：Mediumhttps://leetcode-cn.com/problemset/all/ #8 字符串转换整数需要注意几个测试用例 &amp;quot;  +0 123&amp;quot; &amp;quot; 0012&amp;quot; &amp;quot;3.14&amp;quot;先判断是否有正负号，然后循环数组，需要记得把 Character.isDigit(sc[i]) 加在循环条件里，保证只有当下一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/05/LeetCode-1/">
+
+
+
+
+
+  <title>LeetCode刷题（Medium） | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/05/LeetCode-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LeetCode刷题（Medium）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T17:02:37+08:00">
+                2018-12-05
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/05/LeetCode-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/05/LeetCode-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/12/05/LeetCode-1/" class="leancloud_visitors" data-flag-title="LeetCode刷题（Medium）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="LeetCode刷题"><a href="#LeetCode刷题" class="headerlink" title="LeetCode刷题"></a>LeetCode刷题</h2><h3 id="Type：Medium"><a href="#Type：Medium" class="headerlink" title="Type：Medium"></a>Type：Medium</h3><p><a href="https://leetcode-cn.com/problemset/all/" title="LeetCode" target="_blank" rel="noopener">https://leetcode-cn.com/problemset/all/</a></p>
+<h5 id="8-字符串转换整数"><a href="#8-字符串转换整数" class="headerlink" title="#8 字符串转换整数"></a>#8 字符串转换整数</h5><p>需要注意几个测试用例</p>
+<pre><code>&quot;  +0 123&quot;
+&quot; 0012&quot;
+&quot;3.14&quot;</code></pre><p>先判断是否有正负号，然后循环数组，需要记得把 <code>Character.isDigit(sc[i])</code> 加在循环条件里，保证只有当下一个字符是数字的时候才会把数值加起来。</p>
+<pre><code>class Solution {
+public int myAtoi(String str) {
+    boolean isPos = true;
+    char[] sc = (str.trim() + &quot; &quot;).toCharArray();
+    int i = 0;
+
+    if (sc[0] == &apos;-&apos;) {
+        isPos = false;
+        i++;
+    } else if (sc[0] == &apos;+&apos;) {
+        isPos = true;
+        i++;
+    }
+
+    long value = 0;
+    while (i &lt; sc.length &amp;&amp; Character.isDigit(sc[i])) {
+        value = value * 10 + (sc[i] - &apos;0&apos;);
+        i++;
+
+        if (value &gt; Integer.MAX_VALUE) {
+            return isPos ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+        }
+    }
+    value = isPos ? value : -value;
+    return (int) value;
+}
+}</code></pre><h5 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="#15 三数之和"></a>#15 三数之和</h5><p>首先对原数组进行排序。<br>最先想到的是三重循环，优化：<br>要满足 a + b + c = 0 ，则 a 一定是非正数，即 i 对应的数一定要小于等于 0 的，等于0的时候 a b c 都为 0 。同时 i 的循环应该是从 0 到 length - 3 的，即 0 &lt;= i &lt; length - 2 , 因为 j 要大于 i ，同理 k 要大于 j 。  </p>
+<p>实现如下：</p>
+<pre><code>class Solution {
+public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
+    List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+    Arrays.sort(nums);
+    int v1;
+    int v2;
+    int v3;
+    for(int i = 0; i &lt; nums.length-1 &amp;&amp; nums[i] &lt;= 0; ++i){
+        v1 = nums[i];
+        int j = i + 1;
+        int k = nums.length - 1;
+        while(k &gt; j){
+            v2 = nums[j];
+            v3 = nums[k];
+            if(v1 + v2 + v3 &gt; 0){
+                k--;
+            }else if(v1 + v2 + v3 &lt; 0){
+                j++;
+            }
+            else if(v1 + v2 + v3 == 0){
+                List&lt;Integer&gt; tmp = new ArrayList&lt;&gt;();
+                tmp.add(v1);
+                tmp.add(v2);
+                tmp.add(v3);
+                if(!res.contains(tmp)){a
+                    res.add(tmp);
+                }
+                j++;
+                k--;
+
+            }
+        }
+    }
+    return res;
+}
+}</code></pre><p>上面这种写法虽然能满足题目，但是会超时，时间主要会消耗在 res.add() 之前的去重上。所以想通过 HashSet 来辅助去重（Hash表的查询时间O（1）因为查询的是每个元素的hashcode）。</p>
+<blockquote>
+<p>想要可以自动拓展的数组 =&gt; List<br>想要元素不重复的数组 =&gt; Set<br>set内部排序由每个元素的hashcode决定</p>
+</blockquote>
+<p>双重循环，v3 = -(v1 + v2) , 借助 HashMap 来判断原数组是否有 v3 这个值同时下标必须在 v2 之后，满足的话就可以放进 Set 中。</p>
+<pre><code>class Solution {
+public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
+    Set&lt;List&lt;Integer&gt;&gt; res = new HashSet&lt;&gt;();
+    Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();
+    Arrays.sort(nums);
+    for(int i = 0;i &lt; nums.length;++i){
+        map.put(nums[i],i);
+    }
+    int v1;
+    int v2;
+    int v3;
+    for(int i = 0; i &lt; nums.length - 2 &amp;&amp; nums[i] &lt;= 0; ++i){
+        for(int j = i + 1; j &lt; nums.length - 1 &amp;&amp; j &gt; i; ++j){
+            v1 = nums[i];
+            v2 = nums[j];
+            v3 = -(v1 + v2);
+            if(map.containsKey(v3) &amp;&amp; map.get(v3) &gt; j){
+                res.add(Arrays.asList(v1,v2,v3));
+            }
+        }
+    }
+    return new ArrayList&lt;&gt;(res);
+}
+}</code></pre><h5 id="701-二叉搜索树中的插入操作"><a href="#701-二叉搜索树中的插入操作" class="headerlink" title="#701 二叉搜索树中的插入操作"></a>#701 二叉搜索树中的插入操作</h5><p>current 为当前结点，如果当前结点为 null ，那么就记录下 current 对应的 parent 结点，插入值小于 parent 结点的值，插入在左子树，反之插入在右子树</p>
+<pre><code>/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+public TreeNode insertIntoBST(TreeNode root, int val) {
+    if(root == null){
+        root = new TreeNode(val);
+        return root;
+    }
+
+    boolean isLeft = false;
+
+    TreeNode current = root;
+    TreeNode parent = root;
+
+    while(current != null){
+        parent = current;
+        if(val &lt; current.val){
+            current = current.left;
+            isLeft = true;
+        }else{
+            current = current.right;
+            isLeft = false;
+        }
+    }
+
+    TreeNode vNode = new TreeNode(val);
+    if(isLeft == true){
+        parent.left = vNode;
+    }else{
+        parent.right = vNode;
+    }
+
+    return root;
+}
+}</code></pre><h5 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="#2 两数相加"></a>#2 两数相加</h5><p>不能将链表中的每个元素一次性全部取出然后相加，然后把计算后的数值每一位都插入到链表中，因为可能会超出int整数范围。所以只能同时遍历两个链表对每一个元素依次相加。<br>需要用到的是一个进位符号，如果当前位置加和大于等于10，进位置为1；还需要一个curNode，作为辅助指针，指向当前应该插入的位置。<br>需要注意的测试用例是：  </p>
+<pre><code>[9],[9]</code></pre><p>输出的结果应该是[8,1]，首先当两数相加大于等于10的时候，sum应该等于对10取余。同时如果 l1 和 l2 如果都计算完了，但是进位标识是1的话还需要再添加一个元素进去。</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    int carry = 0; // 进位
+    ListNode head = new ListNode(0);
+    ListNode curNode = head; // 辅助指针
+    while(l1 != null || l2 != null){
+        int sum = tmp;
+        if(l1 != null){
+            sum += l1.val;
+        }
+        if(l2 != null){
+            sum += l2.val;
+        }
+        ListNode tmpNode;
+        if(sum &gt;= 10){
+            carry = 1;
+            tmpNode = new ListNode(sum % 10);
+        }else{
+            carry = 0;
+            tmpNode = new ListNode(sum);
+        }
+        curNode.next = tmpNode;
+        curNode = curNode.next;
+        if(l1 != null){
+            l1 = l1.next;
+        }
+        if(l2 != null){
+            l2 = l2.next;
+        }
+    }
+    if(carry == 1){
+        ListNode tmpNode = new ListNode(1);
+        curNode.next = tmpNode;
+    }
+
+    return head.next;
+}
+}</code></pre><h5 id="120-三角形最小路径和"><a href="#120-三角形最小路径和" class="headerlink" title="#120 三角形最小路径和"></a>#120 三角形最小路径和</h5><p>从最后一层往上计算，当前一层的值等于下一层相邻的两个数取最小再加上当前一层的数，不断网上，一直到第一层。<br>第一种方式：借助一个 n + 1 大小的数组，记录每一层的值，（最后一层是初始化的过程），然后输出数组第一个值就是最小路径和。</p>
+<pre><code>class Solution {
+public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
+    if(triangle == null || triangle.size() == 0){
+        return 0;
+    }
+    int[] res = new int[triangle.size()+1];
+    for(int i = triangle.size() - 1; i &gt;= 0; --i){
+        for(int j = 0; j &lt; triangle.get(i).size(); ++j){
+            res[j] = Math.min(res[j],res[j+1]) + triangle.get(i).get(j);
+        }
+    }
+    return res[0];
+}
+}</code></pre><p>第二种方式：从倒数第二层开始计算，计算出当前位置的最小值后，直接重新赋值，不需要新的空间</p>
+<pre><code>class Solution {
+public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
+    if(triangle == null || triangle.size() == 0){
+        return 0;
+    }
+    for(int i = triangle.size() - 2; i &gt;= 0; --i){
+        for(int j = 0; j &lt; triangle.get(i).size(); ++j){
+            Integer re = Math.min(triangle.get(i+1).get(j),triangle.get(i+1).get(j+1)) + triangle.get(i).get(j);
+            triangle.get(i).set(j,re);
+        }
+    }
+    return triangle.get(0).get(0);
+}
+}</code></pre><h5 id="220-存在重复元素Ⅲ"><a href="#220-存在重复元素Ⅲ" class="headerlink" title="#220 存在重复元素Ⅲ"></a>#220 存在重复元素Ⅲ</h5><p>跟 #217 #219 关联性不大，#217 是找到重复元素，#219是找到重复元素并且是在一定范围内。这道题是要保证在一定的范围内（k），两个值的差的绝对值要不大于某个数（t）。<br>前面的 #217 可以使用双重循环运行完所有的测试用例，但是 #220 使用双重循环就会超时，所以使用 treeset 来辅助计算，二叉树的插入、删除、搜索都是O（logN）。总的时间复杂度降为O（N * logN）。</p>
+<p>修改前：</p>
+<pre><code>class Solution {
+public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+    if(nums.length == 0 || k &lt;= 0)
+        return false;
+    for(int i = 0; i &lt; nums.length; ++i){
+        for(int j = i+1; j &lt;= i + k; ++j){
+            if(j &gt;= nums.length)
+                break;
+            long val = 0; // 用 long 是为了避免 int 超出范围
+            val = Math.abs((long)nums[i] - (long)nums[j]) &gt; val ? Math.abs((long)nums[i] - (long)nums[j]) : val;
+            if(val &lt;= t)
+                return true;
+        }
+    }
+    return false;
+}
+}</code></pre><p>修改后：</p>
+<pre><code>class Solution {
+public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+    if(nums.length &lt; 2 || k &lt; 1 || t &lt; 0)
+        return false;
+    TreeSet &lt;Long&gt; set = new TreeSet&lt;Long&gt;();
+    for(int i = 0; i &lt; nums.length; ++i){
+        // set.subSet() 返回的类型是 SortedSet，返回值的范围是 [(long)nums[i]-t,(long)nums[i]+t+1))
+        SortedSet &lt;Long&gt; subSet = set.subSet((long)nums[i]-t,(long)nums[i]+t+1);
+        if(!subSet.isEmpty())
+            return true;
+        if(i &gt;= k)
+            set.remove((long)nums[i-k]);
+        set.add((long)nums[i]);
+    }
+    return false;
+}
+}</code></pre><h5 id="881-救生艇"><a href="#881-救生艇" class="headerlink" title="#881 救生艇"></a>#881 救生艇</h5><p>贪心（双指针）  </p>
+<p>思路</p>
+<p>如果最重的人可以与最轻的人共用一艘船，那么就这样安排。否则，最重的人无法与任何人配对，那么他们将自己独自乘一艘船。</p>
+<p>这么做的原因是，如果最轻的人可以与任何人配对，那么他们也可以与最重的人配对。</p>
+<p>算法</p>
+<p>令 people[i] 指向当前最轻的人，而 people[j] 指向最重的那位。</p>
+<p>然后，如上所述，如果最重的人可以与最轻的人共用一条船（即 people[j] + people[i] &lt;= limit），那么就这样做；否则，最重的人自己独自坐在船上</p>
+<pre><code>class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        Arrays.sort(people);
+        int i = 0;
+        int j = people.length - 1;
+        int boat = 0;
+        while(i &lt;= j){
+            boat++;
+            if(people[i] + people[j] &lt;= limit){
+                i++;
+            }
+            j--;
+        }
+        return boat;
+    }
+}</code></pre><h5 id="35-搜索插入位置"><a href="#35-搜索插入位置" class="headerlink" title="#35 搜索插入位置"></a>#35 搜索插入位置</h5><p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>你可以假设数组中无重复元素。</p>
+<p>二分查找</p>
+<pre><code>class Solution {
+    public int searchInsert(int[] nums, int target) {
+        if(target &lt; nums[0]){
+            return 0;
+        }else if(target &gt; nums[nums.length - 1]){
+            return nums.length;
+        }else {
+            int low = 0;
+            int high = nums.length - 1;
+            while(low &lt;= high){
+                int mid = (low + high) / 2;
+                if(target &lt; nums[mid]){
+                    high = mid - 1;
+                }else if(target == nums[mid]){
+                    return mid;
+                }else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+    }
+}</code></pre><h5 id="74-搜索二维矩阵"><a href="#74-搜索二维矩阵" class="headerlink" title="#74 搜索二维矩阵"></a>#74 搜索二维矩阵</h5><p>先查找符合的行，然后下标从 1 … matrix[0].length - 2 通过二分查找来查找元素</p>
+<pre><code> class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix.length == 0 || matrix[0].length == 0){
+            return false;
+        }
+        int low = 0;
+        int high = matrix.length - 1;
+        while(low &lt;= high){
+            int mid = (low + high) / 2;
+            if(target &lt; matrix[mid][0]){
+                // 在 1 3 5 7 中查询
+                high = mid - 1;
+            }else if(target == matrix[mid][0] || target == matrix[mid][matrix[0].length - 1]){
+                return true;
+            }else if(target &gt; matrix[mid][matrix[0].length - 1]){
+                // 在 23 30 34 50 中查询
+                low = mid + 1;
+            }else {
+                // 在 10 11 16 20 中查询
+                int l = 1; // 已经排除 10 和 20 不可能了
+                int h = matrix[0].length - 2;
+                while(l &lt;= h){
+                    int m = (l + h) / 2;
+                    if(target &lt; matrix[mid][m]){
+                        h = m - 1;
+                    }else if(target == matrix[mid][m]){
+                        return true;
+                    }else {
+                        l = m + 1;
+                    }
+                }
+                // 缺少这个 return 的话，会一直死循环
+                return false;
+            }
+        }
+        return false;
+    }
+}</code></pre><h5 id="240-搜索二维矩阵Ⅱ"><a href="#240-搜索二维矩阵Ⅱ" class="headerlink" title="#240 搜索二维矩阵Ⅱ"></a>#240 搜索二维矩阵Ⅱ</h5><p>矩阵具有以下特性：<br>1.每行的元素从左到右升序排列。<br>2.每列的元素从上到下升序排列。</p>
+<p>从左下或者右上开始判断都可以，按台阶形状进行判断</p>
+<pre><code>class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix.length == 0 || matrix[0].length == 0){
+            return false;
+        }
+        // 从左下开始判断
+        // int i = matrix.length - 1;
+        // int j = 0;
+        // while(i &gt;= 0 &amp;&amp; j &lt; matrix[0].length){
+        //     if(matrix[i][j] == target){
+        //         return true;
+        //     }else if(matrix[i][j] &lt; target){
+        //         j = j + 1;
+        //     }else {
+        //         i = i - 1;
+        //     }
+        // }
+
+        // 从右上开始判断
+        int i = 0;
+        int j = matrix[0].length - 1;
+        while(i &lt; matrix.length &amp;&amp; j &gt;= 0){
+            if(matrix[i][j] == target){
+                return true;
+            }else if(matrix[i][j] &gt; target){
+                j = j - 1;
+            }else {
+                i = i + 1;
+            }
+        }
+        return false;
+    }
+}</code></pre><h5 id="11-盛最多水的容器"><a href="#11-盛最多水的容器" class="headerlink" title="#11 盛最多水的容器"></a>#11 盛最多水的容器</h5><p>Area = Max ( min ( height[i], height[j] ) * ( j-i ) ) { 其中 0 &lt;= i &lt; j &lt; height.size() }<br>使用两个指针，值小的指针向内移动，这样就减小了搜索空间。因为面积取决于指针的距离与值小的值乘积，如果值大的值向内移动，距离一定减小，而求面积的另外一个乘数一定小于等于值小的值，因此面积一定减小，而我们要求最大的面积，因此值大的指针不动，而值小的指针向内移动遍历。</p>
+<pre><code>class Solution {
+    public int maxArea(int[] height) {
+        int i = 0;
+        int j = height.length - 1;
+        int area = 0;
+        while(i &lt; j){
+            int h = Math.min(height[i], height[j]);
+            area = Math.max(area, (j - i) * h);
+            if(h == height[i])
+                i++;
+            else
+                j--;
+        }
+        return area;
+    }
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"><i class="fa fa-tag"></i> Algorithm</a>
+          
+            <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-tag"></i> LeetCode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/05/LeetCode-0/" rel="next" title="LeetCode刷题（Easy）">
+                <i class="fa fa-chevron-left"></i> LeetCode刷题（Easy）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/11/DB-0/" rel="prev" title="关系型和非关系型数据库对比">
+                关系型和非关系型数据库对比 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/05/06/QlikSense-3/" title="QlikSense插件开发" target="_blank">QlikSense插件开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/08/01/Scala-0/" title="Scala学习" target="_blank">Scala学习</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2019/08/30/Hql-1/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/07/Kafka-0/" title="Kafka概念" target="_blank">Kafka概念</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/07/Scala-1/" title="Scala编程 笔记" target="_blank">Scala编程 笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode刷题"><span class="nav-number">1.</span> <span class="nav-text">LeetCode刷题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Type：Medium"><span class="nav-number">1.1.</span> <span class="nav-text">Type：Medium</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#8-字符串转换整数"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">#8 字符串转换整数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15-三数之和"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">#15 三数之和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#701-二叉搜索树中的插入操作"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">#701 二叉搜索树中的插入操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-两数相加"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">#2 两数相加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#120-三角形最小路径和"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">#120 三角形最小路径和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#220-存在重复元素Ⅲ"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">#220 存在重复元素Ⅲ</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#881-救生艇"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">#881 救生艇</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#35-搜索插入位置"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">#35 搜索插入位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#74-搜索二维矩阵"><span class="nav-number">1.1.0.9.</span> <span class="nav-text">#74 搜索二维矩阵</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#240-搜索二维矩阵Ⅱ"><span class="nav-number">1.1.0.10.</span> <span class="nav-text">#240 搜索二维矩阵Ⅱ</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-盛最多水的容器"><span class="nav-number">1.1.0.11.</span> <span class="nav-text">#11 盛最多水的容器</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
