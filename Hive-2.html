@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="9jbEn2n4xq">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hadoop,Hive,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="###一、关系运算  等值比较: = select 1 from dual where 1 = 2;  等值比较:&amp;lt;=&amp;gt;a &amp;lt;=&amp;gt; b  不等值比较: &amp;lt;&amp;gt;和!=a != b || a &amp;lt;&amp;gt; b  小于比较: &amp;lt;   a &amp;lt; b  小于等于比较: &amp;lt;=a &amp;lt;= b  大于比较: &amp;gt;a &amp;gt; b  大于等于比较: &amp;g">
+<meta name="keywords" content="Hadoop,Hive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive函数使用">
+<meta property="og:url" content="http://yoursite.com/Hive-2.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="###一、关系运算  等值比较: = select 1 from dual where 1 = 2;  等值比较:&amp;lt;=&amp;gt;a &amp;lt;=&amp;gt; b  不等值比较: &amp;lt;&amp;gt;和!=a != b || a &amp;lt;&amp;gt; b  小于比较: &amp;lt;   a &amp;lt; b  小于等于比较: &amp;lt;=a &amp;lt;= b  大于比较: &amp;gt;a &amp;gt; b  大于等于比较: &amp;g">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-16T11:03:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hive函数使用">
+<meta name="twitter:description" content="###一、关系运算  等值比较: = select 1 from dual where 1 = 2;  等值比较:&amp;lt;=&amp;gt;a &amp;lt;=&amp;gt; b  不等值比较: &amp;lt;&amp;gt;和!=a != b || a &amp;lt;&amp;gt; b  小于比较: &amp;lt;   a &amp;lt; b  小于等于比较: &amp;lt;=a &amp;lt;= b  大于比较: &amp;gt;a &amp;gt; b  大于等于比较: &amp;g">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/Hive-2.html">
+
+
+
+
+
+  <title>Hive函数使用 | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Hive-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hive函数使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T19:03:08+08:00">
+                2018-11-16
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/Hive/" itemprop="url" rel="index">
+                    <span itemprop="name">Hive</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Hive-2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/Hive-2.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Hive-2.html" class="leancloud_visitors" data-flag-title="Hive函数使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###一、关系运算</p>
+<ol>
+<li><p>等值比较: =<br> <code>select 1 from dual where 1 = 2;</code></p>
+</li>
+<li><p>等值比较:&lt;=&gt;<br>a &lt;=&gt; b</p>
+</li>
+<li><p>不等值比较: &lt;&gt;和!=<br>a != b || a &lt;&gt; b</p>
+</li>
+<li><p>小于比较: &lt;  
+a &lt; b</p>
+</li>
+<li><p>小于等于比较: &lt;=<br>a &lt;= b</p>
+</li>
+<li><p>大于比较: &gt;<br>a &gt; b</p>
+</li>
+<li><p>大于等于比较: &gt;=<br>a &gt;= b</p>
+</li>
+<li><p>区间比较？？？？？  </p>
+<pre><code># step1 设定区间分类个数，此处设置为10
+m=10
+
+# step2 求解字段 result 的最大值和最小值
+section=`hive -e &quot;
+select max(result) as max_num,
+   min(result) as min_num
+from  tmp
+&quot;`
+max_num=`echo -e &quot;${section}&quot; | cut -f1`
+min_num=`echo -e &quot;${section}&quot; | cut -f2`
+
+# step3 求解区间的长度
+len_section=`hive -e &quot;
+select (${max_num} - ${min_num}) / ${m}
+from   dual
+&quot;`
+
+# step4 统计每个区间的个数
+hive -e &quot;
+select ${min_num} + floor((result - ${min_num}) / ${len_section}) * ${len_section} as section_flag,
+   count(*) as num  
+from   tmp
+&quot;</code></pre></li>
+<li><p>空值判断: IS NULL<br> <code>select 1 from dual where A is null;</code></p>
+</li>
+<li><p>非空判断: IS NOT NULL<br><code>select 1 from dual where A is not null;</code></p>
+</li>
+<li><p>LIKE比较: A LIKE B<br><strong>B中字符”_“表示任意单个字符，而字符”%”表示任意数量的字符</strong><br><strong>否定比较的时候用 NOT A LIKE B</strong></p>
+<pre><code>select 1 from dual where ‘key&apos; like &apos;foot%&apos;;  
+select 1 from dual where ‘key &apos; like &apos;foot____&apos;;</code></pre></li>
+<li><p>JAVA的LIKE操作: A RLIKE B<br>如果字符串A或者字符串B为NULL，则返回NULL；如果字符串A符合JAVA正则表达式B的正则语法，则为TRUE；否则为FALSE  </p>
+<pre><code>select 1 from dual where &apos;123456&apos; rlike &apos;^\\d+$&apos;    判断一个字符串是否都是数字</code></pre></li>
+<li><p>REGEXP操作: A REGEXP B<br>功能和RLIKE一样  </p>
+<pre><code>select 1 from dual where ‘key&apos; REGEXP &apos;^f.*r$&apos;;</code></pre></li>
+</ol>
+<p>###二、数学运算 </p>
+<ol>
+<li><p>加法操作: +</p>
+</li>
+<li><p>减法操作: –<br> <strong>结果的数值类型等于A的类型和B的类型的最小父类型</strong><br> 比如int ± int 一般结果为int类型，而int ± double 一般结果为double类型  </p>
+</li>
+<li><p>乘法操作: *  
+ <strong>结果的数值类型等于A的类型和B的类型的最小父类型</strong><br> 如果A乘以B的结果超过默认结果类型的数值范围，则需要通过cast将结果转换成范围更大的数值类型</p>
+</li>
+<li><p>除法操作: /？？？？？<br> 返回A除以B的结果。结果的数值类型为double  </p>
+<pre><code>注意：hive 中最高精度的数据类型是 double, 只精确到小数点后16位，做除法运算时要特别注意  
+hive&gt;select ceil(28.0/6.999999999999999999999) from dual limit 1;  
+结果为4  
+hive&gt;select ceil(28.0/6.99999999999999) from dual limit 1;  
+结果为5</code></pre></li>
+<li><p>取余操作: %<br> 返回A除以B的余数。结果的数值类型等于A的类型和B的类型的最小父类型  </p>
+<pre><code>注意：精度在 hive 中是个很大的问题，类似这样的操作最好通过 round 指定精度  
+hive&gt; select round(8.4 % 4 , 2) from dual;  
+0.4  </code></pre></li>
+<li><p>位与操作: &amp;<br> 返回A和B按位进行与操作的结果。结果的数值类型等于A的类型和B的类型的最小父类型  </p>
+<pre><code>hive&gt; select 4 &amp; 8 from dual;  
+0  
+hive&gt; select 6 &amp; 4 from dual;  
+4</code></pre></li>
+<li><p>位或操作: |<br> 返回A和B按位进行或操作的结果。结果的数值类型等于A的类型和B的类型的最小父类型  </p>
+<pre><code>hive&gt; select 4 | 8 from dual;  
+12  
+hive&gt; select 6 | 8 from dual;  
+14</code></pre></li>
+<li><p>位异或操作: ^<br> 返回A和B按位进行异或操作的结果。结果的数值类型等于A的类型和B的类型的最小父类型</p>
+<pre><code>hive&gt; select 4 ^ 8 from dual;  
+12  
+hive&gt; select 6 ^ 4 from dual;  
+2</code></pre></li>
+<li><p>位取反操作: ~  
+返回A按位取反操作的结果。结果的数值类型等于A的类型。</p>
+<pre><code>hive&gt; select ~6 from dual;  
+-7  
+hive&gt; select ~4 from dual;  
+-5  </code></pre><blockquote>
+<p><strong>所有正整数的按位取反是其本身+1的负数</strong><br><strong>所有负整数的按位取反是其本身+1的绝对值</strong><br><strong>零的按位取反是 -1</strong></p>
+</blockquote>
+</li>
+</ol>
+<p>###三、逻辑运算</p>
+<ol>
+<li><p>逻辑与操作: AND 、&amp;&amp;</p>
+</li>
+<li><p>逻辑或操作: OR 、||</p>
+</li>
+<li><p>逻辑非操作: NOT、!  
+ NOT A：如果A为FALSE，或者A为NULL，则为TRUE；否则为FALSE  </p>
+<pre><code>select 1 from dual where  not 1=2 ;</code></pre></li>
+</ol>
+<p>###四、复合类型构造函数   </p>
+<ol>
+<li><p>map结构<br> map (key1, value1, key2, value2,…)<br> 根据输入的key和value对构建map类型</p>
+<pre><code>hive&gt; Create table lxw_test as select map(&apos;100&apos;,&apos;tom&apos;,&apos;200&apos;,&apos;mary&apos;)as t from lxw_dual;
+hive&gt; describe lxw_test;
+t   map&lt;string,string&gt;
+hive&gt; select t from lxw_test;
+{&quot;100&quot;:&quot;tom&quot;,&quot;200&quot;:&quot;mary&quot;}
+
+hive&gt; create table employee(id string, perf map&lt;string, int&gt;)   
+&gt; ROW FORMAT DELIMITED  
+&gt; FIELDS TERMINATED BY &apos;\t&apos;
+&gt; COLLECTION ITEMS TERMINATED BY &apos;,&apos;   
+&gt; MAP KEYS TERMINATED BY &apos;:&apos;;
+1   job:80,team:60,person:70  
+2   job:60,team:80  
+3   job:90,team:70,person:100
+hive&gt; load data local inpath &apos;/home/oracle/emp.txt&apos; into table employee;
+hive&gt; select perf[&apos;person&apos;] from employee;
+OK  
+70  
+NULL  
+100
+hive&gt; select perf[&apos;person&apos;] from employee where perf[&apos;person&apos;] is not null;
+70  
+100</code></pre></li>
+</ol>
+<blockquote>
+<p>‘MAP KEYS TERMINATED BY’ ：key value分隔符</p>
+</blockquote>
+<ol start="2">
+<li><p>struct结构<br> struct(val1, val2, val3,…)<br> 根据输入的参数构建结构体struct类型</p>
+<pre><code>hive&gt; create table student_test(id INT, info struct&lt;name:STRING, age:INT&gt;)  
+&gt; ROW FORMAT DELIMITED FIELDS TERMINATED BY &apos;,&apos; 
+&gt; COLLECTION ITEMS TERMINATED BY &apos;:&apos;;
+hive&gt;load data local inpath &apos;/home/oracle/student_test.txt&apos; into table student_test;
+1,zhou:30  
+2,yan:30  
+3,chen:20  
+4,li:80
+hive&gt; select info.age from student_test;  
+30  
+30  
+20  
+80</code></pre></li>
+</ol>
+<blockquote>
+<p>‘FIELDS TERMINATED BY’ ：字段与字段之间的分隔符<br>‘COLLECTION ITEMS TERMINATED BY’ ：一个字段各个item的分隔符</p>
+</blockquote>
+<ol start="3">
+<li><p>named_struct结构<br> named_struct(name1,val1,name2,val2,name3,val3,…)<br> 使用给定的表达式，构造一个指定列名的 struct 数据结构</p>
+<pre><code>hive&gt; select named_struct(&apos;a&apos;,1,&apos;b&apos;,&apos;aaa&apos;,&apos;c&apos;,FALSE) from lxw1234; 
+{&quot;a&quot;:1,&quot;b&quot;:&quot;aaa&quot;,&quot;c&quot;:false}</code></pre></li>
+<li><p>array结构<br> array(val1, val2,…)<br> 根据输入的参数构建数组array类型</p>
+<pre><code>hive&gt; create table lxw_test as selectarray(&quot;tom&quot;,&quot;mary&quot;,&quot;tim&quot;) as t from lxw_dual;
+hive&gt; describe lxw_test;
+t   array&lt;string&gt;
+hive&gt; select t from lxw_test;
+[&quot;tom&quot;,&quot;mary&quot;,&quot;tim&quot;]
+
+hive&gt; create table class_test(name string, student_id_list array&lt;INT&gt;)
+034,1:2:3:4  
+035,5:6  
+036,7:8:9:10
+hive&gt; select student_id_list[3] from class_test;
+4  
+NULL  
+10</code></pre></li>
+<li><p>create_union (tag, val1, val2, …)<br> 使用给定的 tag 和表达式，构造一个 uniontype 数据结构。tag 表示使用第 tag 个 表达式作为 uniontype 的 value</p>
+<pre><code>hive&gt; select create_union(0,&apos;ss&apos;,array(1,2,3)) from lxw1234; 
+{0:&quot;ss&quot;}
+hive&gt; select create_union(1,&apos;ss&apos;,array(1,2,3)) from lxw1234; 
+{1:[1,2,3]}</code></pre></li>
+</ol>
+<p>###五、复合类型操作符 </p>
+<ol>
+<li><p>获取array中的元素 A[n]<br> 返回数组A中的第n个变量值。数组的起始下标为0。比如，A是个值为[‘foo’, ‘bar’]的数组类型，那么A[0]将返回’foo’,而A[1]将返回’bar’  </p>
+<pre><code>hive&gt; create table lxw_test as selectarray(&quot;tom&quot;,&quot;mary&quot;,&quot;tim&quot;) as t from lxw_dual;
+hive&gt; select t[0],t[1],t[2] from lxw_test;
+tom   mary   tim
+
+hive&gt; select array(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;)[1] from lxw1234;  
+b</code></pre></li>
+<li><p>获取map中的元素 M[key]<br> 返回map类型M中，key值为指定值的value值。比如，M是值为{‘f’ -&gt; ‘foo’, ‘b’-&gt; ‘bar’, ‘all’ -&gt; ‘foobar’}的map类型，那么M[‘all’]将会返回’foobar’</p>
+<pre><code>hive&gt; Create table lxw_test as selectmap(&apos;100&apos;,&apos;tom&apos;,&apos;200&apos;,&apos;mary&apos;) as t from lxw_dual;
+hive&gt; select t[&apos;200&apos;],t[&apos;100&apos;] from lxw_test;
+mary   tom
+
+hive&gt; select map(&apos;k1&apos;,&apos;v1&apos;)[&apos;k1&apos;];  
+v1</code></pre></li>
+<li><p>获取struct中的元素 S.x<br> 返回结构体S中的x字段。比如，对于结构体struct foobar {int foo, int bar}，foobar.foo返回结构体中的foo字段</p>
+<pre><code>hive&gt; create table lxw_test as select struct(&apos;tom&apos;,&apos;mary&apos;,&apos;tim&apos;)as t from lxw_dual;
+hive&gt; describe lxw_test;
+t   struct&lt;col1:string,col2:string,col3:string&gt;
+hive&gt; select t.col1,t.col3 from lxw_test;
+tom tim
+
+hive&gt; select named_struct(&apos;a&apos;,1,&apos;b&apos;,&apos;aaa&apos;,&apos;c&apos;,FALSE).c;  
+false</code></pre></li>
+</ol>
+<p>###六、数值计算函数</p>
+<ol>
+<li><p>取整函数: round(double a)<br> 返回double类型的整数值部分 （遵循四舍五入）</p>
+<pre><code>hive&gt; select round(3.1415926) from dual;  
+3  
+hive&gt; select round(3.5) from dual;  
+4</code></pre></li>
+<li><p>指定精度取整函数: round(double a, int d)<br> 返回指定精度d的double类型</p>
+<pre><code>hive&gt; select round(3.1415926,4) from dual;  
+3.1416</code></pre></li>
+<li><p>向下取整函数: floor(double a)<br> 返回等于或者小于该double变量的最大的整数</p>
+<pre><code>hive&gt; select floor(3.1415926) from dual;  
+3  
+hive&gt; select floor(25) from dual;  
+25</code></pre></li>
+<li><p>向上取整函数: ceil(double a)<br> 返回等于或者大于该double变量的最小的整数</p>
+<pre><code>hive&gt; select ceil(3.1415926) from dual;  
+4  
+hive&gt; select ceil(46) from dual;  
+46</code></pre></li>
+<li><p>向上取整函数: ceiling(double a)<br>与ceil功能相同</p>
+<pre><code>hive&gt; select ceiling(3.1415926) from dual;  
+4  
+hive&gt; select ceiling(46) from dual;  
+46</code></pre></li>
+<li><p>取随机数函数: rand(),rand(int seed)<br> 返回一个0到1范围内的随机数。如果指定种子seed，则会等到一个稳定的随机数序列</p>
+<pre><code>hive&gt; select rand() from dual;  
+0.5577432776034763</code></pre></li>
+<li><p>自然指数函数: exp(double a)<br> 返回自然对数e的a次方</p>
+<pre><code>hive&gt; select exp(2) from dual;  
+7.38905609893065</code></pre></li>
+<li><p>以10为底对数函数: log10(double a)<br> 返回以10为底的a的对数</p>
+<pre><code>hive&gt; select log10(100) from dual;  
+2.0</code></pre></li>
+<li><p>以2为底对数函数: log2(double a)<br> 返回以2为底的a的对数</p>
+<pre><code>hive&gt; select log2(8) from dual;  
+3.0</code></pre></li>
+<li><p>对数函数: log(double base, double a)<br>返回以base为底的a的对数</p>
+<pre><code>hive&gt; select log(4,256) from dual;
+4.0</code></pre></li>
+<li><p>幂运算函数: pow(double a, double p)<br>返回a的p次幂</p>
+<pre><code>hive&gt; select pow(2,4) from dual;
+16.0</code></pre></li>
+<li><p>幂运算函数: power(double a, double p)<br>返回a的p次幂,与pow功能相同</p>
+<pre><code>hive&gt; select power(2,4) from dual;
+16.0</code></pre></li>
+<li><p>开平方函数: sqrt(double a)<br>返回a的平方根</p>
+<pre><code>hive&gt; select sqrt(16) from dual;
+4.0</code></pre></li>
+<li><p>二进制函数: bin(BIGINT a)<br>返回a的二进制代码表示</p>
+<pre><code>hive&gt; select bin(7) from dual;
+111</code></pre></li>
+<li><p>十六进制函数: hex(BIGINT a)<br>如果变量是int类型，那么返回a的十六进制表示；如果变量是string类型，则返回该字符串的十六进制表示</p>
+<pre><code>hive&gt; select hex(17) from dual;
+11
+hive&gt; select hex(‘abc’) from dual;
+616263</code></pre></li>
+<li><p>反转十六进制函数: unhex(string a)<br>返回该十六进制字符串所代表的字符串</p>
+<pre><code>hive&gt; select unhex(‘616263’) from dual;
+abc
+hive&gt; select unhex(‘11’) from dual;
+-
+hive&gt; select unhex(616263) from dual;
+abc</code></pre></li>
+<li><p>进制转换函数: conv(BIGINT num, int from_base, int to_base)<br>将数值num从from_base进制转化到to_base进制</p>
+<pre><code>hive&gt; select conv(17,10,16) from dual;
+11
+hive&gt; select conv(17,10,2) from dual;
+10001</code></pre></li>
+<li><p>绝对值函数: abs(double a) || abs(int a)<br>返回数值a的绝对值</p>
+<pre><code>hive&gt; select abs(-3.9) from dual;
+3.9
+hive&gt; select abs(10.9) from dual;
+10.9</code></pre></li>
+<li><p>正取余函数: pmod(int a, int b) || pmod(double a, double b)<br>返回正的a除以b的余数</p>
+<pre><code>hive&gt; select pmod(9,4) from dual;
+1
+hive&gt; select pmod(-9,4) from dual;
+3
+// 如果参数是一正一负，先都看成正数 4 * 3 = 12 &gt; 9，则余数是 12 - 9 = 3
+// 找到比负数大的数，减去负数的绝对值</code></pre></li>
+<li><p>正弦函数: sin(double a)<br>返回a的正弦值</p>
+<pre><code>hive&gt; select sin(0.8) from dual;
+0.7173560908995228</code></pre></li>
+<li><p>反正弦函数: asin(double a)<br>返回a的反正弦值</p>
+<pre><code>hive&gt; select asin(0.7173560908995228) from dual;
+0.8</code></pre></li>
+<li><p>余弦函数: cos(double a)<br>返回a的余弦值</p>
+<pre><code>hive&gt; select cos(0.9) from dual;
+0.6216099682706644</code></pre></li>
+<li><p>反余弦函数: acos(double a)<br>返回a的反余弦值</p>
+<pre><code>hive&gt; select acos(0.6216099682706644) from dual;
+0.9</code></pre></li>
+<li><p>positive函数: positive(int a) || positive(double a)<br>返回a</p>
+<pre><code>hive&gt; select positive(-10) from dual;
+-10
+hive&gt; select positive(12) from dual;
+12</code></pre></li>
+<li><p>negative函数: negative(int a) || negative(double a)<br>返回-a</p>
+<pre><code>hive&gt; select negative(-5) from dual;
+5
+hive&gt; select negative(8) from dual;
+-8</code></pre></li>
+</ol>
+<p>###七、集合操作函数    </p>
+<ol>
+<li><p>map类型大小：size(Map&lt;K.V&gt;)<br> 返回map类型的长度</p>
+<pre><code>hive&gt; select size(map(&apos;100&apos;,&apos;tom&apos;,&apos;101&apos;,&apos;mary&apos;)) from lxw_dual;
+2</code></pre></li>
+<li><p>array类型大小：size(Array<t>)  
+ 返回array类型的长度</t></p>
+<pre><code>hive&gt; select size(array(&apos;100&apos;,&apos;101&apos;,&apos;102&apos;,&apos;103&apos;)) from lxw_dual;
+4</code></pre></li>
+<li><p>判断元素数组是否包含元素：array_contains(Array, value)<br> 返回 Array中是否包含元素 value</p>
+<pre><code>hive&gt; select array_contains(array(1,2,3,4,5),3) from lxw1234; 
+true</code></pre></li>
+<li><p>获取map中所有value集合<br> map_values(Map)<br> 返回 Map中所有 value 的集合</p>
+<pre><code>hive&gt; select map_values(map(&apos;k1&apos;,&apos;v1&apos;,&apos;k2&apos;,&apos;v2&apos;)) from lxw1234; 
+[&quot;v2&quot;,&quot;v1&quot;]</code></pre></li>
+<li><p>获取map中所有key集合<br> map_keys(Map)<br> 返回 Map中所有 key 的集合</p>
+<pre><code>hive&gt; select map_keys(map(&apos;k1&apos;,&apos;v1&apos;,&apos;k2&apos;,&apos;v2&apos;)) from lxw1234; 
+[&quot;k2&quot;,&quot;k1&quot;]</code></pre></li>
+<li><p>数组排序<br> sort_array(Array)<br> 对 Array进行升序排序</p>
+<pre><code>hive&gt; select sort_array(array(5,7,3,6,9)) from lxw1234;
+[3,5,6,7,9]</code></pre></li>
+</ol>
+<p>###八、类型转换函数 </p>
+<ol>
+<li><p>二进制转换：binary(string|binary)<br> 将输入的值转换成二进制</p>
+<pre><code>hive&gt; select binary(&apos;4&apos;);
+4
+hive&gt; select binary(&apos;1111&apos;);
+1111
+hive&gt; select binary(&apos;abd&apos;);
+abd</code></pre></li>
+<li><p>基础类型之间强制转换：cast(expr as <type>)  
+ 返回值：Expected “=” to follow “type”<br> 返回from之后的长度，如果是一张表就输出行数个expr</type></p>
+<pre><code>hive&gt; select cast(1 as float);
+1.0
+hive&gt; select cast(2 as bigint) from tablss;
+2
+2
+2
+2
+2
+2</code></pre></li>
+</ol>
+<p>###九、日期函数   </p>
+<ol>
+<li><p>UNIX时间戳转日期函数: from_unixtime(bigint unixtime[, string format])<br> 转化UNIX时间戳（从1970-01-01 00:00:00 UTC到指定时间的秒数）到当前时区的时间格式</p>
+<pre><code>hive&gt; select from_unixtime(1323308943,&apos;yyyyMMdd&apos;) from dual;
+20111208</code></pre></li>
+<li><p>获取当前UNIX时间戳函数: unix_timestamp()<br> 获得当前时区的UNIX时间戳</p>
+<pre><code>hive&gt; select unix_timestamp() from dual;
+1323309615</code></pre></li>
+<li><p>日期转UNIX时间戳函数: unix_timestamp(string date)<br> 转换格式为”yyyy-MM-dd HH:mm:ss”的日期到UNIX时间戳。如果转化失败，则返回0</p>
+<pre><code>hive&gt; select unix_timestamp(&apos;2011-12-07 13:01:03&apos;) from dual;
+1323234063</code></pre></li>
+<li><p>指定格式日期转UNIX时间戳函数: unix_timestamp(string date, string pattern)<br> 转换pattern格式的日期到UNIX时间戳。如果转化失败，则返回0</p>
+<pre><code>hive&gt; select unix_timestamp(&apos;20111207 13:01:03&apos;,&apos;yyyyMMdd HH:mm:ss&apos;) from dual;
+1323234063</code></pre></li>
+<li><p>日期时间转日期函数: to_date(string timestamp)<br> 返回日期时间字段中的日期部分</p>
+<pre><code>hive&gt; select to_date(&apos;2011-12-08 10:03:01&apos;) from dual;
+2011-12-08</code></pre></li>
+<li><p>日期转年函数: year(string date)<br> 返回日期中的年</p>
+<pre><code>hive&gt; select year(&apos;2011-12-08 10:03:01&apos;) from dual;
+2011
+hive&gt; select year(&apos;2012-12-08&apos;) from dual;
+2012</code></pre></li>
+<li><p>日期转月函数: month (string date)<br> 返回日期中的月份</p>
+<pre><code>hive&gt; select month(&apos;2011-12-08 10:03:01&apos;) from dual;
+12
+hive&gt; select month(&apos;2011-08-08&apos;) from dual;
+8</code></pre></li>
+<li><p>日期转天函数: day (string date)<br> 返回日期中的天</p>
+<pre><code>hive&gt; select day(&apos;2011-12-08 10:03:01&apos;) from dual;
+8
+hive&gt; select day(&apos;2011-12-24&apos;) from dual;
+24</code></pre></li>
+<li><p>日期转小时函数: hour (string date)<br> 返回日期中的小时</p>
+<pre><code>hive&gt; select hour(&apos;2011-12-08 10:03:01&apos;) from dual;
+10</code></pre></li>
+<li><p>日期转分钟函数: minute (string date)<br>返回日期中的分钟</p>
+<pre><code>hive&gt; select minute(&apos;2011-12-08 10:03:01&apos;) from dual;
+3</code></pre></li>
+<li><p>日期转秒函数: second (string date)<br>返回日期中的秒</p>
+<pre><code>hive&gt; select second(&apos;2011-12-08 10:03:01&apos;) from dual;
+1</code></pre></li>
+<li><p>日期转周函数: weekofyear (string date)<br>返回日期在当前的周数</p>
+<pre><code>hive&gt; select weekofyear(&apos;2011-12-08 10:03:01&apos;) from dual;
+49</code></pre></li>
+<li><p>日期比较函数: datediff(string enddate, string startdate)<br>返回结束日期减去开始日期的天数</p>
+<pre><code>hive&gt; select datediff(&apos;2012-12-08&apos;,&apos;2012-05-09&apos;) from dual;
+213</code></pre></li>
+<li><p>日期增加函数: date_add(string startdate, int days)<br>返回开始日期startdate增加days天后的日期</p>
+<pre><code>hive&gt; select date_add(&apos;2012-12-08&apos;,10) from dual;
+2012-12-18</code></pre></li>
+<li><p>日期减少函数: date_sub (string startdate, int days)<br>返回开始日期startdate减少days天后的日期</p>
+<pre><code>hive&gt; select date_sub(&apos;2012-12-08&apos;,10) from dual;
+2012-11-28</code></pre></li>
+</ol>
+<p>###十、条件函数   </p>
+<ol>
+<li><p>If函数: if(boolean testCondition, T valueTrue, T valueFalseOrNull)<br>  当条件testCondition为TRUE时，返回valueTrue；否则返回valueFalseOrNull</p>
+<pre><code>hive&gt; select if(1=2,100,200) from dual;
+200
+hive&gt; select if(1=1,100,200) from dual;
+100</code></pre></li>
+<li><p>非空查找函数: COALESCE(T v1, T v2, …)<br> 返回参数中的第一个非空值；如果所有值都为NULL，那么返回NULL</p>
+<pre><code>hive&gt; select COALESCE(null,&apos;100&apos;,&apos;50′) from dual;
+100</code></pre></li>
+<li><p>条件判断函数：CASE a WHEN b THEN c [WHEN d THEN e]* [ELSE f] END<br> 如果 a 等于 b ，那么返回 c ；如果 a 等于 d ，那么返回 e ；否则返回 f</p>
+<pre><code>hive&gt; Select case 100 when 50 then &apos;tom&apos;   
+when 100 then &apos;mary&apos;   
+else &apos;tim&apos; end from dual;  
+mary</code></pre></li>
+</ol>
+<p>###十一、字符串函数  </p>
+<ol>
+<li><p>字符ascii码函数：ascii(str)<br> 返回字符串str第一个字符的ascii码</p>
+<pre><code>hive&gt; select ascii(‘abcde’) from dual;  
+97</code></pre></li>
+<li><p>base64字符串：base64(binary bin)<br> 将二进制bin转换成64位的字符串</p>
+<pre><code>hive&gt; select base64(binary(‘lxw1234’));
+bHh3MTIzNA==</code></pre></li>
+<li><p>字符串连接函数：concat(string A, string B…)<br> 返回输入字符串连接后的结果，支持任意个输入字符串</p>
+<pre><code>hive&gt; select concat(‘abc’,&apos;def’,&apos;gh’) from dual;  
+abcdefgh</code></pre></li>
+<li><p>带分隔符字符串连接函数：concat_ws(string SEP, string A, string B…)<br> 返回输入字符串连接后的结果，SEP表示各个字符串间的分隔符</p>
+<pre><code>hive&gt; select concat_ws(‘,’,&apos;abc’,&apos;def’,&apos;gh’) from dual;  
+abc,def,gh
+hive&gt; select concat_ws(&apos;.&apos;,&apos;www&apos;,&apos;iteblog&apos;,&apos;com&apos;) from iteblog;
+www.iteblog.com</code></pre></li>
+<li><p>数组转换成字符串的函数：concat_ws(string SEP, array<string>)  
+ 返回将数组链接成字符串后的结果，SEP 表示各个字符串间的分隔符</string></p>
+<pre><code>hive&gt; select concat_ws(&apos;|&apos;,array(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;));
+a|b|c</code></pre></li>
+</ol>
+<ol start="6">
+<li><p>小数位格式化成字符串函数：format_number(number x, int d)<br> 将数值X转换成”#,###,###.##”格式字符串，并保留d位小数，如果d为0，将进行四舍五入且不保留小数</p>
+<pre><code>hive&gt; select format_number(5.23456,3) from lxw1234;
+5.235</code></pre></li>
+<li><p>字符串截取函数：substr(string A, int start) || substring(string A, int start)<br> 返回字符串A从start位置到结尾的字符串 </p>
+<pre><code>hive&gt; select substr(‘abcde’,3) from dual;  
+cde  
+hive&gt; select substring(‘abcde’,3) from dual;  
+cde  
+hive&gt;  select substr(‘abcde’,-1) from dual;  （和ORACLE相同）  
+e</code></pre></li>
+<li><p>字符串截取函数：substr(string A, int start, int len) || substring(string A, int start, int len)<br> 返回字符串A从start位置开始，长度为len的字符串</p>
+<pre><code>hiveselect substr(‘abcde’,3,2) from dual;  
+cd  
+hiveselect substring(‘abcde’,3,2) from dual;  
+cd  
+hive&gt;select substring(‘abcde’,-2,2) from dual;  
+de</code></pre></li>
+<li><p>字符串查找函数：instr(string str, string substr)<br> 返回值为int<br> 查找字符串str中子字符串substr出现的位置，如果查找失败将返回0，如果任一参数为Null将返回null，注意位置为从1开始的</p>
+<pre><code>hive&gt; select instr(&apos;abcdf&apos;,&apos;df&apos;) from lxw1234;
+4</code></pre></li>
+<li><p>字符串长度函数：length(string A)<br>返回字符串A的长度</p>
+<pre><code>hive&gt; select length(&apos;abcedfg&apos;) from dual;
+7</code></pre></li>
+<li><p>字符串查找函数：locate(string substr, string str[, int pos])<br>查找字符串str中的pos位置后字符串substr第一次出现的位置</p>
+<pre><code>hive&gt; select locate(&apos;a&apos;,&apos;abcda&apos;,1) from lxw1234;
+1
+hive&gt; select locate(&apos;a&apos;,&apos;abcda&apos;,2) from lxw1234;
+5</code></pre></li>
+<li><p>字符串格式化函数：printf(String format, Obj… args)<br>按照printf风格格式输出字符串</p>
+<pre><code>hive&gt; select printf(&quot;%08X&quot;,123) from lxw1234; 
+0000007B</code></pre></li>
+<li><p>字符串转换成map函数：str_to_map(text[, delimiter1, delimiter2])<br>返回值：map&lt;string,string&gt;<br>将字符串str按照指定分隔符转换成Map，第一个参数是需要转换字符串，第二个参数是键值对之间的分隔符，默认为逗号;第三个参数是键值之间的分隔符，默认为”=”</p>
+<pre><code>hive&gt; select str_to_map(&apos;k1:v1,k2:v2&apos;) from lxw1234;
+{&quot;k2&quot;:&quot;v2&quot;,&quot;k1&quot;:&quot;v1&quot;}
+hive&gt; select str_to_map(&apos;k1=v1,k2=v2&apos;,&apos;,&apos;,&apos;=&apos;) from lxw1234;
+{&quot;k2&quot;:&quot;v2&quot;,&quot;k1&quot;:&quot;v1&quot;}</code></pre></li>
+<li><p>base64解码函数：unbase64(string str)<br>将64位的字符串转换二进制值</p>
+<pre><code>hive&gt; select unbase64(&apos;bHh3MTIzNA==&apos;) from lxw1234;
+lxw1234</code></pre></li>
+<li><p>字符串转大写函数：upper(string A) || ucase(string A)<br>返回字符串A的大写格式</p>
+<pre><code>hive&gt; select upper(‘abSEd’) from dual;  
+ABSED  
+hive&gt; select ucase(‘abSEd’) from dual;  
+ABSED</code></pre></li>
+<li><p>字符串转小写函数：lower(string A) || lcase(string A)<br>返回字符串A的小写格式</p>
+<pre><code>hive&gt; select lower(‘abSEd’) from dual;  
+absed  
+hive&gt; select lcase(‘abSEd’) from dual;  
+absed</code></pre></li>
+<li><p>去空格函数：trim(string A)<br>去除字符串两边的空格</p>
+<pre><code>hive&gt; select trim(‘ abc ‘) from dual;  
+abc</code></pre></li>
+<li><p>左边去空格函数：ltrim(string A)<br>去除字符串左边的空格</p>
+<pre><code>hive&gt; select ltrim(‘ abc ‘) from dual;  
+abc</code></pre></li>
+<li><p>右边去空格函数：rtrim(string A)<br>去除字符串右边的空格</p>
+<pre><code>hive&gt; select rtrim(‘ abc ‘) from dual;  
+abc</code></pre></li>
+<li><p>正则表达式替换函数：regexp_replace(string A, string B, string C)<br>将字符串A中的符合java正则表达式B的部分替换为C。注意，在有些情况下要使用转义字符,类似oracle中的regexp_replace函数</p>
+<pre><code>hive&gt; select regexp_replace(&apos;foobar&apos;, &apos;oo|ar&apos;, &apos;&apos;) from lxw_dual;
+fb</code></pre></li>
+<li><p>正则表达式解析函数：regexp_extract(string subject, string pattern, int index)<br>将字符串subject按照pattern正则表达式的规则拆分，返回index指定的字符,其中的index是按照正则字符串（）的位置。注意，在有些情况下要使用转义字符</p>
+<pre><code>hive&gt; select regexp_extract(‘foothebar’, ‘foo(.*?)(bar)’, 1) from dual;  
+the  
+hive&gt; select regexp_extract(‘foothebar’, ‘foo(.*?)(bar)’, 2) from dual;  
+bar  
+hive&gt; select regexp_extract(‘foothebar’, ‘foo(.*?)(bar)’, 0) from dual;  
+foothebar？？？？？</code></pre></li>
+<li><p>URL解析函数：parse_url(url, partToExtract[, key])？？？？？<br>解析URL字符串，partToExtract的选项包含[HOST,PATH,QUERY,REF,PROTOCOL,FILE,AUTHORITY,USERINFO]。</p>
+<pre><code>parse_url(&apos;http://facebook.com/path/p1.php?query=1&apos;, &apos;HOST&apos;)返回&apos;facebook.com&apos;   
+parse_url(&apos;http://facebook.com/path/p1.php?query=1&apos;, &apos;PATH&apos;)返回&apos;/path/p1.php&apos;   
+parse_url(&apos;http://facebook.com/path/p1.php?query=1&apos;, &apos;QUERY&apos;)返回&apos;query=1&apos;，  
+可以指定key来返回特定参数，例如  
+parse_url(&apos;http://facebook.com/path/p1.php?query=1&apos;, &apos;QUERY&apos;,&apos;query&apos;)返回&apos;1&apos;，  
+
+parse_url(&apos;http://facebook.com/path/p1.php?query=1#Ref&apos;, &apos;REF&apos;)返回&apos;Ref&apos;   
+parse_url(&apos;http://facebook.com/path/p1.php?query=1#Ref&apos;, &apos;PROTOCOL&apos;)返回&apos;http&apos; </code></pre></li>
+<li><p>json解析函数：get_json_object(string json_string, string path)<br>解析json的字符串json_string,返回path指定的内容。如果输入的json字符串无效，那么返回NULL</p>
+<pre><code>hive&gt; select  get_json_object(‘{“store”:  
+&gt;   {“fruit”:\[{&quot;weight&quot;:8,&quot;type&quot;:&quot;apple&quot;},{&quot;weight&quot;:9,&quot;type&quot;:&quot;pear&quot;}],  
+&gt;“bicycle”:{“price”:19.95,”color”:”red”}  
+&gt;   },  
+&gt;  “email”:”amy@only_for_json_udf_test.net”,  
+&gt;  “owner”:”amy”  
+&gt; }  
+&gt; ‘,’$.owner’) from dual;  
+amy
+
+select get_json_object(&apos;{&quot;store&quot;:{&quot;fruit&quot;:\[&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;]},&quot;owner&quot;:&quot;amy&quot;}&apos;,&apos;$.store.fruit[0]&apos;) from test_msg limit 1;</code></pre></li>
+<li><p>空格字符串函数：space(int n)<br>返回长度为n的字符串</p>
+<pre><code>hive&gt; select space(10) from dual;  
+hive&gt; select length(space(10)) from dual;  
+10</code></pre></li>
+<li><p>重复字符串函数：repeat(string str, int n)<br>返回重复n次后的str字符串</p>
+<pre><code>hive&gt; select repeat(‘abc’,5) from dual;  
+abcabcabcabcabc</code></pre></li>
+<li><p>左补足函数：lpad(string str, int len, string pad)<br>将str进行用pad进行左补足到len位</p>
+<pre><code>hive&gt; select lpad(‘abc’,10,’td’) from dual;  
+tdtdtdtabc</code></pre></li>
+<li><p>右补足函数：rpad(string str, int len, string pad)<br>将str进行用pad进行右补足到len位</p>
+<pre><code>hive&gt; select rpad(‘abc’,10,’td’) from dual;  
+abctdtdtdt</code></pre></li>
+<li><p>分割字符串函数: split(string str, string pat)<br>按照pat字符串分割str，会返回分割后的字符串数组</p>
+<pre><code>hive&gt; select split(‘abtcdtef’,&apos;t’) from dual;  
+[&quot;ab&quot;,&quot;cd&quot;,&quot;ef&quot;]</code></pre></li>
+<li><p>集合查找函数: find_in_set(string str, string strList)<br>返回str在strlist第一次出现的位置，strlist是用逗号分割的字符串。如果没有找该str字符，则返回0</p>
+<pre><code>hive&gt; select find_in_set(‘ab’,&apos;ef,ab,de’) from dual;  
+2  
+hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;  
+0</code></pre></li>
+<li><p>分词函数：sentences(string str, string lang, string locale)<br>返回值: array<array><br>返回输入 str 分词后的单词数组<br><strong>分词函数先分句子，句号.会看成是一个单词，逗号,会被拆开，叹号！会被拆成两个句子</strong></array></p>
+<pre><code>hive&gt; select sentences(&apos;hello word!hello hive,hi hive,hello hive&apos;)
+[[&quot;hello&quot;,&quot;word&quot;],[&quot;hello&quot;,&quot;hive&quot;,&quot;hi&quot;,&quot;hive&quot;,&quot;hello&quot;,&quot;hive&quot;]]  
+
+select sentences(&apos;hello word,hello hive,hi hive,hello hive&apos;);
+[[&quot;hello&quot;,&quot;word&quot;,&quot;hello&quot;,&quot;hive&quot;,&quot;hi&quot;,&quot;hive&quot;,&quot;hello&quot;,&quot;hive&quot;]]  
+
+hive&gt;select sentences(&apos;hello word.hello hive,hi hive,hello hive&apos;);
+[[&quot;hello&quot;,&quot;word.hello&quot;,&quot;hive&quot;,&quot;hi&quot;,&quot;hive&quot;,&quot;hello&quot;,&quot;hive&quot;]]</code></pre></li>
+<li><p>分词后统计一起出现频次最高的TOP-K<br>ngrams(array<array>, int N, int K, int pf)<br>返回值: array&lt;struct&lt;string,double&gt;&gt;<br>与 sentences()函数一起使用，分词后，统计分词结果中一起出现频次最高的 TOP-K 结果  </array></p>
+<pre><code>hive&gt; select ngrams(sentences(&apos;hello word!hello hive,hi hive,hello hive&apos;),2,2);  
+[{&quot;ngram&quot;:[&quot;hello&quot;,&quot;hive&quot;],&quot;estfrequency&quot;:2.0},{&quot;ngram&quot;:[&quot;hive&quot;,&quot;hi&quot;],&quot;estfrequency&quot;:1.0}]
+//该查询中，统计的是两个词在一起出现频次最高的 TOP\-2  
+//结果中，hello 与 hive 同时出现 2 次</code></pre></li>
+<li><p>分词后统计与指定单词一起出现频次最高的TOP-K<br>context_ngrams(array<array>, array, int K, int pf)<br>返回值：array&lt;struct&lt;string,double&gt;&gt;<br>与 sentences()函数一起使用，分词后，统计分词结果中与数组中指定的单词一起出现(包括顺序)频次最高的 TOP-K 结果<br><strong>是紧跟着指定单词出现，可以跨越句子</strong></array></p>
+<pre><code>hive&gt; select context_ngrams(sentences(&apos;hello word!hello hive,hi hive,hello hive&apos;),array(&apos;hello&apos;,null),3);
+[{&quot;ngram&quot;:[&quot;hive&quot;],&quot;estfrequency&quot;:2.0},{&quot;ngram&quot;:[&quot;word&quot;],&quot;estfrequency&quot;:1.0}]
+//该查询中，统计的是与&apos;hello&apos;一起出现，并且在 hello 后面的频次最高的 TOP-3
+//结果中，hello 与 hive 同时出现 2 次，hello 与 word 同时出现 1 次
+
+hive&gt; select context_ngrams(sentences(&apos;hello word!hello hive,hi hive,hello hive&apos;),array(null,&apos;hive&apos;),3);
+[{&quot;ngram&quot;:[&quot;hello&quot;],&quot;estfrequency&quot;:2.0},{&quot;ngram&quot;:[&quot;hi&quot;],&quot;estfrequency&quot;:1.0}]
+//该查询中，统计的是与&apos;hive&apos;一起出现，并且在 hive 之前的频次最高的 TOP-3
+
+hive&gt;select context\_ngrams(sentences(&apos;hello word hello hive,hi hive,hello hive&apos;),array(null,&apos;hive&apos;),3);  
+[{&quot;ngram&quot;:[&quot;hello&quot;],&quot;estfrequency&quot;:2.0},{&quot;ngram&quot;:[&quot;hi&quot;],&quot;estfrequency&quot;:1.0}]
+
+hive&gt;select context\_ngrams(sentences(&apos;hello hive,hello hive,hi hive,hello hive&apos;),array(null,&apos;hive&apos;),3);  
+[{&quot;ngram&quot;:[&quot;hello&quot;],&quot;estfrequency&quot;:3.0},{&quot;ngram&quot;:[&quot;hi&quot;],&quot;estfrequency&quot;:1.0}]
+
+hive&gt;select context\_ngrams(sentences(&apos;hello hive,hello hive,hello hive,hi hive,hello hive&apos;),array(null,&apos;hive&apos;),3);
+[{&quot;ngram&quot;:[&quot;hello&quot;],&quot;estfrequency&quot;:4.0},{&quot;ngram&quot;:[&quot;hi&quot;],&quot;estfrequency&quot;:1.0}]</code></pre></li>
+<li><p>字符串反转函数： reverse(string A)<br>返回字符串A的反转结果</p>
+<pre><code>hive&gt; select reverse(abcedfg’) from dual;
+gfdecba  </code></pre></li>
+<li><p>重复字符串函数：repeat(string str, int n)<br>返回重复n次后的str字符串 </p>
+<pre><code>hive&gt; select repeat(&apos;abc&apos;,5);
+abcabcabcabcabc</code></pre></li>
+</ol>
+<p>###十二、混合函数  </p>
+<ol>
+<li><p>调用Java函数： java_method(class, method[, arg1[, arg2..]])<br> 返回值: varies<br> 调用 Java 中的方法处理数据  </p>
+<pre><code>hive&gt; select reflect(&quot;java.net.URLEncoder&quot;, &quot;encode&quot;, &apos;http://lxw1234.com&apos;,&quot;UTF-8&quot;);
+http%3A%2F%2Flxw1234.com
+//该查询中调用 java.net.URLEncoder 中的encode方法，给该方法传的参数为&apos;http://lxw1234.com&apos;,&quot;UTF-8&quot;</code></pre></li>
+<li><p>调用Java函数：reflect(class, method[, arg1[, arg2..]])<br> 返回值: varies<br> 调用 Java 中的方法处理数据  </p>
+<pre><code>hive&gt; select reflect(&quot;java.net.URLDecoder&quot;, &quot;decode&quot;,
+&apos;http%3A%2F%2Flxw1234.com&apos;,&quot;UTF-8&quot;);
+http://lxw1234.com</code></pre></li>
+<li><p>字符串的hash值：hash(a1[, a2…])<br> 返回值: int<br> 返回字符串的 hash 值  </p>
+<pre><code>hive&gt; select hash(&apos;lxw1234.com&apos;);
+-809268416</code></pre></li>
+</ol>
+<p>###十三、XPath解析XML函数   </p>
+<ol>
+<li><p>xpath<br> (string xmlstr,string xpath_expression)<br> 返回值: array<br> 从 xml 字符串中返回匹配到表达式的结果数组  </p>
+<pre><code>//获取 xml 字符串中 a/b/节点的值
+hive&gt; select xpath(&apos;b1b2c1&apos;,&apos;a/b/text()&apos;) from lxw1234;
+[&quot;b1&quot;,&quot;b2&quot;]
+//获取 xml 字符串中所有名为 id 的属性值
+hive&gt; select xpath(&apos;b1b2&apos;,&apos;//@id&apos;) from lxw1234;
+[&quot;foo&quot;,&quot;bar&quot;]</code></pre></li>
+<li><p>xpath_string<br> xpath_string(string xmlstr,string xpath_expression)<br> 返回值: string<br> 默认情况下，从 xml 字符串中返回第一个匹配到表达式的节点的值  </p>
+<pre><code>hive&gt; select xpath_string (&apos;b1b2&apos;, &apos;//b&apos;) from lxw1234;
+b1
+3.
+//指定返回匹配到哪一个节点
+hive&gt; select xpath_string (&apos;b1b2&apos;, &apos;//b[2]&apos;) from lxw1234;
+b2</code></pre></li>
+<li><p>xpath_boolean<br> xpath_boolean (string xmlstr,string xpath_expression)<br> 返回值: boolean<br> 返回 xml 字符串中是否匹配 xml 表达式  </p>
+<pre><code>hive&gt; select xpath_boolean (&apos;b&apos;, &apos;a/b&apos;) from lxw1234;  
+true
+hive&gt; select xpath_boolean (&apos;10&apos;, &apos;a/b &lt; 10&apos;) from lxw1234;  
+false </code></pre></li>
+<li><p>xpath_short, xpath_int, xpath_long<br> xpath_short (string xmlstr,string xpath_expression)<br> xpath_int (string xmlstr,string xpath_expression)<br> xpath_long (string xmlstr,string xpath_expression)<br> 返回值: int<br> 返回 xml 字符串中经过 xml 表达式计算后的值，如果不匹配，则返回0  </p>
+<pre><code>hive&gt; SELECT xpath_int (&apos;this is not a number&apos;, &apos;a&apos;) FROM lxw1234;  
+0
+hive&gt; SELECT xpath_int (&apos;1248&apos;, &apos;sum(a/*)&apos;) FROM lxw1234;  
+15
+hive&gt; select xpath_long(&apos;10.511.2&apos;,&apos;sum(a/*)&apos;) from lxw1234;  
+21</code></pre></li>
+<li><p>xpath_float, xpath_double, xpath_number<br> xpath_float (string xmlstr,string xpath_expression)<br> xpath_double (string xmlstr,string xpath_expression)<br> path_number (string xmlstr,string xpath_expression)<br> 返回值: number<br> 返回 xml 字符串中经过 xml 表达式计算后的值，如果不匹配，则返回0  </p>
+<pre><code>hive&gt; select xpath_double(&apos;10.511.2&apos;,&apos;sum(a/*)&apos;) from lxw1234;  
+21.7</code></pre></li>
+</ol>
+<p>###十四、汇总统计函数（UDAF） </p>
+<ol>
+<li><p>个数统计函数: count(*) || count(expr) || count(DISTINCT expr[, expr_.])  </p>
+<p> count(*)统计检索出的行的个数，包括NULL值的行<br> count(expr)返回指定字段的非空值的个数<br> count(DISTINCTexpr[, expr_.])返回指定字段的不同的非空值的个数</p>
+<pre><code>hive&gt; select count(*) from lxw_dual;
+20
+hive&gt; select count(distinct t) from lxw_dual;
+10</code></pre></li>
+<li><p>总和统计函数: sum(col) || sum(DISTINCT col)<br> sum(col)统计结果集中col的相加的结果<br> sum(DISTINCT col)统计结果中col不同值相加的结果</p>
+<pre><code>hive&gt; select sum(t) from lxw_dual;
+100
+hive&gt; select sum(distinct t) from lxw_dual;
+70</code></pre></li>
+<li><p>平均值统计函数: avg(col) || avg(DISTINCT col)<br> avg(col)统计结果集中col的平均值<br> avg(DISTINCT col)统计结果中col不同值相加的平均值</p>
+<pre><code>hive&gt; select avg(t) from lxw_dual;
+50
+hive&gt; select avg (distinct t) from lxw_dual;
+30</code></pre></li>
+<li><p>最小值统计函数: min(col)<br> 统计结果集中col字段的最小值</p>
+<pre><code>hive&gt; select min(t) from lxw_dual;
+20</code></pre></li>
+<li><p>最大值统计函数: max(col)<br> 统计结果集中col字段的最大值</p>
+<pre><code>hive&gt; select max(t) from lxw_dual;
+120</code></pre></li>
+<li><p>非空集合总体变量函数: var_pop(col)<br> 返回值: double<br> 统计结果集中col非空集合的总体变量（忽略null）</p>
+</li>
+<li><p>非空集合样本变量函数: var_samp (col)<br> 返回值: double<br> 统计结果集中col非空集合的样本变量（忽略null）</p>
+</li>
+<li><p>总体标准偏离函数: stddev_pop(col)<br> 返回值: double<br> 该函数计算总体标准偏离，并返回总体变量的平方根，其返回值与VAR_POP函数的平方根相同</p>
+</li>
+<li><p>样本标准偏离函数: stddev_samp (col)<br> 返回值: double<br> 该函数计算样本标准偏离</p>
+</li>
+<li><p>中位数函数: percentile  </p>
+<ul>
+<li><p>percentile(BIGINT col, p)<br>求准确的第pth个百分位数，p必须介于0和1之间，但是col字段目前只支持整数，不支持浮点数类型  </p>
+<pre><code>hive&gt;select percentile(id,0.2) from student;
+2.0</code></pre></li>
+<li><p>percentile(BIGINT col, array(p1 [, p2]…))<br>功能和上述类似，之后后面可以输入多个百分位数，返回类型也为array<double>，其中为对应的百分位数</double></p>
+<pre><code>hive&gt;select percentile(id,array(0.2,0.4)) from student；  
+[2.0,2.4000000000000004]</code></pre></li>
+</ul>
+</li>
+<li><p>近似中位数函数: percentile_approx(DOUBLE col, p [, B])<br>求近似的第pth个百分位数，p必须介于0和1之间，返回类型为double，但是col字段支持浮点类型。参数B控制内存消耗的近似精度，B越大，结果的准确度越高。默认为10,000。当col字段中的distinct值的个数小于B时，结果为准确的百分位数</p>
+</li>
+</ol>
+<ol start="12">
+<li><p>直方图: histogram_numeric(col, b)<br>返回值：array&lt;struct {‘x’,’y’}&gt;<br>以b为基准计算col的直方图信息  </p>
+<pre><code>hive&gt; select histogram_numeric(100,5) from lxw_dual;
+[{&quot;x&quot;:100.0,&quot;y&quot;:1.0}]</code></pre></li>
+<li><p>集合去重数：collect_set(col)<br>只接受基本数据类型，它的主要作用是将某字段的值进行去重汇总，产生array类型字段</p>
+<pre><code>如下数据记录，要统计每种no下的score，这里就可以配合group by 产生奇效
+no  score
+1   2
+1   3
+1   3
+2   2
+2   4
+2   4
+hive&gt;select no，collect_set(score) from tablss group by no;
+1    [2,3]
+2    [2,4]
+
+hive&gt; select * from student;
+1    zhangsan    22
+2    lisi    21
+3    wangwu    17
+4    zhaoliu    25
+2    lisi    21
+3    wangwu    17
+4    zhaoliu    25
+hive&gt;select name,collect_set(id) from student group by name;
+lisi [2]
+wangwu [3]
+zhangsan [1]
+zhaoliu [4]</code></pre></li>
+<li><p>集合不去重函数：collect_list (col)<br>返回值: array<br>将 col 字段合并成一个数组,不去重  </p>
+<pre><code>hive&gt; select no,collect_list(score) from tablss group by no;
+1    [2,3,3]
+2    [2,4,4]
+
+hive&gt; select name,collect_list(id) from student group by name;
+lisi    [2,2]
+wangwu    [3,3]
+zhangsan    [1]
+zhaoliu    [4,4]</code></pre></li>
+</ol>
+<p>###十五、表格生成函数Table-Generating Functions (UDTF)  </p>
+<ol>
+<li><p>数组拆分成多行：explode  </p>
+<ul>
+<li><p>explode(array<type> a)<br>  返回值：Array Type<br>  对于a中的每个元素，将生成一行且包含该元素  </type></p>
+<pre><code>hive&gt; select explode(split(concat_ws(&apos;,&apos;,&apos;1&apos;,&apos;2&apos;,&apos;3&apos;,&apos;4&apos;,&apos;5&apos;,&apos;6&apos;,&apos;7&apos;,&apos;8&apos;,&apos;9&apos;),&apos;,&apos;)) from test.dual;  
+1  
+2  
+3  
+4  
+5  
+6  
+7  
+8  
+9</code></pre></li>
+</ul>
+</li>
+<li><p>Map拆分成多行：explode  </p>
+<ul>
+<li><p>explode(MAP)<br>  map中每个key-value对，生成一行，key为一列，value为一列</p>
+<pre><code>hive&gt; select explode(map(&apos;k1&apos;,&apos;v1&apos;,&apos;k2&apos;,&apos;v2&apos;));
+k1    v1
+k2    v2</code></pre></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"><i class="fa fa-tag"></i> Hadoop</a>
+          
+            <a href="/tags/Hive/" rel="tag"><i class="fa fa-tag"></i> Hive</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Hive-1.html" rel="next" title="Hive">
+                <i class="fa fa-chevron-left"></i> Hive
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Hue.html" rel="prev" title="Hue">
+                Hue <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/05/06/QlikSense-3/" title="QlikSense插件开发" target="_blank">QlikSense插件开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/08/01/Scala-0/" title="Scala学习" target="_blank">Scala学习</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/Hql-1.html" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
+          </li>
+        
+          <li>
+            <a href="/Kafka-0.html" title="Kafka概念" target="_blank">Kafka概念</a>
+          </li>
+        
+          <li>
+            <a href="/Scala-1.html" title="Scala编程 笔记" target="_blank">Scala编程 笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
