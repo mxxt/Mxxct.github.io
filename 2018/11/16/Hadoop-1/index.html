@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="1.从Hadoop整体框架来说1.1 Hadoop1.0即第一代Hadoop，由分布式存储系统HDFS和分布式计算框架MapReduce组成，其中HDFS由一个NameNode和多个DateNode组成，MapReduce由一个JobTracker和多个TaskTracker组成。1.2 Hadoop2.0为克服Hadoop1.0中的不足：针对Hadoop1.0单NameNode制约HDFS的扩展">
+<meta name="description" content="一、Hadoop Hadoop是一个由Apache基金会所开发的分布式系统基础架构    充分利用集群的威力进行高速运算和存储，具有可靠、高效、可伸缩的特点    Hadoop的核心是Yarn、HDFS和MapReduce  适合大数据的分布式存储与计算平台 HDFS: Hadoop Distributed File System分布式文件系统 MapReduce：并行计算框架    二、HDFS">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop1.0 和 Hadoop2.0">
+<meta property="og:title" content="Hadoop生态圈">
 <meta property="og:url" content="http://yoursite.com/2018/11/16/Hadoop-1/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="1.从Hadoop整体框架来说1.1 Hadoop1.0即第一代Hadoop，由分布式存储系统HDFS和分布式计算框架MapReduce组成，其中HDFS由一个NameNode和多个DateNode组成，MapReduce由一个JobTracker和多个TaskTracker组成。1.2 Hadoop2.0为克服Hadoop1.0中的不足：针对Hadoop1.0单NameNode制约HDFS的扩展">
+<meta property="og:description" content="一、Hadoop Hadoop是一个由Apache基金会所开发的分布式系统基础架构    充分利用集群的威力进行高速运算和存储，具有可靠、高效、可伸缩的特点    Hadoop的核心是Yarn、HDFS和MapReduce  适合大数据的分布式存储与计算平台 HDFS: Hadoop Distributed File System分布式文件系统 MapReduce：并行计算框架    二、HDFS">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-16T10:54:37.000Z">
+<meta property="og:updated_time" content="2018-11-16T10:57:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hadoop1.0 和 Hadoop2.0">
-<meta name="twitter:description" content="1.从Hadoop整体框架来说1.1 Hadoop1.0即第一代Hadoop，由分布式存储系统HDFS和分布式计算框架MapReduce组成，其中HDFS由一个NameNode和多个DateNode组成，MapReduce由一个JobTracker和多个TaskTracker组成。1.2 Hadoop2.0为克服Hadoop1.0中的不足：针对Hadoop1.0单NameNode制约HDFS的扩展">
+<meta name="twitter:title" content="Hadoop生态圈">
+<meta name="twitter:description" content="一、Hadoop Hadoop是一个由Apache基金会所开发的分布式系统基础架构    充分利用集群的威力进行高速运算和存储，具有可靠、高效、可伸缩的特点    Hadoop的核心是Yarn、HDFS和MapReduce  适合大数据的分布式存储与计算平台 HDFS: Hadoop Distributed File System分布式文件系统 MapReduce：并行计算框架    二、HDFS">
 
 
 
@@ -172,7 +172,7 @@
 
 
 
-  <title>Hadoop1.0 和 Hadoop2.0 | 猫熊小才天の书院</title>
+  <title>Hadoop生态圈 | 猫熊小才天の书院</title>
   
 
 
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hadoop1.0 和 Hadoop2.0</h1>
+          <h1 class="post-title" itemprop="name headline">Hadoop生态圈</h1>
         
 
         <div class="post-meta">
@@ -364,7 +364,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T18:54:37+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T18:57:14+08:00">
                 2018-11-16
               </time>
             
@@ -416,7 +416,7 @@
 
           
           
-             <span id="/2018/11/16/Hadoop-1/" class="leancloud_visitors" data-flag-title="Hadoop1.0 和 Hadoop2.0">
+             <span id="/2018/11/16/Hadoop-1/" class="leancloud_visitors" data-flag-title="Hadoop生态圈">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -449,8 +449,83 @@
       
 
       
-        <h3 id="1-从Hadoop整体框架来说"><a href="#1-从Hadoop整体框架来说" class="headerlink" title="1.从Hadoop整体框架来说"></a>1.从Hadoop整体框架来说</h3><p>1.1 Hadoop1.0即第一代Hadoop，由分布式存储系统HDFS和分布式计算框架MapReduce组成，其中HDFS由一个NameNode和多个DateNode组成，MapReduce由一个JobTracker和多个TaskTracker组成。<br>1.2 Hadoop2.0为克服Hadoop1.0中的不足：<strong>针对Hadoop1.0单NameNode制约HDFS的扩展性问题</strong>，提出HDFS Federation，它让多个NameNode分管不同的目录进而实现访问隔离和横向扩展，同时彻底解决了NameNode单点故障问题；<br>针对Hadoop1.0中的MapReduce在扩展性和多框架支持等方面的不足，它将JobTracker中的资源管理和作业控制分开，分别由ResourceManager（负责所有应用程序的资源分配）和ApplicationMaster（负责管理一个应用程序）实现，即<strong>引入了资源管理框架Yarn</strong>。同时Yarn作为Hadoop2.0中的资源管理系统，它是一个通用的资源管理模块，可为各类应用程序进行资源管理和调度，不仅限于MapReduce一种框架，也可以为其他框架使用，如Tez、Spark、Storm等</p>
-<h3 id="2-从MapReduce计算框架来说"><a href="#2-从MapReduce计算框架来说" class="headerlink" title="2.从MapReduce计算框架来说"></a>2.从MapReduce计算框架来说</h3><p>2.1 MapReduce1.0计算框架主要由三部分组成：编程模型、数据处理引擎和运行时环境。它的基本编程模型是将问题抽象成Map和Reduce两个阶段，其中Map阶段将输入的数据解析成key/value，迭代调用map()函数处理后，再以key/value的形式输出到本地目录，Reduce阶段将key相同的value进行规约处理，并将最终结果写到HDFS上；它的数据处理引擎由MapTask和ReduceTask组成，分别负责Map阶段逻辑和Reduce阶段的逻辑处理；它的运行时环境由一个JobTracker和若干个TaskTracker两类服务组成，其中JobTracker负责资源管理和所有作业的控制，TaskTracker负责接收来自JobTracker的命令并执行它。<br>2.2 MapReducer2.0具有与MRv1相同的编程模型和数据处理引擎，唯一不同的是运行时环境。MRv2是在MRv1基础上经加工之后，运行于资源管理框架Yarn之上的计算框架MapReduce。它的运行时环境不再由JobTracker和TaskTracker等服务组成，而是变为通用资源管理系统Yarn和作业控制进程ApplicationMaster，其中Yarn负责资源管理的调度而ApplicationMaster负责作业的管理。</p>
+        <h2 id="一、Hadoop"><a href="#一、Hadoop" class="headerlink" title="一、Hadoop"></a>一、Hadoop</h2><ol>
+<li><p>Hadoop是一个由Apache基金会所开发的分布式系统基础架构  </p>
+</li>
+<li><p>充分利用集群的威力进行高速运算和存储，具有可靠、高效、可伸缩的特点  </p>
+</li>
+<li><p>Hadoop的核心是Yarn、HDFS和MapReduce</p>
+<ul>
+<li>适合大数据的分布式存储与计算平台</li>
+<li>HDFS: Hadoop Distributed File System分布式文件系统</li>
+<li>MapReduce：并行计算框架</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、HDFS-Hadoop分布式文件系统"><a href="#二、HDFS-Hadoop分布式文件系统" class="headerlink" title="二、HDFS(Hadoop分布式文件系统)"></a>二、HDFS(Hadoop分布式文件系统)</h2><ol>
+<li>Hadoop Distributed File System  </li>
+<li>HDFS是Hadoop体系中数据存储管理的基础  </li>
+<li>高容错；高吞吐量；在项目里处理大数据集；流式访问文件系统数据；可以构建在普通的硬件之上  </li>
+<li>一次写入多次读取；数据以块的形式，同时分布在集群不同物理机器上</li>
+</ol>
+<h2 id="三、MapReduce-分布式计算框架"><a href="#三、MapReduce-分布式计算框架" class="headerlink" title="三、MapReduce(分布式计算框架)"></a>三、MapReduce(分布式计算框架)</h2><ol>
+<li>MapReduce是一种分布式计算模型，用以进行大数据量的计算</li>
+<li>它屏蔽了分布式计算框架细节，将计算抽象成map和reduce两部分，其中Map对数据集上的独立元素进行指定的操作，生成键-值对形式中间结果。Reduce则对中间结果中相同“键”的所有“值”进行规约，以得到最终结果</li>
+</ol>
+<h2 id="四、Hbase-分布式列存数据库"><a href="#四、Hbase-分布式列存数据库" class="headerlink" title="四、Hbase(分布式列存数据库)"></a>四、Hbase(分布式列存数据库)</h2><ol>
+<li><p>HBase是一个建立在HDFS之上，面向列的针对结构化数据的可伸缩、高可靠、高性能、分布式和面向列的动态模式数据库</p>
+</li>
+<li><p>HBase利用Hadoop HDFS作为其文件存储系统，利用Hadoop MapReduce来处理HBase中的海量数据</p>
+</li>
+<li><p>一次写多次读，对修改支持很少</p>
+</li>
+<li><p>表 行键 列族 列 值</p>
+<ul>
+<li>Google Bigtable的开源实现</li>
+<li>列式数据库</li>
+<li>可集群化</li>
+<li>可以使用shell、web、api等多种方式访问</li>
+<li>适合高读写(insert)的场景</li>
+<li>HQL查询语言</li>
+<li>NoSQL的典型代表产品</li>
+</ul>
+</li>
+</ol>
+<h2 id="五、Hive-数据仓库"><a href="#五、Hive-数据仓库" class="headerlink" title="五、Hive(数据仓库)"></a>五、Hive(数据仓库)</h2><ol>
+<li><p>Hive定义了一种类似SQL的查询语言(HQL),将SQL转化为MapReduce任务在Hadoop上执行</p>
+</li>
+<li><p>通常用于离线分析</p>
+<ul>
+<li>数据仓库工具。可以把Hadoop下的原始结构化数据变成Hive中的表</li>
+<li>支持一种与SQL几乎完全相同的语言HiveQL。除了不支持更新、索引和事务，几乎SQL的其它特征都能支持</li>
+<li>可以看成是从SQL到Map-Reduce的映射器</li>
+<li>提供shell、JDBC/ODBC、Thrift、Web等接口</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>数据仓库和关系型数据库的关系<br>一般来说，一个项目通常都有专门的数据库进行存储数据，这时候用到的一般都是关系型数据库，存储的数据都是较少的有针对性的数据，可以快速的存取<br>数据仓库中存储的数据是庞大的，并且种类繁多，所能执行的语句也很多  </p>
+</blockquote>
+<h2 id="六、Sqoop-数据ETL-同步工具"><a href="#六、Sqoop-数据ETL-同步工具" class="headerlink" title="六、Sqoop(数据ETL/同步工具)"></a>六、Sqoop(数据ETL/同步工具)</h2><ol>
+<li><p>SQL-to-Hadoop</p>
+</li>
+<li><p>主要用于传统数据库和Hadoop之前传输数据,可以将一个关系型数据库中的数据导进到Hadoop的HDFS中，也可以将HDFS的数据导进到关系型数据库中  </p>
+</li>
+<li><p>数据的导入和导出本质上是Mapreduce程序，充分利用了MR的并行化和容错性</p>
+<ul>
+<li>用于在Hadoop和关系型数据库之间交换数据</li>
+<li>通过JDBC接口连入关系型数据库</li>
+</ul>
+</li>
+</ol>
+<h2 id="七、Flume-日志收集工具"><a href="#七、Flume-日志收集工具" class="headerlink" title="七、Flume(日志收集工具)"></a>七、Flume(日志收集工具)</h2><ol>
+<li>Cloudera开源的日志收集系统，具有分布式、高可靠、高容错、易于定制和扩展的特点  </li>
+<li>它将数据从产生、传输、处理并最终写入目标的路径的过程抽象为数据流，在具体的数据流中，数据源支持在Flume中定制数据发送方，从而支持收集各种不同协议数据  </li>
+<li>同时，Flume数据流提供对日志数据进行简单处理的能力，如过滤、格式转换等。此外，Flume还具有能够将日志写往各种数据目标（可定制）的能力</li>
+</ol>
+<h2 id="八、Yarn-分布式资源管理器"><a href="#八、Yarn-分布式资源管理器" class="headerlink" title="八、Yarn(分布式资源管理器)"></a>八、Yarn(分布式资源管理器)</h2><ol>
+<li>将JobTracker的两个主要功能（资源管理和作业调度/监控）分离，主要方法是创建一个全局的ResourceManager（RM）和若干个针对应用程序的ApplicationMaster（AM）</li>
+</ol>
 
       
     </div>
@@ -481,8 +556,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/16/Hexo-2/" rel="next" title="Hexo相关配置">
-                <i class="fa fa-chevron-left"></i> Hexo相关配置
+              <a href="/2018/11/16/Hadoop-0/" rel="next" title="Hadoop1.0 和 Hadoop2.0">
+                <i class="fa fa-chevron-left"></i> Hadoop1.0 和 Hadoop2.0
               </a>
             
           </div>
@@ -491,8 +566,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/16/Hadoop-2/" rel="prev" title="Hadoop生态圈">
-                Hadoop生态圈 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/16/Hadoop-2/" rel="prev" title="Yarn">
+                Yarn <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -656,7 +731,7 @@
         
         
           <li>
-            <a href="/2019/08/30/Hql-1/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
+            <a href="/2019/08/30/Hive-3/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
           </li>
         
           <li>
@@ -686,7 +761,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-从Hadoop整体框架来说"><span class="nav-text">1.从Hadoop整体框架来说</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-从MapReduce计算框架来说"><span class="nav-text">2.从MapReduce计算框架来说</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Hadoop"><span class="nav-text">一、Hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、HDFS-Hadoop分布式文件系统"><span class="nav-text">二、HDFS(Hadoop分布式文件系统)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、MapReduce-分布式计算框架"><span class="nav-text">三、MapReduce(分布式计算框架)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Hbase-分布式列存数据库"><span class="nav-text">四、Hbase(分布式列存数据库)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、Hive-数据仓库"><span class="nav-text">五、Hive(数据仓库)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、Sqoop-数据ETL-同步工具"><span class="nav-text">六、Sqoop(数据ETL/同步工具)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、Flume-日志收集工具"><span class="nav-text">七、Flume(日志收集工具)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、Yarn-分布式资源管理器"><span class="nav-text">八、Yarn(分布式资源管理器)</span></a></li></ol></div>
             
 
           </div>

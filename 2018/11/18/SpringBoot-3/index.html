@@ -125,21 +125,18 @@
 
 
 
-<meta name="description" content="json接口添加@RestController注解 自定义FilterSpring boot自动添加了OrderedCharacterEncodingFilter 和 HiddenHttpMethodFilter实现自定义Fliter需要添加@Configuration注解，将自定义Fliter加入过滤链 自定义Property配置在application.properties中 12mxxct_">
+<meta name="description" content="定时任务在启动类上面加上 @EnableScheduling即可开启定时 12345678@SpringBootApplication@EnableSchedulingpublic class Application &amp;#123;	public static void main(String[] args) &amp;#123;		SpringApplication.run(Application.cla">
 <meta name="keywords" content="Java,Spring,Spring Boot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建Spring Boot项目（二）">
+<meta property="og:title" content="Spring Boot添加定时任务">
 <meta property="og:url" content="http://yoursite.com/2018/11/18/SpringBoot-3/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="json接口添加@RestController注解 自定义FilterSpring boot自动添加了OrderedCharacterEncodingFilter 和 HiddenHttpMethodFilter实现自定义Fliter需要添加@Configuration注解，将自定义Fliter加入过滤链 自定义Property配置在application.properties中 12mxxct_">
+<meta property="og:description" content="定时任务在启动类上面加上 @EnableScheduling即可开启定时 12345678@SpringBootApplication@EnableSchedulingpublic class Application &amp;#123;	public static void main(String[] args) &amp;#123;		SpringApplication.run(Application.cla">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/F0wXZOQ.png">
-<meta property="og:image" content="https://i.imgur.com/qnH76kz.png">
-<meta property="og:updated_time" content="2018-11-18T03:19:06.000Z">
+<meta property="og:updated_time" content="2018-11-18T03:20:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="搭建Spring Boot项目（二）">
-<meta name="twitter:description" content="json接口添加@RestController注解 自定义FilterSpring boot自动添加了OrderedCharacterEncodingFilter 和 HiddenHttpMethodFilter实现自定义Fliter需要添加@Configuration注解，将自定义Fliter加入过滤链 自定义Property配置在application.properties中 12mxxct_">
-<meta name="twitter:image" content="https://i.imgur.com/F0wXZOQ.png">
+<meta name="twitter:title" content="Spring Boot添加定时任务">
+<meta name="twitter:description" content="定时任务在启动类上面加上 @EnableScheduling即可开启定时 12345678@SpringBootApplication@EnableSchedulingpublic class Application &amp;#123;	public static void main(String[] args) &amp;#123;		SpringApplication.run(Application.cla">
 
 
 
@@ -175,7 +172,7 @@
 
 
 
-  <title>搭建Spring Boot项目（二） | 猫熊小才天の书院</title>
+  <title>Spring Boot添加定时任务 | 猫熊小才天の书院</title>
   
 
 
@@ -353,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">搭建Spring Boot项目（二）</h1>
+          <h1 class="post-title" itemprop="name headline">Spring Boot添加定时任务</h1>
         
 
         <div class="post-meta">
@@ -367,7 +364,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-18T11:19:06+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-18T11:20:03+08:00">
                 2018-11-18
               </time>
             
@@ -430,7 +427,7 @@
 
           
           
-             <span id="/2018/11/18/SpringBoot-3/" class="leancloud_visitors" data-flag-title="搭建Spring Boot项目（二）">
+             <span id="/2018/11/18/SpringBoot-3/" class="leancloud_visitors" data-flag-title="Spring Boot添加定时任务">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -463,18 +460,22 @@
       
 
       
-        <p>json接口<br>添加@RestController注解</p>
-<p>自定义Filter<br>Spring boot自动添加了OrderedCharacterEncodingFilter 和 HiddenHttpMethodFilter<br>实现自定义Fliter需要添加@Configuration注解，将自定义Fliter加入过滤链</p>
-<p>自定义Property<br>配置在application.properties中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mxxct_name=猫熊小才天</span><br><span class="line">mxxct_pass=12345</span><br></pre></td></tr></table></figure>
+        <p>定时任务<br>在启动类上面加上 @EnableScheduling即可开启定时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableScheduling</span><br><span class="line">public class Application &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(Application.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>需要和Application放在同级</strong></p>
-<p><img src="https://i.imgur.com/F0wXZOQ.png" alt></p>
-<p><img src="https://i.imgur.com/qnH76kz.png" alt></p>
-<p>application.properties文件默认编码是ISO-8859-1，所以要添加配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server.tomcat.uri-encoding=UTF-8</span><br><span class="line">spring.http.encoding.charset=UTF-8</span><br><span class="line">spring.http.encoding.enabled=true</span><br><span class="line">spring.http.encoding.force=true</span><br><span class="line">spring.messages.encoding=UTF-8</span><br></pre></td></tr></table></figure>
 
-<p>如果还不行的话，在File -&gt; Settings -&gt; Editor -&gt; File Encodings中将Properties Files (*.properties)下的Default encoding for properties files设置为UTF-8，将Transparent native-to-ascii conversion前的勾选上。</p>
+<p>创建定时任务实现类<br>①</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class SchedulerTask &#123;</span><br><span class="line"></span><br><span class="line">    private int count=0;</span><br><span class="line"></span><br><span class="line">    @Scheduled(cron=&quot;*/6 * * * * ?&quot;)</span><br><span class="line">    private void process()&#123;</span><br><span class="line">        System.out.println(&quot;this is scheduler task runing  &quot;+(count++));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>②</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Scheduler2Task &#123;</span><br><span class="line"></span><br><span class="line">    private static final SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">    @Scheduled(fixedRate = 6000)</span><br><span class="line">    public void reportCurrentTime() &#123;</span><br><span class="line">        System.out.println(&quot;现在时间：&quot; + dateFormat.format(new Date()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">this is scheduler task runing  0</span><br><span class="line">现在时间：09:44:17</span><br><span class="line">this is scheduler task runing  1</span><br><span class="line">现在时间：09:44:23</span><br><span class="line">this is scheduler task runing  2</span><br><span class="line">现在时间：09:44:29</span><br><span class="line">this is scheduler task runing  3</span><br><span class="line">现在时间：09:44:35</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Scheduled 参数可以接受两种定时的设置，一种是我们常用的cron=&quot;*/6 * * * * ?&quot;,一种是 fixedRate = 6000，两种都表示每隔六秒打印一下内容。</span><br><span class="line">fixedRate 说明</span><br><span class="line">@Scheduled(fixedRate = 6000) ：上一次开始执行时间点之后6秒再执行</span><br><span class="line">@Scheduled(fixedDelay = 6000) ：上一次执行完毕时间点之后6秒再执行</span><br><span class="line">@Scheduled(initialDelay=1000, fixedRate=6000) ：第一次延迟1秒后执行，之后按fixedRate的规则每6秒执行一次</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -509,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/18/SpringBoot-2/" rel="next" title="搭建Spring Boot项目（一）">
-                <i class="fa fa-chevron-left"></i> 搭建Spring Boot项目（一）
+              <a href="/2018/11/18/SpringBoot-2/" rel="next" title="搭建Spring Boot项目（二）">
+                <i class="fa fa-chevron-left"></i> 搭建Spring Boot项目（二）
               </a>
             
           </div>
@@ -519,8 +520,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/18/SpringBoot-4/" rel="prev" title="Spring Boot添加定时任务">
-                Spring Boot添加定时任务 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/18/SpringBoot-4/" rel="prev" title="Spring Boot测试与打包">
+                Spring Boot测试与打包 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -675,7 +676,7 @@
         
         
           <li>
-            <a href="/2019/08/30/Hql-1/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
+            <a href="/2019/08/30/Hive-3/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
           </li>
         
           <li>
