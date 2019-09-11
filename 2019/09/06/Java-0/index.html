@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="m1ei8mEvXD">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想 笔记">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/Java-0/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-11T09:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java编程思想 笔记">
+<meta name="twitter:description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/06/Java-0/">
+
+
+
+
+
+  <title>Java编程思想 笔记 | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/06/Java-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java编程思想 笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T15:10:00+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/06/Java-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/06/Java-0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/09/06/Java-0/" class="leancloud_visitors" data-flag-title="Java编程思想 笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Java编程思想-笔记"><a href="#Java编程思想-笔记" class="headerlink" title="Java编程思想 笔记"></a>Java编程思想 笔记</h2><h3 id="1-四类访问权限修饰词"><a href="#1-四类访问权限修饰词" class="headerlink" title="1. 四类访问权限修饰词"></a>1. 四类访问权限修饰词</h3><table>
+<thead>
+<tr>
+<th align="center">\</th>
+<th align="center">类内部</th>
+<th align="center">本包</th>
+<th align="center">子类</th>
+<th align="center">其他包</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">protected</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">default（friendly）</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">private</td>
+<td align="center">√</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 protected。</p>
+</blockquote>
+<h3 id="2-8个基本类型"><a href="#2-8个基本类型" class="headerlink" title="2. 8个基本类型"></a>2. 8个基本类型</h3><table>
+<thead>
+<tr>
+<th align="center">基本类型</th>
+<th align="center">大小</th>
+<th align="center">包装器类型</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">boolean</td>
+<td align="center">-</td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">16位</td>
+<td align="center">Character</td>
+<td align="center">null</td>
+</tr>
+<tr>
+<td align="center">byte</td>
+<td align="center">8位</td>
+<td align="center">Byte</td>
+<td align="center">(byte)0</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">16位</td>
+<td align="center">Short</td>
+<td align="center">(short)0</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">32位</td>
+<td align="center">Integer</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">64位</td>
+<td align="center">Long</td>
+<td align="center">0L</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">32位</td>
+<td align="center">Float</td>
+<td align="center">0.0f</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">64位</td>
+<td align="center">Double</td>
+<td align="center">0.0d</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>默认值只是当变量作为类的成员使用时，才会给默认值，以确保成员变量得到初始化，防止程序错误。并不适用于局部变量！</p>
+</blockquote>
+<p>int 的整数范围：-2147483648 ~ 2147483647</p>
+<p>高精度数字的类：BigInteger 和 BigDecimal</p>
+<h3 id="3-static-关键字"><a href="#3-static-关键字" class="headerlink" title="3. static 关键字"></a>3. static 关键字</h3><p>由 <code>static</code> 声明的变量或方法只有一份存储空间。关于变量，不管创建多少个对象，这些对象都共享同一个 i；关于方法，可以直接调用不用创建对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class StaticTest &#123;</span><br><span class="line">    static int i = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">StaticTest st1 = new stStaticTestaticTest();</span><br><span class="line">st1.i;</span><br><span class="line"></span><br><span class="line">StaticTest.i; // 也可以直接访问</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>即使没有显式使用 static 关键字，一个类的构造器实际上也是静态方法。</p>
+</blockquote>
+<blockquote>
+<p>初始化的顺序是先静态对象（如果它们尚未因前面的对象创建过程而被初始化），其次是非静态对象。</p>
+</blockquote>
+<blockquote>
+<p>一个类的初始化顺序：</p>
+<ol start="0">
+<li>将分配给对象的存储空间初始化成二进制的零</li>
+<li>基类中的 static 变量初始化</li>
+<li>当前类中的 static 变量初始化 </li>
+<li>基类中的构造器执行，如果构造器中包含的变量未被初始化，则按书写顺序初始化变量（这些变量肯定不是 static）</li>
+<li>当前类中的构造器执行，如果构造器中包含的变量未被初始化，则按书写顺序初始化变量（这些变量肯定不是 static）</li>
+</ol>
+</blockquote>
+<h3 id="4-final-关键字"><a href="#4-final-关键字" class="headerlink" title="4. final 关键字"></a>4. final 关键字</h3><p>如果一个类被声明为 final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract，又被声明为 final。</p>
+<p>将变量或方法声明为 final，可以保证它们在使用中不被改变。被声明为 final 的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。被声明为final 的方法也同样只能使用，不能重载。 </p>
+<h3 id="5"><a href="#5" class="headerlink" title="5. ++"></a>5. ++</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">++i 先执行运算，再生成值</span><br><span class="line">i++ 先生成值，再执行运算</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-和-equals"><a href="#6-和-equals" class="headerlink" title="6. == 和 equals"></a>6. == 和 equals</h3><p><code>equals</code>：不同对象判断内容是否相等用 <code>equals</code><br><code>==</code>：比较的是对象的引用；基本类型使用 <code>==</code> 来判等</p>
+<h3 id="7-while-和-do…while"><a href="#7-while-和-do…while" class="headerlink" title="7. while 和 do…while"></a>7. while 和 do…while</h3><p><code>do...while</code> 中的语句最少会执行一次，哪怕 while 中的判断是 false </p>
+<blockquote>
+<p>for(;;) 和 while(true) 是一样的，都表示无穷循环。</p>
+</blockquote>
+<h3 id="8-foreach"><a href="#8-foreach" class="headerlink" title="8. foreach"></a>8. foreach</h3><p>这里的 foreach 只是 for 循环的变形。Java8 之后可以使用 foreach + lambda 表达式来循环遍历。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(type i : x) // x 比如是一个数组或容器</span><br><span class="line"></span><br><span class="line">for(char c : &quot;a test string&quot;.toCharArray()) // String 类通过 toCharArray() 方法来返回一个 char 数组</span><br></pre></td></tr></table></figure>
+
+<p>Java8 特性：foreach + lambda 表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">items.foreach((k, v) -&gt; &#123;</span><br><span class="line">    System.out.println(&quot;key: &quot; + k + &quot;, value: &quot; + v)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-break-和-continue"><a href="#9-break-和-continue" class="headerlink" title="9. break 和 continue"></a>9. break 和 continue</h3><p>break：用于强行退出循环，不执行循环中剩余的语句</p>
+<p>continue：用于停止执行当前的迭代，然后退回循环起始处，开始下一次迭代</p>
+<blockquote>
+<p>break 和 continue 针对的都是当前迭代层。如果有内外两层迭代，break写在内层，只是退出内层迭代，外层迭代继续。</p>
+</blockquote>
+<h3 id="10-标签"><a href="#10-标签" class="headerlink" title="10. 标签"></a>10. 标签</h3><p>标签是后面跟有冒号的标识符，类似：<code>lable1:</code>，一般和 break、continue 一同使用，表示中断当前循环，跳到标签所在的位置。</p>
+<h3 id="11-垃圾回收"><a href="#11-垃圾回收" class="headerlink" title="11. 垃圾回收"></a>11. 垃圾回收</h3><p>Java 垃圾回收器只知道释放那些由 new 分配内存的对象。如果一个对象并非使用 new 来获得一块内存的话，就需要在类中定义一个名为 finalize() 的方法。</p>
+<p>关于回收的几个点：</p>
+<ol>
+<li>对象不一定会被回收</li>
+<li>垃圾回收不是析构函数</li>
+<li>垃圾回收只与内存有关</li>
+<li>如果 JVM 还没面临内存耗尽的情况，那它就不会浪费时间去执行垃圾回收来恢复内存。</li>
+</ol>
+<p>几种垃圾回收技术：</p>
+<ol>
+<li><p>引用计数：引用连接至对象，计数器加1；引用离开作用域或被设置为 null 时，计数器减1。当计数为0时回收。缺点：如果对象之间存在循环引用，可能会出现”对象应该被回收，但引用技术不为0“</p>
+</li>
+<li><p>停止-复制：先暂停程序运行，把所有存活的对象从当前堆复制到另一个堆，没有被复制的对象都是垃圾。缺点：所有引用需要修正；需要2倍的空间；如果有较少或甚至没有垃圾，就很浪费。</p>
+</li>
+<li><p>标记-清扫：遍历所有引用，标记存活对象，当过程结束后开始回收。</p>
+</li>
+</ol>
+<h3 id="12-可变参数列表"><a href="#12-可变参数列表" class="headerlink" title="12. 可变参数列表"></a>12. 可变参数列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static void printArray(Object[] args)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-基类（继承）"><a href="#13-基类（继承）" class="headerlink" title="13. 基类（继承）"></a>13. 基类（继承）</h3><p>如果 A 作为基类，<code>B extends A</code>，那么当 new 一个 B 类的对象时，会隐式地自动先执行 A 类的无参构造函数，即构造过程是从基类开始想外扩散的。</p>
+<blockquote>
+<p>如果要调用 A 的有参构造函数，就必须显式地使用 super 来调用，并且传参。</p>
+</blockquote>
+<h3 id="14-代理"><a href="#14-代理" class="headerlink" title="14. 代理"></a>14. 代理</h3><p>子类 extends 基类，那么基类的所有方法都会暴露给子类。使用代理可以有选择地将基类的方法暴露给用户来使用。</p>
+<blockquote>
+<p>其实相当于之前是通过 extends 的方式来继承基类，现在是在一个类下面创建基类的对象的方式来实现功能。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">    void func1(int i)&#123;&#125;</span><br><span class="line">    void func2(int i)&#123;&#125;</span><br><span class="line">    void func3(int i)&#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class B extends A &#123;</span><br><span class="line">    // 此时 A 中所有的方法都会暴露给 B</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用代理</span><br><span class="line">public class C &#123;</span><br><span class="line">    private A a = new A();</span><br><span class="line">    // 代理方法</span><br><span class="line">    // 在这里可以有选择地提供基类中的方法</span><br><span class="line">    public void func1(int i)&#123;</span><br><span class="line">        a.func1(i);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-向上转型于向下转型"><a href="#15-向上转型于向下转型" class="headerlink" title="15. 向上转型于向下转型"></a>15. 向上转型于向下转型</h3><h4 id="15-1-向上转型"><a href="#15-1-向上转型" class="headerlink" title="15.1 向上转型"></a>15.1 向上转型</h4><p>向上转型指的是从一个转专用类型向较通用类型转换，比如子类向上转型为基类，由于基类不会有大于子类的方法数量，所以是安全的。</p>
+<h4 id="15-2-向下转型"><a href="#15-2-向下转型" class="headerlink" title="15.2 向下转型"></a>15.2 向下转型</h4><p>向下转型则不安全，需要在转型时在前面用小括号写出具体转型的类型。</p>
+<h3 id="16-多态"><a href="#16-多态" class="headerlink" title="16. 多态"></a>16. 多态</h3><blockquote>
+<p>OOP(面向对象编程)三大特征：</p>
+<ol>
+<li>抽象：把一类事物的属性或行为提出来，形成一个模型（类）</li>
+<li>继承：为了提高代码复用性，将共同的属性或方法提取出来作为基类，子类继承基类，获得基类所有属性和行为，并可以根据自身需求来拓展各自的功能。</li>
+<li>多态：即同一消息可以根据发送对象的不同而采用多种不同的行为方式。</li>
+</ol>
+<p>另外还有 封装（把数据和对数据的操作组合起来，对外隐藏实现细节，对外只能用提供的功能来实现需求）。</p>
+</blockquote>
+<p>以下是还算较为简单的多态的实现，更麻烦的实现是在 Shapes 定义参数不同方法名相同的 draw 方法，然后调用的时候分别把 circle、triangle 对象传进去，通过传递对象的不同来调用各自的 draw 方法。但是这种方法的思想依旧是前期绑定，即在运行前就已经知道了对象的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 基类</span><br><span class="line">class Shape &#123;</span><br><span class="line">    public void draw()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 子类</span><br><span class="line">class Cirle extends Shape &#123;</span><br><span class="line">    @Override 避免了方法重载的麻烦，但是也可以不加</span><br><span class="line">    public void draw()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Triangle extends Shape &#123;</span><br><span class="line">    public void draw()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实现类</span><br><span class="line">class Shapes &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Cirle circle = new Circle();</span><br><span class="line">        Triangle triangle = new Triangle();</span><br><span class="line">        circle.draw();</span><br><span class="line">        triangle.draw();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多态的思想是通过后期绑定（亦或动态绑定或运行时绑定），是在向上转型的基础上来实现的：因为 Cirle 和 Triangle 继承自 Shape，那么可以在创建对象的时候写成 <code>Shape circle = new Circle();</code>，创建一个 Circle 对象，把引用赋值给 Shape。在调用 <code>circle.draw();</code> 时默认会调用基类中的 draw() 方法，但是如果子类中覆写了这个方法，那么就会调用在 Circle 类中覆写的 draw() 方法，从而实现了多态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// 基类</span><br><span class="line">class Shape &#123;</span><br><span class="line">    public void draw()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 子类</span><br><span class="line">class Cirle extends Shape &#123;</span><br><span class="line">    public void draw()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Triangle extends Shape &#123;</span><br><span class="line">    public void draw()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实现类</span><br><span class="line">class Shapes &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Shape circle = new Cirle();</span><br><span class="line">        Shape triangle = new Triangle();</span><br><span class="line">        circle.draw();</span><br><span class="line">        triangle.draw();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多态的两个注意事项：</p>
+<ol>
+<li><p>无法覆盖私有方法</p>
+</li>
+<li><p>变量和静态方法不具有多态性</p>
+</li>
+</ol>
+<h3 id="17-构造器"><a href="#17-构造器" class="headerlink" title="17. 构造器"></a>17. 构造器</h3><p>准则：用尽可能简单的方法使对象进入正常状态；避免调用其他方法。</p>
+<p>在构造器内唯一能够安全调用方法是基类中的 final 方法（也适用于 private 方法，它们自动属于 final 方法），这些方法不能被覆盖。</p>
+<h3 id="18-抽象类和抽象方法"><a href="#18-抽象类和抽象方法" class="headerlink" title="18. 抽象类和抽象方法"></a>18. 抽象类和抽象方法</h3><p>建立抽象类的唯一目的是：不同的子类可以用不同的方式表示此接口（方法），抽象类就是把共同的部分提取了出来。像之前写的 Shape 就是一个抽象基类，或者抽象类。</p>
+<p>如果一个类包含一个或多个抽象方法，该类就必须被限定为 abstract。同时，子类继承抽象类时，必须为基类中所有的抽象方法提供方法定义，否则，子类也必须被限定为 abstract。</p>
+<p>基类中的抽象方法只定义方法，不具体实现。但是那些非抽象方法可以写实现体。（抽象类中的那些抽象方法类似于接口部分）</p>
+<h3 id="19-接口"><a href="#19-接口" class="headerlink" title="19. 接口"></a>19. 接口</h3><p>接口使抽象这一概念更进一步：全是抽象方法，只定义方法，都不实现。</p>
+<p>接口中的方法都是 public。</p>
+<p>一个类只能继承一个基类，但是可以实现多个接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class X extends A implements B, C &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展接口：接口 extends 接口1, 接口2 … (只有接口继承是可以写多个的，除此之外，extends 只能后面跟一个类)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">interface A &#123;</span><br><span class="line">    void func1();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 此时 B 就相当于有2个方法了</span><br><span class="line">interface B extends A &#123;</span><br><span class="line">    void func2();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class C implements B &#123;</span><br><span class="line">    public void func1()&#123;&#125;;</span><br><span class="line">    public void func2()&#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于接口而言，如果使用了 extends，那么子类一定也是一个接口；如果使用了 implements，那么子类就是一个普通的类，并且必须实现接口中的所有方法。</p>
+</blockquote>
+<p>接口中的任何变量都是 final 以及 static 的。</p>
+<h3 id="20-内部类"><a href="#20-内部类" class="headerlink" title="20. 内部类"></a>20. 内部类</h3><p>可以把一个类的定义放在另一个类的定义的内部（可以是类的内部，也可以是在某一个方法的内部），即为内部类。</p>
+<p>内部类的好处之一是内部类拥有对其外部类的所有元素（成员变量及方法）的访问权。</p>
+<p>在内部类里生成对外部类的引用：在外部类的名字后面加 <code>.this</code></p>
+<p>在外部类引用的基础上创建某个内部类的对象：在外部类的名字后面加 <code>.new</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Outer outer = new Outer();</span><br><span class="line">Outer.Inner ini = outer.new Inner();</span><br><span class="line"></span><br><span class="line">不过感觉最好是在外部类中添加一个返回内部类对象的方法</span><br><span class="line">public class Outer &#123;</span><br><span class="line">    public class Inner &#123;</span><br><span class="line">        public Outer getOuter() &#123;</span><br><span class="line">            return Outer.this; // .this 得到外部类的引用</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public Inner inner() &#123; return new Inner(); &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        Outer outer = new Outer();</span><br><span class="line">        Outer.Inner inner = outer.inner();</span><br><span class="line">        // Outer.Inner inner = outer.new Inner(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>匿名内部类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">    public Contents contents() &#123;</span><br><span class="line">        return new Contents() &#123;</span><br><span class="line">            private int i = 1;</span><br><span class="line">            public int value() &#123; return i; &#125;</span><br><span class="line">        &#125;; // 这里的分号必要要有</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        A a = new A();</span><br><span class="line">        Contents contents = a.contents();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/30/Hive-3/" rel="next" title="Hive Sql的窗口函数">
+                <i class="fa fa-chevron-left"></i> Hive Sql的窗口函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/05/06/QlikSense-3/" title="QlikSense插件开发" target="_blank">QlikSense插件开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/08/01/Scala-0/" title="Scala学习" target="_blank">Scala学习</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2019/09/06/Java-0/" title="Java编程思想 笔记" target="_blank">Java编程思想 笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/Hive-3/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/07/Kafka-0/" title="Kafka概念" target="_blank">Kafka概念</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java编程思想-笔记"><span class="nav-text">Java编程思想 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四类访问权限修饰词"><span class="nav-text">1. 四类访问权限修饰词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8个基本类型"><span class="nav-text">2. 8个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-static-关键字"><span class="nav-text">3. static 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-final-关键字"><span class="nav-text">4. final 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5. ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-和-equals"><span class="nav-text">6. == 和 equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-while-和-do…while"><span class="nav-text">7. while 和 do…while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-foreach"><span class="nav-text">8. foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-break-和-continue"><span class="nav-text">9. break 和 continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-标签"><span class="nav-text">10. 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-垃圾回收"><span class="nav-text">11. 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-可变参数列表"><span class="nav-text">12. 可变参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-基类（继承）"><span class="nav-text">13. 基类（继承）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-代理"><span class="nav-text">14. 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-向上转型于向下转型"><span class="nav-text">15. 向上转型于向下转型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-向上转型"><span class="nav-text">15.1 向上转型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-向下转型"><span class="nav-text">15.2 向下转型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-多态"><span class="nav-text">16. 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-构造器"><span class="nav-text">17. 构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-抽象类和抽象方法"><span class="nav-text">18. 抽象类和抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-接口"><span class="nav-text">19. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-内部类"><span class="nav-text">20. 内部类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
