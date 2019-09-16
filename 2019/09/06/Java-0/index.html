@@ -133,10 +133,13 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T09:00:00.000Z">
+<meta property="og:image" content="http://www.th7.cn/d/file/p/2016/02/29/5accc786b4efc1deb9e071728d5afda4.jpg">
+<meta property="og:image" content="http://www.th7.cn/d/file/p/2016/02/29/e8ac2968b934da00bf9666cab534feb7.jpg">
+<meta property="og:updated_time" content="2019-09-15T09:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程思想 笔记">
 <meta name="twitter:description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
+<meta name="twitter:image" content="http://www.th7.cn/d/file/p/2016/02/29/5accc786b4efc1deb9e071728d5afda4.jpg">
 
 
 
@@ -567,10 +570,12 @@
 <p>一个类的初始化顺序：</p>
 <ol start="0">
 <li>将分配给对象的存储空间初始化成二进制的零</li>
-<li>基类中的 static 变量初始化</li>
-<li>当前类中的 static 变量初始化 </li>
-<li>基类中的构造器执行，如果构造器中包含的变量未被初始化，则按书写顺序初始化变量（这些变量肯定不是 static）</li>
-<li>当前类中的构造器执行，如果构造器中包含的变量未被初始化，则按书写顺序初始化变量（这些变量肯定不是 static）</li>
+<li>基类中的 static 静态代码块</li>
+<li>子类中的 static 静态代码块 </li>
+<li>基类中的属性值和普通代码块，按书写顺序初始化（这些变量和方法肯定不是 static）</li>
+<li>基类中的构造器执行</li>
+<li>子类中的属性值和普通代码块，按书写顺序初始化（这些变量和方法肯定不是 static）</li>
+<li>子类中的构造器执行</li>
 </ol>
 </blockquote>
 <h3 id="4-final-关键字"><a href="#4-final-关键字" class="headerlink" title="4. final 关键字"></a>4. final 关键字</h3><p>如果一个类被声明为 final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract，又被声明为 final。</p>
@@ -664,15 +669,84 @@
 <p>对于接口而言，如果使用了 extends，那么子类一定也是一个接口；如果使用了 implements，那么子类就是一个普通的类，并且必须实现接口中的所有方法。</p>
 </blockquote>
 <p>接口中的任何变量都是 final 以及 static 的。</p>
-<h3 id="20-内部类"><a href="#20-内部类" class="headerlink" title="20. 内部类"></a>20. 内部类</h3><p>可以把一个类的定义放在另一个类的定义的内部（可以是类的内部，也可以是在某一个方法的内部），即为内部类。</p>
+<h3 id="20-内部类"><a href="#20-内部类" class="headerlink" title="20. 内部类"></a>20. 内部类</h3><p>使用内部类的原因：每个内部类都能独立地继承自一个（接口的）实现，所以无论外围类是否已经继承了某个（接口的）实现，对于内部类都没有影响。（比如想在一个类中以某种方式实现两个接口，可以使用单一类或者使用内部类，可以使用单一类的原因是因为可以继承多个接口，但是如果是抽象类或者具体类，即只能继承一个，那么就只能使用内部类来实现多重继承）</p>
+<p>可以把一个类的定义放在另一个类的定义的内部（可以是类的内部，也可以是在某一个方法的内部），即为内部类。</p>
 <p>内部类的好处之一是内部类拥有对其外部类的所有元素（成员变量及方法）的访问权。</p>
 <p>在内部类里生成对外部类的引用：在外部类的名字后面加 <code>.this</code></p>
 <p>在外部类引用的基础上创建某个内部类的对象：在外部类的名字后面加 <code>.new</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Outer outer = new Outer();</span><br><span class="line">Outer.Inner ini = outer.new Inner();</span><br><span class="line"></span><br><span class="line">不过感觉最好是在外部类中添加一个返回内部类对象的方法</span><br><span class="line">public class Outer &#123;</span><br><span class="line">    public class Inner &#123;</span><br><span class="line">        public Outer getOuter() &#123;</span><br><span class="line">            return Outer.this; // .this 得到外部类的引用</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public Inner inner() &#123; return new Inner(); &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        Outer outer = new Outer();</span><br><span class="line">        Outer.Inner inner = outer.inner();</span><br><span class="line">        // Outer.Inner inner = outer.new Inner(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>匿名内部类：</p>
+<p>匿名内部类：（还不是很理解……）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">    public Contents contents() &#123;</span><br><span class="line">        return new Contents() &#123;</span><br><span class="line">            private int i = 1;</span><br><span class="line">            public int value() &#123; return i; &#125;</span><br><span class="line">        &#125;; // 这里的分号必要要有</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        A a = new A();</span><br><span class="line">        Contents contents = a.contents();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>嵌套类：将内部类声明为 static，此时内部类对象和其外部类对象之间就没有了联系。（普通的内部类对象隐式地保存了一个引用，指向创建它的外围类对象，但是使用了 static 之后，就没有了这个引用）</p>
+<p>使用嵌套类意味着：</p>
+<ol>
+<li>要创建嵌套类的对象，并不需要其外围类的对象（直接 new 一个就行）</li>
+<li>不能从嵌套类的对象中访问非静态的外围类对象</li>
+</ol>
+<p>嵌套类可以作为接口的一部分。因为接口中的任何类默认都是 <code>public static</code></p>
+<h3 id="21-容器类"><a href="#21-容器类" class="headerlink" title="21. 容器类"></a>21. 容器类</h3><p>容器类类库的用途是：保存对象。</p>
+<p>分为两类：</p>
+<ol>
+<li><p>Collection：一个独立元素的序列</p>
+<ul>
+<li>Collection 是 List 和 Set 两个接口的基接口，List 和 Set 也是接口</li>
+<li>List 在 Collection 之上增加了 ”有序“ 的概念，即必须按照插入的顺序保存元素<ul>
+<li>ArrayList、LinkedList 是实现 List 接口的类。相同点：有序；不同点：ArrayList 是采用数组存放元素（索引查找快但是插入和删除慢），LinkedList 采用的则是链表（索引查找慢但是插入和删除快）</li>
+</ul>
+</li>
+<li>Set 在 Collection 之上增加了 ”唯一“ 的概念，不能有重复元素<ul>
+<li>HashSet、TreeSet 是实现 Set 接口的类。相同点：元素不能重复。不同点：HashSet 是无序的，而 TreeSet 是有序的，但是这个有序和 List 不一样，List 是按照插入顺序，而 TreeSet 是按照元素自定义顺序进行排序（可自定义排序的比较器）。因此 HashSet 允许放入 null，且效率较高，TreeSet相反。</li>
+<li>LinkedHashSet 是另一个实现类，可以保证按照插入顺序来保存元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Map：一组”键值对“对象</p>
+<ul>
+<li>当 get() 方法返回 null 值时，即可以表示 Map 中没有该键，也可以表示该键所对应的值为 null。因此，在 Map 中不能由 get() 方法来判断 Map 中是否存在某个键，而应该用 containsKey() 方法来判断</li>
+<li>实现 Map 的类有：HashMap、HashTable、TreeMap<ul>
+<li>HashMap 允许有空键（null）与空值（null），在缺省情况下是非同步的，效率高于 HashTable，更推荐使用，在多线程环境下使用时，可以转换为同步</li>
+<li>HashTable 缺省是线程同步的；不允许关键字或值为null；不推荐使用</li>
+<li>TreeMap 能把其保存的记录根据key排序（类似TreeSet），默认是按照key的默认排序，但也可指定排序的比较器；不允许有空键（null）但可以有空值（null）。</li>
+<li>TreeMap 和 HashMap 比较：<ul>
+<li>TreeMap 适合于：元素顺序很重要；增加、快速创建的情况；HashMap 适合于：元素顺序不是很重要；查询</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="http://www.th7.cn/d/file/p/2016/02/29/5accc786b4efc1deb9e071728d5afda4.jpg" alt="简单的容器分类"></p>
+<blockquote>
+<p>点线框表示接口，实现框表示具体的类，带有空心箭头的点线表示一个特定的类实现了一个接口，实心箭头表示某个类可以生成箭头所指向类的对象。eg：任意的 Collection 可以生成 Iterator，而 List 即可以生成 Iterator 也可以生成 ListIterator。</p>
+</blockquote>
+<p><img src="http://www.th7.cn/d/file/p/2016/02/29/e8ac2968b934da00bf9666cab534feb7.jpg" alt="完整的容器分类"></p>
+<h3 id="22-List"><a href="#22-List" class="headerlink" title="22. List"></a>22. List</h3><p>subList(fromIndex, toIndex)：获取一个片段，fromIndex &lt;= index &lt; toIndex。需要注意的是 subList 获取的是原列表的引用，如果原列表发生改变（比如插入新的元素或者删除一个元素等等），那么在运行的时候 subList 就会报错。</p>
+<h4 id="22-1-迭代器"><a href="#22-1-迭代器" class="headerlink" title="22.1 迭代器"></a>22.1 迭代器</h4><ol>
+<li>Iterator<ul>
+<li>使用 iterator() 要求容器返回一个 Iterator。Iterator 将准备好返回序列的第一个元素</li>
+<li>使用 next() 返回当前元素，并指向序列的下一个元素</li>
+<li>使用 hasNext() 检查序列中是否还有元素</li>
+<li>使用 remove() 将迭代器当前返回的元素删除，所以在使用 remove() 之前必须调用 next()</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>数组不是 Iterable，需要手动转换</p>
+</blockquote>
+<ol start="2">
+<li>ListIterator：是 Iterator 的子类，只能用于对各种 List 类的访问。ListIterator 支持双向移动</li>
+</ol>
+<h4 id="22-2-LinkedList"><a href="#22-2-LinkedList" class="headerlink" title="22.2 LinkedList"></a>22.2 LinkedList</h4><p>在插入和删除操作上，LinkedList 比 ArrayList 更高效。</p>
+<p>LinkedList 具有实现 Stack 的所有功能的方法，所以可以直接把 LinkedList 当栈使用。</p>
+<p>addFirst() &lt; - &gt; push()<br>getFirst() &lt; - &gt; peek()<br>removeFirst() &lt; - &gt; pop()</p>
+<p>LinkedList 实现了 Queue 接口，所以 LinkedList 可以作为 Queue 的一种实现类 -&gt; 将 LinkedList 向上转型为 Queue 来使用。</p>
+<p>在 Queue 的基础上，还有一个 PriorityQueue，用户可以自定义 Comparator 来定义优先级，下一个弹出的会是具有最高优先级的元素。</p>
+<h3 id="23-Set"><a href="#23-Set" class="headerlink" title="23. Set"></a>23. Set</h3><p>查找是 Set 最重要的操作 =&gt; 通常会使用 HashSet，其对快速查找进行了优化</p>
+<p>HashSet 和 LinkedHashSet 使用了散列函数来存储元素，LinkedHashSet 额外使用了链表来维护元素的插入顺序，TreeSet 使用了红黑树结构来存储元素</p>
 
       
     </div>
@@ -904,7 +978,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java编程思想-笔记"><span class="nav-text">Java编程思想 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四类访问权限修饰词"><span class="nav-text">1. 四类访问权限修饰词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8个基本类型"><span class="nav-text">2. 8个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-static-关键字"><span class="nav-text">3. static 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-final-关键字"><span class="nav-text">4. final 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5. ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-和-equals"><span class="nav-text">6. == 和 equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-while-和-do…while"><span class="nav-text">7. while 和 do…while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-foreach"><span class="nav-text">8. foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-break-和-continue"><span class="nav-text">9. break 和 continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-标签"><span class="nav-text">10. 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-垃圾回收"><span class="nav-text">11. 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-可变参数列表"><span class="nav-text">12. 可变参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-基类（继承）"><span class="nav-text">13. 基类（继承）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-代理"><span class="nav-text">14. 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-向上转型于向下转型"><span class="nav-text">15. 向上转型于向下转型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-向上转型"><span class="nav-text">15.1 向上转型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-向下转型"><span class="nav-text">15.2 向下转型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-多态"><span class="nav-text">16. 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-构造器"><span class="nav-text">17. 构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-抽象类和抽象方法"><span class="nav-text">18. 抽象类和抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-接口"><span class="nav-text">19. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-内部类"><span class="nav-text">20. 内部类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java编程思想-笔记"><span class="nav-text">Java编程思想 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四类访问权限修饰词"><span class="nav-text">1. 四类访问权限修饰词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8个基本类型"><span class="nav-text">2. 8个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-static-关键字"><span class="nav-text">3. static 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-final-关键字"><span class="nav-text">4. final 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5. ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-和-equals"><span class="nav-text">6. == 和 equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-while-和-do…while"><span class="nav-text">7. while 和 do…while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-foreach"><span class="nav-text">8. foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-break-和-continue"><span class="nav-text">9. break 和 continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-标签"><span class="nav-text">10. 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-垃圾回收"><span class="nav-text">11. 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-可变参数列表"><span class="nav-text">12. 可变参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-基类（继承）"><span class="nav-text">13. 基类（继承）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-代理"><span class="nav-text">14. 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-向上转型于向下转型"><span class="nav-text">15. 向上转型于向下转型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-向上转型"><span class="nav-text">15.1 向上转型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-向下转型"><span class="nav-text">15.2 向下转型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-多态"><span class="nav-text">16. 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-构造器"><span class="nav-text">17. 构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-抽象类和抽象方法"><span class="nav-text">18. 抽象类和抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-接口"><span class="nav-text">19. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-内部类"><span class="nav-text">20. 内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-容器类"><span class="nav-text">21. 容器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-List"><span class="nav-text">22. List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#22-1-迭代器"><span class="nav-text">22.1 迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-2-LinkedList"><span class="nav-text">22.2 LinkedList</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Set"><span class="nav-text">23. Set</span></a></li></ol></li></ol></div>
             
 
           </div>
