@@ -133,13 +133,13 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.th7.cn/d/file/p/2016/02/29/5accc786b4efc1deb9e071728d5afda4.jpg">
-<meta property="og:image" content="http://www.th7.cn/d/file/p/2016/02/29/e8ac2968b934da00bf9666cab534feb7.jpg">
-<meta property="og:updated_time" content="2019-09-15T09:00:00.000Z">
+<meta property="og:image" content="https://images0.cnblogs.com/i/617995/201404/161353012916056.png">
+<meta property="og:image" content="https://images0.cnblogs.com/i/617995/201404/161352345105405.png">
+<meta property="og:updated_time" content="2019-09-19T09:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程思想 笔记">
 <meta name="twitter:description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
-<meta name="twitter:image" content="http://www.th7.cn/d/file/p/2016/02/29/5accc786b4efc1deb9e071728d5afda4.jpg">
+<meta name="twitter:image" content="https://images0.cnblogs.com/i/617995/201404/161353012916056.png">
 
 
 
@@ -557,6 +557,7 @@
 </blockquote>
 <p>int 的整数范围：-2147483648 ~ 2147483647</p>
 <p>高精度数字的类：BigInteger 和 BigDecimal</p>
+<p>float 创建变量的时候，后面必须要加一个 f</p>
 <h3 id="3-static-关键字"><a href="#3-static-关键字" class="headerlink" title="3. static 关键字"></a>3. static 关键字</h3><p>由 <code>static</code> 声明的变量或方法只有一份存储空间。关于变量，不管创建多少个对象，这些对象都共享同一个 i；关于方法，可以直接调用不用创建对象。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class StaticTest &#123;</span><br><span class="line">    static int i = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">StaticTest st1 = new stStaticTestaticTest();</span><br><span class="line">st1.i;</span><br><span class="line"></span><br><span class="line">StaticTest.i; // 也可以直接访问</span><br></pre></td></tr></table></figure>
 
@@ -699,6 +700,7 @@
 <li>Set 在 Collection 之上增加了 ”唯一“ 的概念，不能有重复元素<ul>
 <li>HashSet、TreeSet 是实现 Set 接口的类。相同点：元素不能重复。不同点：HashSet 是无序的，而 TreeSet 是有序的，但是这个有序和 List 不一样，List 是按照插入顺序，而 TreeSet 是按照元素自定义顺序进行排序（可自定义排序的比较器）。因此 HashSet 允许放入 null，且效率较高，TreeSet相反。</li>
 <li>LinkedHashSet 是另一个实现类，可以保证按照插入顺序来保存元素</li>
+<li>SortedSet 接口保证元素处于排序状态</li>
 </ul>
 </li>
 </ul>
@@ -719,11 +721,11 @@
 </ul>
 </li>
 </ol>
-<p><img src="http://www.th7.cn/d/file/p/2016/02/29/5accc786b4efc1deb9e071728d5afda4.jpg" alt="简单的容器分类"></p>
+<p><img src="https://images0.cnblogs.com/i/617995/201404/161353012916056.png" alt="简单的容器分类"></p>
 <blockquote>
 <p>点线框表示接口，实现框表示具体的类，带有空心箭头的点线表示一个特定的类实现了一个接口，实心箭头表示某个类可以生成箭头所指向类的对象。eg：任意的 Collection 可以生成 Iterator，而 List 即可以生成 Iterator 也可以生成 ListIterator。</p>
 </blockquote>
-<p><img src="http://www.th7.cn/d/file/p/2016/02/29/e8ac2968b934da00bf9666cab534feb7.jpg" alt="完整的容器分类"></p>
+<p><img src="https://images0.cnblogs.com/i/617995/201404/161352345105405.png" alt="完整的容器分类"></p>
 <h3 id="22-List"><a href="#22-List" class="headerlink" title="22. List"></a>22. List</h3><p>subList(fromIndex, toIndex)：获取一个片段，fromIndex &lt;= index &lt; toIndex。需要注意的是 subList 获取的是原列表的引用，如果原列表发生改变（比如插入新的元素或者删除一个元素等等），那么在运行的时候 subList 就会报错。</p>
 <h4 id="22-1-迭代器"><a href="#22-1-迭代器" class="headerlink" title="22.1 迭代器"></a>22.1 迭代器</h4><ol>
 <li>Iterator<ul>
@@ -747,6 +749,108 @@
 <p>在 Queue 的基础上，还有一个 PriorityQueue，用户可以自定义 Comparator 来定义优先级，下一个弹出的会是具有最高优先级的元素。</p>
 <h3 id="23-Set"><a href="#23-Set" class="headerlink" title="23. Set"></a>23. Set</h3><p>查找是 Set 最重要的操作 =&gt; 通常会使用 HashSet，其对快速查找进行了优化</p>
 <p>HashSet 和 LinkedHashSet 使用了散列函数来存储元素，LinkedHashSet 额外使用了链表来维护元素的插入顺序，TreeSet 使用了红黑树结构来存储元素</p>
+<h3 id="24-异常处理"><a href="#24-异常处理" class="headerlink" title="24. 异常处理"></a>24. 异常处理</h3><p>try 后面可以跟好几个 catch 字句，每个 catch 字句只能接一个参数。只有匹配的 catch 语句才会执行（这点和 switch 不一样，switch 语句需要在每一个 case 后面跟一个 break，以避免执行后续的 case 字句）。</p>
+<p>在 finally 字句中调用 return，即使抛出了异常，也不会产生任何输出。</p>
+<h3 id="25-字符串"><a href="#25-字符串" class="headerlink" title="25. 字符串"></a>25. 字符串</h3><p>推荐使用 StringBuilder</p>
+<p>格式化输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;Row1: [&quot; + x + &quot; &quot; + y + &quot;]&quot;);</span><br><span class="line">System.out.format(&quot;Row1: [%d %f]\n&quot;, x, y);</span><br><span class="line">System.out.printf(&quot;Row1: [%d %f]\n&quot;, x, y);</span><br></pre></td></tr></table></figure>
+
+<p>String 格式化：String.format(…)</p>
+<p>格式化说明符：%[argument_index][flags][width][.precision]conversion</p>
+<ul>
+<li>flags：默认情况下数据是右对齐，使用 ‘-‘ 来使数据左对齐</li>
+<li>width：设置一个域的最小长度，过短时自动添加空格</li>
+<li>.precision：指定最大尺寸。如果应用在 String 时，表示打印 String 时输出字符的最大数量。如果应用在浮点数时，表示小数部分要显示出来的位数（默认是6位小数），如果小数位数过多则舍入，太少则补零。但是不能应用于整数，会报错。</li>
+</ul>
+<h3 id="26-正则表达式"><a href="#26-正则表达式" class="headerlink" title="26. 正则表达式"></a>26. 正则表达式</h3><table>
+<thead>
+<tr>
+<th align="center">code 需要多加一个斜线来转译</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\\d</code></td>
+<td align="center">表示一位数字 [0-9]</td>
+</tr>
+<tr>
+<td align="center"><code>\\D</code></td>
+<td align="center">表示一位非数字 [^0-9]</td>
+</tr>
+<tr>
+<td align="center"><code>\\\\</code></td>
+<td align="center">插入一个普通的反斜线，但是换行和制表符之类的东西只需要单反斜线即可：<code>\n\t</code></td>
+</tr>
+<tr>
+<td align="center"><code>\\+</code></td>
+<td align="center">表示一个加号</td>
+</tr>
+<tr>
+<td align="center"><code>\\w</code></td>
+<td align="center">表示一个单词字符 [a-zA-Z0-9]</td>
+</tr>
+<tr>
+<td align="center"><code>\\W</code></td>
+<td align="center">表示非单词字符</td>
+</tr>
+<tr>
+<td align="center"><code>\\s</code></td>
+<td align="center">空白符（空格、tab、换行、换页和回车）</td>
+</tr>
+<tr>
+<td align="center"><code>\\S</code></td>
+<td align="center">非空白符</td>
+</tr>
+</tbody></table>
+<p>量词：<br>code | 含义<br>:-:|:-:|<br>X?|零个或一个X<br>X*|零个或多个X<br>X+|一个或多个X<br>X{n}|n个X<br>X{n,}|最少n个X<br>X{n,m}|n &lt;= X的个数 &lt;= m</p>
+<h3 id="27-类型信息"><a href="#27-类型信息" class="headerlink" title="27. 类型信息"></a>27. 类型信息</h3><p>RTTI(Run-Time Type Identification): 运行时类型识别</p>
+<h3 id="28-泛型"><a href="#28-泛型" class="headerlink" title="28. 泛型"></a>28. 泛型</h3><p>利用泛型概念，构建“元组”，来返回一组任意类型的对象，避免了使用类来返回信息，增加了复用性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 泛型指代可以用任意的大写字母，不仅仅是 T</span><br><span class="line">class TwoTuple&lt;A, B&gt;&#123;</span><br><span class="line">    public final A first;</span><br><span class="line">    public final B second;</span><br><span class="line">    public TwoTuple(A a, B b) &#123; first = a; second = b; &#125;</span><br><span class="line">    public String toString()&#123;</span><br><span class="line">        return &quot;(&quot; + first + &quot;,&quot; + second + &quot;)&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ThreeTuple&lt;A, B, C&gt; extends TwoTuple&lt;A, B&gt;&#123;</span><br><span class="line">    public final C third;</span><br><span class="line">    public ThreeTuple(A a, B b, C c)&#123;</span><br><span class="line">        super(a, b);</span><br><span class="line">        third = c;</span><br><span class="line">    &#125;</span><br><span class="line">    public String toString()&#123;</span><br><span class="line">        return &quot;(&quot; + first + &quot;,&quot; + second + &quot;,&quot; + third + &quot;)&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>泛型与可变参数列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 第一个 &lt;T&gt; 很重要，相当于声明了当前这个方法是泛型方法</span><br><span class="line">// 只有声明了&lt;T&gt;的方法才是泛型方法，泛型类中的使用了泛型的成员方法并不是泛型方法</span><br><span class="line">public static &lt;T&gt; List&lt;T&gt; makeList(T ... args) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用泛型来构建复杂模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">interface Generator&lt;T&gt; &#123; T next(); &#125;</span><br><span class="line">class Generators &#123;</span><br><span class="line">    public static &lt;T&gt; Collection&lt;T&gt; fill(Collection&lt;T&gt; coll, Generator&lt;T&gt; gen, int n)&#123;</span><br><span class="line">        for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">            coll.add(gen.next());</span><br><span class="line">        &#125;</span><br><span class="line">        return coll;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Product&#123;</span><br><span class="line">    private final int id;</span><br><span class="line">    private String description;</span><br><span class="line">    private double price;</span><br><span class="line">    public Product(int IDnumber, String desc, double price)&#123;</span><br><span class="line">        this.id = IDnumber;</span><br><span class="line">        this.description = desc;</span><br><span class="line">        this.price = price;</span><br><span class="line">//        System.out.println(toString());</span><br><span class="line">    &#125;</span><br><span class="line">    public String toString()&#123;</span><br><span class="line">        return id + &quot;: &quot; + description + &quot;, price: ￥&quot; + price;</span><br><span class="line">    &#125;</span><br><span class="line">    public void priceChange(double change)&#123;</span><br><span class="line">        price = change;</span><br><span class="line">    &#125;</span><br><span class="line">    public static Generator&lt;Product&gt; generator = new Generator&lt;Product&gt;() &#123;</span><br><span class="line">        private Random rand = new Random(47);</span><br><span class="line">        @Override</span><br><span class="line">        public Product next() &#123;</span><br><span class="line">            return new Product(rand.nextInt(1000), &quot;Test&quot;,</span><br><span class="line">                    Math.round(rand.nextDouble() * 1000.0) + 0.99);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Shelf extends ArrayList&lt;Product&gt; &#123;</span><br><span class="line">    public Shelf(int nProducts)&#123;</span><br><span class="line">        Generators.fill(this, Product.generator, nProducts);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Aisle extends ArrayList&lt;Shelf&gt; &#123;</span><br><span class="line">    public Aisle(int nShelves, int nProducts)&#123;</span><br><span class="line">        for(int i = 0; i &lt; nShelves; i++)&#123;</span><br><span class="line">            add(new Shelf(nProducts));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class CheckoutStand &#123;&#125;</span><br><span class="line">class Office &#123;&#125;</span><br><span class="line"></span><br><span class="line">public class Store extends ArrayList&lt;Aisle&gt; &#123;</span><br><span class="line">    private ArrayList&lt;CheckoutStand&gt; checkouts = new ArrayList&lt;CheckoutStand&gt;();</span><br><span class="line">    private Office office = new Office();</span><br><span class="line">    public Store(int nAisles, int nShelves, int nProducts)&#123;</span><br><span class="line">        for(int i = 0; i &lt; nAisles; i++)&#123;</span><br><span class="line">            add(new Aisle(nShelves,nProducts));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public String toString()&#123;</span><br><span class="line">        StringBuilder result = new StringBuilder();</span><br><span class="line">        for(Aisle a : this)&#123;</span><br><span class="line">            for(Shelf s : a)&#123;</span><br><span class="line">                for(Product p : s)&#123;</span><br><span class="line">                    result.append(p);</span><br><span class="line">                    result.append(&quot;\n&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(new Store(3, 5, 2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在泛型代码内部，无法获得任何有关泛型参数类型的信息。</p>
+<p>由于擦除（在方法或类内部移除相关实际类型的信息）的存在，<code>ArrayList&lt;Integer&gt;</code> 和 <code>ArrayList&lt;String&gt;</code> 是相同的类（ getClass() 之后是判等返回 true）。</p>
+<p>一个类不能实现同一个泛型接口的两种变体，由于擦除的原因，这两个变体会成为相同的接口（一个泛型接口，仅实现一次即可）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">interface Payable&lt;T&gt; &#123;&#125;</span><br><span class="line"></span><br><span class="line">class Employee implements Payable&lt;Employee&gt; &#123;&#125;</span><br><span class="line">class Hourly extends Employee implements Payable&lt;Hourly&gt; &#123;&#125;</span><br><span class="line">// Hourly 无法编译，因为擦除会将 Payable&lt;Employee&gt; 和 Payable&lt;Hourly&gt; 简化为相同的类 Payable</span><br><span class="line">// class Hourly implements Payable&lt;Hourly&gt; &#123;&#125; 这样是可以编译的，但是相当于重复两次地实现相同的接口</span><br><span class="line">// 同理可推，方法重载也会因为擦除的原因，导致产生相同的类型签名，从而无法编译，但是可以把方法名 f 改成 f1, f2</span><br><span class="line">public class useList&lt;T, W&gt; &#123;</span><br><span class="line">    void f(List&lt;T&gt; t) &#123;&#125;</span><br><span class="line">    void f(List&lt;W&gt; w) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至 15.11</p>
+<h3 id="29-数组"><a href="#29-数组" class="headerlink" title="29. 数组"></a>29. 数组</h3><p>数组初始化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int[][] a = &#123; &#123; 1, 2, 3 &#125;, &#123; 4, 5, 6 &#125; &#125;</span><br><span class="line">int[][] a = new int[1][2] // 数组中构成矩阵的每个向量都可以具有任意的长度</span><br></pre></td></tr></table></figure>
+
+<p>打印一维数组：<code>Arrays.toString(a)</code>; 打印多维数组：<code>Arrays.deepToString(a)</code></p>
+<p>Arrays 类的6个基本方法：</p>
+<ul>
+<li>equals()：用于比较两个数组是否相等（deepEquals() 用于比较多维数组）</li>
+<li>fill()：用同一个值来填充数组，可以指定起始下标和结束下标</li>
+<li>sort()：用于对数组排序</li>
+<li>binarySearch()：用于在已经排序的数组中查找元素</li>
+<li>toSring()</li>
+<li>hashCode()：产生数组的散列码</li>
+</ul>
+<p>另外 asList() 接受任意的序列和数组作为参数，并将其转换为 List 容器</p>
+<p>复制数组：System.arraycopy() 比 for 循环复制要快很多，但是必须保证两个数组具有相同的确切类型。</p>
+<h3 id="30-散列"><a href="#30-散列" class="headerlink" title="30. 散列"></a>30. 散列</h3><p>使用散列的数据结构：HashSet、HashMap、LinkedHashSet、LinkedHashMap</p>
+<p>使用散列的目的：想要使用一个对象来查找另一个对象</p>
+<h3 id="31-ref-类"><a href="#31-ref-类" class="headerlink" title="31. ref 类"></a>31. ref 类</h3><p>java.lang.ref 类库包含了一组类，这些类为垃圾回收提供了更大的灵活性。</p>
+<p>有三个继承自抽象类 Reference 的类：</p>
+<ul>
+<li>SoftReference：用以实现内存敏感的高速缓存</li>
+<li>WeakReference：是为实现“规范映射”而设计的，不妨碍垃圾回收期回收映射的键或值<ul>
+<li>WeakHashMap：被用来保存 WeakReference。每个值只保存一份实例以节省存储空间。当程序需要那个”值“的时候，便在映射中查询现有的对象，然后使用它（而不是重新再创建）。WeakHashMap 允许垃圾回收期自动清理键和值。</li>
+</ul>
+</li>
+<li>PhantomReference：用以调度回收前的清理工作，比Java终止机制更灵活</li>
+</ul>
+<h3 id="32-I-O"><a href="#32-I-O" class="headerlink" title="32. I/O"></a>32. I/O</h3><h3 id="33-对象序列化"><a href="#33-对象序列化" class="headerlink" title="33. 对象序列化"></a>33. 对象序列化</h3><p>Java 的对象序列化将那些实现了 Serializable 接口的对象转换成一个字节序列，并能够在以后将这个字节序列完全恢复为原来的对象，从而实现轻量级持久性（持久性意味着一个对象的生存周期并不取决于程序是否正在执行，可以生存于程序的调用之间）。</p>
+<h3 id="34-枚举"><a href="#34-枚举" class="headerlink" title="34. 枚举"></a>34. 枚举</h3><p>除了不能继承 enum 之外，基本上可以把 enum 看成一个常规的类——可以向里面添加方法，甚至 enum 可以有 main() 方法</p>
+<p>可以为每一个 enum 的实例编写方法，从而为每一个实例赋予不同的行为。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public enum ConstantSpecificMethod &#123;</span><br><span class="line">    DATE_TIME &#123;</span><br><span class="line">        String getInfo()&#123;</span><br><span class="line">            return DateFormat.getDateInstance().format(new Date());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    CLASSPATH &#123;</span><br><span class="line">        String getInfo()&#123;</span><br><span class="line">            return System.getenv(&quot;CLASSPATH&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -978,7 +1082,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java编程思想-笔记"><span class="nav-text">Java编程思想 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四类访问权限修饰词"><span class="nav-text">1. 四类访问权限修饰词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8个基本类型"><span class="nav-text">2. 8个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-static-关键字"><span class="nav-text">3. static 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-final-关键字"><span class="nav-text">4. final 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5. ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-和-equals"><span class="nav-text">6. == 和 equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-while-和-do…while"><span class="nav-text">7. while 和 do…while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-foreach"><span class="nav-text">8. foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-break-和-continue"><span class="nav-text">9. break 和 continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-标签"><span class="nav-text">10. 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-垃圾回收"><span class="nav-text">11. 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-可变参数列表"><span class="nav-text">12. 可变参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-基类（继承）"><span class="nav-text">13. 基类（继承）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-代理"><span class="nav-text">14. 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-向上转型于向下转型"><span class="nav-text">15. 向上转型于向下转型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-向上转型"><span class="nav-text">15.1 向上转型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-向下转型"><span class="nav-text">15.2 向下转型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-多态"><span class="nav-text">16. 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-构造器"><span class="nav-text">17. 构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-抽象类和抽象方法"><span class="nav-text">18. 抽象类和抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-接口"><span class="nav-text">19. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-内部类"><span class="nav-text">20. 内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-容器类"><span class="nav-text">21. 容器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-List"><span class="nav-text">22. List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#22-1-迭代器"><span class="nav-text">22.1 迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-2-LinkedList"><span class="nav-text">22.2 LinkedList</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Set"><span class="nav-text">23. Set</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java编程思想-笔记"><span class="nav-text">Java编程思想 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四类访问权限修饰词"><span class="nav-text">1. 四类访问权限修饰词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8个基本类型"><span class="nav-text">2. 8个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-static-关键字"><span class="nav-text">3. static 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-final-关键字"><span class="nav-text">4. final 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5. ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-和-equals"><span class="nav-text">6. == 和 equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-while-和-do…while"><span class="nav-text">7. while 和 do…while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-foreach"><span class="nav-text">8. foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-break-和-continue"><span class="nav-text">9. break 和 continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-标签"><span class="nav-text">10. 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-垃圾回收"><span class="nav-text">11. 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-可变参数列表"><span class="nav-text">12. 可变参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-基类（继承）"><span class="nav-text">13. 基类（继承）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-代理"><span class="nav-text">14. 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-向上转型于向下转型"><span class="nav-text">15. 向上转型于向下转型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-向上转型"><span class="nav-text">15.1 向上转型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-向下转型"><span class="nav-text">15.2 向下转型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-多态"><span class="nav-text">16. 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-构造器"><span class="nav-text">17. 构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-抽象类和抽象方法"><span class="nav-text">18. 抽象类和抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-接口"><span class="nav-text">19. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-内部类"><span class="nav-text">20. 内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-容器类"><span class="nav-text">21. 容器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-List"><span class="nav-text">22. List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#22-1-迭代器"><span class="nav-text">22.1 迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-2-LinkedList"><span class="nav-text">22.2 LinkedList</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Set"><span class="nav-text">23. Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-异常处理"><span class="nav-text">24. 异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-字符串"><span class="nav-text">25. 字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-正则表达式"><span class="nav-text">26. 正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-类型信息"><span class="nav-text">27. 类型信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-泛型"><span class="nav-text">28. 泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-数组"><span class="nav-text">29. 数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-散列"><span class="nav-text">30. 散列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-ref-类"><span class="nav-text">31. ref 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-I-O"><span class="nav-text">32. I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-对象序列化"><span class="nav-text">33. 对象序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-枚举"><span class="nav-text">34. 枚举</span></a></li></ol></li></ol></div>
             
 
           </div>
