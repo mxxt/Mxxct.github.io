@@ -135,7 +135,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images0.cnblogs.com/i/617995/201404/161353012916056.png">
 <meta property="og:image" content="https://images0.cnblogs.com/i/617995/201404/161352345105405.png">
-<meta property="og:updated_time" content="2019-09-19T09:00:00.000Z">
+<meta property="og:updated_time" content="2019-09-24T00:30:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程思想 笔记">
 <meta name="twitter:description" content="Java编程思想 笔记1. 四类访问权限修饰词   \ 类内部 本包 子类 其他包    public √ √ √ √   protected √ √ √    default（friendly） √ √     private √       protected：处理的是继承的概念。子类 extends 父类，如果父类希望某个特定成员，把对它的访问权限赋予派生类而不是所有类，即可以使用 prot">
@@ -559,7 +559,7 @@
 <p>高精度数字的类：BigInteger 和 BigDecimal</p>
 <p>float 创建变量的时候，后面必须要加一个 f</p>
 <h3 id="3-static-关键字"><a href="#3-static-关键字" class="headerlink" title="3. static 关键字"></a>3. static 关键字</h3><p>由 <code>static</code> 声明的变量或方法只有一份存储空间。关于变量，不管创建多少个对象，这些对象都共享同一个 i；关于方法，可以直接调用不用创建对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class StaticTest &#123;</span><br><span class="line">    static int i = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">StaticTest st1 = new stStaticTestaticTest();</span><br><span class="line">st1.i;</span><br><span class="line"></span><br><span class="line">StaticTest.i; // 也可以直接访问</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class StaticTest &#123;</span><br><span class="line">    static int i = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">StaticTest st1 = new stStaticTestaticTest();</span><br><span class="line">st1.i;</span><br><span class="line"></span><br><span class="line">StaticTest.i; // 也可以直接访问</span><br><span class="line"></span><br><span class="line">A a＝ new A()</span><br><span class="line">A b ＝new A()</span><br><span class="line">如果A里面有static int x</span><br><span class="line">a.x和b.x是同一个x</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>即使没有显式使用 static 关键字，一个类的构造器实际上也是静态方法。</p>
@@ -680,6 +680,13 @@
 <p>匿名内部类：（还不是很理解……）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">    public Contents contents() &#123;</span><br><span class="line">        return new Contents() &#123;</span><br><span class="line">            private int i = 1;</span><br><span class="line">            public int value() &#123; return i; &#125;</span><br><span class="line">        &#125;; // 这里的分号必要要有</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        A a = new A();</span><br><span class="line">        Contents contents = a.contents();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>一个匿名类的组成部分：</p>
+<ol>
+<li>new 操作符</li>
+<li>new 之后可以写接口、抽象类、普通类名称。</li>
+<li>()：这个括号表示构造函数的参数列表。由于Runnable是一个接口，没有构造函数，所以这里填一个空的括号表示没有参数。</li>
+<li>{…}：大括号中间的代码表示这个类内部的一些结构。在这里可以定义变量名称、方法。跟普通的类一样。</li>
+</ol>
 <p>嵌套类：将内部类声明为 static，此时内部类对象和其外部类对象之间就没有了联系。（普通的内部类对象隐式地保存了一个引用，指向创建它的外围类对象，但是使用了 static 之后，就没有了这个引用）</p>
 <p>使用嵌套类意味着：</p>
 <ol>
@@ -751,6 +758,14 @@
 <p>HashSet 和 LinkedHashSet 使用了散列函数来存储元素，LinkedHashSet 额外使用了链表来维护元素的插入顺序，TreeSet 使用了红黑树结构来存储元素</p>
 <h3 id="24-异常处理"><a href="#24-异常处理" class="headerlink" title="24. 异常处理"></a>24. 异常处理</h3><p>try 后面可以跟好几个 catch 字句，每个 catch 字句只能接一个参数。只有匹配的 catch 语句才会执行（这点和 switch 不一样，switch 语句需要在每一个 case 后面跟一个 break，以避免执行后续的 case 字句）。</p>
 <p>在 finally 字句中调用 return，即使抛出了异常，也不会产生任何输出。</p>
+<p>Java的异常(包括 Exception 和 Error)分为可查的异常（checked exceptions）和不可查的异常（unchecked exceptions）。</p>
+<ul>
+<li>可查异常（编译器要求必须处置的异常）：正确的程序在运行中，很容易出现的、情理可容的异常状况。可查异常虽然是异常状况，但在一定程度上它的发生是可以预计的，而且一旦发生这种异常状况，就必须采取某种方式进行处理。<blockquote>
+<p>除了RuntimeException及其子类以外，其他的Exception类及其子类都属于可查异常。这种异常的特点是Java编译器会检查它，也就是说，当程序中可能出现这类异常，要么用try-catch语句捕获它，要么用throws子句声明抛出它，否则编译不会通过。</p>
+</blockquote>
+</li>
+<li>不可查异常(编译器不要求强制处置的异常):包括运行时异常（RuntimeException与其子类）和错误（Error）。</li>
+</ul>
 <h3 id="25-字符串"><a href="#25-字符串" class="headerlink" title="25. 字符串"></a>25. 字符串</h3><p>推荐使用 StringBuilder</p>
 <p>格式化输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;Row1: [&quot; + x + &quot; &quot; + y + &quot;]&quot;);</span><br><span class="line">System.out.format(&quot;Row1: [%d %f]\n&quot;, x, y);</span><br><span class="line">System.out.printf(&quot;Row1: [%d %f]\n&quot;, x, y);</span><br></pre></td></tr></table></figure>
@@ -851,6 +866,62 @@
 <p>可以为每一个 enum 的实例编写方法，从而为每一个实例赋予不同的行为。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public enum ConstantSpecificMethod &#123;</span><br><span class="line">    DATE_TIME &#123;</span><br><span class="line">        String getInfo()&#123;</span><br><span class="line">            return DateFormat.getDateInstance().format(new Date());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    CLASSPATH &#123;</span><br><span class="line">        String getInfo()&#123;</span><br><span class="line">            return System.getenv(&quot;CLASSPATH&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="35-注解"><a href="#35-注解" class="headerlink" title="35. 注解"></a>35. 注解</h3><p>注解的使用方式几乎和修饰符的使用一模一样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Testable&#123;</span><br><span class="line">    public void execute()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    @Test void testExecute() &#123; execute(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注解的定义像是接口的定义，也会被编译成 class 文件。定义注解时，会需要一些元注解，如 <code>@Target</code>（用来定义注解将应用于什么，比如是一个方法或者一个域） 和 <code>@Retention</code>（用来定义该注解在哪一个级别可用，在源代码中(SOURCE)、类文件中(CLASS)或者运行时(RUNTIME)）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">public @interface Test &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">元注解</th>
+<th align="center">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">@Target</td>
+<td align="center">表示该注解可以用于什么地方。可能的ElementType参数包括：<br> CONSTRUCTOR：构造器的声明 <br> FIELD：域声明（包括 enum 实例）<br> LOCAL_VARIABLE：局部变量 <br> METHOD：方法 <br> PACKAGE：包 <br> PARAMETER：方法参数 <br> TYPE：类、接口（包括注解类型）或 enum 声明</td>
+</tr>
+<tr>
+<td align="center">@Retention</td>
+<td align="center">表示需要在什么级别保存该注解信息。可选的RetentionPolicy参数包括：<br> SOURCE：注解将被编译器丢弃 <br> CLASS：注解在 class 文件中可用，但会被 VM 丢弃 <br> RUNTIME：VM 将在运行期也保留注释，因此可以通过反射机制读取注解的信息</td>
+</tr>
+<tr>
+<td align="center">@Documented</td>
+<td align="center">将此注解包含在 Javadoc 中</td>
+</tr>
+<tr>
+<td align="center">@Inherited</td>
+<td align="center">允许子类继承父类中的注解</td>
+</tr>
+</tbody></table>
+<h3 id="36-并发"><a href="#36-并发" class="headerlink" title="36. 并发"></a>36. 并发</h3><p><code>implements Runnable</code> 必须具有 run() 方法，但是并不相当于具有了线程的能力，只是写了一个任务，需要把这个任务显式地附着到线程上。</p>
+<p>Runnable 是执行工作的独立任务，但是并不返回任何值。如果希望任务在完成时能够返回一个值，可以换成实现 Callable 接口（需要指明类型参数，这个类型是从 call() 方法中返回的值的类型），必须具有 call() 方法，并且使用 ExecutorService.submit() 方法调用它（会自动得到 call() 方法的返回值）。</p>
+<p>后台程序：必须要在线程调用（执行 thread.start() 方法）之前，调用 <code>thread.setDaemon(true)</code> 方法，才能将线程设置为后台程序</p>
+<p>线程之间等待：在 A 线程下传入 B 线程，在调用 A.run() 方法时，调用 B.join()，其作用是让 A 线程等到 B 线程结束之后再执行（即当 B.isAlive() 返回为假的时候 A 线程才会执行），也可以在 B.join() 加上一个参数，如果 B 线程在目标时间内还没结束的话，join() 也会返回</p>
+<p>在 Java 多线程程序中，所有线程都不允许抛出未捕获的 <code>checked exception</code>（比如 <code>sleep()</code> 时的 <code>InterruptedException</code>），也就是说各个线程需要自己把自己的 <code>checked exception</code> 处理掉。这一点是通过 <code>java.lang.Runnable.run()</code> 方法声明(因为此方法声明上没有 <code>throw exception</code> 部分)进行了约束。但是线程依然有可能抛出 <code>unchecked exception</code>（如运行时异常），当此类异常跑抛出时，线程就会终结，而对于主线程和其他线程完全不受影响，且完全感知不到某个线程抛出的异常(也是说完全无法 <code>catch</code> 到这个异常)。JVM 的这种设计源自于这样一种理念：”线程是独立执行的代码片断，线程的问题应该由线程自己来解决，而不要委托到外部。”基于这样的设计理念，在 Java 中，线程方法的异常（无论是 <code>checked</code> 还是 <code>unchecked exception</code>），都应该在线程代码边界之内（ <code>run()</code> 方法内）进行 <code>try catch</code> 并处理掉。换句话说，我们不能捕获从线程中逃逸的异常。</p>
+<p>如果需要捕获线程的 <code>unchecked exception</code> 时，可以通过修改 <code>Executor</code> 产生线程的方式来解决这个问题。<code>Thread.UncaughtExceptionHandler</code> 接口允许在每一个 Thread 对象上添加一个异常处理器。<code>Thread.UncaughtExceptionHandler.uncaughtException()</code> 方法会在线程因未捕获的异常而面临死亡时被调用。</p>
+<p>原子操作：是不能被线程调度机制中断的操作。可以利用这一点来编写无锁的代码，这些代码不需要被同步，但是也可能不安全。</p>
+<p>临界区（同步控制块）：有时只是希望多个线程同时访问方法内部的部分代码而不是防止访问整个方法。通过这种方式分离出来的代码段称为临界区。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在进入这段代码前，必须得到 syncObject 对象的锁</span><br><span class="line">// 如果其他线程已经得到这个锁，那么就得等到锁被释放以后，才能进入临界区</span><br><span class="line">synchronized(syncObject)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>线程四个状态：</p>
+<ul>
+<li>新建(new)：线程被创建后，只会短暂处于这种状态。之后调度器将把这个线程转变为可运行状态或阻塞状态</li>
+<li>就绪(runable)：在这个状态下，只要调度器把时间片分给线程，线程就可以运行。即，在任意时刻，线程可以运行也可以不运行，去看调度器是否分配了时间片</li>
+<li>阻塞(blocked)：当线程处于阻塞状态时，调度器会忽略线程，直到线程重新进入了就绪状态，才可能执行<ul>
+<li>进入阻塞状态的原因<ul>
+<li>通过调用 sleep(milliseconds) 使任务进入休眠状态</li>
+<li>通过调用 wait() 将线程挂起，直到线程得到了 notify() 或者 notifyAll() 消息，线程才会进入就绪状态</li>
+<li>任务在等待某个输入/输出完成</li>
+<li>任务视图在某个对象上调用其同步控制方法，但是对象锁不可用，因为另一个任务已经获取了这个锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>死亡(dead)：此时线程不再是可调度的</li>
+</ul>
 
       
     </div>
@@ -890,6 +961,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/23/Java-1/" rel="prev" title="Java8 新特性">
+                Java8 新特性 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -973,7 +1048,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1052,15 +1127,15 @@
         
         
           <li>
+            <a href="/2019/09/23/Java-1/" title="Java8 新特性" target="_blank">Java8 新特性</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/06/Java-0/" title="Java编程思想 笔记" target="_blank">Java编程思想 笔记</a>
           </li>
         
           <li>
             <a href="/2019/08/30/Hive-3/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/07/Kafka-0/" title="Kafka概念" target="_blank">Kafka概念</a>
           </li>
         
       </ul>
@@ -1082,7 +1157,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java编程思想-笔记"><span class="nav-text">Java编程思想 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四类访问权限修饰词"><span class="nav-text">1. 四类访问权限修饰词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8个基本类型"><span class="nav-text">2. 8个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-static-关键字"><span class="nav-text">3. static 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-final-关键字"><span class="nav-text">4. final 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5. ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-和-equals"><span class="nav-text">6. == 和 equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-while-和-do…while"><span class="nav-text">7. while 和 do…while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-foreach"><span class="nav-text">8. foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-break-和-continue"><span class="nav-text">9. break 和 continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-标签"><span class="nav-text">10. 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-垃圾回收"><span class="nav-text">11. 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-可变参数列表"><span class="nav-text">12. 可变参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-基类（继承）"><span class="nav-text">13. 基类（继承）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-代理"><span class="nav-text">14. 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-向上转型于向下转型"><span class="nav-text">15. 向上转型于向下转型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-向上转型"><span class="nav-text">15.1 向上转型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-向下转型"><span class="nav-text">15.2 向下转型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-多态"><span class="nav-text">16. 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-构造器"><span class="nav-text">17. 构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-抽象类和抽象方法"><span class="nav-text">18. 抽象类和抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-接口"><span class="nav-text">19. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-内部类"><span class="nav-text">20. 内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-容器类"><span class="nav-text">21. 容器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-List"><span class="nav-text">22. List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#22-1-迭代器"><span class="nav-text">22.1 迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-2-LinkedList"><span class="nav-text">22.2 LinkedList</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Set"><span class="nav-text">23. Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-异常处理"><span class="nav-text">24. 异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-字符串"><span class="nav-text">25. 字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-正则表达式"><span class="nav-text">26. 正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-类型信息"><span class="nav-text">27. 类型信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-泛型"><span class="nav-text">28. 泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-数组"><span class="nav-text">29. 数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-散列"><span class="nav-text">30. 散列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-ref-类"><span class="nav-text">31. ref 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-I-O"><span class="nav-text">32. I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-对象序列化"><span class="nav-text">33. 对象序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-枚举"><span class="nav-text">34. 枚举</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java编程思想-笔记"><span class="nav-text">Java编程思想 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四类访问权限修饰词"><span class="nav-text">1. 四类访问权限修饰词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8个基本类型"><span class="nav-text">2. 8个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-static-关键字"><span class="nav-text">3. static 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-final-关键字"><span class="nav-text">4. final 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5. ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-和-equals"><span class="nav-text">6. == 和 equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-while-和-do…while"><span class="nav-text">7. while 和 do…while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-foreach"><span class="nav-text">8. foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-break-和-continue"><span class="nav-text">9. break 和 continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-标签"><span class="nav-text">10. 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-垃圾回收"><span class="nav-text">11. 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-可变参数列表"><span class="nav-text">12. 可变参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-基类（继承）"><span class="nav-text">13. 基类（继承）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-代理"><span class="nav-text">14. 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-向上转型于向下转型"><span class="nav-text">15. 向上转型于向下转型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-向上转型"><span class="nav-text">15.1 向上转型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-向下转型"><span class="nav-text">15.2 向下转型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-多态"><span class="nav-text">16. 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-构造器"><span class="nav-text">17. 构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-抽象类和抽象方法"><span class="nav-text">18. 抽象类和抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-接口"><span class="nav-text">19. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-内部类"><span class="nav-text">20. 内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-容器类"><span class="nav-text">21. 容器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-List"><span class="nav-text">22. List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#22-1-迭代器"><span class="nav-text">22.1 迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-2-LinkedList"><span class="nav-text">22.2 LinkedList</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Set"><span class="nav-text">23. Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-异常处理"><span class="nav-text">24. 异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-字符串"><span class="nav-text">25. 字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-正则表达式"><span class="nav-text">26. 正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-类型信息"><span class="nav-text">27. 类型信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-泛型"><span class="nav-text">28. 泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-数组"><span class="nav-text">29. 数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-散列"><span class="nav-text">30. 散列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-ref-类"><span class="nav-text">31. ref 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-I-O"><span class="nav-text">32. I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-对象序列化"><span class="nav-text">33. 对象序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-枚举"><span class="nav-text">34. 枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-注解"><span class="nav-text">35. 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-并发"><span class="nav-text">36. 并发</span></a></li></ol></li></ol></div>
             
 
           </div>

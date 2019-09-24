@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Hive Sql的日常使用笔记1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-30T02:44:00.000Z">
+<meta property="og:updated_time" content="2019-09-23T06:48:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive Sql的日常使用笔记">
 <meta name="twitter:description" content="Hive Sql的日常使用笔记1. distinct 和 group bydistinct 只能返回去重的列 group by 理论上是需要在 select 后面配合聚合函数（sum, avg, max, min, count）来使用的 select 后面没有在聚合函数中的列都需要写在 group by 的后面，eg：  1select A1, A2, A3, max(B) from test g">
@@ -488,7 +488,12 @@
 
 <h3 id="16-推数编码出错"><a href="#16-推数编码出错" class="headerlink" title="16.推数编码出错"></a>16.推数编码出错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Incorrect string value: &apos;\xF0\xAF\xA0\xA5&apos; for column &apos;customer_txt&apos; at row 45</span><br></pre></td></tr></table></figure>
 
-<p>修改字符集为 utf8mb4</p>
+<p>以下几种方法有可能可以解决：</p>
+<ol>
+<li>修改字符集为 utf8mb4</li>
+<li><code>--default-character-set gbk</code> 在 sqoop 最后转换为 gbk 编码</li>
+<li>出错原因是 <code>can&#39;t parse data &#39; &#39;</code> 之类的话，可能是因为特殊字符，需要一个个排查，可以试一下 <code>regexp_replace(field,&#39;\0&#39;,&#39;&#39;)</code></li>
+</ol>
 <h3 id="17-去重"><a href="#17-去重" class="headerlink" title="17.去重"></a>17.去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select distinct t1.objnr </span><br><span class="line">from jest t1 </span><br><span class="line">where t1.stat = &apos;I0002&apos; </span><br><span class="line">and t1.objnr not in (select distinct objnr from jest where stat = &apos;I0076&apos;);</span><br><span class="line"></span><br><span class="line">==&gt; </span><br><span class="line"></span><br><span class="line">select * from</span><br><span class="line">(select objnr, min(if(stat = &apos;I0002&apos;, 0, 1))a, max(if(stat = &apos;I0076&apos;, 1, 0))b</span><br><span class="line">from jest group by objnr)t where t.a = 0 and t.b = 1;</span><br></pre></td></tr></table></figure>
 
 <h3 id="18-插入数据"><a href="#18-插入数据" class="headerlink" title="18.插入数据"></a>18.插入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into table values (&apos;05:00&apos;,&apos;6&apos;) ,(&apos;06:00&apos;,&apos;7&apos;), </span><br><span class="line">(&apos;07:00&apos;,&apos;8&apos;), (&apos;08:00&apos;,&apos;9&apos;), (&apos;09:00&apos;,&apos;10&apos;), (&apos;10:00&apos;,&apos;11&apos;), (&apos;11:00&apos;,&apos;12&apos;), (&apos;12:00&apos;,&apos;13&apos;), </span><br><span class="line">(&apos;13:00&apos;,&apos;14&apos;);</span><br></pre></td></tr></table></figure>
@@ -669,7 +674,7 @@ count(column)：统计column所有非NULL行</code></pre><h3 id="33-sum-if…-�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -748,15 +753,15 @@ count(column)：统计column所有非NULL行</code></pre><h3 id="33-sum-if…-�
         
         
           <li>
+            <a href="/2019/09/23/Java-1/" title="Java8 新特性" target="_blank">Java8 新特性</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/06/Java-0/" title="Java编程思想 笔记" target="_blank">Java编程思想 笔记</a>
           </li>
         
           <li>
             <a href="/2019/08/30/Hive-3/" title="Hive Sql的窗口函数" target="_blank">Hive Sql的窗口函数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/07/Kafka-0/" title="Kafka概念" target="_blank">Kafka概念</a>
           </li>
         
       </ul>
