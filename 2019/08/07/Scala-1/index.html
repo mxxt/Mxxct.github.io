@@ -134,7 +134,7 @@
 <meta property="og:description" content="Scala编程 笔记1. makeRDD 和 parallelize 生成 RDD123456789def parallelize[T: ClassTag](      seq: Seq[T],      numSlices: Int = defaultParallelism): RDD[T] def makeRDD[T: ClassTag](      seq: Seq[T],      num">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://atts.w3cschool.cn/attachments/image/wk/scaladevelopmentguide/16.png">
-<meta property="og:updated_time" content="2019-09-05T09:00:00.000Z">
+<meta property="og:updated_time" content="2019-11-25T12:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scala编程 笔记">
 <meta name="twitter:description" content="Scala编程 笔记1. makeRDD 和 parallelize 生成 RDD123456789def parallelize[T: ClassTag](      seq: Seq[T],      numSlices: Int = defaultParallelism): RDD[T] def makeRDD[T: ClassTag](      seq: Seq[T],      num">
@@ -508,7 +508,7 @@
 <ol>
 <li><p>如果运行时有参数，那就必须得带有显式的 main 方法</p>
 </li>
-<li><p>如果程序是多线程的话，就需要显示的 main 方法</p>
+<li><p>如果程序是多线程的话，就需要显式的 main 方法</p>
 </li>
 <li><p>某些 JVM 的实现没有优化被 Application 特质执行的对象的初始化代码</p>
 </li>
@@ -635,7 +635,7 @@
 <blockquote>
 <p>但是，有些情况你需要使用引用相等代替用户定义的相等。例如，某些时候效率是首要因素，你想要把某些类哈希合并： hash cons 然后通过引用相等比较它们的实例，为这种情况，类 AnyRef 定义了附加的 eq 方法，它不能被重载并且实现为引用相等（也就是说，它表现得就像 Java 里对于引用类型的 == 那样）。同样也有一个 eq 的反义词，被称为 ne。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">val x =new String(&quot;abc&quot;)</span><br><span class="line">val y = new String(&quot;abc&quot;)</span><br><span class="line">scala&gt; x == y</span><br><span class="line">res0: Boolean = true</span><br><span class="line">scala&gt; x eq y</span><br><span class="line">res1: Boolean = false</span><br><span class="line">scala&gt; x ne y</span><br><span class="line">res2: Boolean = true</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">val x = new String(&quot;abc&quot;)</span><br><span class="line">val y = new String(&quot;abc&quot;)</span><br><span class="line">scala&gt; x == y</span><br><span class="line">res0: Boolean = true</span><br><span class="line">scala&gt; x eq y // 这里相当于两个 String 对象</span><br><span class="line">res1: Boolean = false</span><br><span class="line">scala&gt; x ne y</span><br><span class="line">res2: Boolean = true</span><br><span class="line"></span><br><span class="line">如果说是两个字符串比较</span><br><span class="line">val a = &quot;abc&quot;</span><br><span class="line">val b = &quot;abc&quot;</span><br><span class="line">a == b 和 a eq b 的结果都是 true</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Nothing 类是所有其他类的子类，然而这个类型没有任何实例（也就是没有任何值对应 Nothing 类型）。它的一个用法是示意应用程序非正常终止。</li>
@@ -657,6 +657,8 @@
 <ol start="2">
 <li>不论在类的哪个角落，super 的调用都是静态绑定的。在特质中，它们是动态绑定的，即特质中的 super 调用的方法只有当特质混入到具体类的时候才被决定。（可以想象特质只是这么写，它可以被不同的类继承，或者说它可以混入到不同的类中，调用的方法会因为混入到的类不同而不同）。</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">trait Equal &#123;</span><br><span class="line">   def isEqual(x: Any): Boolean</span><br><span class="line">   def isNotEqual(x: Any): Boolean = !isEqual(x)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Point(xc: Int, yc: Int) extends Equal &#123;</span><br><span class="line">   var x: Int = xc</span><br><span class="line">   var y: Int = yc</span><br><span class="line">   </span><br><span class="line">   def isEqual(obj: Any) = obj.isInstanceOf[Point] &amp;&amp; obj.asInstanceOf[Point].x == y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object Demo &#123;</span><br><span class="line">   def main(args: Array[String]) &#123;</span><br><span class="line">      val p1 = new Point(2, 3)</span><br><span class="line">      val p2 = new Point(2, 4)</span><br><span class="line">      val p3 = new Point(3, 3)</span><br><span class="line"></span><br><span class="line">      println(p1.isNotEqual(p2))</span><br><span class="line">      println(p1.isNotEqual(p3))</span><br><span class="line">      println(p1.isNotEqual(2))</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="25-Ordered-特质"><a href="#25-Ordered-特质" class="headerlink" title="25. Ordered 特质"></a>25. Ordered 特质</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class test extends Ordered[test]&#123;</span><br><span class="line">      ...</span><br><span class="line">      def compare(that: test) = this.number - that.number</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Ordered 特质通过 compare 方法实现了 &lt;, &gt;, &lt;= , &gt;= 的比较。但是对于 equals 并没有实现。因为 equals 需要检查传入对象的类型，然而因为类型擦除，Ordered 特质本身无法做这种测试。</p>
