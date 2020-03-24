@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Python,Spider,Selenium,">
+  <meta name="keywords" content="Python,Spider,">
 
 
 
@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="Selenium1.配置环境1.1 安装seleniumpip install selenium 1.2 安装webdriver安装Chrome的webdriver插件 https://sites.google.com/a/chromium.org/chromedriver/downloads 下载完成之后将 .exe 文件放入到Chrome的安装目录，默认安装路径是C:\Program File">
-<meta name="keywords" content="Python,Spider,Selenium">
+<meta name="description" content="Python爬虫  以爬取豆瓣电影评价为例   1.准备headerdef get_header(movie_id):     UserAgent_List = [         &amp;quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36&amp;qu">
+<meta name="keywords" content="Python,Spider">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Selenium">
+<meta property="og:title" content="Python爬虫">
 <meta property="og:url" content="http://yoursite.com/2018/12/14/Python-1/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Selenium1.配置环境1.1 安装seleniumpip install selenium 1.2 安装webdriver安装Chrome的webdriver插件 https://sites.google.com/a/chromium.org/chromedriver/downloads 下载完成之后将 .exe 文件放入到Chrome的安装目录，默认安装路径是C:\Program File">
+<meta property="og:description" content="Python爬虫  以爬取豆瓣电影评价为例   1.准备headerdef get_header(movie_id):     UserAgent_List = [         &amp;quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36&amp;qu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-14T05:14:22.000Z">
+<meta property="og:updated_time" content="2018-12-14T00:45:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Selenium">
-<meta name="twitter:description" content="Selenium1.配置环境1.1 安装seleniumpip install selenium 1.2 安装webdriver安装Chrome的webdriver插件 https://sites.google.com/a/chromium.org/chromedriver/downloads 下载完成之后将 .exe 文件放入到Chrome的安装目录，默认安装路径是C:\Program File">
+<meta name="twitter:title" content="Python爬虫">
+<meta name="twitter:description" content="Python爬虫  以爬取豆瓣电影评价为例   1.准备headerdef get_header(movie_id):     UserAgent_List = [         &amp;quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36&amp;qu">
 
 
 
@@ -172,7 +172,7 @@
 
 
 
-  <title>Selenium | 猫熊小才天の书院</title>
+  <title>Python爬虫 | 猫熊小才天の书院</title>
   
 
 
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Selenium</h1>
+          <h1 class="post-title" itemprop="name headline">Python爬虫</h1>
         
 
         <div class="post-meta">
@@ -364,7 +364,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T08:47:49+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T08:45:29+08:00">
                 2018-12-14
               </time>
             
@@ -416,7 +416,7 @@
 
           
           
-             <span id="/2018/12/14/Python-1/" class="leancloud_visitors" data-flag-title="Selenium">
+             <span id="/2018/12/14/Python-1/" class="leancloud_visitors" data-flag-title="Python爬虫">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -449,119 +449,208 @@
       
 
       
-        <h2 id="Selenium"><a href="#Selenium" class="headerlink" title="Selenium"></a>Selenium</h2><h3 id="1-配置环境"><a href="#1-配置环境" class="headerlink" title="1.配置环境"></a>1.配置环境</h3><h4 id="1-1-安装selenium"><a href="#1-1-安装selenium" class="headerlink" title="1.1 安装selenium"></a>1.1 安装selenium</h4><p>pip install selenium</p>
-<h4 id="1-2-安装webdriver"><a href="#1-2-安装webdriver" class="headerlink" title="1.2 安装webdriver"></a>1.2 安装webdriver</h4><p>安装Chrome的webdriver插件</p>
-<p><a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="noopener">https://sites.google.com/a/chromium.org/chromedriver/downloads</a></p>
-<p>下载完成之后将 .exe 文件放入到Chrome的安装目录，默认安装路径是<code>C:\Program Files (x86)\Google\Chrome</code>，所以复制到<code>C:\Program Files (x86)\Google\Chrome\Application</code>下。</p>
-<h4 id="1-3-测试"><a href="#1-3-测试" class="headerlink" title="1.3 测试"></a>1.3 测试</h4><pre><code>def open_page():
-    browser = webdriver.Chrome(&quot;C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe&quot;)
-    browser.get(&apos;http://www.baidu.com/&apos;)</code></pre><h3 id="2-Demo：QQMail"><a href="#2-Demo：QQMail" class="headerlink" title="2.Demo：QQMail"></a>2.Demo：QQMail</h3><pre><code>def open_QQmail():
-    driver = webdriver.Chrome(&quot;C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe&quot;)
-    driver.get(&apos;https://mail.qq.com/&apos;)  # 打开QQ邮箱首页
-    time.sleep(3) # 等待页面载入
-    # 切换iframe
-    # selenium只能在一个页面中寻找元素，对于iframe嵌入的页面需要跳转到对应的iframe才能继续操作
-    login_frame = driver.find_element_by_name(&quot;login_frame&quot;)
-    driver.switch_to_frame(login_frame)
-    # 如果已经登录了QQ，那么就需要加上下面这行代码，用于切换到账号密码登录        
-    driver.find_element_by_id(&quot;switcher_plogin&quot;).click()
-    driver.find_element_by_name(&quot;u&quot;).clear() # 先清空对应文本框的内容
-    driver.find_element_by_name(&quot;u&quot;).send_keys(&quot;QQ号&quot;) # 输入文本
-    driver.find_element_by_name(&quot;p&quot;).clear()
-    driver.find_element_by_name(&quot;p&quot;).send_keys(&quot;QQ密码&quot;)
-    driver.find_element_by_id(&quot;login_button&quot;).click() # 点击登录按钮
-    time.sleep(15) # 等待是为了观察页面是否正确跳转
-    print(driver.current_url) # 打印跳转后的页面url，如果等待时间过短，此时驱动可能还没有完全跳转，打印出来的 current_url 还是 &apos;https://mail.qq.com/&apos;
-    driver.close()  # 关闭一个标签页，对于 Chrome 来说，关闭唯一一个标签页浏览器也会关闭，但是 Firefox 和 Opera 不会关闭浏览器
-    # driver.quit()  # 关闭Chrome浏览器</code></pre><h3 id="3-页面交互"><a href="#3-页面交互" class="headerlink" title="3.页面交互"></a>3.页面交互</h3><h4 id="3-1-提交表单"><a href="#3-1-提交表单" class="headerlink" title="3.1 提交表单"></a>3.1 提交表单</h4><pre><code>driver.find_element_by_id(&quot;id&quot;).submit()</code></pre><h4 id="3-2-下拉列表"><a href="#3-2-下拉列表" class="headerlink" title="3.2 下拉列表"></a>3.2 下拉列表</h4><pre><code># 先获取 select 下拉框，然后遍历其中的 option
-# 效率较低
-element = driver.find_element_by_xpath(&quot;//select[@name=&apos;name&apos;]&quot;)
-all_options = element.find_elements_by_tag_name(&quot;option&quot;)
-for option in all_options:
-    print(&quot;Value is: %s&quot; % option.get_attribute(&quot;value&quot;))
-    option.click()
-
-# 获取 select 下拉框，通过 option 的下标、文本、值来进行选择
-from selenium.webdriver.support.ui import Select
-select = Select(driver.find_element_by_name(&apos;name&apos;))
-select.select_by_index(index)
-select.select_by_visible_text(&quot;text&quot;)
-select.select_by_value(value)
-
-# 取消选择
-select = Select(driver.find_element_by_id(&apos;id&apos;))
-select.deselect_all()
-
-# 获取所有已选的选项    
-select = Select(driver.find_element_by_xpath(&quot;xpath&quot;))
-all_selected_options = select.all_selected_options
-
-# 获取所有可选的选项
-options = select.options</code></pre><h4 id="3-3-元素拖拽"><a href="#3-3-元素拖拽" class="headerlink" title="3.3 元素拖拽"></a>3.3 元素拖拽</h4><pre><code># 先指定被拖动的元素（Source）和拖动目标元素（Target）
-element = driver.find_element_by_name(&quot;source&quot;)
-target = driver.find_element_by_name(&quot;target&quot;)
-
-from selenium.webdriver import ActionChains
-action_chains = ActionChains(driver)
-action_chains.drag_and_drop(element, target).perform()</code></pre><h4 id="3-4-页面切换"><a href="#3-4-页面切换" class="headerlink" title="3.4 页面切换"></a>3.4 页面切换</h4><pre><code># 切换窗口
-driver.switch_to_window(&quot;windowName&quot;)
-
-# 获取每个窗口的操作对象
-for handle in driver.window_handles:
-    driver.switch_to_window(handle)
-
-# 切换iframe
-driver.switch_to_frame(&quot;iframeName&quot;)
-
-# 通过“.”操作符你还可以获得子frame，并通过下标指定任意frame
-driver.switch_to_frame(&quot;frameName.0.child&quot;)
-
-# 返回父frame
-driver.switch_to_default_content()</code></pre><h4 id="3-5-弹窗处理"><a href="#3-5-弹窗处理" class="headerlink" title="3.5 弹窗处理"></a>3.5 弹窗处理</h4><pre><code># 获取页面出现了弹窗提示
-alert = driver.switch_to_alert()</code></pre><h4 id="3-6-历史记录"><a href="#3-6-历史记录" class="headerlink" title="3.6 历史记录"></a>3.6 历史记录</h4><pre><code>driver.forward()
-driver.back()</code></pre><h4 id="3-7-cookie"><a href="#3-7-cookie" class="headerlink" title="3.7 cookie"></a>3.7 cookie</h4><pre><code># 添加cookie
-cookie = {‘name’ : ‘foo’, ‘value’ : ‘bar’}
-driver.add_cookie(cookie)
-
-# 获取cookie
-driver.get_cookies()</code></pre><h3 id="4-元素获取"><a href="#4-元素获取" class="headerlink" title="4.元素获取"></a>4.元素获取</h3><h4 id="4-1-单个元素获取"><a href="#4-1-单个元素获取" class="headerlink" title="4.1 单个元素获取"></a>4.1 单个元素获取</h4><pre><code>find_element_by_id
-find_element_by_name
-find_element_by_xpath
-find_element_by_link_text
-find_element_by_partial_link_text
-find_element_by_tag_name
-find_element_by_class_name
-find_element_by_css_selector</code></pre><h4 id="4-2-多个元素获取"><a href="#4-2-多个元素获取" class="headerlink" title="4.2 多个元素获取"></a>4.2 多个元素获取</h4><pre><code>find_elements_by_name
-find_elements_by_xpath
-find_elements_by_link_text
-find_elements_by_partial_link_text
-find_elements_by_tag_name
-find_elements_by_class_name
-find_elements_by_css_selector</code></pre><h3 id="5-页面等待"><a href="#5-页面等待" class="headerlink" title="5.页面等待"></a>5.页面等待</h3><p>现在的网页越来越多采用了 Ajax 技术，这样程序便不能确定何时某个元素完全加载出来了。这会让元素定位困难而且会提高产生 ElementNotVisibleException 的概率。  </p>
-<p>所以 Selenium 提供了两种等待方式，一种是隐式等待，一种是显式等待。隐式等待是等待特定的时间，显式等待是指定某一条件直到条件完成时才继续执行。</p>
-<h4 id="5-1-显式等待"><a href="#5-1-显式等待" class="headerlink" title="5.1 显式等待"></a>5.1 显式等待</h4><p>显式等待指定某个条件，然后设置最长等待时间。如果在这个时间还没有找到元素，那么便会抛出异常了。</p>
-<pre><code>from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-driver = webdriver.Chrome()
-driver.get(&quot;http://www.&quot;)
-try:
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, &quot;id&quot;))
-    )
-finally:
-    driver.quit()</code></pre><p>程序默认会 500ms 调用一次来查看元素是否已经生成，如果本来元素就是存在的，那么会立即返回。</p>
-<p>下面是一些内置的等待条件，你可以直接调用这些条件，而不用自己写某些等待条件了。</p>
-<blockquote>
-<p>title_is<br>title_contains<br>presence_of_element_located<br>visibility_of_element_located<br>visibility_of<br>presence_of_all_elements_located<br>text_to_be_present_in_element<br>text_to_be_present_in_element_value<br>frame_to_be_available_and_switch_to_it<br>invisibility_of_element_located<br>element_to_be_clickable – it is Displayed and Enabled.<br>staleness_of<br>element_to_be_selected<br>element_located_to_be_selected<br>element_selection_state_to_be<br>element_located_selection_state_to_be<br>alert_is_present</p>
+        <h2 id="Python爬虫"><a href="#Python爬虫" class="headerlink" title="Python爬虫"></a>Python爬虫</h2><blockquote>
+<p> 以爬取豆瓣电影评价为例 </p>
 </blockquote>
-<h4 id="5-2-隐式等待"><a href="#5-2-隐式等待" class="headerlink" title="5.2 隐式等待"></a>5.2 隐式等待</h4><pre><code>#  默认等待时间是0秒，一旦设置该值，隐式等待是设置该WebDriver的实例的生命周期。
-driver = webdriver.Chrome()
-driver.implicitly_wait(10) # seconds
-driver.get(&quot;http://somedomain/url_that_delays_loading&quot;)
-myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
+<h3 id="1-准备header"><a href="#1-准备header" class="headerlink" title="1.准备header"></a>1.准备header</h3><pre><code>def get_header(movie_id):
+    UserAgent_List = [
+        &quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2226.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 6.4; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2225.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2225.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.3319.102 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2309.372 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2117.157 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36&quot;,
+        &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36&quot;,
+    ]
+    header = {
+        &apos;User-agent&apos;: random.choice(UserAgent_List),
+        &apos;Host&apos;: &apos;movie.douban.com&apos;,
+        &apos;Referer&apos;: &apos;https://movie.douban.com/subject/&apos; + movie_id + &apos;/?from=showing&apos;,
+    }
+    &apos;&apos;&apos;
+    HTTP来源地址（referer，或 HTTP referer）是HTTP表头的一个字段，用来表示从哪儿链接到目前的网页，采用的格式是URL。
+    换句话说，借着HTTP来源地址，目前的网页可以检查访客从哪里而来，这也常被用来对付伪造的跨网站请求。
+    &apos;&apos;&apos;
+    time.sleep(random.randint(5, 15))  # 增加随机等待时间，防止速度太快被封
+    return header</code></pre><h3 id="2-初始化url"><a href="#2-初始化url" class="headerlink" title="2.初始化url"></a>2.初始化url</h3><pre><code>def get_url(movie_id):
+    base_url = &apos;https://movie.douban.com/subject/&apos;
+    url = base_url + movie_id + &apos;/comments?status=P&apos;
+    return url</code></pre><h3 id="3-开始爬取页面"><a href="#3-开始爬取页面" class="headerlink" title="3.开始爬取页面"></a>3.开始爬取页面</h3><pre><code>def start_spider(movie_id, url, header):
+    print(url)
+    cur_page = requests.get(url, header, timeout=8)
+    if cur_page.status_code == 200:  # 当成功获取到网页连接时
+        soup = BeautifulSoup(cur_page.text, &apos;html5lib&apos;,
+                             from_encoding=&apos;utf-8&apos;)  # 指定使用哪种解析器: 目前支持, lxml, html5lib, 和 html.parser
+        comment_block = soup.find_all(&apos;div&apos;, class_=&apos;comment-item&apos;)  # 找到所有的评论模块 包括头像和文本内容，头像用于获取用户主页，以便于查询用户信息
+        for comment in comment_block:
+            result_list = []
+            nick_name = comment.find(&apos;div&apos;, class_=&apos;avatar&apos;).a[&apos;title&apos;]
+            result_list.append(nick_name)
+            user_url = comment.find(&apos;div&apos;, class_=&apos;avatar&apos;).a[&apos;href&apos;]
+            result_list.append(user_url)
+            # print(nick_name)
+            # print(user_url)
+            user_list = spider_for_user(user_url, header) # 去获取评价对应的用户基本信息
+            result_list.extend(user_list)  # 在 result_list 之后续接 user_list
+            # print(user_list)
+            star_level = comment.find(&apos;span&apos;, class_=&apos;rating&apos;)
+            if star_level:
+                star_level = star_level[&apos;title&apos;]
+                if star_level == &apos;力荐&apos;:
+                    star = &apos;五星&apos;
+                elif star_level == &apos;推荐&apos;:
+                    star = &apos;四星&apos;
+                elif star_level == &apos;还行&apos;:
+                    star = &apos;三星&apos;
+                elif star_level == &apos;较差&apos;:
+                    star = &apos;二星&apos;
+                elif star_level == &apos;很差&apos;:
+                    star = &apos;一星&apos;
+                else:
+                    star = &apos;&apos;
+            else:
+                star = &apos;&apos;
+            result_list.append(star)
+            # print(star)
+            comment_time = comment.find(&apos;span&apos;, class_=&apos;comment-time &apos;).text.strip()
+            result_list.append(comment_time)
+            # print(comment_time)
+            comment_vote = comment.find(&apos;span&apos;, class_=&apos;votes&apos;)
+            if comment_vote:
+                comment_vote = comment_vote.text
+            else:
+                comment_vote = &apos;&apos;
+            result_list.append(comment_vote)
+            # print(comment_vote)
+            comment_content = comment.find(&apos;span&apos;, class_=&apos;short&apos;).text
+            result_list.append(comment_content)
+            # 清除标点符号，方便之后分词和词频统计
+            pattern = re.compile(r&apos;[\u4e00-\u9fa5]+&apos;)
+            filterdata = re.findall(pattern, comment_content)
+            cleaned_comment = &apos;&apos;.join(filterdata)
+            result_list.append(cleaned_comment)
+            # print(cleaned_comment)
+            # print(comment_content)
+            print(result_list)
+            # 创建并打开文件
+            with open(&quot;G:/movie.csv&quot;, mode=&quot;a+&quot;, encoding=&quot;utf-8-sig&quot;, newline=&apos;&apos;) as csvFile:
+                # encoding=&quot;utf-8-sig&quot; python3 中文编码
+                # 获得 writer对象 delimiter是分隔符 默认为 &quot;,&quot;
+                writer = csv.writer(csvFile)
+                # 调用 writer的 writerow方法将 test_writer_data写入 test_writer.csv文件
+                writer.writerow(result_list)
+        next_page = soup.find(&apos;a&apos;, class_=&apos;next&apos;)
+        if next_page:
+            tmp = next_page[&apos;href&apos;].strip().replace(&quot;&amp;amp;&quot;, &quot;&quot;).split(&quot;&amp;&quot;)[0].split(&quot;?&quot;)[
+                1]  # 先移除前后空格，再去除 &amp;amp;，再通过 &amp; 删除多余参数，再通过？只保留下start参数
+            # tmp = start=20
+            next_url = &apos;&apos;.join(tmp)
+        if next_url:
+            header = get_header(movie_id)
+            # print(url + &apos;&amp;&apos; + next_url)
+            start_spider(movie_id, url.split(&quot;&amp;&quot;)[0] + &apos;&amp;&apos; + next_url, header)</code></pre><h3 id="4-爬取用户基本信息"><a href="#4-爬取用户基本信息" class="headerlink" title="4.爬取用户基本信息"></a>4.爬取用户基本信息</h3><pre><code>def spider_for_user(url, header):
+    user_list = []
+    user_page = requests.get(url, header, timeout=8)
+    if user_page.status_code == 200:  # 当成功获取到网页连接时
+        soup = BeautifulSoup(user_page.text, &apos;html5lib&apos;,
+                             from_encoding=&apos;utf-8&apos;)  # 指定使用哪种解析器: 目前支持, lxml, html5lib, 和 html.parser
+        user_info = soup.find(&apos;div&apos;, class_=&apos;basic-info&apos;)  # 找到用户基本信息模块
+        if user_info:
+            user_img = user_info.find(&apos;img&apos;, class_=&apos;userface&apos;)[&apos;src&apos;]
+            if user_img:
+                user_list.append(user_img)
+            else:
+                user_list.append(&quot;&quot;)
+            # print(user_img)
+            location = user_info.find(&apos;div&apos;, class_=&apos;user-info&apos;).a
+            if location:
+                location = location.text.strip()
+                user_list.append(location)
+            else:
+                user_list.append(&quot;&quot;)
+            # print(location.strip())
+            tmp_info = user_info.find(&apos;div&apos;, class_=&apos;pl&apos;)
+            if tmp_info:
+                user_name = tmp_info.text.split(&quot; &quot;)[0]
+                create_time = tmp_info.text.split(&quot; &quot;)[2].split(&quot;加入&quot;)[0]
+                if user_name:
+                    user_list.append(user_name)
+                else:
+                    user_list.append(&quot;&quot;)
+                if create_time:
+                    user_list.append(create_time)
+                else:
+                    user_list.append(&quot;&quot;)
+            else:
+                user_list.append(&quot;&quot;)
+                user_list.append(&quot;&quot;)
+                # tmp_info.text : lingrui1995  2012-08-07加入
+                # tmp_info.text.split(&quot; &quot;) : [&apos;lingrui1995&apos;, &apos;&apos;, &apos;2012-08-07加入&apos;]
+
+                # print(user_name)
+                # print(create_time)
+        else:
+            user_list.append(&quot;&quot;)
+            user_list.append(&quot;&quot;)
+            user_list.append(&quot;&quot;)
+            user_list.append(&quot;&quot;)
+    return user_list</code></pre><h3 id="5-写入csv文件"><a href="#5-写入csv文件" class="headerlink" title="5.写入csv文件"></a>5.写入csv文件</h3><pre><code>if __name__ == &apos;__main__&apos;:
+
+    &apos;&apos;&apos;
+    movie_id = &apos;3878007&apos;
+    url = get_url(movie_id)
+    header = get_header(movie_id)
+    cookie = get_cookie()
+    # 先写入 csv 文件的第一行，也就是 head_list 信息
+    head_list = [&apos;昵称&apos;, &apos;用户首页&apos;, &apos;用户头像&apos;, &apos;地点&apos;, &apos;用户名称&apos;, &apos;注册时间&apos;, &apos;评分&apos;, &apos;评论时间&apos;, &apos;评论喜欢人数&apos;, &apos;评论内容&apos;, &apos;评论纯文本&apos;]
+    with open(&quot;G:/movie.csv&quot;, mode=&quot;w&quot;, encoding=&apos;utf-8-sig&apos;, newline=&apos;&apos;) as csvFile:
+        # encoding = &apos;utf-8-sig&apos; 是因为对于UTF-8编码，Excel要求BOM(字节顺序标记)写在文件的开始，否则它会假设这是ANSI编码
+        # newline = &apos;&apos; 保证文件在写入一行之后下一行不会有多余的空行
+        # mode
+        # r : 以只读模式打开（缺省模式）（必须保证文件存在）
+        # w : 以只写模式打开。若文件存在，则会自动清空文件，然后重新创建；若文件不存在，则新建文件。使用这个模式必须要保证文件所在目录存在，文件可以不存在。该模式下不能使用read*()方法。
+        # a : 以追加模式打开。若文件存在，则会追加到文件的末尾；若文件不存在，则新建文件。该模式不能使用read*()方法。
+        # 下面四个模式要和上面的模式组合使用
+        # &apos;b&apos;：以二进制模式打开
+        # &apos;t&apos;： 以文本模式打开（缺省模式）
+        # &apos;+&apos;：以读写模式打开
+        # &apos;U&apos;：以通用换行符模式打开
+        # 常见的mode组合
+        # &apos;r&apos; 或 &apos;rt&apos;： 默认模式，文本读模式
+        # &apos;w&apos; 或 &apos;wt&apos;： 以文本写模式打开（打开前文件会被清空）
+        # &apos;rb&apos;：以二进制读模式打开
+        # &apos;ab&apos;：以二进制追加模式打开
+        # &apos;wb&apos;：以二进制写模式打开（打开前文件会被清空）
+        # &apos;r+&apos;：以文本读写模式打开，可以写到文件任何位置；默认写的指针开始指在文件开头, 因此会覆写文件
+        # &apos;w+&apos;：以文本读写模式打开（打开前文件会被清空）。可以使用read * ()
+        # &apos;a+&apos;：以文本读写模式打开（写只能写在文件末尾）。可以使用read * ()
+        # &apos;rb+&apos;：以二进制读写模式打开
+        # &apos;wb+&apos;：以二进制读写模式打开（打开前文件会被清空）
+        # &apos;ab+&apos;：以二进制读写模式打开
+
+        # 获得 writer对象
+        writer = csv.writer(csvFile)
+        # 调用 writer的 writerow方法将 test_writer_data写入 test_writer.csv文件
+        writer.writerow(head_list)
+    start_spider(movie_id, url, header)
+    &apos;&apos;&apos;
+
+    with open(&quot;F:\PythonProjects\movie.csv&quot;, mode=&quot;r&quot;, encoding=&apos;utf-8-sig&apos;, newline=&apos;&apos;) as csvFile:
+        csv_reader = csv.reader(csvFile)
+        for row in csv_reader:
+            print(row)</code></pre>
       
     </div>
     
@@ -582,8 +671,6 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
           
             <a href="/tags/Spider/" rel="tag"><i class="fa fa-tag"></i> Spider</a>
           
-            <a href="/tags/Selenium/" rel="tag"><i class="fa fa-tag"></i> Selenium</a>
-          
         </div>
       
 
@@ -595,8 +682,8 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/14/Python-0/" rel="next" title="Python爬虫">
-                <i class="fa fa-chevron-left"></i> Python爬虫
+              <a href="/2018/12/11/DB-1/" rel="next" title="关系型和非关系型数据库对比">
+                <i class="fa fa-chevron-left"></i> 关系型和非关系型数据库对比
               </a>
             
           </div>
@@ -605,8 +692,8 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/14/Algorithm-3/" rel="prev" title="Google面试题（选自公众号）">
-                Google面试题（选自公众号） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/14/Python-2/" rel="prev" title="Selenium">
+                Selenium <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -691,7 +778,7 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,7 +789,7 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -713,7 +800,7 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -776,15 +863,15 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
         
         
           <li>
-            <a href="/2020/02/10/Flask-0/" title="Python之Flask框架" target="_blank">Python之Flask框架</a>
+            <a href="/2020/03/14/Docker-4/" title="Docker启动Mysql镜像" target="_blank">Docker启动Mysql镜像</a>
           </li>
         
           <li>
-            <a href="/2020/01/05/SpringBoot-9/" title="Spring Boot 学习摘要--关于日志框架" target="_blank">Spring Boot 学习摘要--关于日志框架</a>
+            <a href="/2020/02/10/Flask-1/" title="Python之Flask框架" target="_blank">Python之Flask框架</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/SpringBoot-8/" title="Spring Boot 学习摘要--关于配置" target="_blank">Spring Boot 学习摘要--关于配置</a>
+            <a href="/2020/01/05/SpringBoot-10/" title="Spring Boot 学习摘要--关于日志框架" target="_blank">Spring Boot 学习摘要--关于日志框架</a>
           </li>
         
       </ul>
@@ -806,7 +893,7 @@ myDynamicElement = driver.find_element_by_id(&quot;id&quot;)</code></pre>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selenium"><span class="nav-text">Selenium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置环境"><span class="nav-text">1.配置环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-安装selenium"><span class="nav-text">1.1 安装selenium</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-安装webdriver"><span class="nav-text">1.2 安装webdriver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-测试"><span class="nav-text">1.3 测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Demo：QQMail"><span class="nav-text">2.Demo：QQMail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-页面交互"><span class="nav-text">3.页面交互</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-提交表单"><span class="nav-text">3.1 提交表单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-下拉列表"><span class="nav-text">3.2 下拉列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-元素拖拽"><span class="nav-text">3.3 元素拖拽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-页面切换"><span class="nav-text">3.4 页面切换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-弹窗处理"><span class="nav-text">3.5 弹窗处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-历史记录"><span class="nav-text">3.6 历史记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-cookie"><span class="nav-text">3.7 cookie</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-元素获取"><span class="nav-text">4.元素获取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-单个元素获取"><span class="nav-text">4.1 单个元素获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-多个元素获取"><span class="nav-text">4.2 多个元素获取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-页面等待"><span class="nav-text">5.页面等待</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-显式等待"><span class="nav-text">5.1 显式等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-隐式等待"><span class="nav-text">5.2 隐式等待</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python爬虫"><span class="nav-text">Python爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-准备header"><span class="nav-text">1.准备header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-初始化url"><span class="nav-text">2.初始化url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-开始爬取页面"><span class="nav-text">3.开始爬取页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-爬取用户基本信息"><span class="nav-text">4.爬取用户基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-写入csv文件"><span class="nav-text">5.写入csv文件</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Algorithm,Bloom Filter,">
+  <meta name="keywords" content="Algorithm,">
 
 
 
@@ -125,20 +125,30 @@
 
 
 
-<meta name="description" content="布隆过滤 Bloom Filter 它主要用于解决判断一个元素是否在一个集合中，优势在于只需要占用很小的内存空间以及有着高效的查询效率。  1.原理 它是一个保存了很长的二级制向量，同时结合 Hash 函数实现的。   如上图所示：  首先需要初始化一个二进制的数组，长度设为 L（图中为 8），同时初始值全为 0 。  当写入一个 A1 = 1000 的数据时，需要进行 H 次 Hash 函数的运">
-<meta name="keywords" content="Algorithm,Bloom Filter">
+<meta name="description" content="Google面试题（选自公众号）问题把你的手机拨号页想象成一个棋盘。棋子走只能走“L”形状，横着两步，竖着一步；或者竖着两步，横着一步。  现在，假设你拨号只能像棋子一样走“L”形状。每走完一个“L”形拨一次号，起始位置也算拨号一次。问题：从某点开始，在N步内，你可以拨到多少不同的数字？ 讨论每次面试，我基本都会分成两个部分：首先我们找出算法方案，然后让面试者在代码中实现。我说“我们找出算法方案”">
+<meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="布隆过滤 Bloom Filter">
+<meta property="og:title" content="Google面试题（选自公众号）">
 <meta property="og:url" content="http://yoursite.com/2018/12/14/Algorithm-4/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="布隆过滤 Bloom Filter 它主要用于解决判断一个元素是否在一个集合中，优势在于只需要占用很小的内存空间以及有着高效的查询效率。  1.原理 它是一个保存了很长的二级制向量，同时结合 Hash 函数实现的。   如上图所示：  首先需要初始化一个二进制的数组，长度设为 L（图中为 8），同时初始值全为 0 。  当写入一个 A1 = 1000 的数据时，需要进行 H 次 Hash 函数的运">
+<meta property="og:description" content="Google面试题（选自公众号）问题把你的手机拨号页想象成一个棋盘。棋子走只能走“L”形状，横着两步，竖着一步；或者竖着两步，横着一步。  现在，假设你拨号只能像棋子一样走“L”形状。每走完一个“L”形拨一次号，起始位置也算拨号一次。问题：从某点开始，在N步内，你可以拨到多少不同的数字？ 讨论每次面试，我基本都会分成两个部分：首先我们找出算法方案，然后让面试者在代码中实现。我说“我们找出算法方案”">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/nA4kc3K.jpg">
-<meta property="og:updated_time" content="2018-12-14T05:57:00.000Z">
+<meta property="og:image" content="https://i.imgur.com/k7OgLAX.png">
+<meta property="og:image" content="https://i.imgur.com/eLz2Xl6.png">
+<meta property="og:image" content="https://i.imgur.com/S56w55w.png">
+<meta property="og:image" content="https://i.imgur.com/kiIH6Df.png">
+<meta property="og:image" content="https://i.imgur.com/FcLFf4Z.png">
+<meta property="og:image" content="https://i.imgur.com/KtKKOi3.png">
+<meta property="og:image" content="https://i.imgur.com/XkdTcIS.png">
+<meta property="og:image" content="https://i.imgur.com/UH5bvjm.png">
+<meta property="og:image" content="https://i.imgur.com/FcLFf4Z.png">
+<meta property="og:image" content="https://i.imgur.com/dJDLT0C.png">
+<meta property="og:image" content="https://i.imgur.com/zgmD8cK.png">
+<meta property="og:updated_time" content="2018-12-14T05:34:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="布隆过滤 Bloom Filter">
-<meta name="twitter:description" content="布隆过滤 Bloom Filter 它主要用于解决判断一个元素是否在一个集合中，优势在于只需要占用很小的内存空间以及有着高效的查询效率。  1.原理 它是一个保存了很长的二级制向量，同时结合 Hash 函数实现的。   如上图所示：  首先需要初始化一个二进制的数组，长度设为 L（图中为 8），同时初始值全为 0 。  当写入一个 A1 = 1000 的数据时，需要进行 H 次 Hash 函数的运">
-<meta name="twitter:image" content="https://i.imgur.com/nA4kc3K.jpg">
+<meta name="twitter:title" content="Google面试题（选自公众号）">
+<meta name="twitter:description" content="Google面试题（选自公众号）问题把你的手机拨号页想象成一个棋盘。棋子走只能走“L”形状，横着两步，竖着一步；或者竖着两步，横着一步。  现在，假设你拨号只能像棋子一样走“L”形状。每走完一个“L”形拨一次号，起始位置也算拨号一次。问题：从某点开始，在N步内，你可以拨到多少不同的数字？ 讨论每次面试，我基本都会分成两个部分：首先我们找出算法方案，然后让面试者在代码中实现。我说“我们找出算法方案”">
+<meta name="twitter:image" content="https://i.imgur.com/k7OgLAX.png">
 
 
 
@@ -174,7 +184,7 @@
 
 
 
-  <title>布隆过滤 Bloom Filter | 猫熊小才天の书院</title>
+  <title>Google面试题（选自公众号） | 猫熊小才天の书院</title>
   
 
 
@@ -352,7 +362,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">布隆过滤 Bloom Filter</h1>
+          <h1 class="post-title" itemprop="name headline">Google面试题（选自公众号）</h1>
         
 
         <div class="post-meta">
@@ -366,7 +376,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T13:57:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T13:34:56+08:00">
                 2018-12-14
               </time>
             
@@ -418,7 +428,7 @@
 
           
           
-             <span id="/2018/12/14/Algorithm-4/" class="leancloud_visitors" data-flag-title="布隆过滤 Bloom Filter">
+             <span id="/2018/12/14/Algorithm-4/" class="leancloud_visitors" data-flag-title="Google面试题（选自公众号）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -451,176 +461,52 @@
       
 
       
-        <h2 id="布隆过滤-Bloom-Filter"><a href="#布隆过滤-Bloom-Filter" class="headerlink" title="布隆过滤 Bloom Filter"></a>布隆过滤 Bloom Filter</h2><blockquote>
-<p>它主要用于解决判断一个元素是否在一个集合中，优势在于只需要占用很小的内存空间以及有着高效的查询效率。</p>
-</blockquote>
-<h3 id="1-原理"><a href="#1-原理" class="headerlink" title="1.原理"></a>1.原理</h3><blockquote>
-<p>它是一个保存了很长的二级制向量，同时结合 Hash 函数实现的。</p>
-</blockquote>
-<p><img src="https://i.imgur.com/nA4kc3K.jpg" alt></p>
-<p>如上图所示：</p>
-<ul>
-<li><p>首先需要初始化一个二进制的数组，长度设为 L（图中为 8），同时初始值全为 0 。</p>
-</li>
-<li><p>当写入一个 A1 = 1000 的数据时，需要进行 H 次 Hash 函数的运算（这里为 2 次）；与 HashMap 有点类似，通过算出的 HashCode 与 L 取模后定位到 0、2 处，将该处的值设为 1。</p>
-</li>
-<li><p>A2 = 2000 也是同理计算后将 4、7 位置设为 1。</p>
-</li>
-<li><p>当有一个 B1 = 1000 需要判断是否存在时，也是做两次 Hash 运算，定位到 0、2 处，此时他们的值都为 1 ，所以认为 B1 = 1000 存在于集合中。</p>
-</li>
-<li><p>当有一个 B2 = 3000 时，也是同理。第一次 Hash 定位到 index = 4 时，数组中的值为 1，所以再进行第二次 Hash 运算，结果定位到 index = 5 的值为 0，所以认为 B2 = 3000 不存在于集合中。</p>
-</li>
-</ul>
-<p>整个的写入、查询的流程就是这样，汇总起来就是：对写入的数据做 H 次 Hash 运算定位到数组中的位置，同时将数据改为 1 。</p>
-<p>当有数据查询时也是同样的方式定位到数组中。一旦其中的有一位为 0 则认为数据肯定不存在于集合，否则数据可能存在于集合中。</p>
-<h3 id="2-特点"><a href="#2-特点" class="headerlink" title="2.特点"></a>2.特点</h3><ul>
-<li><p>只要返回数据不存在，则肯定不存在。</p>
-</li>
-<li><p>返回数据存在，但只能是大概率存在。</p>
-</li>
-<li><p>同时不能清除其中的数据。</p>
-</li>
-</ul>
-<p>第一点应该都能理解，重点解释下 2、3 点。为什么返回存在的数据却是可能存在呢，这其实也和 HashMap 类似。</p>
-<p>在有限的数组长度中存放大量的数据，即便是再完美的 Hash 算法也会有冲突，所以有可能两个完全不同的 A、B 两个数据最后定位到的位置是一模一样的。</p>
-<p>这时拿 B 进行查询时那自然就是误报了。删除数据也是同理，当我把 B 的数据删除时，其实也相当于是把 A 的数据删掉了，这样也会造成后续的误报。</p>
-<p>基于以上的 Hash 冲突的前提，所以 Bloom Filter 有一定的误报率，这个误报率和 Hash 算法的次数 H，以及数组长度 L 都是有关的。</p>
-<h3 id="3-自己实现一个布隆过滤"><a href="#3-自己实现一个布隆过滤" class="headerlink" title="3.自己实现一个布隆过滤"></a>3.自己实现一个布隆过滤</h3><p>算法其实很简单不难理解，于是利用 Java 实现了一个简单的雏形：</p>
-<ul>
-<li><p>首先初始化了一个 int 数组。</p>
-</li>
-<li><p>写入数据的时候进行三次 Hash 运算，同时把对应的位置置为 1。</p>
-</li>
-<li><p>查询时同样的三次 Hash 运算，取到对应的值，一旦值为 0 ，则认为数据不存在。</p>
-<pre><code>public class BloomFilters {
-
-    /**
-     * 数组长度
-     */
-    private int arraySize;
-
-    /**
-     * 数组
-     */
-    private int[] array;
-
-    public BloomFilters(int arraySize) {
-        this.arraySize = arraySize;
-        array = new int[arraySize];
-    }
-
-    /**
-     * 写入数据
-     * @param key
-     */
-    public void add(String key) {
-        int first = hashcode_1(key);
-        int second = hashcode_2(key);
-        int third = hashcode_3(key);
-
-        array[first % arraySize] = 1;
-        array[second % arraySize] = 1;
-        array[third % arraySize] = 1;
-
-    }
-
-    /**
-     * 判断数据是否存在
-     * @param key
-     * @return
-     */
-    public boolean check(String key) {
-        int first = hashcode_1(key);
-        int second = hashcode_2(key);
-        int third = hashcode_3(key);
-
-        int firstIndex = array[first % arraySize];
-        if (firstIndex == 0) {
-            return false;
-        }
-
-        int secondIndex = array[second % arraySize];
-        if (secondIndex == 0) {
-            return false;
-        }
-
-        int thirdIndex = array[third % arraySize];
-        if (thirdIndex == 0) {
-            return false;
-        }
-
-        return true;
-
-    }</code></pre></li>
-</ul>
-<pre><code>    /**
-     * hash 算法1
-     * @param key
-     * @return
-     */
-    private int hashcode_1(String key) {
-        int hash = 0;
-        int i;
-        for (i = 0; i &lt; key.length(); ++i) {
-            hash = 33 * hash + key.charAt(i);
-        }
-        return Math.abs(hash);
-    }
-
-    /**
-     * hash 算法2
-     * @param data
-     * @return
-     */
-    private int hashcode_2(String data) {
-        final int p = 16777619;
-        int hash = (int) 2166136261L;
-        for (int i = 0; i &lt; data.length(); i++) {
-            hash = (hash ^ data.charAt(i)) * p;
-        }
-        hash += hash &lt;&lt; 13;
-        hash ^= hash &gt;&gt; 7;
-        hash += hash &lt;&lt; 3;
-        hash ^= hash &gt;&gt; 17;
-        hash += hash &lt;&lt; 5;
-        return Math.abs(hash);
-    }
-
-    /**
-     *  hash 算法3
-     * @param key
-     * @return
-     */
-    private int hashcode_3(String key) {
-        int hash, i;
-        for (hash = 0, i = 0; i &lt; key.length(); ++i) {
-            hash += key.charAt(i);
-            hash += (hash &lt;&lt; 10);
-            hash ^= (hash &gt;&gt; 6);
-        }
-        hash += (hash &lt;&lt; 3);
-        hash ^= (hash &gt;&gt; 11);
-        hash += (hash &lt;&lt; 15);
-        return Math.abs(hash);
-    }
-}</code></pre><p>测试类：</p>
-<pre><code>@Test
-public void bloomFilterTest(){
-    long star = System.currentTimeMillis();
-    BloomFilters bloomFilters = new BloomFilters(10000000) ;
-    for (int i = 0; i &lt; 10000000; i++) {
-        bloomFilters.add(i + &quot;&quot;) ;
-    }
-    Assert.assertTrue(bloomFilters.check(1+&quot;&quot;));
-    Assert.assertTrue(bloomFilters.check(2+&quot;&quot;));
-    Assert.assertTrue(bloomFilters.check(3+&quot;&quot;));
-    Assert.assertTrue(bloomFilters.check(999999+&quot;&quot;));
-    Assert.assertFalse(bloomFilters.check(400230340+&quot;&quot;));
-    long end = System.currentTimeMillis();
-    System.out.println(&quot;执行时间：&quot; + (end - star));
-}</code></pre><p>大概三秒就可以写入1000W的数据，并返回判断。</p>
-<p>当数组长度缩小到 100W 时就出现了一个误报，400230340 这个数明明没在集合里，却返回了存在。</p>
-<p>这也体现了 Bloom Filter 的误报率。我们提高数组长度以及 Hash 计算次数可以降低误报率，但相应的 CPU、内存的消耗就会提高；这就需要根据业务需要自行权衡。</p>
+        <h2 id="Google面试题（选自公众号）"><a href="#Google面试题（选自公众号）" class="headerlink" title="Google面试题（选自公众号）"></a>Google面试题（选自公众号）</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>把你的手机拨号页想象成一个棋盘。棋子走只能走“L”形状，横着两步，竖着一步；或者竖着两步，横着一步。</p>
+<p><img src="https://i.imgur.com/k7OgLAX.png" alt></p>
+<p>现在，假设你拨号只能像棋子一样走“L”形状。每走完一个“L”形拨一次号，起始位置也算拨号一次。问题：从某点开始，在N步内，你可以拨到多少不同的数字？</p>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><p>每次面试，我基本都会分成两个部分：首先我们找出算法方案，然后让面试者在代码中实现。我说“我们找出算法方案”，因为这个过程我不是沉默的独裁者。在这样高压下，设计并实现一种算法，45分钟时间并不算充足。</p>
+<p>我通常会让面试者主导讨论，让他们去产生想法，我嘛，就在旁边，时不时地泄漏一点点“天机”。面试者们能力越强，我需要泄漏的“天机”就越少；但是目前为止，我还没遇到一点都不需要我提示的面试者。</p>
+<p>有一点我想强调一下，重要的很：作为面试官，我的职责可不是坐那看着大家失败搞砸。我想要给大家正面的反馈，给大家机会去展现大家最擅长的点。给他们提示，就像是在说：呐，这一步路我给你铺上，但这只是为了让你展示给我，你在后面的路上能走的更远。</p>
+<p>当听完面试官的问题，你应该做什么？切记不要立刻就去写代码，而是在黑板上试着一步一步去分解问题。分解问题能够帮助你寻找到规律，特例等等，逐渐在大脑中形成解决方案。比如，你现在从数字6开始走，能走2步，会有如下组合：</p>
+<pre><code>6–1–8
+6–1–6
+6–7–2
+6–7–6
+6–0–4
+6–0–6</code></pre><p>一共有6种组合。你可以试着用铅笔在纸上画，相信我，有时候动手去解决问题会发生意想不到的事，比你盯着在脑袋里想更神奇。</p>
+<p>怎么样？你脑海里有方案了吗？</p>
+<h4 id="第0阶：到达下一步"><a href="#第0阶：到达下一步" class="headerlink" title="第0阶：到达下一步"></a>第0阶：到达下一步</h4><p>使用这个问题面试，最让我惊讶的是，太多人都卡在了计算从某个特定点跳出时，一共有多少种可能，即邻Neighbors。我的建议是：当你不确定时，先写个占位符，然后请求面试官能否晚点实现这一部分。</p>
+<p>这个问题的复杂性并不在Neighbors的计算；我在意的是你如何计算出总数。所有花费在计算Neighbors上的时间其实都是浪费。</p>
+<p>我会接受“让我们假设有一个函数能给出我Neighbors”。当然，我也可能会让你后面有时间再去实现这一步，你只需要这样写，然后继续。</p>
+<p><img src="https://i.imgur.com/eLz2Xl6.png" alt></p>
+<p>而且，如果一个问题的复杂性不在这里，你也可以问我能不能先略过，一般我都是允许的。我倒是不介意面试者不知道问题的复杂性在哪里，尤其刚开始他们还没有全面了解问题的时候。</p>
+<p>至于Neighbors函数，因为数字永远不变，你可以直接写一个Map然后返回符合的值。</p>
+<p><img src="https://i.imgur.com/S56w55w.png" alt></p>
+<h4 id="第1阶：递归"><a href="#第1阶：递归" class="headerlink" title="第1阶：递归"></a>第1阶：递归</h4><p>聪明的你可能注意到了，这个问题可以通过枚举出所有符合条件的数字，然后计算。这里可以使用递归产生这些值：</p>
+<p><img src="https://i.imgur.com/kiIH6Df.png" alt></p>
+<p>这个方法可以，而且是在面试中最普遍的方法。但是请注意，我们产生了这么多数字却并没有使用他们，我们计算完他们的个数后，就再也不去碰了。所以我建议大家遇到这种情况，尽量去想一下看有没有更好的方案。</p>
+<h4 id="第2阶：数不数数"><a href="#第2阶：数不数数" class="headerlink" title="第2阶：数不数数"></a>第2阶：数不数数</h4><p>怎么在不产生这些数字的情况下计算出个数？可以做到，但需要一点点机智。注意从特定点跳出N次能够拨到的数字个数，等于从它所有临近的点跳出N-1次能够拨到的数字个数的总和。我们可以表达为这样的递归关系：</p>
+<p><img src="https://i.imgur.com/FcLFf4Z.png" alt></p>
+<p>如果你这样想，就会很直观了，跳一次时：6有3个neighbors（1，7和0），当跳0次时每个数字本身算一次，因此每次你只能拨到3个数字。</p>
+<p>怎么会产生这样机智的想法？其实，如果你学了递归，并且在黑板上好好研究，这一点就会变得显而易见。这样你就能继续去解决这个问题，实际上就这一点就有多种实现方法，下面这个便是面试中最常见的：</p>
+<p><img src="https://i.imgur.com/KtKKOi3.png" alt></p>
+<p>就是这样，结合这个函数计算出neighbors 就可以了。这时候，你就可以捏捏肩膀休息下了，因为到这里，你已经刷掉很多人了。</p>
+<p>接下来这个问题我经常问：这个方案的算法理论速度如何？在这个实现中，每次调用count_sequences()都会递归地调用count_sequences()至少2次，因为每个数字至少有2个neighbors。这样会导致runtime成指数增长。</p>
+<p>对于跳1次到20次这样的次数还可以，但是到更大的数字，我们就要碰壁。500次可能就需要整个宇宙的热量来完成运算。</p>
+<h4 id="第3阶：记忆"><a href="#第3阶：记忆" class="headerlink" title="第3阶：记忆"></a>第3阶：记忆</h4><p>那么，我们能做的更好么？使用上面的方法，并不能。我喜欢这个问题，也是因为他能一层一层带出大家的智慧，找到更高效的方法。为了找到更好的方法，让我们看下这个函数是怎么调用的，以count_sequences(6, 4)为例。注意这里用C作为函数名简化。</p>
+<p><img src="https://i.imgur.com/XkdTcIS.png" alt></p>
+<p>你可能注意到了，C(6, 2)运行了3次，每次都是同样的运算并返回同样的值。这里最关键的点在于这些重复的运算，每次你使用过他们的值之后，就没有必要再次计算。</p>
+<p>怎么解决这个问题？记忆。我们那些相同的函数调用和结果，而不是让他们重复。这样，在后面我们就可以直接给出之前的结果。实现方法如下：</p>
+<p><img src="https://i.imgur.com/UH5bvjm.png" alt></p>
+<h4 id="第4阶：动态设计"><a href="#第4阶：动态设计" class="headerlink" title="第4阶：动态设计"></a>第4阶：动态设计</h4><p>如果你再看看前面的递归关系，就会发现递归记忆的方案也有一点局限性：</p>
+<p><img src="https://i.imgur.com/FcLFf4Z.png" alt></p>
+<p>注意跳N次的结果仅仅取决于跳N-1次后调用的结果。同时，缓存中包含着每个次数的所有结果。我之所以说这是个小局限，因为确实不会造成真的问题，当跳的次数增长时，缓存也只是线性增长。但是，毕竟，这还是不够高效。</p>
+<p>怎么办？让我们再来看一看方案和代码。注意，代码中是从最大的次数开始，然后直接递归到最小的次数：</p>
+<p><img src="https://i.imgur.com/dJDLT0C.png" alt></p>
+<p>如果你把整个的函数调用图想象成某种虚拟的树，你就会发现我们在执行深度优先策略。这并没有什么问题，但是它没有利用到浅依赖这个属性。</p>
+<p>如何实现广度优先策略？这里就是一种实现方法：</p>
+<p><img src="https://i.imgur.com/zgmD8cK.png" alt></p>
+<p>这个版本比前面递归版好在哪里？其实并没有好很多，但是这个不是递归的，因此即使处理超大数据也很难崩溃。其次，它使用的是常量内存；最后，它仍旧是线性增长，即便处理200000次跳也只用不到20秒。</p>
 
       
     </div>
@@ -640,8 +526,6 @@ public void bloomFilterTest(){
           
             <a href="/tags/Algorithm/" rel="tag"><i class="fa fa-tag"></i> Algorithm</a>
           
-            <a href="/tags/Bloom-Filter/" rel="tag"><i class="fa fa-tag"></i> Bloom Filter</a>
-          
         </div>
       
 
@@ -653,8 +537,8 @@ public void bloomFilterTest(){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/14/Algorithm-3/" rel="next" title="Google面试题（选自公众号）">
-                <i class="fa fa-chevron-left"></i> Google面试题（选自公众号）
+              <a href="/2018/12/14/Python-2/" rel="next" title="Selenium">
+                <i class="fa fa-chevron-left"></i> Selenium
               </a>
             
           </div>
@@ -663,8 +547,8 @@ public void bloomFilterTest(){
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/21/QlikSense-0/" rel="prev" title="Qlik Sense学习笔记之Mashup开发（一）">
-                Qlik Sense学习笔记之Mashup开发（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/14/Algorithm-5/" rel="prev" title="布隆过滤 Bloom Filter">
+                布隆过滤 Bloom Filter <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -749,7 +633,7 @@ public void bloomFilterTest(){
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -760,7 +644,7 @@ public void bloomFilterTest(){
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -771,7 +655,7 @@ public void bloomFilterTest(){
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -834,15 +718,15 @@ public void bloomFilterTest(){
         
         
           <li>
-            <a href="/2020/02/10/Flask-0/" title="Python之Flask框架" target="_blank">Python之Flask框架</a>
+            <a href="/2020/03/14/Docker-4/" title="Docker启动Mysql镜像" target="_blank">Docker启动Mysql镜像</a>
           </li>
         
           <li>
-            <a href="/2020/01/05/SpringBoot-9/" title="Spring Boot 学习摘要--关于日志框架" target="_blank">Spring Boot 学习摘要--关于日志框架</a>
+            <a href="/2020/02/10/Flask-1/" title="Python之Flask框架" target="_blank">Python之Flask框架</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/SpringBoot-8/" title="Spring Boot 学习摘要--关于配置" target="_blank">Spring Boot 学习摘要--关于配置</a>
+            <a href="/2020/01/05/SpringBoot-10/" title="Spring Boot 学习摘要--关于日志框架" target="_blank">Spring Boot 学习摘要--关于日志框架</a>
           </li>
         
       </ul>
@@ -864,7 +748,7 @@ public void bloomFilterTest(){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布隆过滤-Bloom-Filter"><span class="nav-text">布隆过滤 Bloom Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-原理"><span class="nav-text">1.原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-特点"><span class="nav-text">2.特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-自己实现一个布隆过滤"><span class="nav-text">3.自己实现一个布隆过滤</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Google面试题（选自公众号）"><span class="nav-text">Google面试题（选自公众号）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论"><span class="nav-text">讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第0阶：到达下一步"><span class="nav-text">第0阶：到达下一步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第1阶：递归"><span class="nav-text">第1阶：递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第2阶：数不数数"><span class="nav-text">第2阶：数不数数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第3阶：记忆"><span class="nav-text">第3阶：记忆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第4阶：动态设计"><span class="nav-text">第4阶：动态设计</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
