@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Python,Flask,">
 
 
 
@@ -125,16 +125,18 @@
 
 
 
-<meta name="description" content="君子不器">
-<meta property="og:type" content="website">
-<meta property="og:title" content="猫熊小才天の书院">
-<meta property="og:url" content="http://yoursite.com/page/13/index.html">
+<meta name="description" content="SqlAlchemy1. 理解之前使用的是 pymysql 插件，类似于 JDBC 的连接方式，通过写大量的 sql 语句来进行关联表、筛选字段等功能。SqlAlchemy 和 Flask-SqlAlchemy（不太清楚后者，可能是针对于 Flask 框架做了进一步的优化）则是通过类似于 Mybatis 的方式，将模型与表进行匹配，将 sql 中的关键字提取成方法，以此来获取数据。使用下来的话，官">
+<meta name="keywords" content="Python,Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之SqlAlchemy">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/SqlAlchemy-1/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="君子不器">
+<meta property="og:description" content="SqlAlchemy1. 理解之前使用的是 pymysql 插件，类似于 JDBC 的连接方式，通过写大量的 sql 语句来进行关联表、筛选字段等功能。SqlAlchemy 和 Flask-SqlAlchemy（不太清楚后者，可能是针对于 Flask 框架做了进一步的优化）则是通过类似于 Mybatis 的方式，将模型与表进行匹配，将 sql 中的关键字提取成方法，以此来获取数据。使用下来的话，官">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-24T08:50:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="猫熊小才天の书院">
-<meta name="twitter:description" content="君子不器">
+<meta name="twitter:title" content="Python之SqlAlchemy">
+<meta name="twitter:description" content="SqlAlchemy1. 理解之前使用的是 pymysql 插件，类似于 JDBC 的连接方式，通过写大量的 sql 语句来进行关联表、筛选字段等功能。SqlAlchemy 和 Flask-SqlAlchemy（不太清楚后者，可能是针对于 Flask 框架做了进一步的优化）则是通过类似于 Mybatis 的方式，将模型与表进行匹配，将 sql 中的关键字提取成方法，以此来获取数据。使用下来的话，官">
 
 
 
@@ -164,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/13/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/10/SqlAlchemy-1/">
 
 
 
 
 
-  <title>猫熊小才天の书院</title>
+  <title>Python之SqlAlchemy | 猫熊小才天の书院</title>
   
 
 
@@ -191,8 +193,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -317,9 +318,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -332,7 +333,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/16/Hadoop-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/SqlAlchemy-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mxxct">
@@ -349,9 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/16/Hadoop-2/" itemprop="url">Hadoop生态圈</a></h1>
+          <h1 class="post-title" itemprop="name headline">Python之SqlAlchemy</h1>
         
 
         <div class="post-meta">
@@ -365,8 +364,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T18:57:14+08:00">
-                2018-11-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-10T09:10:00+08:00">
+                2020-02-10
               </time>
             
 
@@ -390,8 +389,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/Flask/" itemprop="url" rel="index">
+                    <span itemprop="name">Flask</span>
                   </a>
                 </span>
 
@@ -408,8 +418,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/16/Hadoop-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/16/Hadoop-2/" itemprop="commentCount"></span>
+                <a href="/2020/02/10/SqlAlchemy-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/10/SqlAlchemy-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -417,7 +427,7 @@
 
           
           
-             <span id="/2018/11/16/Hadoop-2/" class="leancloud_visitors" data-flag-title="Hadoop生态圈">
+             <span id="/2020/02/10/SqlAlchemy-1/" class="leancloud_visitors" data-flag-title="Python之SqlAlchemy">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -450,26 +460,44 @@
       
 
       
-        
-          
-          一、Hadoop
-Hadoop是一个由Apache基金会所开发的分布式系统基础架构  
+        <h2 id="SqlAlchemy"><a href="#SqlAlchemy" class="headerlink" title="SqlAlchemy"></a>SqlAlchemy</h2><h3 id="1-理解"><a href="#1-理解" class="headerlink" title="1. 理解"></a>1. 理解</h3><p>之前使用的是 pymysql 插件，类似于 JDBC 的连接方式，通过写大量的 sql 语句来进行关联表、筛选字段等功能。SqlAlchemy 和 Flask-SqlAlchemy（不太清楚后者，可能是针对于 Flask 框架做了进一步的优化）则是通过类似于 Mybatis 的方式，将模型与表进行匹配，将 sql 中的关键字提取成方法，以此来获取数据。使用下来的话，官方文档给的例子或者说明并不是很清楚，需要多去网上找例子。</p>
+<h3 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h3><h4 id="2-1-数据库连接"><a href="#2-1-数据库连接" class="headerlink" title="2.1 数据库连接"></a>2.1 数据库连接</h4><p>通过读取配置文件获取参数，然后创建一个连接引擎，这个引擎会返回一个session对话，通过这个对话来对数据库进行操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># max_overflow: # 超过连接池大小外最多创建的连接</span><br><span class="line"># pool_size: # 连接池大小</span><br><span class="line">def getSession():</span><br><span class="line">    host, port, user, password, db = Conf.getDbConf()</span><br><span class="line">    linkStr = &quot;mysql+pymysql://&quot; + user + &quot;:&quot; + password + &quot;@&quot; + host + &quot;:&quot; + str(port) + &quot;/&quot; + db</span><br><span class="line">    engine = create_engine(linkStr, max_overflow=6, pool_size=6)</span><br><span class="line">    DBSession = sessionmaker(bind=engine)</span><br><span class="line">    session = DBSession()</span><br><span class="line">    return session</span><br></pre></td></tr></table></figure>
 
-充分利用集群的威力进行高速运算和存储，具有可靠、高效、可伸缩的特点  
+<h4 id="2-2-模型与表的关联"><a href="#2-2-模型与表的关联" class="headerlink" title="2.2 模型与表的关联"></a>2.2 模型与表的关联</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from sqlalchemy import Column, Integer, String</span><br><span class="line">from sqlalchemy.ext.declarative import declarative_base</span><br><span class="line"></span><br><span class="line">user_base = declarative_base()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 对应 t_user 表的定义</span><br><span class="line">class User(user_base):</span><br><span class="line">    __tablename__ = &apos;t_user&apos; # 这里是数据库中对应表名</span><br><span class="line">    id = Column(Integer, primary_key=True)</span><br><span class="line">    itcode = Column(String(50))</span><br><span class="line">    username = Column(String(50))</span><br><span class="line">    password = Column(String(50))</span><br><span class="line">    truename = Column(String(50))</span><br><span class="line">    email = Column(String(50))</span><br><span class="line">    is_active = Column(String(10))</span><br></pre></td></tr></table></figure>
 
-Hadoop的核心是Yarn、HDFS和MapReduce
+<h4 id="2-3-增"><a href="#2-3-增" class="headerlink" title="2.3 增"></a>2.3 增</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 如果表里存在自增字段，那么可以通过下面方式插入：创建一个类的实例，并显式写出每个字段的赋值，之后获取到session会话实例，将类的实例将入到会话中，并提交，最后将会话关闭</span><br><span class="line"># 除查询外，其他三种都需要执行 session.commit() 来提交操作</span><br><span class="line">new_user = User(itcode=itcode, username=username, password=password, truename=truename, email=email, is_active=is_active)</span><br><span class="line">session = db.getSession()</span><br><span class="line">session.add(new_user)</span><br><span class="line">session.commit()</span><br><span class="line">session.close()</span><br></pre></td></tr></table></figure>
 
-适合大数据的分布式存储与计算平台
-HDFS: Hadoop Distrib
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/16/Hadoop-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<h4 id="2-4-删"><a href="#2-4-删" class="headerlink" title="2.4 删"></a>2.4 删</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 简单来看这也算是一种查询：查询 User 类对应的数据表，过滤出 id 等于 del_id 的数据，调用 delete() 方法进行删除</span><br><span class="line"># 这里的 del_res 返回的是受影响的总行数</span><br><span class="line">del_res = session.query(User).filter(User.id == del_id).delete()</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-query"><a href="#2-5-query" class="headerlink" title="2.5 query"></a>2.5 query</h4><p><code>session.query()</code> 括号内可以是某个类，比如 <code>session.query(User)</code> 返回的结果就是 User 这个类对应的表的所有字段；也可以是类的字段，比如 <code>session.query(User.id, User.username)</code> 返回的结果就是 id 和 username 两个字段</p>
+<h4 id="2-6-join"><a href="#2-6-join" class="headerlink" title="2.6 join"></a>2.6 join</h4><p>目前用到的表和表之间关联有两种方式</p>
+<ul>
+<li>直接在类中添加外键定义</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from sqlalchemy import Column, Integer, String, ForeignKey</span><br><span class="line">from sqlalchemy.ext.declarative import declarative_base</span><br><span class="line">from model.User import User</span><br><span class="line"></span><br><span class="line">domain_base = declarative_base()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 对应 t_domain 表的定义</span><br><span class="line">class Domain(domain_base):</span><br><span class="line">    __tablename__ = &apos;t_domain&apos;</span><br><span class="line">    id = Column(Integer, primary_key=True)</span><br><span class="line">    name = Column(String(50))</span><br><span class="line">    region = Column(String(50))</span><br><span class="line">    responser_id = Column(Integer, ForeignKey(User.id)) # 业务域负责人</span><br><span class="line">    responser_truename = Column(String(50))</span><br><span class="line">    is_active = Column(String(10))</span><br></pre></td></tr></table></figure>
+
+<p>这种定义方式存在找不到或者不全的情况，更倾向于第二种</p>
+<ul>
+<li>在 join 时显示写出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">res = session \</span><br><span class="line">	.query(UserDomainRole.id, UserDomainRole.user_id, User.truename,</span><br><span class="line">			UserDomainRole.domain_id, Domain.name.label(&quot;domain_name&quot;),</span><br><span class="line">			UserDomainRole.role_id, Role.name.label(&quot;role_name&quot;),</span><br><span class="line">			UserDomainRole.create_time, UserDomainRole.update_time,</span><br><span class="line">			UserDomainRole.is_active) \</span><br><span class="line">	.join(UserDomainRole, User.id == UserDomainRole.user_id) \</span><br><span class="line">	.join(Domain, Domain.id == UserDomainRole.domain_id) \</span><br><span class="line">	.join(Role, Role.id == UserDomainRole.role_id) \</span><br><span class="line">	.filter(UserDomainRole.id == query_id).all()</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-7-别名"><a href="#2-7-别名" class="headerlink" title="2.7 别名"></a>2.7 别名</h4><p>如果 query 中存在多个重复字段，那么可以在后面添加 label(“别名”) 的方式来进行区分</p>
+<h4 id="2-8-filter"><a href="#2-8-filter" class="headerlink" title="2.8 filter"></a>2.8 filter</h4><p>如果是已确定的条件，那么通过 <code>session.query().filter(User.id == query_id)</code> 这样显式写出来没问题，但是多数情况下，类似于 Mybatis 中 <code>where 1 = 1</code> 后跟着 if 判断语句，并不清楚会有几个查询条件需要放到 filter 中，这时候需要换成下面的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 需要 filter 中遍历的参数</span><br><span class="line">params = list()</span><br><span class="line">if user_id != &quot;&quot;:</span><br><span class="line">	params.append(类.user_id == user_id)</span><br><span class="line">if domain_id != &quot;&quot;:</span><br><span class="line">	params.append(类.domain_id == domain_id)</span><br><span class="line">if role_id != &quot;&quot;:</span><br><span class="line">	params.append(类.role_id == role_id)</span><br><span class="line">if is_active != &quot;&quot;:</span><br><span class="line">	params.append(类.is_active == is_active)</span><br><span class="line"></span><br><span class="line">session = db.getSession()</span><br><span class="line">res = session.query(字段).join().join().filter(*params).filter().all()</span><br><span class="line"># 可以同时写多个 filter 条件来过滤</span><br><span class="line"># 将params传到 filter 中，会自动进行赋值，注意要用 *params</span><br><span class="line"># 最后调用 all() 方法返回所有数据，first() 返回第一条数据， one() 返回一条数据</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-9-分页"><a href="#2-9-分页" class="headerlink" title="2.9 分页"></a>2.9 分页</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 通过 limit 和 offset 来实现分页</span><br><span class="line"># limit(10) 表示返回10条数据</span><br><span class="line"># offset(lower) 表示把下标移动到 lower 的位置，然后从下一个位置开始返回</span><br><span class="line">res = session.query().join().filter().limit(10).offset(lower).all()</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-10-排序"><a href="#2-10-排序" class="headerlink" title="2.10 排序"></a>2.10 排序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通过 order_by() 方法来进行数据排序，可以添加多个字段排序规则</span><br><span class="line">order_by(类1.字段1, 类2.字段2.desc())</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-11-改"><a href="#2-11-改" class="headerlink" title="2.11 改"></a>2.11 改</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 和 filter 中查询条件一样，多数情况下不知道更新哪几个字段，需要动态赋值</span><br><span class="line"># 和 filter 不一样的是，filter(*params) 和 update(params)</span><br><span class="line">params = &#123;&#125;</span><br><span class="line">if user_id != &quot;&quot;:</span><br><span class="line">	params[&quot;user_id&quot;] = user_id</span><br><span class="line">if domain_id != &quot;&quot;:</span><br><span class="line">	params[&quot;domain_id&quot;] = domain_id</span><br><span class="line">if role_id != &quot;&quot;:</span><br><span class="line">	params[&quot;role_id&quot;] = role_id</span><br><span class="line">if is_active != &quot;&quot;:</span><br><span class="line">	params[&quot;is_active&quot;] = is_active</span><br><span class="line">update_res = session.query(类).filter(类.id == query_id).update(params)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-12-聚合函数使用"><a href="#2-12-聚合函数使用" class="headerlink" title="2.12 聚合函数使用"></a>2.12 聚合函数使用</h4><h5 id="2-12-1-group-concat"><a href="#2-12-1-group-concat" class="headerlink" title="2.12.1 group_concat"></a>2.12.1 group_concat</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 对于分组来说，可以直接调用 group_by() 方法来指定按照哪些字段来分组</span><br><span class="line"># 对于像 group_concat() 这样的函数使用，需要引用 func</span><br><span class="line">from sqlalchemy.sql import func</span><br><span class="line"></span><br><span class="line">res = session \</span><br><span class="line">	.query(User.id, User.itcode, User.username, User.password, User.truename, User.email,</span><br><span class="line">			func.group_concat(UserDomainRole.domain_id), func.group_concat(Domain.name),</span><br><span class="line">			func.group_concat(Domain.responser_id), func.group_concat(Domain.responser_truename),</span><br><span class="line">			func.group_concat(UserDomainRole.role_id), func.group_concat(Role.name)) \</span><br><span class="line">	.join(UserDomainRole, User.id == UserDomainRole.user_id) \</span><br><span class="line">	.join(Domain, Domain.id == UserDomainRole.domain_id) \</span><br><span class="line">	.join(Role, Role.id == UserDomainRole.role_id) \</span><br><span class="line">	.filter(User.id == query_id, UserDomainRole.is_active == &apos;Y&apos;, Domain.is_active == &apos;Y&apos;,</span><br><span class="line">			Role.is_active == &apos;Y&apos;) \</span><br><span class="line">	.group_by(User.id, User.itcode, User.username, User.password, User.truename, User.email).all()</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-12-2-count"><a href="#2-12-2-count" class="headerlink" title="2.12.2 count"></a>2.12.2 count</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 虽然有直接的 count() 方法，但是在数据量大的时候，会很慢，所以需要换一种方式</span><br><span class="line">first = session.query(UserDomainRole.id, User.id, Domain.id, Role.id) \</span><br><span class="line">	.join(UserDomainRole, User.id == UserDomainRole.user_id)\</span><br><span class="line">	.join(Domain, Domain.id == UserDomainRole.domain_id)\</span><br><span class="line">	.join(Role, Role.id == UserDomainRole.role_id)\</span><br><span class="line">	.filter(*params)\</span><br><span class="line">	.filter(Domain.is_active == &apos;Y&apos;, Role.is_active == &apos;Y&apos;)</span><br><span class="line">totalCount = first.with_entities(func.count(UserDomainRole.id)).scalar()</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -484,366 +512,42 @@ HDFS: Hadoop Distrib
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/16/Hadoop-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mxxct">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/panda-180.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="猫熊小才天の书院">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/16/Hadoop-1/" itemprop="url">Hadoop1.0 和 Hadoop2.0</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-			
-			
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T18:54:37+08:00">
-                2018-11-16
-              </time>
-            
-
-            
-			
-			
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
-
+            <a href="/tags/Flask/" rel="tag"><i class="fa fa-tag"></i> Flask</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/16/Hadoop-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/16/Hadoop-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/11/16/Hadoop-1/" class="leancloud_visitors" data-flag-title="Hadoop1.0 和 Hadoop2.0">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-		  
-
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          1.从Hadoop整体框架来说1.1 Hadoop1.0即第一代Hadoop，由分布式存储系统HDFS和分布式计算框架MapReduce组成，其中HDFS由一个NameNode和多个DateNode组成，MapReduce由一个JobTracker和多个TaskTracker组成。1.2 Hadoo
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/16/Hadoop-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/05/SpringBoot-10/" rel="next" title="Spring Boot 学习摘要--关于日志框架">
+                <i class="fa fa-chevron-left"></i> Spring Boot 学习摘要--关于日志框架
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/Hadoop-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mxxct">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/panda-180.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="猫熊小才天の书院">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/30/Hadoop-4/" itemprop="url">Hadoop 指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-			
-			
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-30T09:07:56+08:00">
-                2018-04-30
-              </time>
+              <a href="/2020/02/10/Flask-1/" rel="prev" title="Python之Flask框架">
+                Python之Flask框架 <i class="fa fa-chevron-right"></i>
+              </a>
             
-
-            
-			
-			
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/30/Hadoop-4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/30/Hadoop-4/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/30/Hadoop-4/" class="leancloud_visitors" data-flag-title="Hadoop 指令">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-		  
-
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          Hadoop 指令1.lshadoop fs -ls  /列出hdfs文件系统根目录下的目录和文件
-hadoop fs -ls -R /列出hdfs文件系统所有的目录和文件
-2.puthadoop fs -put &lt; local file &gt; &lt; hdfs file &gt;hdf
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/30/Hadoop-4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -853,384 +557,25 @@ hadoop fs -ls -R /列出hdfs文件系统所有的目录和文件
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/20/Novel-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mxxct">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/panda-180.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="猫熊小才天の书院">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/11/20/Novel-1/" itemprop="url">两个人</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-			
-			
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-11-20T15:30:11+08:00">
-                2014-11-20
-              </time>
-            
-
-            
-			
-			
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Novel/" itemprop="url" rel="index">
-                    <span itemprop="name">Novel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2014/11/20/Novel-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2014/11/20/Novel-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2014/11/20/Novel-1/" class="leancloud_visitors" data-flag-title="两个人">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-		  
-
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一个人走进另一个人的世界是多么美好的一件事啊。
-从相见到相识，从相知到相认，从独立的生命个体到相互牵连的二人世界。
-每一个过程，每一个细节，都是这个世界上最美好的东西。
-无需言说的默契，随时依靠的臂膀，默默注视的目光，不曾离去的身影，共赴未来的信心，心系彼此的牵挂，随时随地的想念，患难与共的执着。
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/11/20/Novel-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/10/06/Novel-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mxxct">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/panda-180.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="猫熊小才天の书院">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/10/06/Novel-2/" itemprop="url">Sword Art Online 刀剑神域</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-			
-			
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-06T15:30:11+08:00">
-                2014-10-06
-              </time>
-            
-
-            
-			
-			
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Novel/" itemprop="url" rel="index">
-                    <span itemprop="name">Novel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2014/10/06/Novel-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2014/10/06/Novel-2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2014/10/06/Novel-2/" class="leancloud_visitors" data-flag-title="Sword Art Online 刀剑神域">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-		  
-
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          【一】他和她，第一次相见是在游戏里，两个角色的对话。现在说来都不算是正式见面呢。
-“你好。”
-“……”
-“那个，他们都组完队了，就剩下咱俩了……”
-“……”
-“我叫桐人，你呢？”
-“……
-他的每一句得到的都是对方无言的回复。
-算了，组队要紧。他发组队申请发了过去。五秒钟后，收到了对方同意的回复。
-第
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/10/06/Novel-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
   
-  
-  
-  </article>
 
 
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-
-          
 
         </div>
         
@@ -1253,8 +598,17 @@ hadoop fs -ls -R /列出hdfs文件系统所有的目录和文件
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1376,6 +730,22 @@ hadoop fs -ls -R /列出hdfs文件系统所有的目录和文件
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SqlAlchemy"><span class="nav-text">SqlAlchemy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-理解"><span class="nav-text">1. 理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用"><span class="nav-text">2. 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-数据库连接"><span class="nav-text">2.1 数据库连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-模型与表的关联"><span class="nav-text">2.2 模型与表的关联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-增"><span class="nav-text">2.3 增</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-删"><span class="nav-text">2.4 删</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-query"><span class="nav-text">2.5 query</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-join"><span class="nav-text">2.6 join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-别名"><span class="nav-text">2.7 别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-filter"><span class="nav-text">2.8 filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-9-分页"><span class="nav-text">2.9 分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-10-排序"><span class="nav-text">2.10 排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-11-改"><span class="nav-text">2.11 改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-12-聚合函数使用"><span class="nav-text">2.12 聚合函数使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-12-1-group-concat"><span class="nav-text">2.12.1 group_concat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-12-2-count"><span class="nav-text">2.12.2 count</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1523,6 +893,10 @@ hadoop fs -ls -R /列出hdfs文件系统所有的目录和文件
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
