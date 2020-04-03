@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Data Structure,CircleLinkedList,">
+  <meta name="keywords" content="Algorithm & Data Structure,Bloom Filter,">
 
 
 
@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="数据结构实现之单向循环链表/**  * Copyright (C), 2015-2018, XXX有限公司  * FileName: CircleLinkedList  * Author:   猫熊小才天  * Date:     2018/11/26 17:06  * Description: 单向循环链表  * History:  * &amp;lt;author&amp;gt;          &amp;lt;t">
-<meta name="keywords" content="Data Structure,CircleLinkedList">
+<meta name="description" content="Bloom Filter 布隆过滤器之前的一版笔记 点此跳转 1. 什么是布隆过滤器本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。 相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切">
+<meta name="keywords" content="Algorithm &amp; Data Structure,Bloom Filter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构实现之单向循环链表">
-<meta property="og:url" content="https://mxxt.github.io/2018/11/27/DataStructure-2/index.html">
+<meta property="og:title" content="布隆过滤器 Bloom Filter 2">
+<meta property="og:url" content="https://mxxt.github.io/2020/04/01/Algorithm-8/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="数据结构实现之单向循环链表/**  * Copyright (C), 2015-2018, XXX有限公司  * FileName: CircleLinkedList  * Author:   猫熊小才天  * Date:     2018/11/26 17:06  * Description: 单向循环链表  * History:  * &amp;lt;author&amp;gt;          &amp;lt;t">
+<meta property="og:description" content="Bloom Filter 布隆过滤器之前的一版笔记 点此跳转 1. 什么是布隆过滤器本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。 相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-27T02:29:37.000Z">
+<meta property="og:updated_time" content="2020-04-01T09:00:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构实现之单向循环链表">
-<meta name="twitter:description" content="数据结构实现之单向循环链表/**  * Copyright (C), 2015-2018, XXX有限公司  * FileName: CircleLinkedList  * Author:   猫熊小才天  * Date:     2018/11/26 17:06  * Description: 单向循环链表  * History:  * &amp;lt;author&amp;gt;          &amp;lt;t">
+<meta name="twitter:title" content="布隆过滤器 Bloom Filter 2">
+<meta name="twitter:description" content="Bloom Filter 布隆过滤器之前的一版笔记 点此跳转 1. 什么是布隆过滤器本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。 相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切">
 
 
 
@@ -166,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://mxxt.github.io/2018/11/27/DataStructure-2/">
+  <link rel="canonical" href="https://mxxt.github.io/2020/04/01/Algorithm-8/">
 
 
 
 
 
-  <title>数据结构实现之单向循环链表 | 猫熊小才天の书院</title>
+  <title>布隆过滤器 Bloom Filter 2 | 猫熊小才天の书院</title>
   
 
 
@@ -333,7 +333,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mxxt.github.io/2018/11/27/DataStructure-2/">
+    <link itemprop="mainEntityOfPage" href="https://mxxt.github.io/2020/04/01/Algorithm-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mxxct">
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构实现之单向循环链表</h1>
+          <h1 class="post-title" itemprop="name headline">布隆过滤器 Bloom Filter 2</h1>
         
 
         <div class="post-meta">
@@ -364,8 +364,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-27T10:29:37+08:00">
-                2018-11-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T17:00:00+08:00">
+                2020-04-01
               </time>
             
 
@@ -389,19 +389,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Structure/" itemprop="url" rel="index">
-                    <span itemprop="name">Data Structure</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Structure/CircleLinkedList/" itemprop="url" rel="index">
-                    <span itemprop="name">CircleLinkedList</span>
+                  <a href="/categories/Algorithm-Data-Structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm & Data Structure</span>
                   </a>
                 </span>
 
@@ -418,8 +407,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/27/DataStructure-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/27/DataStructure-2/" itemprop="commentCount"></span>
+                <a href="/2020/04/01/Algorithm-8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/01/Algorithm-8/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -427,7 +416,7 @@
 
           
           
-             <span id="/2018/11/27/DataStructure-2/" class="leancloud_visitors" data-flag-title="数据结构实现之单向循环链表">
+             <span id="/2020/04/01/Algorithm-8/" class="leancloud_visitors" data-flag-title="布隆过滤器 Bloom Filter 2">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -460,324 +449,51 @@
       
 
       
-        <h2 id="数据结构实现之单向循环链表"><a href="#数据结构实现之单向循环链表" class="headerlink" title="数据结构实现之单向循环链表"></a>数据结构实现之单向循环链表</h2><pre><code>/**
- * Copyright (C), 2015-2018, XXX有限公司
- * FileName: CircleLinkedList
- * Author:   猫熊小才天
- * Date:     2018/11/26 17:06
- * Description: 单向循环链表
- * History:
- * &lt;author&gt;          &lt;time&gt;          &lt;version&gt;          &lt;desc&gt;
- * 作者姓名           修改时间           版本号              描述
- */
-package main.List;
+        <h2 id="Bloom-Filter-布隆过滤器"><a href="#Bloom-Filter-布隆过滤器" class="headerlink" title="Bloom Filter 布隆过滤器"></a>Bloom Filter 布隆过滤器</h2><p>之前的一版笔记 <a href="https://mxxt.github.io/2018/12/14/Algorithm-5/">点此跳转</a></p>
+<h3 id="1-什么是布隆过滤器"><a href="#1-什么是布隆过滤器" class="headerlink" title="1. 什么是布隆过滤器"></a>1. 什么是布隆过滤器</h3><p>本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。</p>
+<p>相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切的。</p>
+<p>解决目标：在海量数据的场景当中用来快速地判断某个元素在不在一个庞大的集合当中。</p>
+<h3 id="2-背景"><a href="#2-背景" class="headerlink" title="2. 背景"></a>2. 背景</h3><p>比如在爬虫场景当中，我们需要记录下之前爬过的网站。我们要将之前的网址全部都存储在容器里，然后在遇到新网站的时候去判断是否已经爬过了。在这个问题当中，我们并不关心之前爬过的网站有哪些，我们只关心现在的网站有没有在之前出现过。也就是说之前出现过什么不重要，现在的有没有出现过才重要。</p>
+<p>我们利用平衡树或者是Trie或者是AC自动机等数据结构和算法可以实现高效的查找，但是都离不开存储下所有的字符串。想象一下，一个网址大概上百个字符，大约0.1KB，如果是一亿个网址，就需要10GB了，如果是一百亿一千亿呢？显然这么大的规模就很麻烦了，今天要介绍的布隆过滤器就可以解决这个问题，而且不需要存储下原值，这是一个非常巧妙的做法，让我们一起来看下它的原理。</p>
+<h3 id="3-算法"><a href="#3-算法" class="headerlink" title="3. 算法"></a>3. 算法</h3><ol>
+<li>需要 k 个 hash 函数，依次传入关键字，返回值对应了 k 个不同的 hash 值</li>
+<li>初始化一个长度为 m 的比特 bit 数组，所有值都置为0</li>
+<li>通过 k 个不同的 hash 值对长度 m 取模，可以得到 n 个不同的下标值（n &lt;= k 有可能存在hash值不同，但是取模最后相同的情况），将数组中对应下标的值都由0置为1</li>
+<li>拿到一个新的关键字，计算出它的 k 个 hash 值，得到 n 个下标，查询数组中对应下标的值是否是1，分两种情况<ul>
+<li>如果有一个不是1，那么可以认为这个关键字一定没有存在过，并将其对应的下标都置为1</li>
+<li>如果都是1，只能认为可能存在。因为可能存在两个关键字不同，但是hash值取模后的下标是一样的情况</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-优缺点"><a href="#4-优缺点" class="headerlink" title="4. 优缺点"></a>4. 优缺点</h3><ul>
+<li><p>优点</p>
+<ul>
+<li>不需要存储key，节省空间</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>可能存在，导致命中失败</li>
+<li>无法删除，会导致结果越来越大，最终需要重建数组</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-代码"><a href="#5-代码" class="headerlink" title="5. 代码"></a>5. 代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 插入元素</span><br><span class="line">def BloomFilter(filter, value, hash_functions):</span><br><span class="line">    m = len(filter)</span><br><span class="line">    for func in hash_functions:</span><br><span class="line">        idx = func(value) % m</span><br><span class="line">        filter[idx] = True</span><br><span class="line">    return filter</span><br><span class="line">    </span><br><span class="line"># 判断元素</span><br><span class="line">def MemberInFilter(filter, value, hash_functions):</span><br><span class="line">    m = len(filter)</span><br><span class="line">    for func in hash_functions:</span><br><span class="line">        idx = func(value) % m</span><br><span class="line">        if not filter[idx]:</span><br><span class="line">            return False</span><br><span class="line">    return True</span><br></pre></td></tr></table></figure>
 
-/**
- * 〈一句话功能简述〉&lt;br&gt;
- * 〈单向循环链表〉
- * 在循环的时候不能使用如下方法：
- * Node tmp = head;
- * while(tmp.next != null){
- *
- * }
- * 会出现死循环，换成
- * for(int i = 1; i &lt;= getSize(); ++i)
- * @author 猫熊小才天
- * @create 2018/11/26
- * @since 1.0.0
- */
-public class CircleLinkedList {
+<h3 id="6-应用"><a href="#6-应用" class="headerlink" title="6. 应用"></a>6. 应用</h3><p>利用布隆过滤器减少磁盘 IO 或者网络请求，因为一旦一个值必定不存在的话，就可以不用进行后续昂贵的查询请求，比如</p>
+<ol>
+<li>Google 著名的分布式数据库 Bigtable 使用了布隆过滤器来查找不存在的行或列，以减少磁盘查找的IO次数</li>
+<li>Squid 网页代理缓存服务器在 cache digests 中使用了也布隆过滤器</li>
+<li>Venti 文档存储系统也采用布隆过滤器来检测先前存储的数据</li>
+<li>SPIN 模型检测器也使用布隆过滤器在大规模验证问题时跟踪可达状态空间</li>
+<li>Google Chrome浏览器使用了布隆过滤器加速安全浏览服务</li>
+</ol>
+<h3 id="7-改进后的布隆过滤器"><a href="#7-改进后的布隆过滤器" class="headerlink" title="7. 改进后的布隆过滤器"></a>7. 改进后的布隆过滤器</h3><p>由于传统布隆过滤器的每一位都只有0和1两个状态，并不支持删除操作，原因如下：</p>
+<blockquote>
+<p>假设 A 和 B 两个关键字对应的下标分别为 1、5 和 2、5，删除 A 后将下标 1、5 都置为0，那么查询 B 的时候由于 5 被置为0，其实是存在的，也会返回不存在。</p>
+</blockquote>
+<p>于是有了一个改进版布隆过滤器——Counting Bloom Filter。改进的地方是：数组每一位变成了计数器，插入时就让计数器 +1，删除时 -1。但是容易引起很大的资源浪费，同时有可能某一位多次删除操作后变成负数。</p>
 
-private class Node {
-    int data; // 结点中的数据
-    Node next = null; // 下一个结点的地址信息
-
-    public Node(int data) {
-        this.data = data;
-    }
-
-    public Node() {
-        super();
-    }
-}
-
-private Node head = null; // 保存头结点
-private Node tail = null; // 保存尾节点
-private int size; // 保存已有的的结点数
-
-public CircleLinkedList() {
-    super();
-}
-
-/**
- * 头插法
- * 
- * @param data
- */
-public void headAdd(int data) {
-    // 如果链表为空
-    if (isEmpty()) {
-        head = new Node(data);
-        head.next = head;
-        tail = head;
-    } else {
-        Node newNode = new Node(data);
-        // 让新结点指向head
-        newNode.next = head;
-        // 然后让新结点作为head
-        head = newNode;
-        // 将尾结点指向头结点
-        tail.next = head;
-    }
-    ++size;
-}
-
-/**
- * 尾插法
- * 
- * @param data
- */
-public void tailAdd(int data) {
-    // 如果链表为空
-    if (isEmpty()) {
-        head = new Node(data);
-        head.next = head;
-        tail = head;
-    }else {
-        Node newNode = new Node(data);
-        // 让尾结点指向新结点
-        tail.next = newNode;
-        // 让新结点指向头结点
-        newNode.next = head;
-        // 将新结点作为尾结点
-        tail = newNode;
-    }
-    ++size;
-}
-
-/**
- * 删除第index个结点
- * @param index
- * @return
- */
-public boolean deleteNodeByIndex(int index) {
-    boolean res = false;
-    if (isEmpty()) {
-        System.out.println(&quot;单向循环链表为空&quot;);
-        res = false;
-    }
-    /**
-     * 如果输入的下标超过单向循环链表的范围
-     */
-    if (index &lt; 1 || index &gt; getSize()) {
-        System.out.println(&quot;输入下标不在单向循环链表的范围中&quot;);
-        res = false;
-    }else if(index == 1){
-        // 删除头结点
-        Node tmp = new Node(head.next.data);
-        // 让tmp等于head的下一个结点
-        tmp.next = head.next.next;
-        // 将tmp赋值给head，即相当于删除了原先的head
-        head = tmp;
-        // 尾结点指向新的头结点
-        tail.next = head;
-        System.out.println(&quot;删除头结点成功&quot;);
-        res = true;
-    }else if(index == getSize()){
-        // 删除尾结点
-        // 获取倒数第二个结点
-        Node tmp = getDataByIndex(getSize() - 1);
-        // 让倒数第二个结点指向head
-        tmp.next = head;
-        // tmp赋值到新的尾结点
-        tail = tmp;
-        System.out.println(&quot;删除尾结点成功&quot;);
-        res = true;
-    }else if(index &gt; 1 &amp;&amp; index &lt; getSize()){
-        // 删除的是中间任一结点
-        // 获取第 index - 1 个结点
-        Node prev = getDataByIndex(index - 1);
-        // 需要删除的结点即第index-1个结点的next
-        Node cur = prev.next;
-        prev.next = cur.next;
-        System.out.println(&quot;删除第&quot; + index + &quot;个结点成功&quot;);
-        res = true;
-    }
-    --size;
-    return res;
-}
-
-/**
- * 删除单向循环链表中数据为data的所有结点
- * @param data
- * @return
- */
-public boolean deleteNodeByData(int data) {
-    if (isEmpty()) {
-        System.out.println(&quot;单向循环链表为空&quot;);
-        return false;
-    }
-    boolean res = false;
-    int count = 0;
-    // 先循环将头结点删除，直到头结点中的data≠data
-    Node tmp = head;
-    for(int i = 1; i &lt;= getSize(); ++i){
-        if(tmp.data == data){
-            tmp = tmp.next;
-            head = tmp;
-            tail = head;
-            ++count;
-            --size; // 需要将size减少！！！
-            res = true;
-        }else {
-            break;
-        }
-    }
-    // 再循环将尾结点删除，直到尾结点中的data≠data
-    Node tmp2 = tail;
-    for(int i = 1; i &lt;= getSize(); ++i){
-        if(tmp.data == data){
-            tmp = getDataByIndex(getSize() - 1);
-            tmp.next = head;
-            tail = tmp;
-            ++count;
-            --size;
-            res = true;
-        }else {
-            break;
-        }
-    }
-
-    Node preNode = head;
-    Node curNode = head.next;
-    for(int i = 1; i &lt;= getSize(); ++i){
-        if(curNode.data == data){
-            preNode.next = curNode.next;
-            ++count;
-            --size;
-            res = true;
-        }
-        preNode = curNode;
-        curNode = curNode.next;
-    }
-
-    if(res == true){
-        System.out.println(&quot;共删除了&quot; + count + &quot;个结点&quot;);
-    }else {
-        System.out.println(&quot;删除失败&quot;);
-    }
-    return res;
-}
-
-/**
- * 获取index位置下的Node数据
- * @param index
- */
-public Node getDataByIndex(int index){
-    if (isEmpty()) {
-        System.out.println(&quot;单向循环链表为空&quot;);
-        return null;
-    }else if(index &lt; 1 || index &gt; getSize()){
-        System.out.println(&quot;输入下标不在单向循环链表的范围中&quot;);
-        return null;
-    }else {
-        Node res = head;
-        for(int i = 1; i &lt;= getSize() &amp;&amp; res.next != null; ++i){
-            if(i == index){
-                System.out.println(&quot;第&quot; + index + &quot;个结点的数据是：&quot; + res.data);
-                return res;
-            }
-            res = res.next;
-        }
-        return res;
-    }
-}
-
-/**
- * 判断链表是否为空
- * 
- * @return
- */
-public boolean isEmpty() {
-    return size == 0;
-}
-
-/**
- * 返回链表长度
- * 
- * @return
- */
-public int getSize() {
-    return size;
-}
-
-/**
- * 清空线性表
- */
-public void clear() {
-    // 将头结点和尾结点设为空
-    head = null;
-    tail = null;
-    size = 0;
-}
-
-/**
- * 打印单向链表 如果传过来的参数head是list.reHead即为逆向输出
- * 
- * @param head
- */
-public void printCircleLinkedList(Node head) {
-    Node tmp = head;
-    for(int i = 1; i &lt;= getSize(); ++i){
-        System.out.print(tmp.data);
-        tmp = tmp.next;
-        if (i != getSize()) {
-            System.out.print(&quot; -&gt; &quot;);
-        }
-    }
-    System.out.println();
-}
-
-public static void main(String[] args) {
-    CircleLinkedList list = new CircleLinkedList();
-    list.tailAdd(5);
-    list.tailAdd(2);
-    list.tailAdd(4);
-    list.tailAdd(1);
-    list.tailAdd(5);
-    list.tailAdd(3);
-    list.tailAdd(5);
-    list.printCircleLinkedList(list.head);
-
-    /*list.deleteNodeByIndex(3);
-    list.printCircleLinkedList(list.head);*/
-
-    //list.getDataByIndex(6);
-
-    /*list.deleteNodeByData(5);
-    list.printCircleLinkedList(list.head);*/
-}
-}</code></pre><p>输出结果：</p>
-<pre><code>5 -&gt; 2 -&gt; 4 -&gt; 1 -&gt; 5 -&gt; 3 -&gt; 5
-第2个结点的数据是：2
-删除第3个结点成功
-5 -&gt; 2 -&gt; 1 -&gt; 5 -&gt; 3 -&gt; 5
-
-5 -&gt; 2 -&gt; 4 -&gt; 1 -&gt; 5 -&gt; 3 -&gt; 5
-删除头结点成功
-2 -&gt; 4 -&gt; 1 -&gt; 5 -&gt; 3 -&gt; 5
-
-5 -&gt; 2 -&gt; 4 -&gt; 1 -&gt; 5 -&gt; 3 -&gt; 5
-第5个结点的数据是：5
-删除第6个结点成功
-5 -&gt; 2 -&gt; 4 -&gt; 1 -&gt; 5 -&gt; 5
-
-5 -&gt; 2 -&gt; 4 -&gt; 1 -&gt; 5 -&gt; 3 -&gt; 5
-第4个结点的数据是：1
-
-5 -&gt; 2 -&gt; 4 -&gt; 1 -&gt; 5 -&gt; 3 -&gt; 5
-共删除了3个结点
-2 -&gt; 4 -&gt; 1 -&gt; 3</code></pre>
       
     </div>
     
@@ -794,9 +510,9 @@ public static void main(String[] args) {
       
         <div class="post-tags">
           
-            <a href="/tags/Data-Structure/" rel="tag"><i class="fa fa-tag"></i> Data Structure</a>
+            <a href="/tags/Algorithm-Data-Structure/" rel="tag"><i class="fa fa-tag"></i> Algorithm & Data Structure</a>
           
-            <a href="/tags/CircleLinkedList/" rel="tag"><i class="fa fa-tag"></i> CircleLinkedList</a>
+            <a href="/tags/Bloom-Filter/" rel="tag"><i class="fa fa-tag"></i> Bloom Filter</a>
           
         </div>
       
@@ -809,8 +525,8 @@ public static void main(String[] args) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/26/DataStructure-1/" rel="next" title="数据结构实现之单向链表">
-                <i class="fa fa-chevron-left"></i> 数据结构实现之单向链表
+              <a href="/2020/04/01/Python-4/" rel="next" title="常见的Python运行时错误">
+                <i class="fa fa-chevron-left"></i> 常见的Python运行时错误
               </a>
             
           </div>
@@ -818,10 +534,6 @@ public static void main(String[] args) {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/05/Algorithm-3/" rel="prev" title="树和堆">
-                树和堆 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -927,7 +639,7 @@ public static void main(String[] args) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -990,7 +702,7 @@ public static void main(String[] args) {
         
         
           <li>
-            <a href="/2020/04/01/Filter-1/" title="Bloom Filter 布隆过滤器" target="_blank">Bloom Filter 布隆过滤器</a>
+            <a href="/2020/04/01/Algorithm-8/" title="布隆过滤器 Bloom Filter 2" target="_blank">布隆过滤器 Bloom Filter 2</a>
           </li>
         
           <li>
@@ -1020,7 +732,7 @@ public static void main(String[] args) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构实现之单向循环链表"><span class="nav-text">数据结构实现之单向循环链表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bloom-Filter-布隆过滤器"><span class="nav-text">Bloom Filter 布隆过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是布隆过滤器"><span class="nav-text">1. 什么是布隆过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-背景"><span class="nav-text">2. 背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-算法"><span class="nav-text">3. 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-优缺点"><span class="nav-text">4. 优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-代码"><span class="nav-text">5. 代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-应用"><span class="nav-text">6. 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-改进后的布隆过滤器"><span class="nav-text">7. 改进后的布隆过滤器</span></a></li></ol></li></ol></div>
             
 
           </div>
