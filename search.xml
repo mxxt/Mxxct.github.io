@@ -932,16 +932,18 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> Algorithm and Data Structure </category>
+          
+          <category> LeetCode </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> LeetCode </tag>
+            <tag> Algorithm and Data Structure </tag>
             
-            <tag> Algorithm </tag>
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -959,14 +961,16 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> Algorithm and Data Structure </category>
+          
+          <category> LeetCode </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Algorithm![](70) </tag>
+            <tag> Algorithm and Data Structure </tag>
             
             <tag> LeetCode </tag>
             
@@ -977,7 +981,7 @@
     
     
     <entry>
-      <title>树和堆</title>
+      <title>树和堆（julyedu网课整理）</title>
       <link href="/2018/12/05/Algorithm-3/"/>
       <url>/2018/12/05/Algorithm-3/</url>
       
@@ -1064,7 +1068,7 @@
     
     
     <entry>
-      <title>栈&amp;队列&amp;并查集&amp;哈希表</title>
+      <title>栈&amp;队列&amp;并查集&amp;哈希表（julyedu网课整理）</title>
       <link href="/2018/11/25/Algorithm-2/"/>
       <url>/2018/11/25/Algorithm-2/</url>
       
@@ -1149,7 +1153,7 @@
     
     
     <entry>
-      <title>算法初步</title>
+      <title>算法初步（julyedu网课整理）</title>
       <link href="/2018/11/19/Algorithm-1/"/>
       <url>/2018/11/19/Algorithm-1/</url>
       
