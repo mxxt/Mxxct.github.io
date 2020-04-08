@@ -593,35 +593,11 @@ def bubble_sort(L):
                 temp = L[i]
                 L[i] = L[i+1]
                 L[i+1] = temp</code></pre><h3 id="6-快速排序"><a href="#6-快速排序" class="headerlink" title="6. 快速排序"></a>6. 快速排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-2d150e5550b700fa.gif?imageMogr2/auto-orient/strip" alt><br><strong>基本思想</strong>：挖坑填数+分治法<br>1）从序列当中选择一个基准数(pivot)<br>在这里我们选择序列当中第一个数最为基准数<br>2）将序列当中的所有数依次遍历，比基准数大的位于其右侧，比基准数小的位于其左侧<br>3）重复步骤1.2，直到所有子集当中只有一个元素为止。<br>用伪代码描述如下：<br>    1.i =L; j = R; 将基准数挖出形成第一个坑a[i]。<br>    2.j–由后向前找比它小的数，找到后挖出此数填前一个坑a[i]中。<br>    3.i++由前向后找比它大的数，找到后也挖出此数填到前一个坑a[j]中。<br>    4.再重复执行2,3二步，直到i==j，将基准数填入a[i]中<br><strong>代码实现</strong>：  </p>
-<pre><code>#快速排序
-#L：待排序的序列；start排序的开始index,end序列末尾的index
-#对于长度为length的序列：start = 0;end = length-1
-def quick_sort(L,start,end):
-  if start &lt; end:
-      i , j , pivot = start , end , L[start]
-      while i &lt; j:
-#从右开始向左寻找第一个小于pivot的值
-          while (i &lt; j) and (L[j] &gt;= pivot):
-              j = j-1
-#将小于pivot的值移到左边
-          if (i &lt; j):
-              L[i] = L[j]
-              i = i+1 
-#从左开始向右寻找第一个大于pivot的值
-          while (i &lt; j) and (L[i] &lt; pivot):
-              i = i+1
-#将大于pivot的值移到右边
-          if (i &lt; j):
-              L[j] = L[i]
-              j = j-1
-#循环结束后，说明 i=j，此时左边的值全都小于pivot,右边的值全都大于pivot
-#pivot的位置移动正确，那么此时只需对左右两侧的序列调用此函数进一步排序即可
-#递归调用函数：依次对左侧序列：从0 ~ i-1//右侧序列：从i+1 ~ end
-      L[i] = pivot
-#左侧序列继续排序
-      quick_sort(L,start,i-1)
-#右侧序列继续排序
-      quick_sort(L,i+1,end)  </code></pre><h3 id="7-归并排序"><a href="#7-归并排序" class="headerlink" title="7. 归并排序"></a>7. 归并排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-0597aa6877e219f0.gif?imageMogr2/auto-orient/strip" alt><br><strong>算法思想</strong>：归并排序是建立在归并操作上的一种有效的排序算法，该算法是采用分治法的一个典型的应用。它的基本操作是：将已有的子序列合并，达到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。<br><strong>归并排序其实要做两件事</strong>：  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 快速排序</span><br><span class="line"># start = 0 </span><br><span class="line"># end = len(nums) - 1</span><br><span class="line"># nums 为 待排序数组</span><br><span class="line">def quickSort(start, end, nums):</span><br><span class="line">    if start &lt; end:</span><br><span class="line">        i, j, pivot = start, end, nums[start]</span><br><span class="line">        while i &lt; j:</span><br><span class="line">            # 从右开始向左寻找第一个小于pivot的值</span><br><span class="line">            while i &lt; j and nums[j] &gt;= pivot:</span><br><span class="line">                j = j - 1</span><br><span class="line">            # 找到后将小于pivot的值移到左边</span><br><span class="line">            if i &lt; j:</span><br><span class="line">                nums[i] = nums[j]</span><br><span class="line">                i = i + 1</span><br><span class="line">            # 从左开始向右寻找第一个大于pivot的值</span><br><span class="line">            while i &lt; j and nums[i] &lt;= pivot:</span><br><span class="line">                i = i + 1</span><br><span class="line">            # 找到后将小于pivot的值移到右边</span><br><span class="line">            if i &lt; j:</span><br><span class="line">                nums[j] = nums[i]</span><br><span class="line">                j = j - 1</span><br><span class="line">        # 循环结束后，说明 i=j，此时左边的值全都小于pivot,右边的值全都大于pivot</span><br><span class="line">        nums[i] = pivot</span><br><span class="line">        # pivot的位置移动正确，那么此时只需对左右两侧的序列调用此函数进一步排序即可</span><br><span class="line">		# 递归调用函数：左侧序列：start ~ i-1 右侧序列：i+1 ~ end</span><br><span class="line">        quickSort(start, i - 1, nums)</span><br><span class="line">        quickSort(i + 1, end, nums)</span><br><span class="line">    return nums</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//快速排序</span><br><span class="line">void quick_sort(int s[], int l, int r)</span><br><span class="line">&#123;</span><br><span class="line">    if (l &lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1</span><br><span class="line">        int i = l, j = r, x = s[l];</span><br><span class="line">        while (i &lt; j)</span><br><span class="line">        &#123;</span><br><span class="line">            while(i &lt; j &amp;&amp; s[j] &gt;= x) // 从右向左找第一个小于x的数</span><br><span class="line">                j--;  </span><br><span class="line">            if(i &lt; j) </span><br><span class="line">                s[i++] = s[j];</span><br><span class="line">            </span><br><span class="line">            while(i &lt; j &amp;&amp; s[i] &lt; x) // 从左向右找第一个大于等于x的数</span><br><span class="line">                i++;  </span><br><span class="line">            if(i &lt; j) </span><br><span class="line">                s[j--] = s[i];</span><br><span class="line">        &#125;</span><br><span class="line">        s[i] = x;</span><br><span class="line">        quick_sort(s, l, i - 1); // 递归调用 </span><br><span class="line">        quick_sort(s, i + 1, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-归并排序"><a href="#7-归并排序" class="headerlink" title="7. 归并排序"></a>7. 归并排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-0597aa6877e219f0.gif?imageMogr2/auto-orient/strip" alt><br><strong>算法思想</strong>：归并排序是建立在归并操作上的一种有效的排序算法，该算法是采用分治法的一个典型的应用。它的基本操作是：将已有的子序列合并，达到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。<br><strong>归并排序其实要做两件事</strong>：  
 1）分解—-将序列每次折半拆分<br>2）合并—-将划分后的序列段两两排序合并<br>因此，归并排序实际上就是两个操作，拆分+合并<br><strong>如何合并？</strong><br>L[first…mid]为第一段，L[mid+1…last]为第二段，并且两端已经有序，现在我们要将两端合成达到L[first…last]并且也有序。<br>1）首先依次从第一段与第二段中取出元素比较，将较小的元素赋值给temp[]<br>2）重复执行上一步，当某一段赋值结束，则将另一段剩下的元素赋值给temp[]<br>3）此时将temp[]中的元素复制给L[]，则得到的L[first…last]有序<br><strong>如何分解？</strong><br>在这里，我们采用递归的方法，首先将待排序列分成A,B两组；然后重复对A、B序列分组；直到分组后组内只有一个元素，此时我们认为组内所有元素有序，则分组结束。<br><strong>代码实现：</strong>  </p>
 <pre><code>#归并排序
 #将序列L[first...mid]与序列L[mid+1...last]进行合并
@@ -840,7 +816,7 @@ def radix_sort(L):
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -925,15 +901,15 @@ def radix_sort(L):
         
         
           <li>
+            <a href="/2020/04/03/Docker-3/" title target="_blank"></a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/03/Docker-2/" title target="_blank"></a>
+          </li>
+        
+          <li>
             <a href="/2020/04/01/Algorithm-8/" title="布隆过滤器 Bloom Filter 2" target="_blank">布隆过滤器 Bloom Filter 2</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/01/Python-4/" title="常见的Python运行时错误" target="_blank">常见的Python运行时错误</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/14/Docker-4/" title="Docker启动Mysql镜像" target="_blank">Docker启动Mysql镜像</a>
           </li>
         
       </ul>
