@@ -42,7 +42,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -94,21 +94,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/panda-180-3.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/panda-32.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/panda.svg?v=5.1.4" color="#222">
 
 
 
@@ -129,7 +129,7 @@
 <meta name="keywords" content="Data Structure,Sort">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序">
-<meta property="og:url" content="https://mxxt.github.io/2018/11/18/Sort/index.html">
+<meta property="og:url" content="http://mxxct.gitee.io/blog/2018/11/18/Sort/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="排序   1. 直接插入排序核心思想：将数组中的所有元素依次跟前面已经排好的元素相比较，如果选择的元素比已排序的元素小，则交换，直到全部元素都比较过。因此，从上面的描述中我们可以发现，直接插入排序可以用两个循环完成：第一层循环：遍历待比较的所有数组元素第二层循环：将本轮选择的元素(selected)与已经排好序的元素(ordered)相比较。如果：selected &amp;gt; ordered，那么将">
 <meta property="og:locale" content="zh-Hans">
@@ -137,13 +137,6 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-62f859c2ac6f95ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-936d9f02b6aac880.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike72%2C5%2C5%2C72%2C24/sign=7cf7502408e93901420f856c1a853f82/e7cd7b899e510fb30f0a9f93d033c895d1430ca6.jpg">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-80700e24aed3d83e.png?imageMogr2/auto-orient/strip%7CimageView2/2">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-25821a7cb5aec881.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike150%2C5%2C5%2C150%2C50/sign=09c1144f3301213fdb3e468e358e5db4/48540923dd54564e1689c4afb9de9c82d0584fb3.jpg">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-596eee6397817ca2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-7e5c63ce1ed48ebf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-fef2b2e3edc03289.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-2d150e5550b700fa.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-0597aa6877e219f0.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-70872a75238d1269.gif?imageMogr2/auto-orient/strip">
 <meta property="og:updated_time" content="2018-11-18T03:11:46.000Z">
@@ -157,7 +150,7 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '/blog/',
     scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
@@ -180,7 +173,7 @@
 
 
 
-  <link rel="canonical" href="https://mxxt.github.io/2018/11/18/Sort/">
+  <link rel="canonical" href="http://mxxct.gitee.io/blog/2018/11/18/Sort/">
 
 
 
@@ -216,7 +209,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/blog/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">猫熊小才天の书院</span>
         <span class="logo-line-after"><i></i></span>
@@ -244,7 +237,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/blog/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -254,7 +247,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/blog/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
@@ -264,7 +257,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
+          <a href="/blog/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
@@ -274,7 +267,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/blog/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
@@ -347,12 +340,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mxxt.github.io/2018/11/18/Sort/">
+    <link itemprop="mainEntityOfPage" href="http://mxxct.gitee.io/blog/blog/2018/11/18/Sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mxxct">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/panda-180.png">
+      <meta itemprop="image" content="/blog/images/panda-180.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -403,7 +396,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Structure/" itemprop="url" rel="index">
+                  <a href="/blog/categories/Data-Structure/" itemprop="url" rel="index">
                     <span itemprop="name">Data Structure</span>
                   </a>
                 </span>
@@ -414,7 +407,7 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Structure/Sort/" itemprop="url" rel="index">
+                  <a href="/blog/categories/Data-Structure/Sort/" itemprop="url" rel="index">
                     <span itemprop="name">Sort</span>
                   </a>
                 </span>
@@ -432,8 +425,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/18/Sort/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/18/Sort/" itemprop="commentCount"></span>
+                <a href="/blog/2018/11/18/Sort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/blog/2018/11/18/Sort/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -441,7 +434,7 @@
 
           
           
-             <span id="/2018/11/18/Sort/" class="leancloud_visitors" data-flag-title="排序">
+             <span id="/blog/2018/11/18/Sort/" class="leancloud_visitors" data-flag-title="排序">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -476,127 +469,52 @@
       
         <h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><p><img src="http://upload-images.jianshu.io/upload_images/1156494-ab4cecff133d87b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><img src="http://upload-images.jianshu.io/upload_images/1156494-62f859c2ac6f95ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt>  </p>
 <h3 id="1-直接插入排序"><a href="#1-直接插入排序" class="headerlink" title="1. 直接插入排序"></a>1. 直接插入排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-936d9f02b6aac880.gif?imageMogr2/auto-orient/strip" alt><br><img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike72%2C5%2C5%2C72%2C24/sign=7cf7502408e93901420f856c1a853f82/e7cd7b899e510fb30f0a9f93d033c895d1430ca6.jpg" alt="image"><br><strong>核心思想</strong>：将数组中的所有元素依次跟前面已经排好的元素相比较，如果选择的元素比已排序的元素小，则交换，直到全部元素都比较过。<br>因此，从上面的描述中我们可以发现，直接插入排序可以用两个循环完成：<br>第一层循环：遍历待比较的所有数组元素<br>第二层循环：将本轮选择的元素(selected)与已经排好序的元素(ordered)相比较。<br>如果：selected &gt; ordered，那么将二者交换<br><strong>代码实现</strong>：  </p>
-<pre><code>#直接插入排序
-def insert_sort(L): 
-    #遍历数组中的所有元素，其中0号索引元素默认已排序，因此从1开始
-    for x in range(1,len(L)):
-    #将该元素与已排序好的前序数组依次比较，如果该元素小，则交换
-    #range(x-1,-1,-1):从x-1倒序循环到0
-        for i in range(x-1,-1,-1):
-    #判断：如果符合条件则交换
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">#直接插入排序</span><br><span class="line">def insert_sort(L): </span><br><span class="line">    # 遍历数组中的所有元素，其中0号索引元素默认已排序，因此从1开始</span><br><span class="line">    for x in range(1,len(L)):</span><br><span class="line">        # 将该元素与已排序好的前序数组依次比较，如果该元素小，则交换</span><br><span class="line">        # range(x-1,-1,-1):从x-1倒序循环到0</span><br><span class="line">        for i in range(x-1,-1,-1):</span><br><span class="line">            # 判断：如果符合条件则交换</span><br><span class="line">            if L[i] &gt; L[i+1]:</span><br><span class="line">                L[i+1], L[i] = L[i], L[i+1]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">### 2. 希尔排序  </span><br><span class="line">![](http://upload-images.jianshu.io/upload_images/1156494-80700e24aed3d83e.png?imageMogr2/auto-orient/strip%7CimageView2/2)  </span><br><span class="line">**算法思想**：将待排序数组按照步长gap进行分组，然后将每组的元素利用直接插入排序的方法进行排序；每次将gap折半减小，循环上述操作；当gap=1时，利用直接插入，完成排序。  </span><br><span class="line">同样的：从上面的描述中我们可以发现：希尔排序的总体实现应该由三个循环完成：  </span><br><span class="line">第一层循环：将gap依次折半，对序列进行分组，直到gap=1  </span><br><span class="line">第二、三层循环：也即直接插入排序所需要的两次循环。具体描述见上。  </span><br><span class="line">**代码实现**：  </span><br><span class="line"></span><br><span class="line">	#希尔排序</span><br><span class="line">	def insert_shell(L):</span><br><span class="line">	  #初始化gap值，此处利用序列长度的一般为其赋值</span><br><span class="line">	  gap = (int)(len(L)/2)</span><br><span class="line">	  #第一层循环：依次改变gap值对列表进行分组</span><br><span class="line">	  while (gap &gt;= 1):</span><br><span class="line">	  #下面：利用直接插入排序的思想对分组数据进行排序</span><br><span class="line">	  #range(gap,len(L)):从gap开始</span><br><span class="line">	      for x in range(gap,len(L)):</span><br><span class="line">	  #range(x-gap,-1,-gap):从x-gap开始与选定元素开始倒序比较，每个比较元素之间间隔gap</span><br><span class="line">	          for i in range(x-gap,-1,-gap):</span><br><span class="line">	  #如果该组当中两个元素满足交换条件，则进行交换</span><br><span class="line">	              if L[i] &gt; L[i+gap]:</span><br><span class="line">	                  temp = L[i+gap]</span><br><span class="line">	                  L[i+gap] = L[i]</span><br><span class="line">	                  L[i] =temp</span><br><span class="line">	  #while循环条件折半</span><br><span class="line">	      gap = (int)(gap/2)  </span><br><span class="line"></span><br><span class="line">### 3. 简单选择排序  </span><br><span class="line">![](http://upload-images.jianshu.io/upload_images/1156494-25821a7cb5aec881.gif?imageMogr2/auto-orient/strip)  </span><br><span class="line"></span><br><span class="line">![image](https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike150%2C5%2C5%2C150%2C50/sign=09c1144f3301213fdb3e468e358e5db4/48540923dd54564e1689c4afb9de9c82d0584fb3.jpg)  </span><br><span class="line"></span><br><span class="line">**基本思想**：比较+交换。  </span><br><span class="line">1）从待排序序列中，找到关键字最小的元素；  </span><br><span class="line">2）如果最小元素不是待排序序列的第一个元素，将其和第一个元素互换；  </span><br><span class="line">3）从余下的 N - 1 个元素中，找出关键字最小的元素，重复(1)、(2)步，直到排序结束。  </span><br><span class="line">因此，我们可以发现，简单选择排序也是通过两层循环实现。  </span><br><span class="line">第一层循环：依次遍历序列当中的每一个元素  </span><br><span class="line">第二层循环：将遍历得到的当前元素依次与余下的元素进行比较，符合最小元素的条件，则交换。  </span><br><span class="line">**代码实现**：  </span><br><span class="line"></span><br><span class="line">	# 简单选择排序</span><br><span class="line">	def select_sort(L):</span><br><span class="line">	#依次遍历序列中的每一个元素</span><br><span class="line">	  for x in range(0,len(L)):</span><br><span class="line">	#将当前位置的元素定义此轮循环当中的最小值</span><br><span class="line">	      minimum = L[x]</span><br><span class="line">	#将该元素与剩下的元素依次比较寻找最小元素</span><br><span class="line">	      for i in range(x+1,len(L)):</span><br><span class="line">	          if L[i] &lt; minimum:</span><br><span class="line">	              temp = L[i];</span><br><span class="line">	              L[i] = minimum;</span><br><span class="line">	              minimum = temp</span><br><span class="line">	#将比较后得到的真正的最小值赋值给当前位置</span><br><span class="line">	      L[x] = minimum  </span><br><span class="line"></span><br><span class="line">### 4. 堆排序  </span><br><span class="line">**堆的概念**：  </span><br><span class="line">堆：本质是一种数组对象。特别重要的一点性质：任意的叶子节点小于（或大于）它所有的父节点。对此，又分为大顶堆和小顶堆，大顶堆要求节点的元素都要大于其孩子，小顶堆要求节点元素都小于其左右孩子，两者对左右孩子的大小关系不做任何要求。   </span><br><span class="line">利用堆排序，就是基于大顶堆或者小顶堆的一种排序方法。下面，我们通过大顶堆来实现。  </span><br><span class="line">**基本思想**：  </span><br><span class="line">堆排序可以按照以下步骤来完成：  </span><br><span class="line">1）首先将序列构建称为大顶堆；  </span><br><span class="line">（这样满足了大顶堆那条性质：位于根节点的元素一定是当前序列的最大值）  </span><br><span class="line">![](http://upload-images.jianshu.io/upload_images/1156494-596eee6397817ca2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  </span><br><span class="line">2）取出当前大顶堆的根节点，将其与序列末尾元素进行交换；  </span><br><span class="line">（此时：序列末尾的元素为已排序的最大值；由于交换了元素，当前位于根节点的堆并不一定满足大顶堆的性质）  </span><br><span class="line">3）对交换后的n-1个序列元素进行调整，使其满足大顶堆的性质；  </span><br><span class="line">![](http://upload-images.jianshu.io/upload_images/1156494-7e5c63ce1ed48ebf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  </span><br><span class="line">4）重复2.3步骤，直至堆中只有1个元素为止  </span><br><span class="line">**代码实现**：  </span><br><span class="line"></span><br><span class="line">	#-------------------------堆排序--------------------------------</span><br><span class="line">	#**********获取左右叶子节点**********</span><br><span class="line">	def LEFT(i):</span><br><span class="line">	  return 2*i + 1</span><br><span class="line">	def RIGHT(i):</span><br><span class="line">	  return 2*i + 2</span><br><span class="line">	#********** 调整大顶堆 **********</span><br><span class="line">	#L:待调整序列 length: 序列长度 i:需要调整的结点</span><br><span class="line">	def adjust_max_heap(L,length,i):</span><br><span class="line">	#定义一个int值保存当前序列最大值的下标</span><br><span class="line">	  largest = i</span><br><span class="line">	#执行循环操作：两个任务：1 寻找最大值的下标；2.最大值与父节点交换</span><br><span class="line">	  while (1):</span><br><span class="line">	#获得序列左右叶子节点的下标</span><br><span class="line">	      left,right = LEFT(i),RIGHT(i)</span><br><span class="line">	#当左叶子节点的下标小于序列长度 并且 左叶子节点的值大于父节点时，将左叶子节点的下标赋值给largest</span><br><span class="line">	      if (left &lt; length) and (L[left] &gt; L[i]):</span><br><span class="line">	          largest = left</span><br><span class="line">	          print(&apos;左叶子节点&apos;)</span><br><span class="line">	      else:</span><br><span class="line">	          largest = i</span><br><span class="line">	#当右叶子节点的下标小于序列长度 并且 右叶子节点的值大于父节点时，将右叶子节点的下标值赋值给largest</span><br><span class="line">	      if (right &lt; length) and (L[right] &gt; L[largest]):</span><br><span class="line">	          largest = right</span><br><span class="line">	          print(&apos;右叶子节点&apos;)</span><br><span class="line">	#如果largest不等于i 说明当前的父节点不是最大值，需要交换值</span><br><span class="line">	      if (largest != i):</span><br><span class="line">	          temp = L[i]</span><br><span class="line">	          L[i] = L[largest]</span><br><span class="line">	          L[largest] = temp</span><br><span class="line">	          i = largest</span><br><span class="line">	          print(largest)</span><br><span class="line">	          continue</span><br><span class="line">	      else:</span><br><span class="line">	          break</span><br><span class="line">	#********** 建立大顶堆 **********</span><br><span class="line">	def build_max_heap(L):</span><br><span class="line">	  length = len(L)</span><br><span class="line">	  for x in range((int)((length-1)/2),-1,-1):</span><br><span class="line">	      adjust_max_heap(L,length,x)</span><br><span class="line">	#********** 堆排序 **********</span><br><span class="line">	def heap_sort(L):</span><br><span class="line">	#先建立大顶堆，保证最大值位于根节点；并且父节点的值大于叶子结点</span><br><span class="line">	  build_max_heap(L)</span><br><span class="line">	#i：当前堆中序列的长度.初始化为序列的长度</span><br><span class="line">	  i = len(L)</span><br><span class="line">	#执行循环：1. 每次取出堆顶元素置于序列的最后(len-1,len-2,len-3...)</span><br><span class="line">	#         2. 调整堆，使其继续满足大顶堆的性质，注意实时修改堆中序列的长度</span><br><span class="line">	  while (i &gt; 0):</span><br><span class="line">	      temp = L[i-1]</span><br><span class="line">	      L[i-1] = L[0]</span><br><span class="line">	      L[0] = temp</span><br><span class="line">	#堆中序列长度减1</span><br><span class="line">	      i = i-1</span><br><span class="line">	#调整大顶堆</span><br><span class="line">	      adjust_max_heap(L,i,0)  </span><br><span class="line"></span><br><span class="line">### 5. 冒泡排序  </span><br><span class="line">![](http://upload-images.jianshu.io/upload_images/1156494-fef2b2e3edc03289.gif?imageMogr2/auto-orient/strip)  </span><br><span class="line">**算法思想**：  </span><br><span class="line">1）将序列当中的左右元素，依次比较，保证右边的元素始终大于左边的元素；</span><br><span class="line">（ 第一轮结束后，序列最后一个元素一定是当前序列的最大值；）  </span><br><span class="line">2）对序列当中剩下的n-1个元素再次执行步骤1。  </span><br><span class="line">3）对于长度为n的序列，一共需要执行n-1轮比较</span><br><span class="line">（利用while循环可以减少执行次数）  </span><br><span class="line">**代码实现**：</span><br></pre></td></tr></table></figure>
+
+<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>def bubble_sort(L):<br>    length = len(L)</p>
+<pre><code># 序列长度为length，需要执行length-1轮交换
+for x in range(1, length):
+    # 对于每一轮交换，都将序列当中的左右元素进行比较
+    # 每轮交换当中，由于序列最后的元素一定是最大的，因此每轮循环到序列未排序的位置即可
+    for i in range(0,length-x):
         if L[i] &gt; L[i+1]:
-            temp = L[i+1]
-            L[i+1] = L[i]
-            L[i] = temp  </code></pre><h3 id="2-希尔排序"><a href="#2-希尔排序" class="headerlink" title="2. 希尔排序"></a>2. 希尔排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-80700e24aed3d83e.png?imageMogr2/auto-orient/strip%7CimageView2/2" alt><br><strong>算法思想</strong>：将待排序数组按照步长gap进行分组，然后将每组的元素利用直接插入排序的方法进行排序；每次将gap折半减小，循环上述操作；当gap=1时，利用直接插入，完成排序。<br>同样的：从上面的描述中我们可以发现：希尔排序的总体实现应该由三个循环完成：<br>第一层循环：将gap依次折半，对序列进行分组，直到gap=1<br>第二、三层循环：也即直接插入排序所需要的两次循环。具体描述见上。<br><strong>代码实现</strong>：  </p>
-<pre><code>#希尔排序
-def insert_shell(L):
-  #初始化gap值，此处利用序列长度的一般为其赋值
-  gap = (int)(len(L)/2)
-  #第一层循环：依次改变gap值对列表进行分组
-  while (gap &gt;= 1):
-  #下面：利用直接插入排序的思想对分组数据进行排序
-  #range(gap,len(L)):从gap开始
-      for x in range(gap,len(L)):
-  #range(x-gap,-1,-gap):从x-gap开始与选定元素开始倒序比较，每个比较元素之间间隔gap
-          for i in range(x-gap,-1,-gap):
-  #如果该组当中两个元素满足交换条件，则进行交换
-              if L[i] &gt; L[i+gap]:
-                  temp = L[i+gap]
-                  L[i+gap] = L[i]
-                  L[i] =temp
-  #while循环条件折半
-      gap = (int)(gap/2)  </code></pre><h3 id="3-简单选择排序"><a href="#3-简单选择排序" class="headerlink" title="3. 简单选择排序"></a>3. 简单选择排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-25821a7cb5aec881.gif?imageMogr2/auto-orient/strip" alt>  </p>
-<p><img src="https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike150%2C5%2C5%2C150%2C50/sign=09c1144f3301213fdb3e468e358e5db4/48540923dd54564e1689c4afb9de9c82d0584fb3.jpg" alt="image">  </p>
-<p><strong>基本思想</strong>：比较+交换。<br>1）从待排序序列中，找到关键字最小的元素；<br>2）如果最小元素不是待排序序列的第一个元素，将其和第一个元素互换；<br>3）从余下的 N - 1 个元素中，找出关键字最小的元素，重复(1)、(2)步，直到排序结束。<br>因此，我们可以发现，简单选择排序也是通过两层循环实现。<br>第一层循环：依次遍历序列当中的每一个元素<br>第二层循环：将遍历得到的当前元素依次与余下的元素进行比较，符合最小元素的条件，则交换。<br><strong>代码实现</strong>：  </p>
-<pre><code># 简单选择排序
-def select_sort(L):
-#依次遍历序列中的每一个元素
-  for x in range(0,len(L)):
-#将当前位置的元素定义此轮循环当中的最小值
-      minimum = L[x]
-#将该元素与剩下的元素依次比较寻找最小元素
-      for i in range(x+1,len(L)):
-          if L[i] &lt; minimum:
-              temp = L[i];
-              L[i] = minimum;
-              minimum = temp
-#将比较后得到的真正的最小值赋值给当前位置
-      L[x] = minimum  </code></pre><h3 id="4-堆排序"><a href="#4-堆排序" class="headerlink" title="4. 堆排序"></a>4. 堆排序</h3><p><strong>堆的概念</strong>：  
-堆：本质是一种数组对象。特别重要的一点性质：任意的叶子节点小于（或大于）它所有的父节点。对此，又分为大顶堆和小顶堆，大顶堆要求节点的元素都要大于其孩子，小顶堆要求节点元素都小于其左右孩子，两者对左右孩子的大小关系不做任何要求。<br>利用堆排序，就是基于大顶堆或者小顶堆的一种排序方法。下面，我们通过大顶堆来实现。<br><strong>基本思想</strong>：  
-堆排序可以按照以下步骤来完成：<br>1）首先将序列构建称为大顶堆；<br>（这样满足了大顶堆那条性质：位于根节点的元素一定是当前序列的最大值）<br><img src="http://upload-images.jianshu.io/upload_images/1156494-596eee6397817ca2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>2）取出当前大顶堆的根节点，将其与序列末尾元素进行交换；<br>（此时：序列末尾的元素为已排序的最大值；由于交换了元素，当前位于根节点的堆并不一定满足大顶堆的性质）<br>3）对交换后的n-1个序列元素进行调整，使其满足大顶堆的性质；<br><img src="http://upload-images.jianshu.io/upload_images/1156494-7e5c63ce1ed48ebf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>4）重复2.3步骤，直至堆中只有1个元素为止<br><strong>代码实现</strong>：  </p>
-<pre><code>#-------------------------堆排序--------------------------------
-#**********获取左右叶子节点**********
-def LEFT(i):
-  return 2*i + 1
-def RIGHT(i):
-  return 2*i + 2
-#********** 调整大顶堆 **********
-#L:待调整序列 length: 序列长度 i:需要调整的结点
-def adjust_max_heap(L,length,i):
-#定义一个int值保存当前序列最大值的下标
-  largest = i
-#执行循环操作：两个任务：1 寻找最大值的下标；2.最大值与父节点交换
-  while (1):
-#获得序列左右叶子节点的下标
-      left,right = LEFT(i),RIGHT(i)
-#当左叶子节点的下标小于序列长度 并且 左叶子节点的值大于父节点时，将左叶子节点的下标赋值给largest
-      if (left &lt; length) and (L[left] &gt; L[i]):
-          largest = left
-          print(&apos;左叶子节点&apos;)
-      else:
-          largest = i
-#当右叶子节点的下标小于序列长度 并且 右叶子节点的值大于父节点时，将右叶子节点的下标值赋值给largest
-      if (right &lt; length) and (L[right] &gt; L[largest]):
-          largest = right
-          print(&apos;右叶子节点&apos;)
-#如果largest不等于i 说明当前的父节点不是最大值，需要交换值
-      if (largest != i):
-          temp = L[i]
-          L[i] = L[largest]
-          L[largest] = temp
-          i = largest
-          print(largest)
-          continue
-      else:
-          break
-#********** 建立大顶堆 **********
-def build_max_heap(L):
-  length = len(L)
-  for x in range((int)((length-1)/2),-1,-1):
-      adjust_max_heap(L,length,x)
-#********** 堆排序 **********
-def heap_sort(L):
-#先建立大顶堆，保证最大值位于根节点；并且父节点的值大于叶子结点
-  build_max_heap(L)
-#i：当前堆中序列的长度.初始化为序列的长度
-  i = len(L)
-#执行循环：1. 每次取出堆顶元素置于序列的最后(len-1,len-2,len-3...)
-#         2. 调整堆，使其继续满足大顶堆的性质，注意实时修改堆中序列的长度
-  while (i &gt; 0):
-      temp = L[i-1]
-      L[i-1] = L[0]
-      L[0] = temp
-#堆中序列长度减1
-      i = i-1
-#调整大顶堆
-      adjust_max_heap(L,i,0)  </code></pre><h3 id="5-冒泡排序"><a href="#5-冒泡排序" class="headerlink" title="5. 冒泡排序"></a>5. 冒泡排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-fef2b2e3edc03289.gif?imageMogr2/auto-orient/strip" alt><br><strong>算法思想</strong>：  
-1）将序列当中的左右元素，依次比较，保证右边的元素始终大于左边的元素；<br>（ 第一轮结束后，序列最后一个元素一定是当前序列的最大值；）<br>2）对序列当中剩下的n-1个元素再次执行步骤1。<br>3）对于长度为n的序列，一共需要执行n-1轮比较<br>（利用while循环可以减少执行次数）<br><strong>代码实现</strong>：  </p>
-<pre><code>#冒泡排序
-def bubble_sort(L):
-    length = len(L)
-#序列长度为length，需要执行length-1轮交换
-    for x in range(1,length):
-#对于每一轮交换，都将序列当中的左右元素进行比较
-#每轮交换当中，由于序列最后的元素一定是最大的，因此每轮循环到序列未排序的位置即可
-        for i in range(0,length-x):
-            if L[i] &gt; L[i+1]:
-                temp = L[i]
-                L[i] = L[i+1]
-                L[i+1] = temp</code></pre><h3 id="6-快速排序"><a href="#6-快速排序" class="headerlink" title="6. 快速排序"></a>6. 快速排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-2d150e5550b700fa.gif?imageMogr2/auto-orient/strip" alt><br><strong>基本思想</strong>：挖坑填数+分治法<br>1）从序列当中选择一个基准数(pivot)<br>在这里我们选择序列当中第一个数最为基准数<br>2）将序列当中的所有数依次遍历，比基准数大的位于其右侧，比基准数小的位于其左侧<br>3）重复步骤1.2，直到所有子集当中只有一个元素为止。<br>用伪代码描述如下：<br>    1.i =L; j = R; 将基准数挖出形成第一个坑a[i]。<br>    2.j–由后向前找比它小的数，找到后挖出此数填前一个坑a[i]中。<br>    3.i++由前向后找比它大的数，找到后也挖出此数填到前一个坑a[j]中。<br>    4.再重复执行2,3二步，直到i==j，将基准数填入a[i]中<br><strong>代码实现</strong>：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 快速排序</span><br><span class="line"># start = 0 </span><br><span class="line"># end = len(nums) - 1</span><br><span class="line"># nums 为 待排序数组</span><br><span class="line">def quickSort(start, end, nums):</span><br><span class="line">    if start &lt; end:</span><br><span class="line">        i, j, pivot = start, end, nums[start]</span><br><span class="line">        while i &lt; j:</span><br><span class="line">            # 从右开始向左寻找第一个小于pivot的值</span><br><span class="line">            while i &lt; j and nums[j] &gt;= pivot:</span><br><span class="line">                j = j - 1</span><br><span class="line">            # 找到后将小于pivot的值移到左边</span><br><span class="line">            if i &lt; j:</span><br><span class="line">                nums[i] = nums[j]</span><br><span class="line">                i = i + 1</span><br><span class="line">            # 从左开始向右寻找第一个大于pivot的值</span><br><span class="line">            while i &lt; j and nums[i] &lt;= pivot:</span><br><span class="line">                i = i + 1</span><br><span class="line">            # 找到后将小于pivot的值移到右边</span><br><span class="line">            if i &lt; j:</span><br><span class="line">                nums[j] = nums[i]</span><br><span class="line">                j = j - 1</span><br><span class="line">        # 循环结束后，说明 i=j，此时左边的值全都小于pivot,右边的值全都大于pivot</span><br><span class="line">        nums[i] = pivot</span><br><span class="line">        # pivot的位置移动正确，那么此时只需对左右两侧的序列调用此函数进一步排序即可</span><br><span class="line">		# 递归调用函数：左侧序列：start ~ i-1 右侧序列：i+1 ~ end</span><br><span class="line">        quickSort(start, i - 1, nums)</span><br><span class="line">        quickSort(i + 1, end, nums)</span><br><span class="line">    return nums</span><br></pre></td></tr></table></figure>
+            L[i], L[i+1] = L[i+1], L[i]</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 6. 快速排序  </span><br><span class="line">![](http://upload-images.jianshu.io/upload_images/1156494-2d150e5550b700fa.gif?imageMogr2/auto-orient/strip)  </span><br><span class="line">**基本思想**：挖坑填数+分治法  </span><br><span class="line">1）从序列当中选择一个基准数(pivot)  </span><br><span class="line">在这里我们选择序列当中第一个数最为基准数  </span><br><span class="line">2）将序列当中的所有数依次遍历，比基准数大的位于其右侧，比基准数小的位于其左侧  </span><br><span class="line">3）重复步骤1.2，直到所有子集当中只有一个元素为止。  </span><br><span class="line">用伪代码描述如下：  </span><br><span class="line">	1.i =L; j = R; 将基准数挖出形成第一个坑a[i]。  </span><br><span class="line">	2.j--由后向前找比它小的数，找到后挖出此数填前一个坑a[i]中。  </span><br><span class="line">	3.i++由前向后找比它大的数，找到后也挖出此数填到前一个坑a[j]中。  </span><br><span class="line">	4.再重复执行2,3二步，直到i==j，将基准数填入a[i]中  </span><br><span class="line">**代码实现**：</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//快速排序</span><br><span class="line">void quick_sort(int s[], int l, int r)</span><br><span class="line">&#123;</span><br><span class="line">    if (l &lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1</span><br><span class="line">        int i = l, j = r, x = s[l];</span><br><span class="line">        while (i &lt; j)</span><br><span class="line">        &#123;</span><br><span class="line">            while(i &lt; j &amp;&amp; s[j] &gt;= x) // 从右向左找第一个小于x的数</span><br><span class="line">                j--;  </span><br><span class="line">            if(i &lt; j) </span><br><span class="line">                s[i++] = s[j];</span><br><span class="line">            </span><br><span class="line">            while(i &lt; j &amp;&amp; s[i] &lt; x) // 从左向右找第一个大于等于x的数</span><br><span class="line">                i++;  </span><br><span class="line">            if(i &lt; j) </span><br><span class="line">                s[j--] = s[i];</span><br><span class="line">        &#125;</span><br><span class="line">        s[i] = x;</span><br><span class="line">        quick_sort(s, l, i - 1); // 递归调用 </span><br><span class="line">        quick_sort(s, i + 1, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h1 id="start-0"><a href="#start-0" class="headerlink" title="start = 0"></a>start = 0</h1><h1 id="end-len-nums-1"><a href="#end-len-nums-1" class="headerlink" title="end = len(nums) - 1"></a>end = len(nums) - 1</h1><h1 id="nums-为-待排序数组"><a href="#nums-为-待排序数组" class="headerlink" title="nums 为 待排序数组"></a>nums 为 待排序数组</h1><p>def quickSort(start, end, nums):<br>    if start &lt; end:<br>        i, j, pivot = start, end, nums[start]<br>        while i &lt; j:</p>
+<pre><code>        # 从右开始向左寻找第一个小于pivot的值
+        while i &lt; j and nums[j] &gt;= pivot:
+            j = j - 1
+        # 找到后将小于pivot的值移到左边
+        if i &lt; j:
+            nums[i] = nums[j]
+            i = i + 1
+        # 从左开始向右寻找第一个大于pivot的值
+        while i &lt; j and nums[i] &lt;= pivot:
+            i = i + 1
+        # 找到后将小于pivot的值移到右边
+        if i &lt; j:
+            nums[j] = nums[i]
+            j = j - 1
+    # 循环结束后，说明 i=j，此时左边的值全都小于pivot,右边的值全都大于pivot
+    nums[i] = pivot
+    # pivot的位置移动正确，那么此时只需对左右两侧的序列调用此函数进一步排序即可
+    # 递归调用函数：左侧序列：start ~ i-1 右侧序列：i+1 ~ end
+    quickSort(start, i - 1, nums)
+    quickSort(i + 1, end, nums)
+return nums</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p>//快速排序<br>void quick_sort(int s[], int l, int r)<br>{
+    if (l &lt; r)<br>    {<br>        //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1<br>        int i = l, j = r, x = s[l];<br>        while (i &lt; j)<br>        {<br>            while(i &lt; j &amp;&amp; s[j] &gt;= x) // 从右向左找第一个小于x的数<br>                j–;<br>            if(i &lt; j)<br>                s[i++] = s[j];</p>
+<pre><code>        while(i &lt; j &amp;&amp; s[i] &lt; x) // 从左向右找第一个大于等于x的数
+            i++;  
+        if(i &lt; j) 
+            s[j--] = s[i];
+    }
+    s[i] = x;
+    quick_sort(s, l, i - 1); // 递归调用 
+    quick_sort(s, i + 1, r);
+}</code></pre><p>}
+```</p>
 <h3 id="7-归并排序"><a href="#7-归并排序" class="headerlink" title="7. 归并排序"></a>7. 归并排序</h3><p><img src="http://upload-images.jianshu.io/upload_images/1156494-0597aa6877e219f0.gif?imageMogr2/auto-orient/strip" alt><br><strong>算法思想</strong>：归并排序是建立在归并操作上的一种有效的排序算法，该算法是采用分治法的一个典型的应用。它的基本操作是：将已有的子序列合并，达到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。<br><strong>归并排序其实要做两件事</strong>：  
 1）分解—-将序列每次折半拆分<br>2）合并—-将划分后的序列段两两排序合并<br>因此，归并排序实际上就是两个操作，拆分+合并<br><strong>如何合并？</strong><br>L[first…mid]为第一段，L[mid+1…last]为第二段，并且两端已经有序，现在我们要将两端合成达到L[first…last]并且也有序。<br>1）首先依次从第一段与第二段中取出元素比较，将较小的元素赋值给temp[]<br>2）重复执行上一步，当某一段赋值结束，则将另一段剩下的元素赋值给temp[]<br>3）此时将temp[]中的元素复制给L[]，则得到的L[first…last]有序<br><strong>如何分解？</strong><br>在这里，我们采用递归的方法，首先将待排序列分成A,B两组；然后重复对A、B序列分组；直到分组后组内只有一个元素，此时我们认为组内所有元素有序，则分组结束。<br><strong>代码实现：</strong>  </p>
 <pre><code>#归并排序
@@ -705,9 +623,9 @@ def radix_sort(L):
       
         <div class="post-tags">
           
-            <a href="/tags/Data-Structure/" rel="tag"><i class="fa fa-tag"></i> Data Structure</a>
+            <a href="/blog/tags/Data-Structure/" rel="tag"><i class="fa fa-tag"></i> Data Structure</a>
           
-            <a href="/tags/Sort/" rel="tag"><i class="fa fa-tag"></i> Sort</a>
+            <a href="/blog/tags/Sort/" rel="tag"><i class="fa fa-tag"></i> Sort</a>
           
         </div>
       
@@ -720,7 +638,7 @@ def radix_sort(L):
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/18/Linux-2/" rel="next" title="Linux下安装Tomcat">
+              <a href="/blog/2018/11/18/Linux-2/" rel="next" title="Linux下安装Tomcat">
                 <i class="fa fa-chevron-left"></i> Linux下安装Tomcat
               </a>
             
@@ -730,7 +648,7 @@ def radix_sort(L):
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/18/Search/" rel="prev" title="查找">
+              <a href="/blog/2018/11/18/Search/" rel="prev" title="查找">
                 查找 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -803,7 +721,7 @@ def radix_sort(L):
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+              <img class="site-author-image" itemprop="image" src="/blog/images/panda-180.png" alt="Mxxct">
             
               <p class="site-author-name" itemprop="name">Mxxct</p>
               <p class="site-description motion-element" itemprop="description">君子不器</p>
@@ -814,7 +732,7 @@ def radix_sort(L):
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/blog/archives/">
               
                   <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">日志</span>
@@ -826,7 +744,7 @@ def radix_sort(L):
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
+                <a href="/blog/categories/index.html">
                   <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
@@ -837,7 +755,7 @@ def radix_sort(L):
               
               
               <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
+                <a href="/blog/tags/index.html">
                   <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
@@ -901,15 +819,15 @@ def radix_sort(L):
         
         
           <li>
-            <a href="/2020/04/01/Algorithm-8/" title="布隆过滤器 Bloom Filter 2" target="_blank">布隆过滤器 Bloom Filter 2</a>
+            <a href="/blog/2020/04/01/Algorithm-8/" title="布隆过滤器 Bloom Filter 2" target="_blank">布隆过滤器 Bloom Filter 2</a>
           </li>
         
           <li>
-            <a href="/2020/04/01/Python-4/" title="常见的Python运行时错误" target="_blank">常见的Python运行时错误</a>
+            <a href="/blog/2020/04/01/Python-4/" title="常见的Python运行时错误" target="_blank">常见的Python运行时错误</a>
           </li>
         
           <li>
-            <a href="/2020/03/14/Docker-4/" title="Docker启动Mysql镜像" target="_blank">Docker启动Mysql镜像</a>
+            <a href="/blog/2020/03/14/Docker-4/" title="Docker启动Mysql镜像" target="_blank">Docker启动Mysql镜像</a>
           </li>
         
       </ul>
@@ -931,7 +849,7 @@ def radix_sort(L):
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#排序"><span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-直接插入排序"><span class="nav-text">1. 直接插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-希尔排序"><span class="nav-text">2. 希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-简单选择排序"><span class="nav-text">3. 简单选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-堆排序"><span class="nav-text">4. 堆排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-冒泡排序"><span class="nav-text">5. 冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-快速排序"><span class="nav-text">6. 快速排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-归并排序"><span class="nav-text">7. 归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-基数排序"><span class="nav-text">8. 基数排序</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#排序"><span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-直接插入排序"><span class="nav-text">1. 直接插入排序</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#冒泡排序"><span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速排序"><span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#start-0"><span class="nav-text">start = 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#end-len-nums-1"><span class="nav-text">end = len(nums) - 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nums-为-待排序数组"><span class="nav-text">nums 为 待排序数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-归并排序"><span class="nav-text">7. 归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-基数排序"><span class="nav-text">8. 基数排序</span></a></li></ol></li></div>
             
 
           </div>
@@ -1035,64 +953,64 @@ def radix_sort(L):
 
   
   
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -1164,7 +1082,7 @@ def radix_sort(L):
     } else if (/json$/i.test(search_path)) {
       isXml = false;
     }
-    var path = "/" + search_path;
+    var path = "/blog/" + search_path;
     // monitor main search box;
 
     var onPopupClose = function (e) {
