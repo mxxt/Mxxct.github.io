@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="数据倾斜 DataSkew1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
+<meta name="description" content="DataSkew 数据倾斜1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
 <meta name="keywords" content="Hadoop,Hive,DataSkew">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据倾斜 DataSkew">
+<meta property="og:title" content="DataSkew 数据倾斜">
 <meta property="og:url" content="https://mxxt.github.io/2020/04/21/DataSkew/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="数据倾斜 DataSkew1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
+<meta property="og:description" content="DataSkew 数据倾斜1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-04-24T02:26:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据倾斜 DataSkew">
-<meta name="twitter:description" content="数据倾斜 DataSkew1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
+<meta name="twitter:title" content="DataSkew 数据倾斜">
+<meta name="twitter:description" content="DataSkew 数据倾斜1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
 
 
 
@@ -172,7 +172,7 @@
 
 
 
-  <title>数据倾斜 DataSkew | 猫熊小才天の书院</title>
+  <title>DataSkew 数据倾斜 | 猫熊小才天の书院</title>
   
 
 
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据倾斜 DataSkew</h1>
+          <h1 class="post-title" itemprop="name headline">DataSkew 数据倾斜</h1>
         
 
         <div class="post-meta">
@@ -427,7 +427,7 @@
 
           
           
-             <span id="/2020/04/21/DataSkew/" class="leancloud_visitors" data-flag-title="数据倾斜 DataSkew">
+             <span id="/2020/04/21/DataSkew/" class="leancloud_visitors" data-flag-title="DataSkew 数据倾斜">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -460,7 +460,7 @@
       
 
       
-        <h2 id="数据倾斜-DataSkew"><a href="#数据倾斜-DataSkew" class="headerlink" title="数据倾斜 DataSkew"></a>数据倾斜 DataSkew</h2><h3 id="1-Hive-里的数据倾斜"><a href="#1-Hive-里的数据倾斜" class="headerlink" title="1. Hive 里的数据倾斜"></a>1. Hive 里的数据倾斜</h3><h4 id="1-1-null值-空值"><a href="#1-1-null值-空值" class="headerlink" title="1.1 null值 空值"></a>1.1 null值 空值</h4><p>尽量提前过滤，或者把无效值替换成随机字符串，比如 <code>if(a is null or trim(a) = &quot;&quot; or trim(a) = &quot;NULL&quot;, rand(1)+&quot;&quot;)</code>，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送到同一个reduce上，但是需要控制rand(1)的数据范围，小数点位数过多会导致分配的reduce太多，也会影响最终效率。</p>
+        <h2 id="DataSkew-数据倾斜"><a href="#DataSkew-数据倾斜" class="headerlink" title="DataSkew 数据倾斜"></a>DataSkew 数据倾斜</h2><h3 id="1-Hive-里的数据倾斜"><a href="#1-Hive-里的数据倾斜" class="headerlink" title="1. Hive 里的数据倾斜"></a>1. Hive 里的数据倾斜</h3><h4 id="1-1-null值-空值"><a href="#1-1-null值-空值" class="headerlink" title="1.1 null值 空值"></a>1.1 null值 空值</h4><p>尽量提前过滤，或者把无效值替换成随机字符串，比如 <code>if(a is null or trim(a) = &quot;&quot; or trim(a) = &quot;NULL&quot;, rand(1)+&quot;&quot;)</code>，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送到同一个reduce上，但是需要控制rand(1)的数据范围，小数点位数过多会导致分配的reduce太多，也会影响最终效率。</p>
 <blockquote>
 <p>打散key的方式同样适用于MapReduce和Spark。</p>
 </blockquote>
@@ -761,7 +761,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据倾斜-DataSkew"><span class="nav-text">数据倾斜 DataSkew</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Hive-里的数据倾斜"><span class="nav-text">1. Hive 里的数据倾斜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-null值-空值"><span class="nav-text">1.1 null值 空值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-小文件倾斜"><span class="nav-text">1.2 小文件倾斜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-mapjoin-和-streamtable"><span class="nav-text">1.3 mapjoin 和 streamtable</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-1-mapjoin"><span class="nav-text">1.3.1 mapjoin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-2-streamtable"><span class="nav-text">1.3.2 streamtable</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-单纯的多对多"><span class="nav-text">1.4 单纯的多对多</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-MapReduce-中的数据倾斜"><span class="nav-text">2. MapReduce 中的数据倾斜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-小文件倾斜"><span class="nav-text">2.1 小文件倾斜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-key-值倾斜"><span class="nav-text">2.2 key 值倾斜</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Spark-中的数据倾斜"><span class="nav-text">3. Spark 中的数据倾斜</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataSkew-数据倾斜"><span class="nav-text">DataSkew 数据倾斜</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Hive-里的数据倾斜"><span class="nav-text">1. Hive 里的数据倾斜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-null值-空值"><span class="nav-text">1.1 null值 空值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-小文件倾斜"><span class="nav-text">1.2 小文件倾斜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-mapjoin-和-streamtable"><span class="nav-text">1.3 mapjoin 和 streamtable</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-1-mapjoin"><span class="nav-text">1.3.1 mapjoin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-2-streamtable"><span class="nav-text">1.3.2 streamtable</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-单纯的多对多"><span class="nav-text">1.4 单纯的多对多</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-MapReduce-中的数据倾斜"><span class="nav-text">2. MapReduce 中的数据倾斜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-小文件倾斜"><span class="nav-text">2.1 小文件倾斜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-key-值倾斜"><span class="nav-text">2.2 key 值倾斜</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Spark-中的数据倾斜"><span class="nav-text">3. Spark 中的数据倾斜</span></a></li></ol></li></ol></div>
             
 
           </div>
