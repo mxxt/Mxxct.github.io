@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="m1ei8mEvXD">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hadoop,Hive,DataSkew,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据倾斜 DataSkew1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
+<meta name="keywords" content="Hadoop,Hive,DataSkew">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据倾斜 DataSkew">
+<meta property="og:url" content="https://mxxt.github.io/2020/04/21/DataSkew/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="数据倾斜 DataSkew1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-24T02:26:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据倾斜 DataSkew">
+<meta name="twitter:description" content="数据倾斜 DataSkew1. Hive 里的数据倾斜1.1 null值 空值尽量提前过滤，或者把无效值替换成随机字符串，比如 if(a is null or trim(a) = &amp;quot;&amp;quot; or trim(a) = &amp;quot;NULL&amp;quot;, rand(1)+&amp;quot;&amp;quot;)，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mxxt.github.io/2020/04/21/DataSkew/">
+
+
+
+
+
+  <title>数据倾斜 DataSkew | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxt.github.io/2020/04/21/DataSkew/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据倾斜 DataSkew</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-21T19:38:00+08:00">
+                2020-04-21
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/Hive/" itemprop="url" rel="index">
+                    <span itemprop="name">Hive</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/21/DataSkew/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/21/DataSkew/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/21/DataSkew/" class="leancloud_visitors" data-flag-title="数据倾斜 DataSkew">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数据倾斜-DataSkew"><a href="#数据倾斜-DataSkew" class="headerlink" title="数据倾斜 DataSkew"></a>数据倾斜 DataSkew</h2><h3 id="1-Hive-里的数据倾斜"><a href="#1-Hive-里的数据倾斜" class="headerlink" title="1. Hive 里的数据倾斜"></a>1. Hive 里的数据倾斜</h3><h4 id="1-1-null值-空值"><a href="#1-1-null值-空值" class="headerlink" title="1.1 null值 空值"></a>1.1 null值 空值</h4><p>尽量提前过滤，或者把无效值替换成随机字符串，比如 <code>if(a is null or trim(a) = &quot;&quot; or trim(a) = &quot;NULL&quot;, rand(1)+&quot;&quot;)</code>，由于是无效值所以不影响最终的取数，但是因为把关联字段打散了，所以就不会把所有的key发送到同一个reduce上，但是需要控制rand(1)的数据范围，小数点位数过多会导致分配的reduce太多，也会影响最终效率。</p>
+<blockquote>
+<p>打散key的方式同样适用于MapReduce和Spark。</p>
+</blockquote>
+<h4 id="1-2-小文件倾斜"><a href="#1-2-小文件倾斜" class="headerlink" title="1.2 小文件倾斜"></a>1.2 小文件倾斜</h4><p>这一点在 Hive 里主要表现在模型汇总程度越高，数据量越小，如果再带有分区，那么在HDFS里就会有很多小文件。HDFS的文件元信息，包括位置、大小、分块信息都保存在NameNode的内存中，文件越多占的内存越大，所以读取小文件就会消耗时间。还有一种产生的可能是MapReduce的reduce数量增加，也会增加输出结果文件的数量，从而导致小文件过多。</p>
+<blockquote>
+<p>最后这种情况主要针对的是 MapReduce。当然Hive也可以通过配置项来尽可能减少reduce输出的小文件。</p>
+</blockquote>
+<p>解决方法有两种：</p>
+<ol>
+<li><p>map输入端的小文件合并</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- 每个Map最大输入大小，决定合并后的文件数</span><br><span class="line">set mapred.max.split.size=256000000; **常见**</span><br><span class="line">-- 一个节点上split的至少的大小 ，决定了多个data node上的文件是否需要合并</span><br><span class="line">set mapred.min.split.size.per.node=100000000;</span><br><span class="line">-- 一个交换机下split的至少的大小，决定了多个交换机上的文件是否需要合并</span><br><span class="line">set mapred.min.split.size.per.rack=100000000;</span><br><span class="line">-- 执行Map前进行小文件合并</span><br><span class="line">set hive.input.format=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat; **常见**</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>reduce输出端的小文件合并</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">hive.merge.mapfiles=True True时在map输出后合并文件，默认true</span><br><span class="line">hive.merge.mapredfiles=True True时在reduce输出后合并文件，默认false</span><br><span class="line">hive.merge.size.per.task 合并后每个文件的大小，默认256000000</span><br><span class="line">hive.merge.smallfiles.avgsize 当输出文件平均大小小于设定值时，并且前两个参数得有一个为true，才会启动合并操作，默认16000000</span><br><span class="line"></span><br><span class="line">Hive在对结果文件进行合并时会执行一个额外的map-only脚本，mapper的数量是文件总大小除以size.per.task参数所得的值，触发合并的条件是：</span><br><span class="line">根据查询类型不同，相应的mapfiles/mapredfiles参数需要打开；</span><br><span class="line">结果文件的平均大小需要大于avgsize参数的值。</span><br><span class="line"></span><br><span class="line">hive.map.aggr=true; Map 端部分聚合，相当于Combiner</span><br><span class="line">hive.groupby.mapaggr.checkinterval =100000 在 Map 端进行聚合操作的条目数目</span><br><span class="line">hive.groupby.skewindata=true; 这个是给groupby优化的。会生成2个mr job，其中第一个相当于是combiner的作用，会先做一部分聚合再给reduce传过去</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="1-3-mapjoin-和-streamtable"><a href="#1-3-mapjoin-和-streamtable" class="headerlink" title="1.3 mapjoin 和 streamtable"></a>1.3 mapjoin 和 streamtable</h4><p>这两个类似于注解一样，放在 select 的后面即可</p>
+<h5 id="1-3-1-mapjoin"><a href="#1-3-1-mapjoin" class="headerlink" title="1.3.1 mapjoin"></a>1.3.1 mapjoin</h5><p>适合于：N个较大的表，一个较小的表</p>
+<p>mapjoin 会把指定的小表在客户端打成一个哈希表序列化文件的压缩包，通过分布式缓存均匀分发到作业执行的每一个结点上。然后在结点上进行解压，在内存中完成关联，有一个超级小表的情况下，目前hive能做到自动判断并转为map join。Map Join全过程不会使用Reduce，非常均匀，不会存在数据倾斜问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set hive.auto.convert.join = true; # 默认为false</span><br><span class="line">该参数为true时，Hive自动对左边的表统计量，如果是小表就加入内存，即对 小表使用Map join</span><br><span class="line"></span><br><span class="line">set hive.mapjoin.smalltable.filesize;</span><br><span class="line">hive.mapjoin.smalltable.filesize=25000000</span><br><span class="line">大表小表的阈值默认值是25mb</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-2-streamtable"><a href="#1-3-2-streamtable" class="headerlink" title="1.3.2 streamtable"></a>1.3.2 streamtable</h5><p>适合于：N个较小的表，一个超大的表</p>
+<p>join一般都是在reduce阶段完成的，因为在map阶段无法使同样key值的分在一个map上。<br>而在reduce阶段的join，hive默认把左表数据（小表）放在缓存中，右表数据（大表）放入到磁盘中，然后把内存中的表的数据逐条与硬盘上user表的数据做Join。<br>通过<code>/*+ streamtable(大表表名) */</code>来指定大表。<br>最好每次写join时，小表放左边，大表放右边。</p>
+<h4 id="1-4-单纯的多对多"><a href="#1-4-单纯的多对多" class="headerlink" title="1.4 单纯的多对多"></a>1.4 单纯的多对多</h4><p>主键拼接一个rand(1)，放入不同的reduce，group by 的时候把真正的主键做一个截取即可</p>
+<h3 id="2-MapReduce-中的数据倾斜"><a href="#2-MapReduce-中的数据倾斜" class="headerlink" title="2. MapReduce 中的数据倾斜"></a>2. MapReduce 中的数据倾斜</h3><h4 id="2-1-小文件倾斜"><a href="#2-1-小文件倾斜" class="headerlink" title="2.1 小文件倾斜"></a>2.1 小文件倾斜</h4><p>原理和Hive是一样的，太多的小文件，导致在ApplicationMaster在向ResourceManager去申请资源时，要频繁访问HDFS的NameNode，再去DataNode拿数据，准备数据时间太长。</p>
+<p>所以可以在 map 端开始之前先把小文件进行合并，再传递给MapReduce。比如客户端产生数据文件时进行合并，或者文件数据进入map之前通过继承CombineFileInputFormat类实现小文件的合并。job.setInputFormatClass(CombineTextInputFormat.class)，然后在代码里的Configuration中设置切分的块的最小值最大值等等，在同一节点上的数据块会合并，超过最大值就生产新的分片。<br>hadoopConf.set(“mapreduce.input.fileinputformat.split.maxsize”, “512000000”)<br>hadoopConf.set(“mapreduce.input.fileinputformat.split.minsize”, “268435456”)</p>
+<h4 id="2-2-key-值倾斜"><a href="#2-2-key-值倾斜" class="headerlink" title="2.2 key 值倾斜"></a>2.2 key 值倾斜</h4><p>同一个key的数据太多，导致全部传递到一个reduce上，导致其中一个reduce运行时间过长。</p>
+<p>可以先创建一个类，通过 extends Partitioner 来重写 <code>int getPartition()</code> 方法，将key先都拼接一个rand()随机数，但是这个随机数应该和最多能启动起来的reduceNum个数是一样的（感觉是这样，随机数不能太多不一样的值，不然会传递到太多的reduce上，虽然每个reduceTask上的数据相对少了，但是启动过多的reduceTask也会增加时间），然后再创建一个类，通过 extends WritableComparator 来重写 <code>public int compare(WritableComparable a, WritableComparable b)</code> 方法，reduce 会自动调用 WritableComparator 类中的 <code>int compare</code> 方法，来判断循环的key是否和前一个是同一个来做累加，所以如果修改了partition分区方法，一般都是需要再覆写 WritableComparator 类的。</p>
+<h3 id="3-Spark-中的数据倾斜"><a href="#3-Spark-中的数据倾斜" class="headerlink" title="3. Spark 中的数据倾斜"></a>3. Spark 中的数据倾斜</h3><ol>
+<li><p>数据源数据文件不均匀</p>
+<p> SparkContext.textFile(“”) 读取文件数据的时候底层实现是通过Hadoop读取文件的方式</p>
+<p> 在 Hadoop 读取文件时，会通过 <code>getPartitions()</code> 方法来获取分区，在这个方法里会调用 InputFormat 这个抽象类的 <code>getSplits()</code> 方法，这个方法的具体实现是在 FileInputFormat 类中对 <code>getSplits()</code> 方法进行覆写。如何去切分文件数据的思路是：</p>
+<ol>
+<li><p>inputPath 如果是一个文件夹的话，遍历里面的所有文件，累加所有文件的size作为totalSize</p>
+</li>
+<li><p>求一个平均文件大小 <code>goalSize = totalSize / numSplits;  // numSplits 指的是 min(想要的分区个数，默认分区个数2个) 在spark里面是这样的，mr可能是读的配置</code></p>
+</li>
+<li><p><code>while(fileSize / goalSize &gt; 1.1L){fileSize -= goalSize}</code> 如果当前文件的大小超过平均大小的1.1倍，那么就从平均大小对应的offset那里进行切分文件</p>
+</li>
+<li><p>综上，如果文件不可切分，那么一个分区就是那一整个不可切分文件；如果文件可切分，计算出一个理想文件大小，然后依次判断文件大小和这个理想文件大小的关系，幅度在1.1倍之内的都可以接受，否则就需要切割。</p>
+<p>每一个partition都会是一个task，所以如果文件不可分割，那么就会input一个特别大的文件，造成倾斜<br>适用场景：对于数据源单个spark input read数据量过大，或者单个task 相对于其他task spark input read较大的情况，读取数据源明显不均匀<br>解决方式：尽量使用可切割的文本存储，生成尽量多的task进行并行计算<br>优点：从数据源避免倾斜，并且从源头增大并行度，避免倾斜<br>缺点：需要改造数据源，支持可切割</p>
+</li>
+</ol>
+</li>
+<li><p>计算过程中key的分布不均（Shuffle导致的数据不均，在进行shuffle的时候，必须将各个节点上相同的key拉取到某个节点上的一个task来进行处理，此时如果某个key对应的数据量特别大的话，就会发生数据倾斜）</p>
+<ul>
+<li>单个rdd中进行groupby的时候key分布不均<br>  groupby(customerPart)<br>  map(key+rand()).reducebykey().reducebykey() 执行两次</li>
+<li>多个rdd进行join过程中key的不均匀<ul>
+<li>一个大表和一个小表的时候，将较小的RDD中的数据存到一个Broadcast变量（即广播变量）中，先广播到各个节点中，即在每个节点的内存中缓存一份，然后对大表RDD进行map算子，从Broadcast变量中获取较小RDD的全量数据，与当前RDD的每一条数据按照连接key进行比对，如果连接key相同的话，那么就将两个RDD的数据用你需要的方式连接起来。需要调整一下广播的阈值。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"><i class="fa fa-tag"></i> Hadoop</a>
+          
+            <a href="/tags/Hive/" rel="tag"><i class="fa fa-tag"></i> Hive</a>
+          
+            <a href="/tags/DataSkew/" rel="tag"><i class="fa fa-tag"></i> DataSkew</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/21/Kafka-2/" rel="next" title="Kafka">
+                <i class="fa fa-chevron-left"></i> Kafka
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/22/MapReduce/" rel="prev" title="MapReduce">
+                MapReduce <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mxxt" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/05/06/QlikSense-3/" title="QlikSense插件开发" target="_blank">QlikSense插件开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/08/01/Scala-0/" title="Scala学习" target="_blank">Scala学习</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/08/21/HashMap-2/" title="HashMap 中的哈希值计算问题" target="_blank">HashMap 中的哈希值计算问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/20/JS/" title="JavaScript 面试问题" target="_blank">JavaScript 面试问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/19/Thread-4/" title="守护线程和用户线程" target="_blank">守护线程和用户线程</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据倾斜-DataSkew"><span class="nav-text">数据倾斜 DataSkew</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Hive-里的数据倾斜"><span class="nav-text">1. Hive 里的数据倾斜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-null值-空值"><span class="nav-text">1.1 null值 空值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-小文件倾斜"><span class="nav-text">1.2 小文件倾斜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-mapjoin-和-streamtable"><span class="nav-text">1.3 mapjoin 和 streamtable</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-1-mapjoin"><span class="nav-text">1.3.1 mapjoin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-2-streamtable"><span class="nav-text">1.3.2 streamtable</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-单纯的多对多"><span class="nav-text">1.4 单纯的多对多</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-MapReduce-中的数据倾斜"><span class="nav-text">2. MapReduce 中的数据倾斜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-小文件倾斜"><span class="nav-text">2.1 小文件倾斜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-key-值倾斜"><span class="nav-text">2.2 key 值倾斜</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Spark-中的数据倾斜"><span class="nav-text">3. Spark 中的数据倾斜</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

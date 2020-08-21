@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="m1ei8mEvXD">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,Thread,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="同步队列∵ 多线程 ∴ 需要针对一些资源进行同步 ∴ 有了同步队列实现方式主要有两种：阻塞方式（队列使用一个锁，出队入队用同一把锁或者队列使用两把锁，出队和入队用不同的锁）和非阻塞方式（底层通过循环CAS的方式） synchronized是悲观锁，这种线程一旦得到锁，其他需要锁的线程就挂起的情况就是悲观锁CAS操作的就是乐观锁，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直">
+<meta name="keywords" content="Java,Thread">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同步队列">
+<meta property="og:url" content="https://mxxt.github.io/2020/08/11/Thread-2/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="同步队列∵ 多线程 ∴ 需要针对一些资源进行同步 ∴ 有了同步队列实现方式主要有两种：阻塞方式（队列使用一个锁，出队入队用同一把锁或者队列使用两把锁，出队和入队用不同的锁）和非阻塞方式（底层通过循环CAS的方式） synchronized是悲观锁，这种线程一旦得到锁，其他需要锁的线程就挂起的情况就是悲观锁CAS操作的就是乐观锁，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://dl.iteye.com/upload/attachment/0083/2584/b7b2472f-6b93-3f85-9e44-29a9ff774c8e.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/400827/201709/400827-20170928212457434-1134706220.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2843224-59ca97f3ae25b043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/681/format/webp">
+<meta property="og:updated_time" content="2020-08-20T09:23:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="同步队列">
+<meta name="twitter:description" content="同步队列∵ 多线程 ∴ 需要针对一些资源进行同步 ∴ 有了同步队列实现方式主要有两种：阻塞方式（队列使用一个锁，出队入队用同一把锁或者队列使用两把锁，出队和入队用不同的锁）和非阻塞方式（底层通过循环CAS的方式） synchronized是悲观锁，这种线程一旦得到锁，其他需要锁的线程就挂起的情况就是悲观锁CAS操作的就是乐观锁，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直">
+<meta name="twitter:image" content="http://dl.iteye.com/upload/attachment/0083/2584/b7b2472f-6b93-3f85-9e44-29a9ff774c8e.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mxxt.github.io/2020/08/11/Thread-2/">
+
+
+
+
+
+  <title>同步队列 | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxt.github.io/2020/08/11/Thread-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">同步队列</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-11T14:32:00+08:00">
+                2020-08-11
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Thread/" itemprop="url" rel="index">
+                    <span itemprop="name">Thread</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/08/11/Thread-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/11/Thread-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/08/11/Thread-2/" class="leancloud_visitors" data-flag-title="同步队列">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="同步队列"><a href="#同步队列" class="headerlink" title="同步队列"></a>同步队列</h2><p>∵ 多线程 ∴ 需要针对一些资源进行同步 ∴ 有了同步队列<br>实现方式主要有两种：阻塞方式（队列使用一个锁，出队入队用同一把锁或者队列使用两把锁，出队和入队用不同的锁）和非阻塞方式（底层通过循环CAS的方式）</p>
+<p>synchronized是悲观锁，这种线程一旦得到锁，其他需要锁的线程就挂起的情况就是悲观锁<br>CAS操作的就是乐观锁，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。Compare And Swap 比较并替换</p>
+<p>CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。<br>更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改为B。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">AtomicBoolean为例</span><br><span class="line">compareAndSet(prev,newValue)方法要拆成compare(prev)方法和Set(newValue)方法理解，是compare(prev)是等于prev后，就马上设置共享内存为newValue。</span><br><span class="line">public final boolean getAndSet(boolean newValue) &#123;</span><br><span class="line">    boolean prev;</span><br><span class="line">    do &#123;</span><br><span class="line">        prev = get();</span><br><span class="line">    &#125; while (!compareAndSet(prev, newValue));</span><br><span class="line">    return prev;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CAS的缺点：</span><br><span class="line">1.CPU开销较大</span><br><span class="line">在并发量比较高的情况下，如果许多线程反复尝试更新某一个变量，却又一直更新不成功，循环往复，会给CPU带来很大的压力。所以一般会线程sleep</span><br><span class="line">2.不能保证代码块的原子性</span><br><span class="line">CAS机制所保证的只是一个变量的原子性操作，而不能保证整个代码块的原子性。比如需要保证3个变量共同进行原子性的更新，就不得不使用Synchronized了。</span><br><span class="line"></span><br><span class="line">CAS的原理：</span><br><span class="line">CAS通过调用JNI的代码实现的。JNI:Java Native Interface为JAVA本地调用，允许java调用其他语言。而compareAndSwapInt就是借助C来调用CPU底层指令实现的</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://dl.iteye.com/upload/attachment/0083/2584/b7b2472f-6b93-3f85-9e44-29a9ff774c8e.png" alt="java.util.concurrent"></p>
+<h3 id="1-非阻塞队列"><a href="#1-非阻塞队列" class="headerlink" title="1. 非阻塞队列"></a>1. 非阻塞队列</h3><h4 id="1-1-ConcurrentLinkedQueue"><a href="#1-1-ConcurrentLinkedQueue" class="headerlink" title="1.1 ConcurrentLinkedQueue"></a>1.1 ConcurrentLinkedQueue</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 在队尾插入一个元素，因为队列无边界，所以不会返回false</span><br><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final Node&lt;E&gt; newNode = new Node&lt;E&gt;(e);//入队前，创建一个新节点</span><br><span class="line"></span><br><span class="line">    for (Node&lt;E&gt; t = tail, p = t;;) &#123;//除非插入成功并返回，否则反复循环</span><br><span class="line">        Node&lt;E&gt; q = p.next;</span><br><span class="line">        if (q == null) &#123;</span><br><span class="line">            // p is last node</span><br><span class="line">            if (p.casNext(null, newNode)) &#123;//利用CAS操作，将p的next指针从旧值null更新为newNode </span><br><span class="line">                if (p != t) // hop two nodes at a time</span><br><span class="line">                    casTail(t, newNode);  // Failure is OK.利用CAS操作更新tail，如果失败说明其他线程添加了元素，由其他线程负责更新tail</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            // Lost CAS race to another thread; re-read next 如果添加元素失败，说明其他线程添加了元素，p后移，并继续尝试</span><br><span class="line">        &#125;</span><br><span class="line">        else if (p == q) //如果p被移除出链表，我们需要调整指针重新指向head，否则我们指向新的tail</span><br><span class="line">            p = (t != (t = tail)) ? t : head;</span><br><span class="line">        else</span><br><span class="line">            //p指向tail或者q</span><br><span class="line">            p = (p != t &amp;&amp; t != (t = tail)) ? t : q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">casTail(cmp,value)方法用于更新tail节点。tail被设置为volatile保证可见性</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-ConcurrentHashMap"><a href="#1-2-ConcurrentHashMap" class="headerlink" title="1.2 ConcurrentHashMap"></a>1.2 ConcurrentHashMap</h4><p>HashTable 线程安全，但是put get实现方法全是synchronized，效率太低；HashMap 线程不安全。HashTable 效率低下，是因为所有线程访问竞争的都是同一把锁，而<br>JDK 1.5<br>ConcurrentHashMap 采用锁分段技术，将数据分段，每一段数据都配有一把锁，那么多线程访问不同数据段的数据时就不需要竞争同一把锁，就可以实现线程安全。对于像 size() containsValue() 方法需要锁定整个表而不仅仅是某几个数据段，那么就需要按顺序锁定所有段，操作完毕后，再按顺序释放所有段的锁。<br><img src="https://images2017.cnblogs.com/blog/400827/201709/400827-20170928212457434-1134706220.png" alt></p>
+<p>JDK 1.8<br>ConcurrentHashMap取消了segment分段锁，而采用CAS和synchronized来保证并发安全。数据结构跟HashMap1.8的结构一样，数组+链表/红黑二叉树。<br>synchronized只锁定当前链表或红黑二叉树的首节点，这样只要hash不冲突，就不会产生并发，效率又提升N倍。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2843224-59ca97f3ae25b043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/681/format/webp" alt></p>
+<p>TreeBin: 红黑二叉树节点 Node: 链表节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">hash表初始化或扩容时的一个控制位标识量。</span><br><span class="line">负数代表正在进行初始化或扩容操作</span><br><span class="line">-1 代表正在初始化</span><br><span class="line">-N 表示有 N-1 个线程正在进行扩容操作</span><br><span class="line">正数或0代表hash表还没有被初始化，这个数值表示初始化或下一次进行扩容的大小 */</span><br><span class="line">private transient volatile int sizeCtl;</span><br><span class="line">static final int MOVED     = -1; // hash值是-1，表示这是一个forwardNode节点</span><br><span class="line">static final int TREEBIN   = -2; // hash值是-2  表示这时一个TreeBin节点</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">    return putVal(key, value, false);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** Implementation for put and putIfAbsent */</span><br><span class="line">final V putVal(K key, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">    //ConcurrentHashMap 不允许插入null键，HashMap允许插入一个null键</span><br><span class="line">    if (key == null || value == null) throw new NullPointerException();</span><br><span class="line">    //计算key的hash值</span><br><span class="line">    int hash = spread(key.hashCode());</span><br><span class="line">    int binCount = 0;</span><br><span class="line">    //for循环的作用：因为更新元素是使用CAS机制更新，需要不断的失败重试，直到成功为止。</span><br><span class="line">    for (Node&lt;K,V&gt;[] tab = table;;) &#123;</span><br><span class="line">        // f：链表或红黑二叉树头结点，向链表中添加元素时，需要synchronized获取f的锁。</span><br><span class="line">        Node&lt;K,V&gt; f; int n, i, fh;</span><br><span class="line">        //判断Node[]数组是否初始化，没有则进行初始化操作</span><br><span class="line">        if (tab == null || (n = tab.length) == 0)</span><br><span class="line">            tab = initTable();</span><br><span class="line">        //通过hash定位Node[]数组的索引坐标，是否有Node节点，如果没有则使用CAS进行添加（链表的头结点），添加失败则进入下次循环。</span><br><span class="line">        else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) &#123;</span><br><span class="line">            if (casTabAt(tab, i, null,</span><br><span class="line">                         new Node&lt;K,V&gt;(hash, key, value, null)))</span><br><span class="line">                break;                   // no lock when adding to empty bin</span><br><span class="line">        &#125;</span><br><span class="line">        //检查到内部正在移动元素（Node[] 数组扩容）</span><br><span class="line">        else if ((fh = f.hash) == MOVED)</span><br><span class="line">            //帮助它扩容</span><br><span class="line">            tab = helpTransfer(tab, f);</span><br><span class="line">        else &#123;</span><br><span class="line">            V oldVal = null;</span><br><span class="line">            //锁住链表或红黑二叉树的头结点</span><br><span class="line">            synchronized (f) &#123;</span><br><span class="line">                //判断f是否是链表的头结点</span><br><span class="line">                if (tabAt(tab, i) == f) &#123;</span><br><span class="line">                    //如果fh&gt;=0 是链表节点</span><br><span class="line">                    if (fh &gt;= 0) &#123;</span><br><span class="line">                        binCount = 1;</span><br><span class="line">                        //遍历链表所有节点</span><br><span class="line">                        for (Node&lt;K,V&gt; e = f;; ++binCount) &#123;</span><br><span class="line">                            K ek;</span><br><span class="line">                            //如果节点存在，则更新value</span><br><span class="line">                            if (e.hash == hash &amp;&amp;</span><br><span class="line">                                ((ek = e.key) == key ||</span><br><span class="line">                                 (ek != null &amp;&amp; key.equals(ek)))) &#123;</span><br><span class="line">                                oldVal = e.val;</span><br><span class="line">                                if (!onlyIfAbsent)</span><br><span class="line">                                    e.val = value;</span><br><span class="line">                                break;</span><br><span class="line">                            &#125;</span><br><span class="line">                            //不存在则在链表尾部添加新节点。</span><br><span class="line">                            Node&lt;K,V&gt; pred = e;</span><br><span class="line">                            if ((e = e.next) == null) &#123;</span><br><span class="line">                                pred.next = new Node&lt;K,V&gt;(hash, key,</span><br><span class="line">                                                          value, null);</span><br><span class="line">                                break;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //TreeBin是红黑二叉树节点</span><br><span class="line">                    else if (f instanceof TreeBin) &#123;</span><br><span class="line">                        Node&lt;K,V&gt; p;</span><br><span class="line">                        binCount = 2;</span><br><span class="line">                        //添加树节点</span><br><span class="line">                        if ((p = ((TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,</span><br><span class="line">                                                      value)) != null) &#123;</span><br><span class="line">                            oldVal = p.val;</span><br><span class="line">                            if (!onlyIfAbsent)</span><br><span class="line">                                p.val = value;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if (binCount != 0) &#123;</span><br><span class="line">                //如果链表长度已经达到临界值8 就需要把链表转换为树结构</span><br><span class="line">                if (binCount &gt;= TREEIFY_THRESHOLD)</span><br><span class="line">                    treeifyBin(tab, i);</span><br><span class="line">                if (oldVal != null)</span><br><span class="line">                    return oldVal;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //将当前ConcurrentHashMap的size数量+1</span><br><span class="line">    addCount(1L, binCount);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>判断Node[]数组是否初始化，没有则进行初始化操作<br>通过hash定位Node[]数组的索引坐标，是否有Node节点，如果没有则使用CAS进行添加（链表的头结点），添加失败则进入下次循环。<br>检查到内部正在扩容，如果正在扩容，就帮助它一块扩容。<br>如果f!=null，则使用synchronized锁住f元素（链表/红黑二叉树的头元素）<br>4.1 如果是Node(链表结构)则执行链表的添加操作。<br>4.2 如果是TreeNode(树型结果)则执行树添加操作。<br>判断链表长度已经达到临界值8 就需要把链表转换为树结构。<br>总结：<br>    JDK8中的实现也是锁分离的思想，它把锁分的比segment（JDK1.5）更细一些，只要hash不冲突，就不会出现并发获得锁的情况。它首先使用无锁操作CAS插入头结点，如果插入失败，说明已经有别的线程插入头结点了，再次循环进行操作。如果头结点已经存在，则通过synchronized获得头结点锁，进行后续的操作。性能比segment分段锁又再次提升。</p>
+<h3 id="2-阻塞队列"><a href="#2-阻塞队列" class="headerlink" title="2. 阻塞队列"></a>2. 阻塞队列</h3><p>ArrayBlockingQueue：一个由数组结构组成的有界阻塞队列。<br>LinkedBlockingQueue：一个由链表结构组成的有界阻塞队列。<br>PriorityBlockingQueue：一个支持优先级排序的无界阻塞队列。<br>DelayQueue：一个使用优先级队列实现的无界阻塞队列。<br>SynchronousQueue：一个不存储元素的阻塞队列。</p>
+<p>LinkedTransferQueue：一个由链表结构组成的无界阻塞队列。<br>LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列。</p>
+<p><a href="https://www.cnblogs.com/tjudzj/p/4454490.html" target="_blank" rel="noopener">参考</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>抛出异常</th>
+<th>特殊值</th>
+<th>阻塞</th>
+<th>超时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入</td>
+<td>add(e)</td>
+<td>offer(e)</td>
+<td>put(e)</td>
+<td>offer(e, time, unit)</td>
+</tr>
+<tr>
+<td>移除</td>
+<td>remove()</td>
+<td>poll()</td>
+<td>take()</td>
+<td>poll(time, unit)</td>
+</tr>
+<tr>
+<td>检查</td>
+<td>element()</td>
+<td>peek()</td>
+<td>不可用</td>
+<td>不可用</td>
+</tr>
+</tbody></table>
+<h4 id="2-1-SynchronousQueue"><a href="#2-1-SynchronousQueue" class="headerlink" title="2.1 SynchronousQueue"></a>2.1 SynchronousQueue</h4><p>无界的，无缓冲的等待队列。无缓冲指的是，一个put必须需要一个take，不会保存put的数据。</p>
+<p>生产者 put() 一个对象时，会等消费者来 take()，如果没有的话就一直等，直到消费者消费；反之，如果消费者 take() 时，会等生产者 put()。</p>
+<p>isEmpty()方法永远返回是true，remainingCapacity() 方法永远返回是0，remove()和removeAll() 方法永远返回是false，iterator()方法永远返回空，peek()方法永远返回null。</p>
+<p>它一种阻塞队列，其中每个 put 必须等待一个 take，反之亦然。同步队列没有任何内部容量，甚至连一个队列的容量都没有。<br>它是线程安全的，是阻塞的。<br>不允许使用 null 元素。<br>公平排序策略是指调用put的线程之间，或take的线程之间。</p>
+<p>为什么 ExecutorService cachedThreadPool = Executors.newCachedThreadPool(); newCachedThreadPool() 方法里使用的是 SynchronousQueue。</p>
+<p>SynchronousQueue队列，一个不存储元素的阻塞队列。每个插入操作必须等到另一个线程调用移除操作。所以，当我们提交第一个任务的时候，是加入不了队列的，这就满足了一个线程池条件“当无法加入队列的时候，且任务没有达到maxsize时，我们将新开启一个线程任务”。所以我们的maxsize是int的最大值。时间是60s，当一个线程没有任务执行会暂时保存60s超时时间，如果没有的新的任务的话，会从cache中remove掉。线程池为无限大，当执行第二个任务时第一个任务已经完成，会复用执行第一个任务的线程，而不用每次新建线程。</p>
+<h4 id="2-2-LinkedBlockingQueue"><a href="#2-2-LinkedBlockingQueue" class="headerlink" title="2.2 LinkedBlockingQueue"></a>2.2 LinkedBlockingQueue</h4><p>是一个无界缓存的等待队列。</p>
+<p>基于链表的阻塞队列，内部维持着一个数据缓冲队列（该队列由链表构成）。当生产者往队列中放入一个数据时，队列会从生产者手中获取数据，并缓存在队列内部，而生产者立即返回；只有当队列缓冲区达到最大值缓存容量时（LinkedBlockingQueue可以通过构造函数指定该值），才会阻塞生产者队列，直到消费者从队列中消费掉一份数据，生产者线程会被唤醒，反之对于消费者这端的处理也基于同样的原理。LinkedBlockingQueue之所以能够高效的处理并发数据，还因为其对于生产者端和消费者端分别采用了独立的锁来控制数据同步，这也意味着在高并发的情况下生产者和消费者可以并行地操作队列中的数据，以此来提高整个队列的并发性能。</p>
+<p>在构造 LinkedBlockingQueue 对象时如果没有指定其容量大小，默认会设置为int最大值，一旦生产者的速度远远大于消费者的速度，会导致内存溢出。</p>
+<h4 id="2-3-ArrayBlockingQueue"><a href="#2-3-ArrayBlockingQueue" class="headerlink" title="2.3 ArrayBlockingQueue"></a>2.3 ArrayBlockingQueue</h4><p>是一个有界缓存的等待队列。在创建时必须指定队列长度，一旦指定，不能修改。还可以指定是否采用公平锁。</p>
+<p>内部维持着一个定长数据缓冲队列（该队列由数组构成）。ArrayBlockingQueue内部还保存着两个整形变量，分别标识着队列的头部和尾部在数组中的位置。</p>
+<p>ArrayBlockingQueue在生产者放入数据和消费者获取数据，都是共用同一个锁对象，由此也意味着两者无法真正并行运行，这点尤其不同于LinkedBlockingQueue；按照实现原理来分析，ArrayBlockingQueue完全可以采用分离锁，从而实现生产者和消费者操作的完全并行运行。Doug Lea之所以没这样去做，也许是因为ArrayBlockingQueue的数据写入和获取操作已经足够轻巧，以至于引入独立的锁机制，除了给代码带来额外的复杂性外，其在性能上完全占不到任何便宜。 ArrayBlockingQueue和LinkedBlockingQueue间还有一个明显的不同之处在于，前者在插入或删除元素时不会产生或销毁任何额外的对象实例，而后者则会生成一个额外的Node对象。这在长时间内需要高效并发地处理大批量数据的系统中，其对于GC的影响还是存在一定的区别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">// 在队尾插入一个元素，如果队列已满，会一直等待，直到队列有空间</span><br><span class="line">public void put(E e) throws InterruptedException &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lockInterruptibly();</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count == items.length)</span><br><span class="line">            notFull.await();</span><br><span class="line">        enqueue(e);</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在队尾插入一个元素，插入成功则返回true；如果队列满无法插入，立刻返回false。</span><br><span class="line">// 这个方法要好于 add(E e)，因为add如果队列满无法插入，会抛出一个异常</span><br><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count == items.length)</span><br><span class="line">            return false;</span><br><span class="line">        else &#123;</span><br><span class="line">            enqueue(e);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在指定的时间内，不断尝试在队尾插入一个元素，成功返回true，失败返回false</span><br><span class="line">public boolean offer(E e, long timeout, TimeUnit unit)</span><br><span class="line">    throws InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    long nanos = unit.toNanos(timeout);</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lockInterruptibly();</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count == items.length) &#123;</span><br><span class="line">            if (nanos &lt;= 0)</span><br><span class="line">                return false;</span><br><span class="line">            nanos = notFull.awaitNanos(nanos);</span><br><span class="line">        &#125;</span><br><span class="line">        enqueue(e);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">同理，take() 会返回对头元素，但是如果队列为空，就会一直等待，直到队列不为空；poll() 方法如果有元素，立马返回对头元素，如果队列为空，会立马返回null；poll(long timeout, TimeUnit unit) 会在指定时间内不断尝试获取对头元素</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-DelayQueue"><a href="#2-4-DelayQueue" class="headerlink" title="2.4 DelayQueue"></a>2.4 DelayQueue</h4><p>DelayQueue中的元素只有当其指定的延迟时间到了，才能够从队列中获取到该元素。DelayQueue是一个没有大小限制的队列，因此往队列中插入数据的操作（生产者）永远不会被阻塞，而只有获取数据的操作（消费者）才会被阻塞。</p>
+<p>DelayQueue使用场景较少，但都相当巧妙，常见的例子比如使用一个DelayQueue来管理一个超时未响应的连接队列。</p>
+<h4 id="2-5-PriorityBlockingQueue"><a href="#2-5-PriorityBlockingQueue" class="headerlink" title="2.5 PriorityBlockingQueue"></a>2.5 PriorityBlockingQueue</h4><p>基于优先级的阻塞队列（优先级的判断通过构造函数传入的Compator对象来决定），但需要注意的是PriorityBlockingQueue并不会阻塞数据生产者，而只会在没有可消费的数据时，阻塞数据的消费者。因此使用的时候要特别注意，生产者生产数据的速度绝对不能快于消费者消费数据的速度，否则时间一长，会最终耗尽所有的可用堆内存空间。在实现PriorityBlockingQueue时，内部控制线程同步的锁采用的是公平锁。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+            <a href="/tags/Thread/" rel="tag"><i class="fa fa-tag"></i> Thread</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/20/Parquet/" rel="next" title="Parquet 源码解析">
+                <i class="fa fa-chevron-left"></i> Parquet 源码解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/19/Thread-3/" rel="prev" title="ThreadLocal">
+                ThreadLocal <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mxxt" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/05/06/QlikSense-3/" title="QlikSense插件开发" target="_blank">QlikSense插件开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2019/08/01/Scala-0/" title="Scala学习" target="_blank">Scala学习</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/08/21/HashMap-2/" title="HashMap 中的哈希值计算问题" target="_blank">HashMap 中的哈希值计算问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/20/JS/" title="JavaScript 面试问题" target="_blank">JavaScript 面试问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/19/Thread-4/" title="守护线程和用户线程" target="_blank">守护线程和用户线程</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#同步队列"><span class="nav-text">同步队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-非阻塞队列"><span class="nav-text">1. 非阻塞队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-ConcurrentLinkedQueue"><span class="nav-text">1.1 ConcurrentLinkedQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-ConcurrentHashMap"><span class="nav-text">1.2 ConcurrentHashMap</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-阻塞队列"><span class="nav-text">2. 阻塞队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-SynchronousQueue"><span class="nav-text">2.1 SynchronousQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-LinkedBlockingQueue"><span class="nav-text">2.2 LinkedBlockingQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-ArrayBlockingQueue"><span class="nav-text">2.3 ArrayBlockingQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-DelayQueue"><span class="nav-text">2.4 DelayQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-PriorityBlockingQueue"><span class="nav-text">2.5 PriorityBlockingQueue</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

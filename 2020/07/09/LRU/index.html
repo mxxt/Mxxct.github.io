@@ -42,7 +42,7 @@
 
   
   
-  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -94,29 +94,27 @@
 
 
 
-<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/panda-180-3.jpg?v=5.1.4">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/panda-32.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/panda-16.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/blog/images/panda.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
 
 
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
 
 
+  <meta name="keywords" content="Java,LinkedHashMap,LRU,">
 
 
 
@@ -125,23 +123,29 @@
 
 
 
-<meta name="description" content="君子不器">
-<meta property="og:type" content="website">
-<meta property="og:title" content="猫熊小才天の书院">
-<meta property="og:url" content="http://mxxct.gitee.io/blog/categories/Kafka/index.html">
+
+
+<meta name="description" content="LinkedHashMap 实现LRU缓存参考 LinkedHashMap是HashMap的子类，但是内部还有一个双向链表维护键值对的顺序，每个键值对既位于哈希表中，也位于双向链表中。LinkedHashMap支持两种顺序插入顺序 、 访问顺序 插入顺序：先添加的在前面，后添加的在后面。修改操作不影响顺序访问顺序：所谓访问指的是get/put操作，对一个键执行get/put操作后，其对应的键值对会">
+<meta name="keywords" content="Java,LinkedHashMap,LRU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qlik Sense学习笔记之简介">
+<meta property="og:url" content="https://mxxt.github.io/2020/07/09/LRU/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="君子不器">
+<meta property="og:description" content="LinkedHashMap 实现LRU缓存参考 LinkedHashMap是HashMap的子类，但是内部还有一个双向链表维护键值对的顺序，每个键值对既位于哈希表中，也位于双向链表中。LinkedHashMap支持两种顺序插入顺序 、 访问顺序 插入顺序：先添加的在前面，后添加的在后面。修改操作不影响顺序访问顺序：所谓访问指的是get/put操作，对一个键执行get/put操作后，其对应的键值对会">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190413205151890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZW5tZW5neXVhbkNTRE4=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2020-08-21T09:40:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="猫熊小才天の书院">
-<meta name="twitter:description" content="君子不器">
+<meta name="twitter:title" content="Qlik Sense学习笔记之简介">
+<meta name="twitter:description" content="LinkedHashMap 实现LRU缓存参考 LinkedHashMap是HashMap的子类，但是内部还有一个双向链表维护键值对的顺序，每个键值对既位于哈希表中，也位于双向链表中。LinkedHashMap支持两种顺序插入顺序 、 访问顺序 插入顺序：先添加的在前面，后添加的在后面。修改操作不影响顺序访问顺序：所谓访问指的是get/put操作，对一个键执行get/put操作后，其对应的键值对会">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190413205151890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZW5tZW5neXVhbkNTRE4=,size_16,color_FFFFFF,t_70">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/blog/',
+    root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
@@ -164,13 +168,13 @@
 
 
 
-  <link rel="canonical" href="http://mxxct.gitee.io/blog/categories/Kafka/">
+  <link rel="canonical" href="https://mxxt.github.io/2020/07/09/LRU/">
 
 
 
 
 
-  <title>分类: Kafka | 猫熊小才天の书院</title>
+  <title>Qlik Sense学习笔记之简介 | 猫熊小才天の书院</title>
   
 
 
@@ -191,7 +195,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -200,7 +204,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/blog/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">猫熊小才天の书院</span>
         <span class="logo-line-after"><i></i></span>
@@ -228,7 +232,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/blog/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -238,7 +242,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/blog/tags/" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
@@ -248,7 +252,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/blog/categories/" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
@@ -258,7 +262,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/blog/archives/" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
@@ -317,53 +321,234 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Kafka<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxt.github.io/2020/07/09/LRU/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/blog/2019/08/07/Kafka-1/" itemprop="url">
-              
-                <span itemprop="name">Kafka概念</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Qlik Sense学习笔记之简介</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-07T11:15:00+08:00" content="2019-08-07">
-          08-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-09T13:52:00+08:00">
+                2020-07-09
+              </time>
+            
 
-    </header>
-  </article>
+            
+			
+			
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/LinkedHashMap/" itemprop="url" rel="index">
+                    <span itemprop="name">LinkedHashMap</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/07/09/LRU/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/09/LRU/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/07/09/LRU/" class="leancloud_visitors" data-flag-title="Qlik Sense学习笔记之简介">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="LinkedHashMap-实现LRU缓存"><a href="#LinkedHashMap-实现LRU缓存" class="headerlink" title="LinkedHashMap 实现LRU缓存"></a>LinkedHashMap 实现LRU缓存</h2><p><a href="https://www.cnblogs.com/lzrabbit/p/3734850.html#f1" target="_blank" rel="noopener">参考</a></p>
+<p>LinkedHashMap是HashMap的子类，但是内部还有一个双向链表维护键值对的顺序，每个键值对既位于哈希表中，也位于双向链表中。LinkedHashMap支持两种顺序插入顺序 、 访问顺序</p>
+<p>插入顺序：先添加的在前面，后添加的在后面。修改操作不影响顺序<br>访问顺序：所谓访问指的是get/put操作，对一个键执行get/put操作后，其对应的键值对会移动到链表末尾，<strong>所以最末尾的是最近访问的，最开始的是最久没有被访问的</strong>，这就是访问顺序。</p>
+<p><code>public LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder)</code> 其中参数accessOrder就是用来指定是否按访问顺序，如果为true，就是访问顺序。</p>
+<p>LRU(Least Recently Used): 最近最少使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class LRUCache&lt;K, V&gt; extends LinkedHashMap&lt;K, V&gt; &#123;</span><br><span class="line"></span><br><span class="line">    private int maxEntries;</span><br><span class="line"></span><br><span class="line">    public LRUCache(int maxEntries) &#123;</span><br><span class="line">        super(16, 0.75f, true);</span><br><span class="line">        this.maxEntries = maxEntries;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) &#123;</span><br><span class="line">        return size() &gt; maxEntries;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在LinkedHashMap添加元素后，会调用removeEldestEntry防范，传递的参数时最久没有被访问的键值对，如果方法返回true，这个最久的键值对就会被删除。LinkedHashMap中的实现总返回false，该子类重写后即可实现对容量的控制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LRUCache&lt;String,Object&gt; cache = new LRUCache&lt;&gt;(3);</span><br><span class="line">cache.put(&quot;a&quot;,&quot;abstract&quot;);</span><br><span class="line">cache.put(&quot;b&quot;,&quot;basic&quot;);</span><br><span class="line">cache.put(&quot;c&quot;,&quot;call&quot;);</span><br><span class="line">cache.get(&quot;a&quot;);</span><br><span class="line">cache.put(&quot;d&quot;,&quot;滴滴滴&quot;);</span><br><span class="line">System.out.println(cache); // 输出为：&#123;c=call, a=abstract, d=滴滴滴&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相比HashMap，LinkedHashMap还实现了三个方法，当且仅当 accessOrder=True 时会被调用到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void afterNodeAccess(Node&lt;K,V&gt; p) &#123; &#125;  //访问节点之后调用的方法</span><br><span class="line">void afterNodeInsertion(boolean evict) &#123; &#125; //插入节点之后调用的方法</span><br><span class="line">void afterNodeRemoval(Node&lt;K,V&gt; p) &#123; &#125;  //删除节点之后调用的方法</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">在get()方法中调用afterNodeAccess()方法，具体作用是：在对节点进行访问之后，会更新链表，将节点移动到链表的尾部，表示最近被访问过。</span><br><span class="line">void afterNodeAccess(Node&lt;K,V&gt; e) &#123; // move node to last</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; last;</span><br><span class="line">    if (accessOrder &amp;&amp; (last = tail) != e) &#123;</span><br><span class="line">        LinkedHashMap.Entry&lt;K,V&gt; p =</span><br><span class="line">            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;</span><br><span class="line">        p.after = null;</span><br><span class="line">        if (b == null)</span><br><span class="line">            head = a;</span><br><span class="line">        else</span><br><span class="line">            b.after = a;</span><br><span class="line">        if (a != null)</span><br><span class="line">            a.before = b;</span><br><span class="line">        else</span><br><span class="line">            last = b;</span><br><span class="line">        if (last == null)</span><br><span class="line">            head = p;</span><br><span class="line">        else &#123;</span><br><span class="line">            p.before = last;</span><br><span class="line">            last.after = p;</span><br><span class="line">        &#125;</span><br><span class="line">        tail = p;</span><br><span class="line">        ++modCount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LinkedHashMap的put()是调用的父类HashMap的put()方法</span><br><span class="line">这个方法是在HashMap中的put()方法中被调用，在LinkedHashMap中被实现，具体作用是：在插入新节点后，因为缓存不够，需要删除最近最少使用的节点。要成功调用这个方法，还需要用户覆写 removeEldestEntry(first) 方法</span><br><span class="line">void afterNodeInsertion(boolean evict) &#123; // possibly remove eldest</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; first;</span><br><span class="line">    if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(first)) &#123;</span><br><span class="line">        K key = first.key;</span><br><span class="line">        removeNode(hash(key), key, null, false, true);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">当LinkedHashMap成功调用removeNode()方法，删除节点之后，会调用本方法</span><br><span class="line">具体作用是：在removeNode方法中，只是删除了HashMap中的节点，并没有在链表中删除。所以在removeNode中，回调了这个方法，将该节点从链表中删除（这里是删除的头结点，因为头结点是最早进入或者最近最久未使用的）。</span><br><span class="line">void afterNodeRemoval(Node&lt;K,V&gt; e) &#123; // unlink</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; p =</span><br><span class="line">        (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;</span><br><span class="line">    p.before = p.after = null;</span><br><span class="line">    if (b == null)</span><br><span class="line">        head = a;</span><br><span class="line">    else</span><br><span class="line">        b.after = a;</span><br><span class="line">    if (a == null)</span><br><span class="line">        tail = b;</span><br><span class="line">    else</span><br><span class="line">        a.before = b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190413205151890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZW5tZW5neXVhbkNTRE4=,size_16,color_FFFFFF,t_70" alt="左HashMap右LinkedHashMap"></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+            <a href="/tags/LinkedHashMap/" rel="tag"><i class="fa fa-tag"></i> LinkedHashMap</a>
+          
+            <a href="/tags/LRU/" rel="tag"><i class="fa fa-tag"></i> LRU</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/08/Hive-5/" rel="next" title="Hive源码解析">
+                <i class="fa fa-chevron-left"></i> Hive源码解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/20/Thread-1/" rel="prev" title="多线程">
+                多线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -371,6 +556,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -393,12 +585,21 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/blog/images/panda-180.png" alt="Mxxct">
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
             
               <p class="site-author-name" itemprop="name">Mxxct</p>
               <p class="site-description motion-element" itemprop="description">君子不器</p>
@@ -409,9 +610,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/blog/archives/">
+                <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -421,8 +622,8 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">35</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -432,8 +633,8 @@
               
               
               <div class="site-state-item site-state-tags">
-                <a href="/blog/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -496,15 +697,15 @@
         
         
           <li>
-            <a href="/blog/2020/04/01/Algorithm-8/" title="布隆过滤器 Bloom Filter 2" target="_blank">布隆过滤器 Bloom Filter 2</a>
+            <a href="/2020/08/21/HashMap-2/" title="HashMap 中的哈希值计算问题" target="_blank">HashMap 中的哈希值计算问题</a>
           </li>
         
           <li>
-            <a href="/blog/2020/04/01/Python-4/" title="常见的Python运行时错误" target="_blank">常见的Python运行时错误</a>
+            <a href="/2020/08/20/JS/" title="JavaScript 面试问题" target="_blank">JavaScript 面试问题</a>
           </li>
         
           <li>
-            <a href="/blog/2020/03/14/Docker-4/" title="Docker启动Mysql镜像" target="_blank">Docker启动Mysql镜像</a>
+            <a href="/2020/08/19/Thread-4/" title="守护线程和用户线程" target="_blank">守护线程和用户线程</a>
           </li>
         
       </ul>
@@ -516,6 +717,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap-实现LRU缓存"><span class="nav-text">LinkedHashMap 实现LRU缓存</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -614,60 +831,64 @@
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -739,7 +960,7 @@
     } else if (/json$/i.test(search_path)) {
       isXml = false;
     }
-    var path = "/blog/" + search_path;
+    var path = "/" + search_path;
     // monitor main search box;
 
     var onPopupClose = function (e) {

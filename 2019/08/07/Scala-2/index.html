@@ -42,7 +42,7 @@
 
   
   
-  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -94,21 +94,21 @@
 
 
 
-<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/panda-180-3.jpg?v=5.1.4">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/panda-32.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/panda-16.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/blog/images/panda.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
 
 
 
@@ -129,7 +129,7 @@
 <meta name="keywords" content="Spark,Scala">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scala编程 笔记">
-<meta property="og:url" content="http://mxxct.gitee.io/blog/2019/08/07/Scala-2/index.html">
+<meta property="og:url" content="https://mxxt.github.io/2019/08/07/Scala-2/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Scala编程 笔记1. makeRDD 和 parallelize 生成 RDD123456789def parallelize[T: ClassTag](      seq: Seq[T],      numSlices: Int = defaultParallelism): RDD[T] def makeRDD[T: ClassTag](      seq: Seq[T],      num">
 <meta property="og:locale" content="zh-Hans">
@@ -145,7 +145,7 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/blog/',
+    root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
@@ -168,7 +168,7 @@
 
 
 
-  <link rel="canonical" href="http://mxxct.gitee.io/blog/2019/08/07/Scala-2/">
+  <link rel="canonical" href="https://mxxt.github.io/2019/08/07/Scala-2/">
 
 
 
@@ -204,7 +204,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/blog/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">猫熊小才天の书院</span>
         <span class="logo-line-after"><i></i></span>
@@ -232,7 +232,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/blog/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -242,7 +242,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/blog/tags/" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
@@ -252,7 +252,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/blog/categories/" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
@@ -262,7 +262,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/blog/archives/" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
@@ -335,12 +335,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://mxxct.gitee.io/blog/blog/2019/08/07/Scala-2/">
+    <link itemprop="mainEntityOfPage" href="https://mxxt.github.io/2019/08/07/Scala-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mxxct">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/blog/images/panda-180.png">
+      <meta itemprop="image" content="/images/panda-180.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -391,7 +391,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Scala/" itemprop="url" rel="index">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
                     <span itemprop="name">Scala</span>
                   </a>
                 </span>
@@ -409,8 +409,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2019/08/07/Scala-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/blog/2019/08/07/Scala-2/" itemprop="commentCount"></span>
+                <a href="/2019/08/07/Scala-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/07/Scala-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -418,7 +418,7 @@
 
           
           
-             <span id="/blog/2019/08/07/Scala-2/" class="leancloud_visitors" data-flag-title="Scala编程 笔记">
+             <span id="/2019/08/07/Scala-2/" class="leancloud_visitors" data-flag-title="Scala编程 笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -496,11 +496,14 @@
 <li>可变：修改集合本身</li>
 <li>不可变：创建并返回一个新的集合</li>
 </ol>
-<h3 id="7-reduceLeft"><a href="#7-reduceLeft" class="headerlink" title="7. reduceLeft"></a>7. reduceLeft</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val longestLine = lines.reduceLeft(</span><br><span class="line">      (a, b) =&gt; if(a.length &gt; b.length) a else b</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="7-reduceLeft-和-reduceRight"><a href="#7-reduceLeft-和-reduceRight" class="headerlink" title="7. reduceLeft 和 reduceRight"></a>7. reduceLeft 和 reduceRight</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val longestLine = lines.reduceLeft(</span><br><span class="line">      (a, b) =&gt; if(a.length &gt; b.length) a else b</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <p>reduceLeft 会把自动把第一个、第二个的比较结果保存，再和第三个进行比较，以此类推，最后返回一个值。</p>
 <p>eg：求和 求最大值等</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array.reduceLeft(_ + _)</span><br><span class="line">array.reduceLeft(_ max _)</span><br></pre></td></tr></table></figure>
+
+<p>reduceRight 会从尾部开始拿两个数据进行计算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">val list = List(1,2,3,4,5)</span><br><span class="line">list.reduce(_ - _) // -13</span><br><span class="line">list.reduceLeft(_ - _) // -13</span><br><span class="line">list.reduceRight(_ - _) // 3 先计算 4-5，然后是 3-(4-5) ...</span><br></pre></td></tr></table></figure>
 
 <h3 id="8-Scala自带的特质：-Application"><a href="#8-Scala自带的特质：-Application" class="headerlink" title="8. Scala自带的特质： Application"></a>8. Scala自带的特质： Application</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">object test extends Application &#123;</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -956,9 +959,9 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/Spark/" rel="tag"><i class="fa fa-tag"></i> Spark</a>
+            <a href="/tags/Spark/" rel="tag"><i class="fa fa-tag"></i> Spark</a>
           
-            <a href="/blog/tags/Scala/" rel="tag"><i class="fa fa-tag"></i> Scala</a>
+            <a href="/tags/Scala/" rel="tag"><i class="fa fa-tag"></i> Scala</a>
           
         </div>
       
@@ -971,7 +974,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/08/01/Scala-1/" rel="next" title="Scala 特殊符号含义">
+              <a href="/2019/08/01/Scala-1/" rel="next" title="Scala 特殊符号含义">
                 <i class="fa fa-chevron-left"></i> Scala 特殊符号含义
               </a>
             
@@ -981,7 +984,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2019/08/07/Kafka-1/" rel="prev" title="Kafka概念">
+              <a href="/2019/08/07/Kafka-1/" rel="prev" title="Kafka概念">
                 Kafka概念 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1054,7 +1057,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/blog/images/panda-180.png" alt="Mxxct">
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
             
               <p class="site-author-name" itemprop="name">Mxxct</p>
               <p class="site-description motion-element" itemprop="description">君子不器</p>
@@ -1065,9 +1068,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/blog/archives/">
+                <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1077,8 +1080,8 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">35</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1088,8 +1091,8 @@
               
               
               <div class="site-state-item site-state-tags">
-                <a href="/blog/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1152,15 +1155,15 @@
         
         
           <li>
-            <a href="/blog/2020/04/01/Algorithm-8/" title="布隆过滤器 Bloom Filter 2" target="_blank">布隆过滤器 Bloom Filter 2</a>
+            <a href="/2020/08/21/HashMap-2/" title="HashMap 中的哈希值计算问题" target="_blank">HashMap 中的哈希值计算问题</a>
           </li>
         
           <li>
-            <a href="/blog/2020/04/01/Python-4/" title="常见的Python运行时错误" target="_blank">常见的Python运行时错误</a>
+            <a href="/2020/08/20/JS/" title="JavaScript 面试问题" target="_blank">JavaScript 面试问题</a>
           </li>
         
           <li>
-            <a href="/blog/2020/03/14/Docker-4/" title="Docker启动Mysql镜像" target="_blank">Docker启动Mysql镜像</a>
+            <a href="/2020/08/19/Thread-4/" title="守护线程和用户线程" target="_blank">守护线程和用户线程</a>
           </li>
         
       </ul>
@@ -1182,7 +1185,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala编程-笔记"><span class="nav-text">Scala编程 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-makeRDD-和-parallelize-生成-RDD"><span class="nav-text">1. makeRDD 和 parallelize 生成 RDD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-yield"><span class="nav-text">2. yield</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-函数和方法"><span class="nav-text">3.函数和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-List-的一些方法"><span class="nav-text">4. List 的一些方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Map-的初始化"><span class="nav-text">5. Map 的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Set-和-Map"><span class="nav-text">6. Set 和 Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-reduceLeft"><span class="nav-text">7. reduceLeft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Scala自带的特质：-Application"><span class="nav-text">8. Scala自带的特质： Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-富包装器"><span class="nav-text">9. 富包装器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-先决条件：precondition"><span class="nav-text">10. 先决条件：precondition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-从构造器-auxiliary-constructor"><span class="nav-text">11. 从构造器 auxiliary constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-最大公约数-greatest-common-divisor"><span class="nav-text">12. 最大公约数 greatest common divisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-闭包"><span class="nav-text">13. 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-for-循环"><span class="nav-text">14. for 循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#14-1-简单的循环"><span class="nav-text">14.1 简单的循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-2-在-for-循环中添加过滤器"><span class="nav-text">14.2 在 for 循环中添加过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-3-嵌套枚举"><span class="nav-text">14.3 嵌套枚举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-4-创建新集合"><span class="nav-text">14.4 创建新集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-模式匹配"><span class="nav-text">15. 模式匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-match-表达式"><span class="nav-text">15.1 match 表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-更多详情见32"><span class="nav-text">15.2 更多详情见32</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-重复参数"><span class="nav-text">16. 重复参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-尾递归"><span class="nav-text">17. 尾递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-exists"><span class="nav-text">18. exists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-Curry-柯里化"><span class="nav-text">19. Curry 柯里化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-大括号和小括号"><span class="nav-text">20. 大括号和小括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-编写新的控制结构"><span class="nav-text">21. 编写新的控制结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-叫名参数-by-name-parameter"><span class="nav-text">22. 叫名参数 by-name parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Scala的类层级"><span class="nav-text">23. Scala的类层级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-特质：trait"><span class="nav-text">24. 特质：trait</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-Ordered-特质"><span class="nav-text">25. Ordered 特质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-可改动堆叠"><span class="nav-text">26. 可改动堆叠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-特质的用和不用"><span class="nav-text">27. 特质的用和不用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-访问包中对象"><span class="nav-text">28. 访问包中对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-隐式引用"><span class="nav-text">29. 隐式引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-访问修饰符"><span class="nav-text">30. 访问修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#30-1-私有成员"><span class="nav-text">30.1 私有成员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-2-保护成员"><span class="nav-text">30.2 保护成员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-3-保护的作用域"><span class="nav-text">30.3 保护的作用域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-几种单元测试的失败报告"><span class="nav-text">31. 几种单元测试的失败报告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-样本类与模式匹配"><span class="nav-text">32. 样本类与模式匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#32-1-样本类"><span class="nav-text">32.1 样本类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-2-模式匹配的种类"><span class="nav-text">32.2 模式匹配的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-1-通配模式"><span class="nav-text">32.2.1 通配模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-2-常量模式"><span class="nav-text">32.2.2 常量模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-3-变量模式"><span class="nav-text">32.2.3 变量模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-4-构造器模式"><span class="nav-text">32.2.4 构造器模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-5-序列模式"><span class="nav-text">32.2.5 序列模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-6-元组模式"><span class="nav-text">32.2.6 元组模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-7-类型模式"><span class="nav-text">32.2.7 类型模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-8-类型擦除规则"><span class="nav-text">32.2.8 类型擦除规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-9-变量绑定"><span class="nav-text">32.2.9 变量绑定</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-3-模式守卫"><span class="nav-text">32.3 模式守卫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-4-模式重叠与封闭类"><span class="nav-text">32.4 模式重叠与封闭类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-5-Option-类型"><span class="nav-text">32.5 Option 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-6-模式匹配的一些其他例子"><span class="nav-text">32.6 模式匹配的一些其他例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-List-列表"><span class="nav-text">33. List 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-集合类型"><span class="nav-text">34. 集合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#34-1-序列"><span class="nav-text">34.1 序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#34-4-元组"><span class="nav-text">34.4 元组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#？？-使用高性能算子"><span class="nav-text">？？ 使用高性能算子</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala编程-笔记"><span class="nav-text">Scala编程 笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-makeRDD-和-parallelize-生成-RDD"><span class="nav-text">1. makeRDD 和 parallelize 生成 RDD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-yield"><span class="nav-text">2. yield</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-函数和方法"><span class="nav-text">3.函数和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-List-的一些方法"><span class="nav-text">4. List 的一些方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Map-的初始化"><span class="nav-text">5. Map 的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Set-和-Map"><span class="nav-text">6. Set 和 Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-reduceLeft-和-reduceRight"><span class="nav-text">7. reduceLeft 和 reduceRight</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Scala自带的特质：-Application"><span class="nav-text">8. Scala自带的特质： Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-富包装器"><span class="nav-text">9. 富包装器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-先决条件：precondition"><span class="nav-text">10. 先决条件：precondition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-从构造器-auxiliary-constructor"><span class="nav-text">11. 从构造器 auxiliary constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-最大公约数-greatest-common-divisor"><span class="nav-text">12. 最大公约数 greatest common divisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-闭包"><span class="nav-text">13. 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-for-循环"><span class="nav-text">14. for 循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#14-1-简单的循环"><span class="nav-text">14.1 简单的循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-2-在-for-循环中添加过滤器"><span class="nav-text">14.2 在 for 循环中添加过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-3-嵌套枚举"><span class="nav-text">14.3 嵌套枚举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-4-创建新集合"><span class="nav-text">14.4 创建新集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-模式匹配"><span class="nav-text">15. 模式匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-match-表达式"><span class="nav-text">15.1 match 表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-更多详情见32"><span class="nav-text">15.2 更多详情见32</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-重复参数"><span class="nav-text">16. 重复参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-尾递归"><span class="nav-text">17. 尾递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-exists"><span class="nav-text">18. exists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-Curry-柯里化"><span class="nav-text">19. Curry 柯里化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-大括号和小括号"><span class="nav-text">20. 大括号和小括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-编写新的控制结构"><span class="nav-text">21. 编写新的控制结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-叫名参数-by-name-parameter"><span class="nav-text">22. 叫名参数 by-name parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Scala的类层级"><span class="nav-text">23. Scala的类层级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-特质：trait"><span class="nav-text">24. 特质：trait</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-Ordered-特质"><span class="nav-text">25. Ordered 特质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-可改动堆叠"><span class="nav-text">26. 可改动堆叠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-特质的用和不用"><span class="nav-text">27. 特质的用和不用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-访问包中对象"><span class="nav-text">28. 访问包中对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-隐式引用"><span class="nav-text">29. 隐式引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-访问修饰符"><span class="nav-text">30. 访问修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#30-1-私有成员"><span class="nav-text">30.1 私有成员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-2-保护成员"><span class="nav-text">30.2 保护成员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-3-保护的作用域"><span class="nav-text">30.3 保护的作用域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-几种单元测试的失败报告"><span class="nav-text">31. 几种单元测试的失败报告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-样本类与模式匹配"><span class="nav-text">32. 样本类与模式匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#32-1-样本类"><span class="nav-text">32.1 样本类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-2-模式匹配的种类"><span class="nav-text">32.2 模式匹配的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-1-通配模式"><span class="nav-text">32.2.1 通配模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-2-常量模式"><span class="nav-text">32.2.2 常量模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-3-变量模式"><span class="nav-text">32.2.3 变量模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-4-构造器模式"><span class="nav-text">32.2.4 构造器模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-5-序列模式"><span class="nav-text">32.2.5 序列模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-6-元组模式"><span class="nav-text">32.2.6 元组模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-7-类型模式"><span class="nav-text">32.2.7 类型模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-8-类型擦除规则"><span class="nav-text">32.2.8 类型擦除规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-2-9-变量绑定"><span class="nav-text">32.2.9 变量绑定</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-3-模式守卫"><span class="nav-text">32.3 模式守卫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-4-模式重叠与封闭类"><span class="nav-text">32.4 模式重叠与封闭类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-5-Option-类型"><span class="nav-text">32.5 Option 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-6-模式匹配的一些其他例子"><span class="nav-text">32.6 模式匹配的一些其他例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-List-列表"><span class="nav-text">33. List 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-集合类型"><span class="nav-text">34. 集合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#34-1-序列"><span class="nav-text">34.1 序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#34-4-元组"><span class="nav-text">34.4 元组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#？？-使用高性能算子"><span class="nav-text">？？ 使用高性能算子</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1286,64 +1289,64 @@
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
-
-
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
-
 
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -1415,7 +1418,7 @@
     } else if (/json$/i.test(search_path)) {
       isXml = false;
     }
-    var path = "/blog/" + search_path;
+    var path = "/" + search_path;
     // monitor main search box;
 
     var onPopupClose = function (e) {
