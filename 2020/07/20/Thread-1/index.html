@@ -494,13 +494,24 @@
 <h3 id="3-线程安全和线程同步"><a href="#3-线程安全和线程同步" class="headerlink" title="3. 线程安全和线程同步"></a>3. 线程安全和线程同步</h3><p>为了提高资源利用效率 -&gt; 多线程会对同一个资源同时进行操作（线程异步）-&gt; 这样的线程在运行时是不安全的，所以引入同步 —&gt; 当线程A对某一个资源进行操作时，其他线程必须等待。</p>
 <p>多线程访问一个类，如果不用考虑这些线程在运行时环境下的调度和交替执行，并且不需要额外的同步，这个类的行为仍然是正确的，那么称这个类是线程安全的。</p>
 <p>线程同步的实现条件：队列(线程排队来获取一个对象进行操作)+锁(每一个对象都有一个锁)</p>
-<h4 id="3-1-synchronized"><a href="#3-1-synchronized" class="headerlink" title="3.1 synchronized"></a>3.1 synchronized</h4><p><a href="https://www.cnblogs.com/codebj/p/10994748.html" target="_blank" rel="noopener">关于锁的用法1</a><br><a href="https://www.cnblogs.com/paddix/p/5367116.html" target="_blank" rel="noopener">关于锁的用法2</a></p>
+<h4 id="3-1-synchronized"><a href="#3-1-synchronized" class="headerlink" title="3.1 synchronized"></a>3.1 synchronized</h4><p><a href="https://www.cnblogs.com/codebj/p/10994748.html" target="_blank" rel="noopener">关于锁的用法1</a><br><a href="https://www.cnblogs.com/paddix/p/5367116.html" target="_blank" rel="noopener">关于锁的用法2</a><br><a href="https://blog.csdn.net/gentlezuo/article/details/91410716" target="_blank" rel="noopener">synchronized和对象头</a></p>
 <blockquote>
 <p>方法锁、类锁，能确保同步的前提是，锁的那部分代码指向的应该是内存中的同一个地址</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">synchronized(需要加锁的共享变量)&#123;</span><br><span class="line">    // 同步代码块</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public synchronized void xxx()&#123;</span><br><span class="line">    // 同步方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>所以某一个线程进入synchronized代码块前后，执行过程入如下：<br>a.线程获得互斥锁<br>b.清空工作内存<br>c.从主内存拷贝共享变量最新的值到工作内存成为副本<br>d.执行代码<br>e.将修改后的副本的值刷新回主内存中<br>f.线程释放锁<br>随后，其他代码在进入synchronized代码块的时候，所读取到的工作内存上共享变量的值都是上一个线程修改后的最新值。</p>
+<p>synchronized 的实现依赖于对象头。对象在内存中存储的布局可以分为三块区域：</p>
+<ul>
+<li>对象头（Header）<ul>
+<li>第一部分是类型指针，用于表示是哪一个类的对象</li>
+<li>第二部分存储了关于对象运行时的数据，比如GC年龄，hashcode，锁状态标志等，这一部分也被称为Mark Word。</li>
+</ul>
+</li>
+<li>实例数据（Instance Data）</li>
+<li>对齐填充（Padding）</li>
+</ul>
+<p>一个对象可以是无锁状态，偏向锁状态（当前线程检查对象头没有存储其他线程，那么当前线程用CAS替换Mark Word，将对象头中的Mark Word指向当前线程自己），轻量级锁（对象头中存储了其他线程，当前线程自旋来获取锁），重量级锁（如果当前线程一直自旋却始终无法获取锁，那么锁会膨胀到重量级锁）</p>
 <h4 id="3-2-volatile"><a href="#3-2-volatile" class="headerlink" title="3.2 volatile"></a>3.2 volatile</h4><p>当一个变量定义为 volatile 之后，它将具备两种特性：</p>
 <ul>
 <li>保证此变量对所有线程的可见性<br>  volatile变量每次被线程访问时，都强迫线程从主内存中重读该变量的最新值，而当该变量发生修改变化时，也会强迫线程将最新的值刷新回主内存中。这样一来，不同的线程都能及时的看到该变量的最新值。</li>
@@ -686,7 +697,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -697,7 +708,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -708,7 +719,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -775,15 +786,15 @@
         
         
           <li>
-            <a href="/2020/08/21/HashMap-2/" title="HashMap 中的哈希值计算问题" target="_blank">HashMap 中的哈希值计算问题</a>
+            <a href="/2020/09/21/Function-1/" title="java.util.function 包" target="_blank">java.util.function 包</a>
           </li>
         
           <li>
-            <a href="/2020/08/20/JS/" title="JavaScript 面试问题" target="_blank">JavaScript 面试问题</a>
+            <a href="/2020/09/18/Redis-1/" title="Redis" target="_blank">Redis</a>
           </li>
         
           <li>
-            <a href="/2020/08/19/Thread-4/" title="守护线程和用户线程" target="_blank">守护线程和用户线程</a>
+            <a href="/2020/09/10/Phoenix-2/" title="Phoenix索引" target="_blank">Phoenix索引</a>
           </li>
         
       </ul>

@@ -474,6 +474,7 @@
 <p>虽然丢失了高区特征，不同hashcode也可以计算出不同的槽位来，但是如果两个hashcode很接近时，高区的特征差异可能会导致一次哈希碰撞。</p>
 <h3 id="2-使用异或运算的原因"><a href="#2-使用异或运算的原因" class="headerlink" title="2. 使用异或运算的原因"></a>2. 使用异或运算的原因</h3><p>异或运算能更好的保留各部分的特征，如果采用 &amp; 运算计算出来的值会向0靠拢，采用 | 运算计算出来的值会向1靠拢</p>
 <h3 id="3-为什么槽位数必须使用2-n-为什么要-amp-length-1"><a href="#3-为什么槽位数必须使用2-n-为什么要-amp-length-1" class="headerlink" title="3. 为什么槽位数必须使用2^n / 为什么要 &amp;length-1"></a>3. 为什么槽位数必须使用2^n / 为什么要 &amp;length-1</h3><p>为了让哈希后的结果更加均匀，减少hash碰撞</p>
+<h3 id="4-扩容后Hash值计算"><a href="#4-扩容后Hash值计算" class="headerlink" title="4. 扩容后Hash值计算"></a>4. 扩容后Hash值计算</h3><p>length * 2，即新增的bit位是1，在 (n - 1) &amp; hash 时，只需要判断新增加的这一个bit位，如果是0的话，说明索引不变，如果变成1了，索引变成 原索引+扩容前的容量大小</p>
 
       
     </div>
@@ -515,6 +516,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/03/OOP-1/" rel="prev" title="面向对象编程一些理解">
+                面向对象编程一些理解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -598,7 +603,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -609,7 +614,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -620,7 +625,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -687,15 +692,15 @@
         
         
           <li>
-            <a href="/2020/08/21/HashMap-2/" title="HashMap 中的哈希值计算问题" target="_blank">HashMap 中的哈希值计算问题</a>
+            <a href="/2020/09/21/Function-1/" title="java.util.function 包" target="_blank">java.util.function 包</a>
           </li>
         
           <li>
-            <a href="/2020/08/20/JS/" title="JavaScript 面试问题" target="_blank">JavaScript 面试问题</a>
+            <a href="/2020/09/18/Redis-1/" title="Redis" target="_blank">Redis</a>
           </li>
         
           <li>
-            <a href="/2020/08/19/Thread-4/" title="守护线程和用户线程" target="_blank">守护线程和用户线程</a>
+            <a href="/2020/09/10/Phoenix-2/" title="Phoenix索引" target="_blank">Phoenix索引</a>
           </li>
         
       </ul>
@@ -717,7 +722,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-中的哈希值计算问题"><span class="nav-text">HashMap 中的哈希值计算问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-hash-计算"><span class="nav-text">1. hash 计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用异或运算的原因"><span class="nav-text">2. 使用异或运算的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-为什么槽位数必须使用2-n-为什么要-amp-length-1"><span class="nav-text">3. 为什么槽位数必须使用2^n / 为什么要 &amp;length-1</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-中的哈希值计算问题"><span class="nav-text">HashMap 中的哈希值计算问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-hash-计算"><span class="nav-text">1. hash 计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用异或运算的原因"><span class="nav-text">2. 使用异或运算的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-为什么槽位数必须使用2-n-为什么要-amp-length-1"><span class="nav-text">3. 为什么槽位数必须使用2^n / 为什么要 &amp;length-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-扩容后Hash值计算"><span class="nav-text">4. 扩容后Hash值计算</span></a></li></ol></li></ol></div>
             
 
           </div>
