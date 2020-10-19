@@ -476,7 +476,7 @@
 </ul>
 <p>创建索引的时候有可能因为表的数据量过大，导致索引表的数据量过大，导致发生超时异常，创建出来的索引表不完整，此时可以通过异步索引创建来解决 – 在创建索引的语句最后添加一个 async，执行语句会直接返回结果，但是索引表状态是处于building。</p>
 <p>每一个put/delete操作执行前，会先写入到主表的 Write Ahead Log (WAL) 中，如果出现HBase服务器宕机，则可以从WAL中回放执行之前没有完成的操作，用来保证高并发、持久化的日志保存与回放机制。因为索引表的更新可能会落后于主表一小部分。</p>
-<p><a href="https://images2015.cnblogs.com/blog/668023/201608/668023-20160825165419007-57626050.png" target="_blank" rel="noopener">HBase WAL架构</a></p>
+<p><a href="https://images.weserv.nl/?url=https://images2015.cnblogs.com/blog/668023/201608/668023-20160825165419007-57626050.png" target="_blank" rel="noopener">HBase WAL架构</a></p>
 <p>WAL日志文件使用的是Hadoop Sequence文件格式，其主要特点：</p>
 <ol>
 <li>二进制格式。row key, family, qualifier, timestamp, value等HBase byte[]数据，都原封不动地顺序写入文件。</li>

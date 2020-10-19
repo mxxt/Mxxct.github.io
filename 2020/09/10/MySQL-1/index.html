@@ -133,15 +133,15 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="MySQL索引参考文档 1. 多页结构OS存储数据按页来存储，一页是4KB，读取数据也是一次读一页，原因是程序局部性的概念，大意是“一个程序在访问了一条数据之后，在之后会有极大的可能再次访问这条数据和访问这条数据的相邻数据”。 MySQL的InnoDb引擎中，一页是16KB。页内部存储数据是采用了链表的结构，链表的查询很慢，采用的优化措施就是在每一页添加页目录。每个目录项会存放自己这个目录项当中最">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduorm2ASuQc426uLBf1IAeqbMBGrMtDwB55ibicUwfmZdN1GG7icRLgqiaKCMdA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
-<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormFthFItV6J6tnB4hLP4SwIH2aibRlJiaThrEkoAFVejkyyMjJNr9CsrXQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
-<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormSzm8lME2RWyXPmuMyMCficTFbJBelrsibZM2CuBIObo7PicEGFSc7tFOQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
-<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/eQPyBffYbueceu5zyASlL2O8XwIduorm6rweXEicm7ECh5QVAJWf0cbJZUqn5vV3W4qFYhCIibKQHum4NVZMdlng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduorm2ASuQc426uLBf1IAeqbMBGrMtDwB55ibicUwfmZdN1GG7icRLgqiaKCMdA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormFthFItV6J6tnB4hLP4SwIH2aibRlJiaThrEkoAFVejkyyMjJNr9CsrXQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormSzm8lME2RWyXPmuMyMCficTFbJBelrsibZM2CuBIObo7PicEGFSc7tFOQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/eQPyBffYbueceu5zyASlL2O8XwIduorm6rweXEicm7ECh5QVAJWf0cbJZUqn5vV3W4qFYhCIibKQHum4NVZMdlng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:updated_time" content="2020-09-12T01:54:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL索引">
 <meta name="twitter:description" content="MySQL索引参考文档 1. 多页结构OS存储数据按页来存储，一页是4KB，读取数据也是一次读一页，原因是程序局部性的概念，大意是“一个程序在访问了一条数据之后，在之后会有极大的可能再次访问这条数据和访问这条数据的相邻数据”。 MySQL的InnoDb引擎中，一页是16KB。页内部存储数据是采用了链表的结构，链表的查询很慢，采用的优化措施就是在每一页添加页目录。每个目录项会存放自己这个目录项当中最">
-<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduorm2ASuQc426uLBf1IAeqbMBGrMtDwB55ibicUwfmZdN1GG7icRLgqiaKCMdA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduorm2ASuQc426uLBf1IAeqbMBGrMtDwB55ibicUwfmZdN1GG7icRLgqiaKCMdA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
 
 
@@ -458,11 +458,11 @@
 <h3 id="1-多页结构"><a href="#1-多页结构" class="headerlink" title="1. 多页结构"></a>1. 多页结构</h3><p>OS存储数据按页来存储，一页是4KB，读取数据也是一次读一页，原因是程序局部性的概念，大意是“一个程序在访问了一条数据之后，在之后会有极大的可能再次访问这条数据和访问这条数据的相邻数据”。</p>
 <p>MySQL的InnoDb引擎中，一页是16KB。页内部存储数据是采用了链表的结构，链表的查询很慢，采用的优化措施就是在每一页添加页目录。每个目录项会存放自己这个目录项当中最小的id，在查询时先找在哪个目录，然后再逐条查找。而这种方式能成立的原因在于数据库在用户插入数据时会默认按照主键排序，否则按照页目录来查找就会出现问题。</p>
 <p>在开辟新页的时候，我们插入的数据不一定是放在新开辟的页上，而是要进行所有页的数据比较，来决定这条插入的数据放在哪一页上，而完成数据插入之后，最终的多页结构就会如下：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduorm2ASuQc426uLBf1IAeqbMBGrMtDwB55ibicUwfmZdN1GG7icRLgqiaKCMdA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="多页结构"></p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduorm2ASuQc426uLBf1IAeqbMBGrMtDwB55ibicUwfmZdN1GG7icRLgqiaKCMdA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="多页结构"></p>
 <p>页与页之间通过指针关联，也算是链表结构，所以在多页查询时也会出现查询效率低的情况。优化方式和页内部数据的优化一样，即创建一个目录页来管理页，存放的是页的地址以及这一页中最小的数据。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormFthFItV6J6tnB4hLP4SwIH2aibRlJiaThrEkoAFVejkyyMjJNr9CsrXQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="最终版多页结构"></p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormFthFItV6J6tnB4hLP4SwIH2aibRlJiaThrEkoAFVejkyyMjJNr9CsrXQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="最终版多页结构"></p>
 <p>在查询时先在目录页中查询，对比最小地址，找到相应页的地址，然后进入到页中查看这一页的目录，找到数据。这个最终的结构就是B+树。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormSzm8lME2RWyXPmuMyMCficTFbJBelrsibZM2CuBIObo7PicEGFSc7tFOQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="转为B+树结构"></p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbueceu5zyASlL2O8XwIduormSzm8lME2RWyXPmuMyMCficTFbJBelrsibZM2CuBIObo7PicEGFSc7tFOQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="转为B+树结构"></p>
 <p>其中的每个节点就可以理解为是一个页，而叶子节点也就是数据页，除了叶子节点以外的节点就是目录页。</p>
 <p>B+树的优势：</p>
 <ol>
@@ -471,7 +471,7 @@
 <li>B+树有利于数据库的扫描。</li>
 <li>B+树有利于磁盘的IO，因为他的层高基本不会因为数据扩大而增高（三层树结构大概可以存放两千万数据量。）</li>
 </ol>
-<h3 id="2-页的结构"><a href="#2-页的结构" class="headerlink" title="2. 页的结构"></a>2. 页的结构</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/eQPyBffYbueceu5zyASlL2O8XwIduorm6rweXEicm7ECh5QVAJWf0cbJZUqn5vV3W4qFYhCIibKQHum4NVZMdlng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<h3 id="2-页的结构"><a href="#2-页的结构" class="headerlink" title="2. 页的结构"></a>2. 页的结构</h3><p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/eQPyBffYbueceu5zyASlL2O8XwIduorm6rweXEicm7ECh5QVAJWf0cbJZUqn5vV3W4qFYhCIibKQHum4NVZMdlng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
 <p>File Header 字段用于记录 Page 的头信息，其中比较重要的是 FIL_PAGE_PREV 和 FIL_PAGE_NEXT 字段，通过这两个字段，我们可以找到该页的上一页和下一页，实际上所有页通过两个字段可以形成一条双向链表。</p>
 <p>Page Header 字段用于记录 Page 的状态信息。接下来的 Infimum 和 Supremum 是两个伪行记录，Infimum（下确界）记录比该页中任何主键值都要小的值，Supremum （上确界）记录比该页中任何主键值都要大的值，这个伪记录分别构成了页中记录的边界。</p>
 <p>User Records 中存放的是实际的数据行记录，具体的行记录结构将在本文的第二节中详细介绍。Free Space 中存放的是空闲空间，被删除的行记录会被记录成空闲空间。Page Directory 记录着与二叉查找相关的信息。File Trailer 存储用于检测数据完整性的校验和等数据。</p>

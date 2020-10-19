@@ -134,7 +134,7 @@
 <meta property="og:description" content="线程一些问题1. 概述单线程和多线程 表象化的一种理解：线程就是程序执行的路径，单线程就是只有一条路径，多线程就是多条路径 进程：一个程序装载到内存里，分配好资源如网络等等。是分配资源的最基本单位 线程：程序开始运行，将一条条指令放到cpu里执行。是调度执行的最基本单位 CPU：ALU（算术逻辑单元，负责计算） + Registers（寄存器，存储数据） + PC（计数器，记录执行到哪一条指令，记">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://img-blog.csdn.net/20180402191722152?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnUxMjMxMjNmdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9930763-bec61c919d66e2db.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/663/format/webp">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/9930763-bec61c919d66e2db.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/663/format/webp">
 <meta property="og:updated_time" content="2020-09-21T10:15:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程一些问题">
@@ -521,7 +521,7 @@
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">处理器重排</span><br><span class="line">// 初始化</span><br><span class="line">int a = 0;</span><br><span class="line">int b = 0;</span><br><span class="line">int x = 0;</span><br><span class="line">int y = 0;</span><br><span class="line"></span><br><span class="line">// 处理器A执行</span><br><span class="line">a = 1;</span><br><span class="line">x = b;</span><br><span class="line">// 处理器B执行</span><br><span class="line">b = 2;</span><br><span class="line">y = a;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://upload-images.jianshu.io/upload_images/9930763-bec61c919d66e2db.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/663/format/webp" alt="pic2"></p>
+<p><img src="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/9930763-bec61c919d66e2db.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/663/format/webp" alt="pic2"></p>
 <p>变量全部存储在主内存。a=1 这个操作在A处理器本地缓存中处理，此时a变量最新的值没有刷新到主内存中，此时B处理器从主内存中读a的值就会返回0。同理y也可能被赋值为0。</p>
 <p>针对这种情况，处理器提供四种内存屏障 – LoadLoadBarrier、StoreStoreBarrier、LoadStoreBarrier、StoreLoadBarrier。Load是读，Store是写。屏障前的指令必须全部执行完，才能执行屏障后的指令。</p>
 <h3 id="4-对象的创建过程"><a href="#4-对象的创建过程" class="headerlink" title="4. 对象的创建过程"></a>4. 对象的创建过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class T&#123;</span><br><span class="line">    int m = 8;</span><br><span class="line">&#125;</span><br><span class="line">T t = new T();</span><br></pre></td></tr></table></figure>
