@@ -502,6 +502,7 @@
 </li>
 </ul>
 <h4 id="3-2-AOF"><a href="#3-2-AOF" class="headerlink" title="3.2 AOF"></a>3.2 AOF</h4><p>采用AOF持久方式时，Redis会把每一个写请求都记录在一个日志文件里。在Redis重启时，会把AOF文件中记录的所有写操作顺序执行一遍，确保数据恢复到最新。</p>
+<p>缺点：恢复速度慢，因为恢复的时候需要遍历日记文件；对一个key不断进行操作，记录多次，有冗余，针对这一点可以对日志冗余的部分进行合并重写</p>
 <h3 id="4-内存管理"><a href="#4-内存管理" class="headerlink" title="4. 内存管理"></a>4. 内存管理</h3><p>提前预估设置最大内存使用大小，避免无限制占用内存。</p>
 <p>在内存占用达到了maxmemory后，再向Redis写入数据时，Redis会：</p>
 <ul>
@@ -572,8 +573,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/10/Phoenix-2/" rel="next" title="Phoenix索引">
-                <i class="fa fa-chevron-left"></i> Phoenix索引
+              <a href="/2020/09/10/Phoenix-2/" rel="next" title="Phoenix的一些问题">
+                <i class="fa fa-chevron-left"></i> Phoenix的一些问题
               </a>
             
           </div>
@@ -668,7 +669,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -757,15 +758,15 @@
         
         
           <li>
-            <a href="/2020/09/28/Singleton/" title="单例模式" target="_blank">单例模式</a>
+            <a href="/2020/10/15/Redis-4/" title="Redis" target="_blank">Redis</a>
           </li>
         
           <li>
-            <a href="/2020/09/28/Thread-5/" title="线程一些问题" target="_blank">线程一些问题</a>
+            <a href="/2020/10/15/Redis-3/" title="Redis" target="_blank">Redis</a>
           </li>
         
           <li>
-            <a href="/2020/09/24/Redis-2/" title="Mac 搭建 Redis 集群" target="_blank">Mac 搭建 Redis 集群</a>
+            <a href="/2020/10/09/Hive-8/" title="Distcp 跨集群同步" target="_blank">Distcp 跨集群同步</a>
           </li>
         
       </ul>

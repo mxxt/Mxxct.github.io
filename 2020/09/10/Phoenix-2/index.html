@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="Phoenix索引 全局索引：适合读多写少的场景。写数据时因为索引表分布在不同数据节点，跨节点数据传输带来巨大的性能消耗。  全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。123456789create index my_index on my_table (v3);select v1 from my_table where v3 = &amp;apos;13406157616&amp;apos;">
+<meta name="description" content="1. Phoenix索引 全局索引：适合读多写少的场景。写数据时因为索引表分布在不同数据节点，跨节点数据传输带来巨大的性能消耗。  全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。123456789create index my_index on my_table (v3);select v1 from my_table where v3 = &amp;apos;13406157616&amp;ap">
 <meta name="keywords" content="Hadoop,Phoenix">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Phoenix索引">
+<meta property="og:title" content="Phoenix的一些问题">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/09/10/Phoenix-2/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Phoenix索引 全局索引：适合读多写少的场景。写数据时因为索引表分布在不同数据节点，跨节点数据传输带来巨大的性能消耗。  全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。123456789create index my_index on my_table (v3);select v1 from my_table where v3 = &amp;apos;13406157616&amp;apos;">
+<meta property="og:description" content="1. Phoenix索引 全局索引：适合读多写少的场景。写数据时因为索引表分布在不同数据节点，跨节点数据传输带来巨大的性能消耗。  全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。123456789create index my_index on my_table (v3);select v1 from my_table where v3 = &amp;apos;13406157616&amp;ap">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-09-14T08:30:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Phoenix索引">
-<meta name="twitter:description" content="Phoenix索引 全局索引：适合读多写少的场景。写数据时因为索引表分布在不同数据节点，跨节点数据传输带来巨大的性能消耗。  全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。123456789create index my_index on my_table (v3);select v1 from my_table where v3 = &amp;apos;13406157616&amp;apos;">
+<meta name="twitter:title" content="Phoenix的一些问题">
+<meta name="twitter:description" content="1. Phoenix索引 全局索引：适合读多写少的场景。写数据时因为索引表分布在不同数据节点，跨节点数据传输带来巨大的性能消耗。  全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。123456789create index my_index on my_table (v3);select v1 from my_table where v3 = &amp;apos;13406157616&amp;ap">
 
 
 
@@ -172,7 +172,7 @@
 
 
 
-  <title>Phoenix索引 | 猫熊小才天の书院</title>
+  <title>Phoenix的一些问题 | 猫熊小才天の书院</title>
   
 
 
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Phoenix索引</h1>
+          <h1 class="post-title" itemprop="name headline">Phoenix的一些问题</h1>
         
 
         <div class="post-meta">
@@ -427,7 +427,7 @@
 
           
           
-             <span id="/2020/09/10/Phoenix-2/" class="leancloud_visitors" data-flag-title="Phoenix索引">
+             <span id="/2020/09/10/Phoenix-2/" class="leancloud_visitors" data-flag-title="Phoenix的一些问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -460,7 +460,7 @@
       
 
       
-        <h2 id="Phoenix索引"><a href="#Phoenix索引" class="headerlink" title="Phoenix索引"></a>Phoenix索引</h2><ul>
+        <h3 id="1-Phoenix索引"><a href="#1-Phoenix索引" class="headerlink" title="1. Phoenix索引"></a>1. Phoenix索引</h3><ul>
 <li><p>全局索引：适合读多写少的场景。写数据时因为索引表分布在不同数据节点，跨节点数据传输带来巨大的性能消耗。</p>
 <ul>
 <li>全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create index my_index on my_table (v3);</span><br><span class="line">select v1 from my_table where v3 = &apos;13406157616&apos;;</span><br><span class="line">此时不会走索引，因为检索列不在全局索引中，有以下三种方法使它使用索引：</span><br><span class="line">1. 使用覆盖索引</span><br><span class="line">CREATE INDEX cover_index ON my_table(v3) INCLUDE (v1);</span><br><span class="line">2. 使用 Hint 强制索引</span><br><span class="line">SELECT /*+ INDEX(my_table my_index) */ v1 FROM my_table WHERE v3 = &apos;13406157616&apos;;</span><br><span class="line">3. 使用本地索引</span><br><span class="line">CREATE LOCAL INDEX local_index on my_table (v3);</span><br></pre></td></tr></table></figure>
@@ -483,10 +483,22 @@
 <li>Sequence文件中，每隔若干行，会插入一个16字节的魔数作为分隔符。这样如果文件损坏，导致某一行残缺不全，可以通过这个魔数分隔符跳过这一行，继续读取下一个完整的行。</li>
 <li>支持压缩。可以按行压缩。也可以按块压缩（将多行打成一个块）</li>
 </ol>
-<p>select contract_no, comp_code, telephone, telesource, count(1) as a from ecej_calling_center_h group by contract_no, comp_code, telephone, telesource order by a desc limit 10;</p>
-<p>distcp_ecej_calling_center_h<br>{“sourceDB”:”dev_ennenergy_ecej”,”sourceTable”:”ecej_calling_center_h”,”targetDB”:”model_ennenergy_ecej”,”targetTable”:”ecej_calling_center_h”,”impalaJdbcUrl”:”jdbc:hive2://impala2.cluster.enn.cn:21051/;principal=impala/impala2.cluster.enn.cn@ENN.CN;auth=kerberos;”,”type”:”impala”}</p>
-<p>hive2phoenix_ecej_calling_center_h<br>{“hive_db_name”:”model_ennenergy_ecej”,”hive_table_name”:”ecej_calling_center_h”,”primary_key_list”:[“telephone”,”contract_no”,”comp_code”,”telesource”],”phoenix_db_name”:”model_group_rule_account_test”,”phoenix_table_name”:”ecej_calling_center_h”,”sync_mode”:”full”,”phoenix_table_split_on”:””,”refer_maxval_column”:””,”specific_update_columns”:[],”ignore_compare_column”:[“update_time”],”phoenix_table_buckets”:10,”restart_parquet_filename”:””,”phoenix_batch_size”:100,”phoenix_sleep_millisecond”:5}</p>
-<p>select<br>TENANT_ID TABLE_CAT,TABLE_SCHEM,TABLE_NAME ,COLUMN_NAME,KEY_SEQ,PK_NAME,CASE WHEN SORT_ORDER = 1 THEN ‘D’ ELSE ‘A’ END ASC_OR_DESC,ExternalSqlTypeId(DATA_TYPE) AS DATA_TYPE,SqlTypeName(DATA_TYPE) AS TYPE_NAME,COLUMN_SIZE,DATA_TYPE TYPE_ID,VIEW_CONSTANT from SYSTEM.”CATALOG” “SYSTEM.TABLE” where<br>TABLE_SCHEM = ‘MODEL_GROUP_RULE_ACCOUNT_TEST’<br>and TABLE_NAME = ‘ECEJ_CALLING_CENTER_H’<br>and COLUMN_NAME is not null<br>and COLUMN_FAMILY is null<br>order by TENANT_ID,TABLE_SCHEM,TABLE_NAME ,COLUMN_NAME</p>
+<h3 id="2-Phoenix加盐"><a href="#2-Phoenix加盐" class="headerlink" title="2. Phoenix加盐"></a>2. Phoenix加盐</h3><p>加盐的目的是为了让数据分散到不同机器，缓解查询压力</p>
+<p>如果行键即数据，单调增加，那么数据会分布在一个region里，可能会造成热点问题 =&gt; 通过添加 SALT_BUCKETS = Num(0 – 256) 来对行键添加一个字节，使得数据能更均匀分布到各个region中。</p>
+<p>其中0是关闭对数据表添加了盐分的索引的盐析的一种特殊方式（因为默认情况下，索引与其数据表具有相同数量的盐桶）</p>
+<p>由于加盐表不会顺序存储数据，因此严格的顺序扫描不会以自然排序的方式返回所有数据。强制进行顺序扫描的子句（例如带有LIMIT的子句）可能会返回与普通表不同的数据顺序。</p>
+<p>new_row_key = (++index % BUCKETS_NUMBER) + original_key</p>
+<h3 id="3-主键查询"><a href="#3-主键查询" class="headerlink" title="3. 主键查询"></a>3. 主键查询</h3><p>通过关键字 <code>!primarykeys table</code> 或者下面这段查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">TENANT_ID TABLE_CAT,TABLE_SCHEM,TABLE_NAME ,COLUMN_NAME,KEY_SEQ,PK_NAME,CASE WHEN SORT_ORDER = 1 THEN &apos;D&apos; ELSE &apos;A&apos; END ASC_OR_DESC,ExternalSqlTypeId(DATA_TYPE) AS DATA_TYPE,SqlTypeName(DATA_TYPE) AS TYPE_NAME,COLUMN_SIZE,DATA_TYPE TYPE_ID,VIEW_CONSTANT from SYSTEM.&quot;CATALOG&quot; &quot;SYSTEM.TABLE&quot; where</span><br><span class="line">TABLE_SCHEM = &apos;MODEL_GROUP_RULE_ACCOUNT_TEST&apos;</span><br><span class="line">and TABLE_NAME = &apos;ECEJ_CALLING_CENTER_H&apos;</span><br><span class="line">and COLUMN_NAME is not null</span><br><span class="line">and COLUMN_FAMILY is null</span><br><span class="line">order by TENANT_ID,TABLE_SCHEM,TABLE_NAME ,COLUMN_NAME</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-修改字段长度"><a href="#4-修改字段长度" class="headerlink" title="4. 修改字段长度"></a>4. 修改字段长度</h3><p>当创建好phoenix的表后， 默认情况下phoenix不允许修改字段类型和长度。但是可以通过直接修改 SYSTEM.CATALOG 里的数据达到目的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upsert into SYSTEM.CATALOG (TENANT_ID,TABLE_SCHEM,TABLE_NAME,COLUMN_NAME,COLUMN_FAMILY,DATA_TYPE,COLUMN_SIZE) values(&apos;&apos;,&apos;库&apos;,&apos;表&apos;,&apos;字段&apos;,&apos;0&apos;,12,50);</span><br></pre></td></tr></table></figure>
+
+<p>测试发现，即使上面的上SQL执行成功，重新执行 upsert 往表里插入数据，DEBIT_AMOUNT(初始长度6)超过初始长度的还是不能成功</p>
+<p>经过查看源码发现，在 <code>SYSTEM.CATALOG</code> 上有协处理器， 这个里面有表元数据缓存，默认要三个小时过期</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.apache.phoenix.cache.GlobalCache</span><br><span class="line">long maxTTL = this.config.getLong(&quot;phoenix.coprocessor.maxMetaDataCacheTimeToLiveMs&quot;, 1800000L);</span><br><span class="line">          long maxSize = this.config.getLong(&quot;phoenix.coprocessor.maxMetaDataCacheSize&quot;, 20971520L);</span><br></pre></td></tr></table></figure>
+
+<p>猜想修改长度后三小时能生效<br>或者在<code>hbase shell</code> 中 先 <code>disable SYSTEM.CATALOG</code>, 然后在 <code>enable SYSTEM.CATALOG</code></p>
 
       
     </div>
@@ -615,7 +627,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -704,15 +716,15 @@
         
         
           <li>
-            <a href="/2020/09/28/Singleton/" title="单例模式" target="_blank">单例模式</a>
+            <a href="/2020/10/15/Redis-4/" title="Redis" target="_blank">Redis</a>
           </li>
         
           <li>
-            <a href="/2020/09/28/Thread-5/" title="线程一些问题" target="_blank">线程一些问题</a>
+            <a href="/2020/10/15/Redis-3/" title="Redis" target="_blank">Redis</a>
           </li>
         
           <li>
-            <a href="/2020/09/24/Redis-2/" title="Mac 搭建 Redis 集群" target="_blank">Mac 搭建 Redis 集群</a>
+            <a href="/2020/10/09/Hive-8/" title="Distcp 跨集群同步" target="_blank">Distcp 跨集群同步</a>
           </li>
         
       </ul>
@@ -734,7 +746,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Phoenix索引"><span class="nav-text">Phoenix索引</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Phoenix索引"><span class="nav-text">1. Phoenix索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Phoenix加盐"><span class="nav-text">2. Phoenix加盐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-主键查询"><span class="nav-text">3. 主键查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-修改字段长度"><span class="nav-text">4. 修改字段长度</span></a></li></ol></div>
             
 
           </div>

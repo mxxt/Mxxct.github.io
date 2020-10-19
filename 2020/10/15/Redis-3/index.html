@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="m1ei8mEvXD">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Redis的一些问题Remote Dictionary Server 底层C写的 类似于 mysql，可以把最近的query和对应的结果保存下来 =&amp;gt; hashquery 存入到缓存里，如果其他用户的query的hash值是一样的，说明查询是一样的，直接从缓存里读出来结果 =&amp;gt; 多级缓存，目的是将最初的query进行过滤、优化，尽可能只让最后的事务操作落到DB中，缓解DB压力 1. r">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="https://mxxct4git.github.io/2020/10/15/Redis-3/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="Redis的一些问题Remote Dictionary Server 底层C写的 类似于 mysql，可以把最近的query和对应的结果保存下来 =&amp;gt; hashquery 存入到缓存里，如果其他用户的query的hash值是一样的，说明查询是一样的，直接从缓存里读出来结果 =&amp;gt; 多级缓存，目的是将最初的query进行过滤、优化，尽可能只让最后的事务操作落到DB中，缓解DB压力 1. r">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-10-19T10:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis">
+<meta name="twitter:description" content="Redis的一些问题Remote Dictionary Server 底层C写的 类似于 mysql，可以把最近的query和对应的结果保存下来 =&amp;gt; hashquery 存入到缓存里，如果其他用户的query的hash值是一样的，说明查询是一样的，直接从缓存里读出来结果 =&amp;gt; 多级缓存，目的是将最初的query进行过滤、优化，尽可能只让最后的事务操作落到DB中，缓解DB压力 1. r">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mxxct4git.github.io/2020/10/15/Redis-3/">
+
+
+
+
+
+  <title>Redis | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/10/15/Redis-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-15T10:58:00+08:00">
+                2020-10-15
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/10/15/Redis-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/10/15/Redis-3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/10/15/Redis-3/" class="leancloud_visitors" data-flag-title="Redis">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Redis的一些问题"><a href="#Redis的一些问题" class="headerlink" title="Redis的一些问题"></a>Redis的一些问题</h2><p>Remote Dictionary Server</p>
+<p>底层C写的</p>
+<p>类似于 mysql，可以把最近的query和对应的结果保存下来 =&gt; hashquery 存入到缓存里，如果其他用户的query的hash值是一样的，说明查询是一样的，直接从缓存里读出来结果 =&gt; 多级缓存，目的是将最初的query进行过滤、优化，尽可能只让最后的事务操作落到DB中，缓解DB压力</p>
+<h3 id="1-redis出现的原因"><a href="#1-redis出现的原因" class="headerlink" title="1. redis出现的原因"></a>1. redis出现的原因</h3><p>数据文件过大，查询变慢 -&gt; 因为要走 全量扫描</p>
+<p>数据存储的2个位置</p>
+<ul>
+<li>磁盘<br>  影响指标<ul>
+<li>带宽/吞吐：百兆/s – G/s</li>
+<li>寻址时间：毫秒</li>
+</ul>
+</li>
+<li>内存<br>  纳秒级别</li>
+</ul>
+<p>mysql 查询快的原因是因为数据会分成block/datapage来保存，通过B+树建立索引，避免了全表扫描。</p>
+<p>当mysql中的表非常大的时候，查询会很慢吗？</p>
+<ul>
+<li>如果是一条sql命中了索引的话，还是很快的</li>
+<li>如果是并发量很大的话，并且命中索引后指向的是独立的datapage，那么mysql会把每一个datapage拉到内存中查询，一个datapage是4k大小，如果请求量过大，磁盘带宽跟不上，会导致查询变慢</li>
+</ul>
+<p>同样的数据，在内存中占的大小比在磁盘中占的大小要小很多。因为有指针，数据复用的现象。</p>
+<p>=&gt; 把热点数据放入到内存中，就是 redis，类似的还有 memcache。java 借助 LinkedHashMap 实现 LRU</p>
+<h3 id="2-redis-特征"><a href="#2-redis-特征" class="headerlink" title="2. redis 特征"></a>2. redis 特征</h3><p><a href="https://redis.io/topics/faq" target="_blank" rel="noopener">关于单线程以及其他问题的官方回答</a></p>
+<ul>
+<li>绝大部分请求是纯粹的内存操作</li>
+<li>worker 单线程串行的<ul>
+<li>关于线程这个问题，影响的瓶颈在于IO通信。Redis 4.x 之前，在后台删除对象等方面是多线程的，对数据的添加修改等是单线程的，但是4.x之后会变得更加的多线程化，官方回答。</li>
+</ul>
+</li>
+<li>value 类型且每个类型有自己的本地方法。比如存入一个数组 <code>[a,b,c]</code>，客户端要c的下标，redis有数组的index方法可以直接返回2，不需要返回整个数组，在客户端进行计算。相比之下 memcache 就是单纯的 kv 格式，都是string</li>
+<li>客户端的访问是并发的，通过epoll解决</li>
+</ul>
+<p>内存操作 + 单线程避免锁、上下文竞争切换 + 非阻塞IO + value 的数据结构专门设计 =&gt; 速度快</p>
+<p>多线程的弊端：一致性。redis的数据要多线程，一定要加锁，会退化成串行，不如单线程。</p>
+<p>单线程的弊端：cpu利用率不高。redis单线程已足够用了，如果想继续压榨cpu，就多开实例，相当于多开redis服务器。</p>
+<p>redis 的 worker单线程，但是IO Thread可以是多线程 !!!</p>
+<p>客户端C1、C2并发请求，IO Thread1 可以读取C1的数据data1，IO Thread2 可以读取C2的数据data2。然后把数据交给单线程的worker来依次计算data1，data2，保证数据是串行的，不会发生错误。worker计算后的数据可以再交给对应的 IO Thread 分别返回给C1、C2。[Redis 6.x 版本的IO Threads多线程]</p>
+<p>但是存在问题，即先计算data2后计算data1，理论上来说C1、C2请求负载均衡到不同服务器，本来就可能是无序的状态。优化的话，比如在负载均衡的时候，根据uri来分组，绑定到一个连接池里，交给一个connection里，就可以按照顺序来处理（不是很懂，但是io thread多线程是存在的）</p>
+<h3 id="3-跟踪redis启动后的线程情况"><a href="#3-跟踪redis启动后的线程情况" class="headerlink" title="3. 跟踪redis启动后的线程情况"></a>3. 跟踪redis启动后的线程情况</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install strace</span><br><span class="line">strace -ff -O ./strace_out/out ./redis-server</span><br><span class="line">在启动redis-server的同时，将对系统的调用情况输出到 ./strace_out/ 目录下的，文件名前缀 out</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-redis-持久化"><a href="#4-redis-持久化" class="headerlink" title="4. redis 持久化"></a>4. redis 持久化</h3><p>memcache 不支持持久化</p>
+<p>指令 BGSAVE 会在后台执行将数据持久化到磁盘，底层调用的是 copyOnWrite 方法，内核中clone指令（类似于fork指令）</p>
+<p>copyOnWrite–当前线程A读取数据提供服务，启动线程B来持久化数据，指向的物理空间数据地址都是同一个。如果此时数据发生变化，A指向新的数据地址，B不变。</p>
+<p>cow 具体原理: 在内存里已经有一部分数据了，此时执行持久化指令，不可能复制一份数据，可能存不下，存下也是浪费。所以新起一个线程B，不耽误正在提供服务的线程A，线程指B向的数据的物理地址和线程A是一样的，如果同一个key在持久化的时候被修改了，那么在内存中重新开辟一个地址，线程A指向新的物理地址。</p>
+<h3 id="5-CPU中断与内核"><a href="#5-CPU中断与内核" class="headerlink" title="5. CPU中断与内核"></a>5. CPU中断与内核</h3><p>内核常驻在内存中。</p>
+<p>CPU 里有晶振时间中断，每秒震荡很多次，将一秒分成了很多的时间片，每一个设备占用时间片的时候会拿到中断号（类似于时间片号），内核里有一个回调函数，通过中断号可以获取到数据在内存中的地址，这样CPU就可以在对应的时间片内去获取数据处理数据，从而达到切换程序的效果。</p>
+<p>内核的指令 clone、select、epoll、read、write、sendfile</p>
+<h3 id="6-BIO-gt-NIO-gt-epoll（多路复用）"><a href="#6-BIO-gt-NIO-gt-epoll（多路复用）" class="headerlink" title="6. BIO -&gt; NIO -&gt; epoll（多路复用）"></a>6. BIO -&gt; NIO -&gt; epoll（多路复用）</h3><ul>
+<li>BIO: 客户端请求数据，发送一个key，如果这时候数据还没到，没有value，会一直等着，导致用户进程的阻塞。即一个连接一个线程</li>
+<li>NIO: 客户端每次请求的key都扔到一个线程里，哪个线程能获取到value了，就把数据返回。即一个连接N个线程<ul>
+<li>缺点: 如果请求量特别多，会导致线程过多（几十万的请求量就相当于几十万的线程），不断循环线程的时间复杂度是 O(N)，影响效率。所以通过内核指令 select，在内核里维护一个fds(fileDescription)的数组，数组里是需要监听的socket对象。当其中一个数据到了，就会启动CPU中断，select() 返回，启动一个线程，让socket接收数据。缺点就是需要多次遍历数组，不知道是哪一个socket拿到了数据，另外还得从等待队列中移除被唤醒的进程。</li>
+</ul>
+</li>
+<li>epoll(多路复用): 通过内核的epoll指令，redis可以知道哪一个客户端（socket）的数据已经准备好了，然后串行获取数据，计算结果返回给客户端<ul>
+<li>调用epoll_create()建立一个epoll对象(在epoll文件系统中为这个句柄对象分配资源)</li>
+<li>调用epoll_ctl向epoll对象中添加这100万个连接的socket</li>
+<li>调用epoll_wait收集发生的事件的连接（添加到一个双向链表里）</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-零拷贝"><a href="#7-零拷贝" class="headerlink" title="7. 零拷贝"></a>7. 零拷贝</h3><p>kafka、nginx 零拷贝技术大同小异</p>
+<p>客户端请求数据 socket -&gt; 调用内核 sendfile 指令 -&gt; 获取文件数据（文件描述符fd）并缓存到内核中 -&gt; 直接返回网卡到客户端 </p>
+<h3 id="8-expire-过期删除"><a href="#8-expire-过期删除" class="headerlink" title="8. expire 过期删除"></a>8. expire 过期删除</h3><p>redis 维护了一个 expire dict字典（因为不是所有的key都会过期，设置为过期的单独保存到字典中，可以更节省内存）来保存会过期的key，用到数据的时候会先检查key是否过期，过期则删除，然后返回错误。这是惰性删除，如果数据不被查找可能不会删除，造成内存浪费，所以同时有一个定时执行的函数，servercron，会在一定时间内，随机选出来字典里的数据，如果过期删除，否则再随机选择，直到规定的时间结束。这个时间有长有短，即servercron的运行时间有长有短。一般执行短的删除，每隔一段时间执行一次长的删除。</p>
+<h3 id="9-value-的五个类型"><a href="#9-value-的五个类型" class="headerlink" title="9. value 的五个类型"></a>9. value 的五个类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">typedef struct redisObject &#123;</span><br><span class="line">    // 类型 一共5个类型</span><br><span class="line">    unsigned type:4;</span><br><span class="line"></span><br><span class="line">    // 编码 字符串--raw 数值--int ...</span><br><span class="line">    unsigned encoding:4;</span><br><span class="line"></span><br><span class="line">    // 对象最后一次被访问的时间</span><br><span class="line">    unsigned lru:REDIS_LRU_BITS; /* lru time (relative to server.lruclock) */</span><br><span class="line"></span><br><span class="line">    // 引用计数</span><br><span class="line">    int refcount;</span><br><span class="line"></span><br><span class="line">    // 指向实际值的指针</span><br><span class="line">    void *ptr;</span><br><span class="line"></span><br><span class="line">&#125; robj;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>string</p>
+<ul>
+<li><p>数值可以按string保存，对于已经进行过计算的数值，在<code>encoding</code>里会把这个value设置为int，这样下次再计算的时候直接计算，而不需要判断是否能转换成数值。第一次进行计算的时候是需要进行判断的。</p>
+<ul>
+<li>比如对于秒杀场景，初始化值10是string，第一次-1会判断10能不能转换为数字，如果可以-1，并且把<code>encoding</code>设置为<code>int</code>（<code>encoding=raw</code> 表示字符串），下一次-1的时候直接-1，省略了判断的过程，提高效率</li>
+</ul>
+</li>
+<li><p>bitmap 位图 8个比特位，首位默认是0，遵循ascii码。但是如果 offset 超过7，那么redis会自动拓展这个位图到设置的那个长度</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setbit k1 1 1 # 偏移量1的位置设置为1</span><br><span class="line">get k1 # 返回 &quot;@&quot; 01000000 二进制64，对应的是 @</span><br><span class="line">setbit k1 7 1 # 偏移量7的位置设置为1</span><br><span class="line">get k1 # 返回 &quot;A&quot; 01000001 二进制65，对应的是 A</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>bitcount 可以统计出value里有多少个7，换算到字节的话，长度/8，可以减少存储空间；</li>
+<li>bitop 可以进行二进制的与或非操作</li>
+<li>适用场景：<ol>
+<li>统计用户在一段时间内登陆次数，比如一年365，length就是365，登陆就置为1</li>
+<li>活跃用户的统计</li>
+<li>权限控制 类似于linux的chmod 777</li>
+<li>布隆过滤器 redis自带</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>list</p>
+<ul>
+<li>按放入顺序 有序</li>
+<li>value 保存是双向链表的结构，同时key保存了头元素和尾元素的指针，访问头尾都是O(1)</li>
+<li>插入、弹出有方向区别，为了模拟不同的数据结构。同向：栈；异向：队列。通过index指令还可以模拟数组。</li>
+<li>适用场景：数据共享</li>
+</ul>
+</li>
+<li><p>set</p>
+<ul>
+<li>去重 无序，当元素变多之后元素可能顺序和之前也不一样。<ul>
+<li>java hashset 底层实现是hashmap，只不过value设置为null，当元素变多，会触发rehash，导致元素顺序更不一样</li>
+</ul>
+</li>
+<li>适用场景：随机事件；差集可以做推荐好友，交集可以做推荐共同好友</li>
+</ul>
+</li>
+<li><p>hash </p>
+<ul>
+<li>即hashmap，通过 hset key field value 来设置；通过 hgetall key 可以直接返回field和value</li>
+<li>适用场景：商品详情页，可以把商品的一整套信息放在一起</li>
+</ul>
+</li>
+<li><p>zset: 排序的 set</p>
+<ul>
+<li>跳表 =&gt; 实现有序集合 <a href>跳转到对跳表的说明</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="10-持久化"><a href="#10-持久化" class="headerlink" title="10. 持久化"></a>10. 持久化</h3><p>两种方式：</p>
+<ol>
+<li>RDB<ul>
+<li>快照恢复速度快，但是可能会丢失大量数据</li>
+</ul>
+</li>
+<li>AOF<ul>
+<li>日志完整，但是恢复速度慢，同时可能存在冗余日志</li>
+<li>存在冗余日志 =&gt; 4.x 之后版本会自动开启对aof日志的重写，即对同一key的操作日志，只保留有效的最近一次的日志，aof文件超过64MB的时候会自动触发</li>
+</ul>
+</li>
+</ol>
+<p>使用方法：</p>
+<ul>
+<li>4.x 之前版本<ul>
+<li>默认开启 rdb 关闭 aof。如果开启了 aof 那么 rdb 就不生效 =&gt; 即不推荐 aof，因为过多的io会造成redis性能下降</li>
+</ul>
+</li>
+<li>4.x 之后版本<ul>
+<li>混合使用 rdb + aof =&gt; 持久化的时候，会生成一个aof文件，这个文件包含两部分，第一部分是此刻 rdb 的数据，第二部分是此刻后追加的日志记录 =&gt; 类比于 hdfs，数据保存的形式为 fsimage + edits.log</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-压力测试"><a href="#11-压力测试" class="headerlink" title="11. 压力测试"></a>11. 压力测试</h3><p>eg: <code>redis-benchmark -c 客户端连接数（默认50） -n 请求数（默认10万） -q(quiet 不输出多余日志) -t(设置测试的命令列表) set(只测试set一个)</code></p>
+<p>影响效率的几点：</p>
+<ol>
+<li>网络IO -&gt; 物理地址ip、局域网 是否走DNS转换等</li>
+<li>磁盘IO -&gt; aof 文件写的频率，默认是 <code>appendfsync=appendfsync</code>，如果改成 <code>appendfsync=always</code> 即每一次操作都落入到日志文件里，会降低redis的处理效率</li>
+</ol>
+<h3 id="12-分布式部署"><a href="#12-分布式部署" class="headerlink" title="12. 分布式部署"></a>12. 分布式部署</h3><p>分布式要解决的两个问题</p>
+<ol>
+<li>单点故障 -&gt; 主从复制 -&gt; 为了保证其中一个挂了，另一个能顶替，那么就需要做到<strong>数据同步</strong></li>
+<li>单个结点压力大 -&gt; 分片集群，即将数据分片，将不同片的数据放在不同机器上，缓解访问压力 -&gt; 不需要做到数据同步</li>
+</ol>
+<blockquote>
+<p>redis 的数据分片就是每个节点负责不同的槽位，hash(key)%65536</p>
+</blockquote>
+<h4 id="12-1-主从复制中数据同步的方式"><a href="#12-1-主从复制中数据同步的方式" class="headerlink" title="12.1 主从复制中数据同步的方式"></a>12.1 主从复制中数据同步的方式</h4><blockquote>
+<p>分布式CAP定理 – Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性），最多只能同时三个特性中的两个，三者不可兼得<br>P 指的是节点之间的网络通信，一般情况来说网络故障很正常，所以只能在CA之间进行取舍<br>但是对于银行转账这样的涉及金融，C是一定需要的，那么就在AP之间取舍</p>
+</blockquote>
+<ol>
+<li>强一致性<ul>
+<li>client 发送请求，主节点同步把请求发给子节点，只有两个节点都成功，才返回给client成功 =&gt; 如果子节点挂了，主节点会一直等子节点重启、执行命令、返回请求，影响效率，即<strong>强一致性破坏可用性</strong></li>
+</ul>
+</li>
+<li>弱一致性（redis默认使用这种）<ul>
+<li>client 发送请求，主节点执行成功，返回给client，同时把请求异步发给子节点，但并不能保证子节点一定执行成功 =&gt; 可能会影响一部分数据的一致性 =&gt; 如果redis的使用场景是为了缓存热点数据的话，丢一部分数据没有问题；如果是做分布式锁的话，可能会出现问题</li>
+</ul>
+</li>
+<li>最终一致性<ul>
+<li>client 发送请求，主节点执行成功，返回给client，同时把请求写入到一个位置（类似于黑盒的一个可靠的集群），子节点会读取这个位置的记录，一条条指令执行，也许会有延迟，但是能保证数据最终的一样，哪怕子节点掉了，也可以重新读记录</li>
+<li>HDFS 中两个namenode之间共享数据来保证数据同步靠的是 journalnode（这也是一个集群，N个节点） ，思想就是：一条数据在journalnode集群里保证至少 <code>n/2 + 1</code> 个节点记录这个成功即可，这个集群会自动在n个journalnode里找到最新版本的数据来更新数据</li>
+<li>类似思想也存在于 zookeeper、哨兵、kafka等，<a href="https://zhuanlan.zhihu.com/p/31727291" target="_blank" rel="noopener">参考Paxos</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="12-2-AKF-拆分原则"><a href="#12-2-AKF-拆分原则" class="headerlink" title="12.2 AKF 拆分原则"></a>12.2 AKF 拆分原则</h4><p>分片集群，每个节点管理一部分数据 -&gt; 存在某个节点挂了，无法访问某一部分数据的情况 -&gt; 是否针对每一个节点做HA？需要针对业务做结合</p>
+<p>AKF 拆分原则：通过加机器可以解决容量和可用性问题</p>
+<ul>
+<li>X轴：水平复制，HA 高可用</li>
+<li>Y轴：按照业务切分，比如分业务分库</li>
+<li>Z轴：数据分区（切片）</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/09/Hive-8/" rel="next" title="Distcp 跨集群同步">
+                <i class="fa fa-chevron-left"></i> Distcp 跨集群同步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/10/15/Redis-4/" rel="prev" title="Redis">
+                Redis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mxxt" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/08/11/Thread-2/" title="同步队列" target="_blank">同步队列</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/07/08/Hive-5/" title="Hive源码解析" target="_blank">Hive源码解析</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/05/31/Sqoop/" title="Sqoop源码解析" target="_blank">Sqoop源码解析</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/10/15/Redis-4/" title="Redis" target="_blank">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/15/Redis-3/" title="Redis" target="_blank">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/09/Hive-8/" title="Distcp 跨集群同步" target="_blank">Distcp 跨集群同步</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis的一些问题"><span class="nav-text">Redis的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-redis出现的原因"><span class="nav-text">1. redis出现的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-redis-特征"><span class="nav-text">2. redis 特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-跟踪redis启动后的线程情况"><span class="nav-text">3. 跟踪redis启动后的线程情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-redis-持久化"><span class="nav-text">4. redis 持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-CPU中断与内核"><span class="nav-text">5. CPU中断与内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-BIO-gt-NIO-gt-epoll（多路复用）"><span class="nav-text">6. BIO -&gt; NIO -&gt; epoll（多路复用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-零拷贝"><span class="nav-text">7. 零拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-expire-过期删除"><span class="nav-text">8. expire 过期删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-value-的五个类型"><span class="nav-text">9. value 的五个类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-持久化"><span class="nav-text">10. 持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-压力测试"><span class="nav-text">11. 压力测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-分布式部署"><span class="nav-text">12. 分布式部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#12-1-主从复制中数据同步的方式"><span class="nav-text">12.1 主从复制中数据同步的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-2-AKF-拆分原则"><span class="nav-text">12.2 AKF 拆分原则</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
