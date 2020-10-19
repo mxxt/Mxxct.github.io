@@ -504,8 +504,8 @@
 </ol>
 <p>如何实现内存的可见性？</p>
 <ol>
-<li>对volatile变量执行写操作时，会在写操作后加入一条store屏障指令</li>
-<li>对volatile变量执行读操作时，会在读操作前加入一条load屏障指令</li>
+<li>对volatile变量执行写操作时，会在写操作后加入一条store屏障指令 =&gt; <strong>写后存(store)</strong></li>
+<li>对volatile变量执行读操作时，会在读操作前加入一条load屏障指令 =&gt; <strong>读前读(load)</strong></li>
 </ol>
 <p>通俗的讲：volatile变量在每次被线程访问时，都强迫从主内存中重读该变量的值，而当该变量发生变化时，又会强迫线程将最新的值刷新到主内存。这样任何时刻，不同的线程总能看到该变量的最新值。</p>
 <p>为什么不能保证volatile变量复合操作的原子性？<br>通俗的讲，volatile不能加锁，对number++;的操作会被多个线程交叉执行，导致出现不同的结果</p>
