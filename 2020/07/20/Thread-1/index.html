@@ -133,12 +133,12 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="多线程多线程的目的不是提升执行速度等，而是提高资源利用效率，当有的线程不占用cpu时让出来资源，从而有可能达到提高效率的结果（线程太多有可能会变慢）。 JVM虚拟机的启动是多线程的，至少有两个线程：main 和垃圾回收机制。 线程状态创建状态(new一个线程) – Thread.State.NEW就绪状态(调用 start() 方法，等cpu调度) – Thread.State.RUNNABLE运">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdn.net/20151027094316987">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://img-blog.csdn.net/20151027094316987">
 <meta property="og:updated_time" content="2020-08-20T07:50:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程">
 <meta name="twitter:description" content="多线程多线程的目的不是提升执行速度等，而是提高资源利用效率，当有的线程不占用cpu时让出来资源，从而有可能达到提高效率的结果（线程太多有可能会变慢）。 JVM虚拟机的启动是多线程的，至少有两个线程：main 和垃圾回收机制。 线程状态创建状态(new一个线程) – Thread.State.NEW就绪状态(调用 start() 方法，等cpu调度) – Thread.State.RUNNABLE运">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20151027094316987">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://img-blog.csdn.net/20151027094316987">
 
 
 
@@ -472,7 +472,7 @@
 <h3 id="1-实现方法"><a href="#1-实现方法" class="headerlink" title="1. 实现方法"></a>1. 实现方法</h3><p>1.1 通过 extends Thread类，重写Thread的run()方法，将线程运行的逻辑放在其中。</p>
 <p>1.2 通过 implement Runnable接口，实例化Thread类，如果要有返回值的话，就 implement Callable接口，通过 Future 来接收所有的返回值</p>
 <p>1.3 通过线程池</p>
-<p><img src="https://img-blog.csdn.net/20151027094316987" alt="ExecutorService继承树"></p>
+<p><img src="https://images.weserv.nl/?url=https://img-blog.csdn.net/20151027094316987" alt="ExecutorService继承树"></p>
 <p>接口 Executor 只有一个方法 <code>void execute(Runnable command);</code><br>在这个接口的基础上，提供一个更有拓展性的接口 ExecutorService，里面的方法有 <code>submit(Callable&lt;T&gt; task)</code> <code>submit(Runnable task);</code> <code>shutdown()</code> 等等<br>ThreadPoolExecutor 类是提供了一个更有拓展性的线程池实现类。在ThreadPoolExecutor的execute方法中会判断线程池是否可用，如果可用，就会获取线程池的锁(ReentrantLock)，然后将任务加入任务队列。<br>Executors 类提供了方便的工厂方法</p>
 <blockquote>
 <p>submit 和 execute 最大的区别在于异常处理上，使用 execute 的时候，如果没有实现一个 handler，那么就是用默认的handler来处理异常，如果实现了一个handler就会使用实例化的handler。<br>还可以改写 ThreadPoolExecutor.afterExecute() 中自定义异常。但是对于 submit 来说，异常是绑定到 Future 上，只有调用 future.get() 的时候，才会抛出异常，这意味着自定义的handler是没有用的。<br>如果关心线程执行的结果，那么就使用 submit, 在通过 future.get() 取结果的时候拿到异常；如果不关心这个任务的结果，就直接使用 ExecutorService.execute(Runnable) 方法，实际是继承了 Executor 接口来直接执行任务。</p>

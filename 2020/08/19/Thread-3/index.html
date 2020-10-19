@@ -133,12 +133,12 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="ThreadLocal参考网址 以数据库连接为例，如果多个线程共享一个连接，有可能一个线程在对数据库进行操作，另一个线程调用了closeConnection操作；如果在每一个线程都new一个连接对象，如果开启关闭数据库操作频繁，会影响到服务器压力，并且影响程序执行性能。=&amp;gt; ThreadLocal 内部维护一个 ThreadLocalMap 类，保存的是 Entry&amp;lt;Thread K,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbuf9AEW6RSVibTlHEWRFAklONOCH7Lh4ibClfBFzw1gn8LneEdcdR4jeBp85dgxyWJE4xn6ExFMOibGPw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbuf9AEW6RSVibTlHEWRFAklONOCH7Lh4ibClfBFzw1gn8LneEdcdR4jeBp85dgxyWJE4xn6ExFMOibGPw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:updated_time" content="2020-08-19T02:16:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ThreadLocal">
 <meta name="twitter:description" content="ThreadLocal参考网址 以数据库连接为例，如果多个线程共享一个连接，有可能一个线程在对数据库进行操作，另一个线程调用了closeConnection操作；如果在每一个线程都new一个连接对象，如果开启关闭数据库操作频繁，会影响到服务器压力，并且影响程序执行性能。=&amp;gt; ThreadLocal 内部维护一个 ThreadLocalMap 类，保存的是 Entry&amp;lt;Thread K,">
-<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbuf9AEW6RSVibTlHEWRFAklONOCH7Lh4ibClfBFzw1gn8LneEdcdR4jeBp85dgxyWJE4xn6ExFMOibGPw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbuf9AEW6RSVibTlHEWRFAklONOCH7Lh4ibClfBFzw1gn8LneEdcdR4jeBp85dgxyWJE4xn6ExFMOibGPw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
 
 
@@ -469,7 +469,7 @@
 <p>Thread维护了ThreadLocalMap，而ThreadLocalMap里维护了Entry，而Entry里存的是以ThreadLocal为key，传入的值为value的键值对。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// java.lang.Thread类里持有ThreadLocalMap的引用</span><br><span class="line">public class Thread implements Runnable &#123;</span><br><span class="line">    ThreadLocal.ThreadLocalMap threadLocals = null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// java.lang.ThreadLocal有内部静态类ThreadLocalMap</span><br><span class="line">public class ThreadLocal&lt;T&gt; &#123;</span><br><span class="line">    static class ThreadLocalMap &#123;</span><br><span class="line">        private Entry[] table;</span><br><span class="line">        </span><br><span class="line">        // ThreadLocalMap内部有Entry类，Entry的key是ThreadLocal本身，value是泛型值</span><br><span class="line">        static class Entry extends WeakReference&lt;ThreadLocal&lt;?&gt;&gt; &#123;</span><br><span class="line">            Object value;</span><br><span class="line">            Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">                super(k);</span><br><span class="line">                value = v;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbuf9AEW6RSVibTlHEWRFAklONOCH7Lh4ibClfBFzw1gn8LneEdcdR4jeBp85dgxyWJE4xn6ExFMOibGPw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="ThreadLocal内存结构图"></p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbuf9AEW6RSVibTlHEWRFAklONOCH7Lh4ibClfBFzw1gn8LneEdcdR4jeBp85dgxyWJE4xn6ExFMOibGPw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="ThreadLocal内存结构图"></p>
 <p>主要方法：</p>
 <ul>
 <li><p>initialValue：初始化。在get方法里懒加载的。</p>

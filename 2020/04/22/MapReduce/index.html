@@ -133,12 +133,12 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="MapReduce1.1 输入输出 首先都是 k, v 的形式 map 到 reduce 端是通过网络来传输，所以 k, v 都需要序列化和反序列化，Java 基本数据类型不支持序列化，所以需要用 MR 自己封装的类型，比如 LongWritable, Text, IntWritable 等等 reduce 的输入顺序默认是按照 key 的大小顺序（字符串的字典顺序）来进行处理，如果 map 输出">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12652505-0716b5d505b94bc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/12652505-0716b5d505b94bc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp">
 <meta property="og:updated_time" content="2020-04-24T01:40:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MapReduce">
 <meta name="twitter:description" content="MapReduce1.1 输入输出 首先都是 k, v 的形式 map 到 reduce 端是通过网络来传输，所以 k, v 都需要序列化和反序列化，Java 基本数据类型不支持序列化，所以需要用 MR 自己封装的类型，比如 LongWritable, Text, IntWritable 等等 reduce 的输入顺序默认是按照 key 的大小顺序（字符串的字典顺序）来进行处理，如果 map 输出">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/12652505-0716b5d505b94bc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/12652505-0716b5d505b94bc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp">
 
 
 
@@ -462,7 +462,7 @@
       
 
       
-        <h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><h3 id="1-1-输入输出"><a href="#1-1-输入输出" class="headerlink" title="1.1 输入输出"></a>1.1 输入输出</h3><p><img src="https://upload-images.jianshu.io/upload_images/12652505-0716b5d505b94bc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp" alt></p>
+        <h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><h3 id="1-1-输入输出"><a href="#1-1-输入输出" class="headerlink" title="1.1 输入输出"></a>1.1 输入输出</h3><p><img src="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/12652505-0716b5d505b94bc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp" alt="pic1"></p>
 <p>首先都是 k, v 的形式</p>
 <p>map 到 reduce 端是通过网络来传输，所以 k, v 都需要序列化和反序列化，Java 基本数据类型不支持序列化，所以需要用 MR 自己封装的类型，比如 LongWritable, Text, IntWritable 等等</p>
 <p>reduce 的输入顺序默认是按照 key 的大小顺序（字符串的字典顺序）来进行处理，如果 map 输出的 key 是一个对象，可以 implements WritableComparable 接口，自定义 key 的顺序来交给 reduce</p>
@@ -524,7 +524,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 1.9 分组排序 WritableComparator</span><br><span class="line"></span><br><span class="line">比如两个 key 是否一样，会调用 GroupComparator 类下的 compare(o1, o2) 方法</span><br><span class="line"></span><br><span class="line">用bean来做key，包括orderid，amounfee两个属性，相同的orderid排在一起，id小的在前面</span><br><span class="line">重写分发规则 partitioner，让orderid相同的分到同一个reduce</span><br><span class="line">重写 groupComparator，由于传递的key是对象，所以要指出来只要orderid相同，就会被看成同一组进行一次reduce聚合（跟上一步不一样的地方在于，有可能存在不同的key取hashcode再取模后分发到同一个reduce上，这时候需要通过groupComparator类下的compare()方法来保证同一类orderid进行聚合）</span><br></pre></td></tr></table></figure>
 
 <p>class OrderIdGroupingComparator extends WritableComparator {<br>    public OrderIdGroupingComparator(){<br>        super(OrderBean.class, true); // 调用父类的构造函数，将 OrderBean.class 序列化，要不然下面的方法无法识别 OrderBean，true代表是执行序列化<br>    }<br>    @Overwrite<br>    public int compare(WritableComparable a, WritableComparable b){<br>        OrderBean o1 = (OrderBean)a;<br>        OrderBean o2 = (OrderBean)b;<br>        return o1.getOrderId().compareTo(o2.getOrderId());<br>    }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](https://img-blog.csdn.net/20180722005722553?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lneWJsdWUy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</span><br><span class="line"></span><br><span class="line">### 1.10 合合</span><br><span class="line"></span><br><span class="line">配置类读取所有的库表以及字段关系</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![pic2](https://images.weserv.nl/?url=https://img-blog.csdn.net/20180722005722553?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lneWJsdWUy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</span><br><span class="line"></span><br><span class="line">### 1.10 合合</span><br><span class="line"></span><br><span class="line">配置类读取所有的库表以及字段关系</span><br></pre></td></tr></table></figure>
 
 <p>final HiveConf hiveconf = new HiveConf(conf, HHDriver.class);<br>HiveMetaStoreClient client = new HiveMetaStoreClient(hiveconf);</p>
 <pre><code>通过HiveMetaStoreClient连接Hive，先要拿到库表的分区信息，client.listPartitionNames，如果存在就添加，如果没有就新建

@@ -133,12 +133,12 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Zookeeper1. 知识点ZooKeeper 集群中包含 Leader、Follower 以及 Observer 三个角色： Leader：负责进行投票的发起和决议，更新系统状态，Leader 是由选举产生;Follower： 用于接受客户端请求并向客户端返回结果，在选主过程中参与投票;Observer：可以接受客户端连接，接受读写请求，写请求转发给 Leader，但 Observer 不参加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3017145-45ad27489478b2ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/3017145-45ad27489478b2ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
 <meta property="og:updated_time" content="2020-04-23T00:38:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zookeeper">
 <meta name="twitter:description" content="Zookeeper1. 知识点ZooKeeper 集群中包含 Leader、Follower 以及 Observer 三个角色： Leader：负责进行投票的发起和决议，更新系统状态，Leader 是由选举产生;Follower： 用于接受客户端请求并向客户端返回结果，在选主过程中参与投票;Observer：可以接受客户端连接，接受读写请求，写请求转发给 Leader，但 Observer 不参加">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3017145-45ad27489478b2ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/3017145-45ad27489478b2ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
 
 
 
@@ -464,7 +464,7 @@
       
         <h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><h3 id="1-知识点"><a href="#1-知识点" class="headerlink" title="1. 知识点"></a>1. 知识点</h3><p>ZooKeeper 集群中包含 Leader、Follower 以及 Observer 三个角色：</p>
 <p>Leader：负责进行投票的发起和决议，更新系统状态，Leader 是由选举产生;<br>Follower： 用于接受客户端请求并向客户端返回结果，在选主过程中参与投票;<br>Observer：可以接受客户端连接，接受读写请求，写请求转发给 Leader，但 Observer 不参加投票过程，只同步 Leader 的状态，Observer 的目的是为了扩展系统，提高读取速度。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3017145-45ad27489478b2ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt></p>
+<p><img src="https://images.weserv.nl/?url=https://upload-images.jianshu.io/upload_images/3017145-45ad27489478b2ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="pic1"></p>
 <blockquote>
 <p>Zookeeper 系统中只要集群中存在超过一半的节点（这里指的是投票节点即非 Observer 节点）能够正常工作，那么整个集群就能够正常对外服务。基于此，如果想搭建一个能够允许 N 台机器 down 掉的集群，那么就要部署一个由 2*N+1 台服务器构成的 ZooKeeper 集群。</p>
 </blockquote>

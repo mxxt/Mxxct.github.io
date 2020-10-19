@@ -133,13 +133,13 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="B-树和B+树1. B-树1.1 B-树就是B树英文名字叫做B-tree，中间的短线是英文连接符，只是翻译的时候将短线翻译成了减号。全称Balance-tree(平衡多路查找树)，平衡的意思是左边和右边分布均匀。多路的意思是相对于二叉树而言的，二叉树就是二路查找树，查找时只有两条路，而B-tree有多条路，即父节点有多个子节点。 1.2 B-树用途使用B-tree结构可以显著减少定位记录时所经历的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.mp.sohu.com/upload/20170713/36efa69561dc4043a17d550133e13a6c_th.png">
-<meta property="og:image" content="http://img.mp.sohu.com/upload/20170713/d8ae1b14e9bf4b1890146eb803ee9795_th.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=http://img.mp.sohu.com/upload/20170713/36efa69561dc4043a17d550133e13a6c_th.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=http://img.mp.sohu.com/upload/20170713/d8ae1b14e9bf4b1890146eb803ee9795_th.png">
 <meta property="og:updated_time" content="2020-09-10T01:57:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="B-树和B+树">
 <meta name="twitter:description" content="B-树和B+树1. B-树1.1 B-树就是B树英文名字叫做B-tree，中间的短线是英文连接符，只是翻译的时候将短线翻译成了减号。全称Balance-tree(平衡多路查找树)，平衡的意思是左边和右边分布均匀。多路的意思是相对于二叉树而言的，二叉树就是二路查找树，查找时只有两条路，而B-tree有多条路，即父节点有多个子节点。 1.2 B-树用途使用B-tree结构可以显著减少定位记录时所经历的">
-<meta name="twitter:image" content="http://img.mp.sohu.com/upload/20170713/36efa69561dc4043a17d550133e13a6c_th.png">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=http://img.mp.sohu.com/upload/20170713/36efa69561dc4043a17d550133e13a6c_th.png">
 
 
 
@@ -481,9 +481,9 @@
 <p>每一个父节点的元素都出现在子节点中，是子节点的最大或最小元素。<br>根节点的最大元素等同于整个B+树的最大元素 =&gt; 无论插入删除多少元素，始终要保持最大元素在根节点中。<br>由于父节点元素都出现在子节点中，因此所有叶子节点包含所有的元素信息。</p>
 </blockquote>
 <h3 id="3-B-树和B-树对比"><a href="#3-B-树和B-树对比" class="headerlink" title="3. B-树和B+树对比"></a>3. B-树和B+树对比</h3><h4 id="3-1-卫星数据"><a href="#3-1-卫星数据" class="headerlink" title="3.1 卫星数据"></a>3.1 卫星数据</h4><p>卫星数据指的是索引元素所指向的数据记录，比如数据库中的某一行。B-树所有节点都带有卫星数据。</p>
-<p><img src="http://img.mp.sohu.com/upload/20170713/36efa69561dc4043a17d550133e13a6c_th.png" alt="B-树的卫星数据"></p>
+<p><img src="https://images.weserv.nl/?url=http://img.mp.sohu.com/upload/20170713/36efa69561dc4043a17d550133e13a6c_th.png" alt="B-树的卫星数据"></p>
 <p>B+树只有叶子节点带有卫星数据，其他节点仅仅是索引。</p>
-<p><img src="http://img.mp.sohu.com/upload/20170713/d8ae1b14e9bf4b1890146eb803ee9795_th.png" alt="B+树的卫星数据"></p>
+<p><img src="https://images.weserv.nl/?url=http://img.mp.sohu.com/upload/20170713/d8ae1b14e9bf4b1890146eb803ee9795_th.png" alt="B+树的卫星数据"></p>
 <blockquote>
 <p>在数据库的聚集索引（Clustered Index）中，叶子节点直接包含卫星数据。在非聚集索引（NonClustered Index）中，叶子节点带有指向卫星数据的指针。</p>
 </blockquote>
