@@ -133,13 +133,13 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="线程一些问题1. 概述单线程和多线程 表象化的一种理解：线程就是程序执行的路径，单线程就是只有一条路径，多线程就是多条路径 进程：一个程序装载到内存里，分配好资源如网络等等。是分配资源的最基本单位 线程：程序开始运行，将一条条指令放到cpu里执行。是调度执行的最基本单位 CPU：ALU（算术逻辑单元，负责计算） + Registers（寄存器，存储数据） + PC（计数器，记录执行到哪一条指令，记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdn.net/20180402191722152?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnUxMjMxMjNmdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://img-blog.csdn.net/20180402191722152?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnUxMjMxMjNmdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9930763-bec61c919d66e2db.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/663/format/webp">
 <meta property="og:updated_time" content="2020-09-21T10:15:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程一些问题">
 <meta name="twitter:description" content="线程一些问题1. 概述单线程和多线程 表象化的一种理解：线程就是程序执行的路径，单线程就是只有一条路径，多线程就是多条路径 进程：一个程序装载到内存里，分配好资源如网络等等。是分配资源的最基本单位 线程：程序开始运行，将一条条指令放到cpu里执行。是调度执行的最基本单位 CPU：ALU（算术逻辑单元，负责计算） + Registers（寄存器，存储数据） + PC（计数器，记录执行到哪一条指令，记">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20180402191722152?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnUxMjMxMjNmdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://img-blog.csdn.net/20180402191722152?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnUxMjMxMjNmdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -489,7 +489,7 @@
 <li>synchronized</li>
 <li>volatile</li>
 </ol>
-<p><img src="https://img-blog.csdn.net/20180402191722152?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnUxMjMxMjNmdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic1"></p>
+<p><img src="https://images.weserv.nl/?url=https://img-blog.csdn.net/20180402191722152?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnUxMjMxMjNmdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic1"></p>
 <h4 id="2-1-synchronized-实现可见性以及原子性"><a href="#2-1-synchronized-实现可见性以及原子性" class="headerlink" title="2.1 synchronized 实现可见性以及原子性"></a>2.1 synchronized 实现可见性以及原子性</h4><p>JMM关于synchronized的两条规定：</p>
 <ol>
 <li>线程解锁前（退出synchronized代码块之前），必须把共享变量的最新值刷新到主内存中，也就是说线程退出synchronized代码块值后，主内存中保存的共享变量的值已经是最新的了</li>
