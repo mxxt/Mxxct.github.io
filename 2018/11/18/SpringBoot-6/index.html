@@ -125,21 +125,21 @@
 
 
 
-<meta name="description" content="1.不需要多余的配置文件信息  application.properties mybatis.type-aliases-package=com.mxxd.SCM.Dao mybatis.mapper-locations=classpath:mybatis/mapper/*.xml  spring.datasource.driverClassName = com.mysql.jdbc.Driver">
+<meta name="description" content="1.不需要多余的配置文件信息  12345678910111213application.propertiesmybatis.type-aliases-package=com.mxxd.SCM.Daomybatis.mapper-locations=classpath:mybatis/mapper/*.xmlspring.datasource.driverClassName = com.mysql">
 <meta name="keywords" content="Java,Spring,Spring Boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot注解与资源文件配置">
 <meta property="og:url" content="https://mxxct4git.github.io/2018/11/18/SpringBoot-6/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="1.不需要多余的配置文件信息  application.properties mybatis.type-aliases-package=com.mxxd.SCM.Dao mybatis.mapper-locations=classpath:mybatis/mapper/*.xml  spring.datasource.driverClassName = com.mysql.jdbc.Driver">
+<meta property="og:description" content="1.不需要多余的配置文件信息  12345678910111213application.propertiesmybatis.type-aliases-package=com.mxxd.SCM.Daomybatis.mapper-locations=classpath:mybatis/mapper/*.xmlspring.datasource.driverClassName = com.mysql">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/3tbNB0o.png">
-<meta property="og:image" content="https://i.imgur.com/q7Fbw3O.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://i.imgur.com/3tbNB0o.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://i.imgur.com/q7Fbw3O.png">
 <meta property="og:updated_time" content="2018-11-18T08:57:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot注解与资源文件配置">
-<meta name="twitter:description" content="1.不需要多余的配置文件信息  application.properties mybatis.type-aliases-package=com.mxxd.SCM.Dao mybatis.mapper-locations=classpath:mybatis/mapper/*.xml  spring.datasource.driverClassName = com.mysql.jdbc.Driver">
-<meta name="twitter:image" content="https://i.imgur.com/3tbNB0o.png">
+<meta name="twitter:description" content="1.不需要多余的配置文件信息  12345678910111213application.propertiesmybatis.type-aliases-package=com.mxxd.SCM.Daomybatis.mapper-locations=classpath:mybatis/mapper/*.xmlspring.datasource.driverClassName = com.mysql">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://i.imgur.com/3tbNB0o.png">
 
 
 
@@ -463,161 +463,32 @@
       
 
       
-        <h3 id="1-不需要多余的配置文件信息"><a href="#1-不需要多余的配置文件信息" class="headerlink" title="1.不需要多余的配置文件信息"></a>1.不需要多余的配置文件信息</h3><p><img src="https://i.imgur.com/3tbNB0o.png" alt> </p>
-<pre><code>application.properties
-mybatis.type-aliases-package=com.mxxd.SCM.Dao
-mybatis.mapper-locations=classpath:mybatis/mapper/*.xml
+        <h3 id="1-不需要多余的配置文件信息"><a href="#1-不需要多余的配置文件信息" class="headerlink" title="1.不需要多余的配置文件信息"></a>1.不需要多余的配置文件信息</h3><p><img src="https://images.weserv.nl/?url=https://i.imgur.com/3tbNB0o.png" alt> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">application.properties</span><br><span class="line">mybatis.type-aliases-package=com.mxxd.SCM.Dao</span><br><span class="line">mybatis.mapper-locations=classpath:mybatis/mapper/*.xml</span><br><span class="line"></span><br><span class="line">spring.datasource.driverClassName = com.mysql.jdbc.Driver</span><br><span class="line">spring.datasource.url = jdbc:mysql://localhost:3306/scm?useUnicode=true&amp;characterEncoding=utf-8</span><br><span class="line">spring.datasource.username = root</span><br><span class="line">spring.datasource.password =</span><br><span class="line"></span><br><span class="line">spring.freemarker.template-loader-path=classpath:/template/</span><br><span class="line">spring.freemarker.suffix=.ftl</span><br><span class="line">spring.freemarker.cache=false</span><br><span class="line">spring.freemarker.charset=UTF-8</span><br></pre></td></tr></table></figure>
 
-spring.datasource.driverClassName = com.mysql.jdbc.Driver
-spring.datasource.url = jdbc:mysql://localhost:3306/scm?useUnicode=true&amp;characterEncoding=utf-8
-spring.datasource.username = root
-spring.datasource.password =
+<p>Dao层mapper 添加注解 @Repository</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Repository</span><br><span class="line">public interface UserMapper &#123;</span><br><span class="line"></span><br><span class="line">//@Select(&quot;SELECT * FROM `users` where user_username = #&#123;username&#125; and user_password = #&#123;password&#125;&quot;)</span><br><span class="line">public UserEntity login(String username, String password);</span><br><span class="line"></span><br><span class="line">public UserEntity queryUser(String name);</span><br><span class="line"></span><br><span class="line">public boolean insert(UserEntity user);</span><br><span class="line"></span><br><span class="line">public boolean update(UserEntity user);</span><br><span class="line"></span><br><span class="line">public boolean delete(int id);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-spring.freemarker.template-loader-path=classpath:/template/
-spring.freemarker.suffix=.ftl
-spring.freemarker.cache=false
-spring.freemarker.charset=UTF-8  </code></pre><p>Dao层mapper 添加注解 @Repository</p>
-<pre><code>@Repository
-public interface UserMapper {
+<p>mapper.xml文件 <mapper namespace> 添加对应mapper文件的位置</mapper></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot; &gt;</span><br><span class="line">&lt;mapper namespace=&quot;com.mxxd.SCM.Dao.UserMapper&quot; &gt;</span><br><span class="line"></span><br><span class="line">&lt;resultMap id=&quot;userMap&quot; type=&quot;com.mxxd.SCM.Entity.UserEntity&quot; &gt;</span><br><span class="line">&lt;id column=&quot;user_id&quot; property=&quot;id&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;user_username&quot; property=&quot;username&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;user_password&quot; property=&quot;password&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;user_name&quot; property=&quot;name&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;user_phone&quot; property=&quot;phone&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;user_email&quot; property=&quot;email&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;user_address&quot; property=&quot;address&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;user_authority&quot; property=&quot;authority&quot; /&gt;</span><br><span class="line">&lt;result column=&quot;is_login&quot; property=&quot;is_login&quot; /&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">&lt;select id=&quot;login&quot; parameterType=&quot;String&quot; resultMap=&quot;userMap&quot;&gt;</span><br><span class="line">  select *</span><br><span class="line">  from users where user_username = #&#123;0&#125; and user_password = #&#123;1&#125;</span><br><span class="line">   	&lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;select id=&quot;queryUser&quot; resultMap=&quot;userMap&quot;&gt;</span><br><span class="line">select *</span><br><span class="line">from users</span><br><span class="line">where 1=1</span><br><span class="line">&lt;if test=&quot;id !=0&quot;&gt;</span><br><span class="line">and user_id = #&#123;id&#125;</span><br><span class="line">&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;username !=null and username !=&apos;&apos; &quot;&gt;</span><br><span class="line">and user_username = #&#123;username&#125;</span><br><span class="line">&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;password !=null and password !=&apos;&apos; &quot;&gt;</span><br><span class="line">and user_password = #&#123;password&#125;</span><br><span class="line">&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;name !=null and name !=&apos;&apos; &quot;&gt;</span><br><span class="line">and user_name like &quot;%&quot; #&#123;name&#125;&quot;%&quot;</span><br><span class="line">&lt;/if&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;insert id=&quot;insert&quot; parameterType=&quot;com.mxxd.SCM.Entity.UserEntity&quot; &gt;</span><br><span class="line">   INSERT INTO</span><br><span class="line">  users</span><br><span class="line">  (user_username,user_password,user_name,user_phone,user_email,user_address,user_authority,is_login)</span><br><span class="line">   VALUES</span><br><span class="line">  (#&#123;username&#125;, #&#123;password&#125;, #&#123;name&#125;,#&#123;phone&#125;,#&#123;email&#125;,#&#123;address&#125;,#&#123;authority&#125;,#&#123;is_login&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br><span class="line"></span><br><span class="line">&lt;update id=&quot;update&quot; parameterType=&quot;com.mxxd.SCM.Entity.UserEntity&quot; &gt;</span><br><span class="line">UPDATE</span><br><span class="line">users</span><br><span class="line">SET</span><br><span class="line">&lt;if test=&quot;username != null and username != &apos;&apos;&quot;&gt;user_username = #&#123;username&#125;,&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;password != null and password != &apos;&apos;&quot;&gt;user_password = #&#123;password&#125;,&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;name != null and name != &apos;&apos;&quot;&gt;user_name = #&#123;name&#125;,&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;phone != null and phone != &apos;&apos;&quot;&gt;user_phone = #&#123;phone&#125;,&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;email != null and email != &apos;&apos;&quot;&gt;user_email = #&#123;email&#125;,&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;address != null and address != &apos;&apos;&quot;&gt;user_address = #&#123;address&#125;,&lt;/if&gt;</span><br><span class="line">&lt;if test=&quot;authority != null and authority != &apos;&apos;&quot;&gt;user_authority = #&#123;authority&#125;,&lt;/if&gt;</span><br><span class="line">WHERE</span><br><span class="line">user_id = #&#123;id&#125;</span><br><span class="line">&lt;/update&gt;</span><br><span class="line"></span><br><span class="line">&lt;delete id=&quot;delete&quot; parameterType=&quot;Integer&quot; &gt;</span><br><span class="line">   DELETE FROM</span><br><span class="line">   users</span><br><span class="line">   WHERE</span><br><span class="line">   user_id =#&#123;0&#125;</span><br><span class="line">&lt;/delete&gt;</span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
 
-//@Select(&quot;SELECT * FROM `users` where user_username = #{username} and user_password = #{password}&quot;)
-public UserEntity login(String username, String password);
+<p>Service层只需要一个service类即可 不需要一个接口一个实现类 添加注解 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">@Autowired 是指自动生成get和set方法</span><br><span class="line">@Service</span><br><span class="line">public class UserService &#123;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">private UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">public UserEntity login(String username, String password)&#123;</span><br><span class="line">	UserEntity user = userMapper.login(username,password);</span><br><span class="line">	return user;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public UserEntity queryUser(String name);
+<p>启动类添加注解 @MapperScan(“com.mxxd.SCM.Dao”)自动扫描Dao层mapper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@MapperScan(&quot;com.mxxd.SCM.Dao&quot;)</span><br><span class="line">public class ScmApplication &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">   	SpringApplication.run(ScmApplication.class, args);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public boolean insert(UserEntity user);
+<h3 id="2-前端不推荐jsp，推荐thymeleaf或freemarker"><a href="#2-前端不推荐jsp，推荐thymeleaf或freemarker" class="headerlink" title="2.前端不推荐jsp，推荐thymeleaf或freemarker"></a>2.前端不推荐jsp，推荐thymeleaf或freemarker</h3><p>使用freemarker<br>pom.xml文件添加依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter-freemarker&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-public boolean update(UserEntity user);
+<p>前端使用 .ftl 文件<br>在resources文件夹下创建两个目录：static 和 template<br>static：目录下创建css、js、img三个目录，存放静态资源文件<br>template：目录下存放 XX.ftl 文件<br>在com.mxxd.SCM目录下创建一个Conf目录，配置springboot的静态资源文件目录  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">   @Configuration</span><br><span class="line">public class WebMvcConfig extends WebMvcConfigurerAdapter &#123;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">       registry.addResourceHandler(&quot;/static/**&quot;).addResourceLocations(&quot;classpath:/static/&quot;);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Bean</span><br><span class="line">   public HttpMessageConverter&lt;String&gt; responseBodyConverter() &#123;</span><br><span class="line">       StringHttpMessageConverter converter = new StringHttpMessageConverter(</span><br><span class="line">               Charset.forName(&quot;UTF-8&quot;));</span><br><span class="line">       return converter;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void configureMessageConverters(</span><br><span class="line">           List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) &#123;</span><br><span class="line">       super.configureMessageConverters(converters);</span><br><span class="line">       converters.add(responseBodyConverter());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void configureContentNegotiation(</span><br><span class="line">           ContentNegotiationConfigurer configurer) &#123;</span><br><span class="line">       configurer.favorPathExtension(false);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public boolean delete(int id);
-
-}</code></pre><p>mapper.xml文件 <mapper namespace> 添加对应mapper文件的位置</mapper></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot; &gt;
-&lt;mapper namespace=&quot;com.mxxd.SCM.Dao.UserMapper&quot; &gt;
-
-&lt;resultMap id=&quot;userMap&quot; type=&quot;com.mxxd.SCM.Entity.UserEntity&quot; &gt;
-&lt;id column=&quot;user_id&quot; property=&quot;id&quot; /&gt;
-&lt;result column=&quot;user_username&quot; property=&quot;username&quot; /&gt;
-&lt;result column=&quot;user_password&quot; property=&quot;password&quot; /&gt;
-&lt;result column=&quot;user_name&quot; property=&quot;name&quot; /&gt;
-&lt;result column=&quot;user_phone&quot; property=&quot;phone&quot; /&gt;
-&lt;result column=&quot;user_email&quot; property=&quot;email&quot; /&gt;
-&lt;result column=&quot;user_address&quot; property=&quot;address&quot; /&gt;
-&lt;result column=&quot;user_authority&quot; property=&quot;authority&quot; /&gt;
-&lt;result column=&quot;is_login&quot; property=&quot;is_login&quot; /&gt;
-&lt;/resultMap&gt;
-
-&lt;select id=&quot;login&quot; parameterType=&quot;String&quot; resultMap=&quot;userMap&quot;&gt;
-  select *
-  from users where user_username = #{0} and user_password = #{1}
-       &lt;/select&gt;
-
-&lt;select id=&quot;queryUser&quot; resultMap=&quot;userMap&quot;&gt;
-select *
-from users
-where 1=1
-&lt;if test=&quot;id !=0&quot;&gt;
-and user_id = #{id}
-&lt;/if&gt;
-&lt;if test=&quot;username !=null and username !=&apos;&apos; &quot;&gt;
-and user_username = #{username}
-&lt;/if&gt;
-&lt;if test=&quot;password !=null and password !=&apos;&apos; &quot;&gt;
-and user_password = #{password}
-&lt;/if&gt;
-&lt;if test=&quot;name !=null and name !=&apos;&apos; &quot;&gt;
-and user_name like &quot;%&quot; #{name}&quot;%&quot;
-&lt;/if&gt;
-&lt;/select&gt;
-
-&lt;insert id=&quot;insert&quot; parameterType=&quot;com.mxxd.SCM.Entity.UserEntity&quot; &gt;
-   INSERT INTO
-  users
-  (user_username,user_password,user_name,user_phone,user_email,user_address,user_authority,is_login)
-   VALUES
-  (#{username}, #{password}, #{name},#{phone},#{email},#{address},#{authority},#{is_login})
-&lt;/insert&gt;
-
-&lt;update id=&quot;update&quot; parameterType=&quot;com.mxxd.SCM.Entity.UserEntity&quot; &gt;
-UPDATE
-users
-SET
-&lt;if test=&quot;username != null and username != &apos;&apos;&quot;&gt;user_username = #{username},&lt;/if&gt;
-&lt;if test=&quot;password != null and password != &apos;&apos;&quot;&gt;user_password = #{password},&lt;/if&gt;
-&lt;if test=&quot;name != null and name != &apos;&apos;&quot;&gt;user_name = #{name},&lt;/if&gt;
-&lt;if test=&quot;phone != null and phone != &apos;&apos;&quot;&gt;user_phone = #{phone},&lt;/if&gt;
-&lt;if test=&quot;email != null and email != &apos;&apos;&quot;&gt;user_email = #{email},&lt;/if&gt;
-&lt;if test=&quot;address != null and address != &apos;&apos;&quot;&gt;user_address = #{address},&lt;/if&gt;
-&lt;if test=&quot;authority != null and authority != &apos;&apos;&quot;&gt;user_authority = #{authority},&lt;/if&gt;
-WHERE
-user_id = #{id}
-&lt;/update&gt;
-
-&lt;delete id=&quot;delete&quot; parameterType=&quot;Integer&quot; &gt;
-   DELETE FROM
-   users
-   WHERE
-   user_id =#{0}
-&lt;/delete&gt;
-
-&lt;/mapper&gt;</code></pre><p>Service层只需要一个service类即可 不需要一个接口一个实现类 添加注解 </p>
-<pre><code>@Service
-@Autowired 是指自动生成get和set方法
-@Service
-public class UserService {
-
-@Autowired
-private UserMapper userMapper;
-
-public UserEntity login(String username, String password){
-    UserEntity user = userMapper.login(username,password);
-    return user;
-    }
-
-}</code></pre><p>启动类添加注解 @MapperScan(“com.mxxd.SCM.Dao”)自动扫描Dao层mapper</p>
-<pre><code>@SpringBootApplication
-@MapperScan(&quot;com.mxxd.SCM.Dao&quot;)
-public class ScmApplication {
-
-   public static void main(String[] args) {
-       SpringApplication.run(ScmApplication.class, args);
-   }
-}</code></pre><h3 id="2-前端不推荐jsp，推荐thymeleaf或freemarker"><a href="#2-前端不推荐jsp，推荐thymeleaf或freemarker" class="headerlink" title="2.前端不推荐jsp，推荐thymeleaf或freemarker"></a>2.前端不推荐jsp，推荐thymeleaf或freemarker</h3><p>使用freemarker<br>pom.xml文件添加依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-freemarker&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre><p>前端使用 .ftl 文件<br>在resources文件夹下创建两个目录：static 和 template<br>static：目录下创建css、js、img三个目录，存放静态资源文件<br>template：目录下存放 XX.ftl 文件<br>在com.mxxd.SCM目录下创建一个Conf目录，配置springboot的静态资源文件目录  </p>
-<pre><code>@Configuration
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
-
-@Override
-public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler(&quot;/static/**&quot;).addResourceLocations(&quot;classpath:/static/&quot;);
-}
-
-@Bean
-public HttpMessageConverter&lt;String&gt; responseBodyConverter() {
-    StringHttpMessageConverter converter = new StringHttpMessageConverter(
-            Charset.forName(&quot;UTF-8&quot;));
-    return converter;
-}
-
-@Override
-public void configureMessageConverters(
-        List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) {
-    super.configureMessageConverters(converters);
-    converters.add(responseBodyConverter());
-}
-
-@Override
-public void configureContentNegotiation(
-        ContentNegotiationConfigurer configurer) {
-    configurer.favorPathExtension(false);
-}
-}</code></pre><p>在 ftl 文件中如下引用<br><img src="https://i.imgur.com/q7Fbw3O.png" alt></p>
+<p>在 ftl 文件中如下引用<br><img src="https://images.weserv.nl/?url=https://i.imgur.com/q7Fbw3O.png" alt></p>
 <p>如果要引用其他页面，使用 &lt;#include /&gt;  </p>
-<pre><code>&lt;#include &quot;header.ftl&quot; encoding=&quot;UTF-8&quot;/&gt;</code></pre><h3 id="3-启动项目必须启动XXXApplication启动类"><a href="#3-启动项目必须启动XXXApplication启动类" class="headerlink" title="3.启动项目必须启动XXXApplication启动类"></a>3.启动项目必须启动XXXApplication启动类</h3><p><strong>不能进行单元测试！！！</strong> 因为需要等SpringBoot把所有的配置全部编译完成之后才能运行，不然会找不到BeanFactory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;#include &quot;header.ftl&quot; encoding=&quot;UTF-8&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-启动项目必须启动XXXApplication启动类"><a href="#3-启动项目必须启动XXXApplication启动类" class="headerlink" title="3.启动项目必须启动XXXApplication启动类"></a>3.启动项目必须启动XXXApplication启动类</h3><p><strong>不能进行单元测试！！！</strong> 因为需要等SpringBoot把所有的配置全部编译完成之后才能运行，不然会找不到BeanFactory</p>
 <h3 id="4-测试controller层调用service调用mapper连接数据库返回值是否正确"><a href="#4-测试controller层调用service调用mapper连接数据库返回值是否正确" class="headerlink" title="4.测试controller层调用service调用mapper连接数据库返回值是否正确"></a>4.测试controller层调用service调用mapper连接数据库返回值是否正确</h3><pre><code>@Controller
 @RequestMapping(&quot;/user&quot;)
 public class UserController {
