@@ -495,10 +495,11 @@
 <li>在 hive export to mysql 时，如果字段还有特殊字符，可能会出现因为切分数据而导致数据错位导致推数失败的情况。如果要对 hive 表中的数据进行处理的话，需要在 mapreduce 包下找到对应的 mapper 类（根据 hive 表类型划分为 TextExportMapper、ParquetMapper、SequenceFileMapper 等）</li>
 </ul>
 </li>
+<li>具体解析参数是在 SqoopParser 类下的 processArgs(Option opt, ListIterator iter) 方法</li>
 </ul>
 </li>
 </ul>
-<pre><code>- 具体解析参数是在 SqoopParser 类下的 processArgs(Option opt, ListIterator iter) 方法</code></pre><p>sqoopTool：sqoop具体的工具类</p>
+<p>sqoopTool：sqoop具体的工具类</p>
 <p>Hive 用增量<br>采集、建模需要固定的时间段，昨天9点到今天9点，限制住时间，或者要先获取到上次执行时间，再算上这次的执行时间。建模无法获取上次的执行时间，如果固定时间间隔，如果报错后续处理，比如垮天了，或者白天执行作业的时候就会很麻烦。<br>Hive不支持删除数据，对于不要的数据只能全量执行，不管是采集还是建模。<br>如果业务那边有一个base_table，每天的一个增量表，可以做成拉链表。燃气设备是做成了拉链表，是在源头做的，不是在hive</p>
 <p>kpi 是增量插入一天一条，但是如果存在回补历史数据或者修正历史数据，比如某一天的数据就很麻烦</p>
 
@@ -629,7 +630,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">109</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,15 +719,15 @@
         
         
           <li>
+            <a href="/2020/10/26/HBase-2/" title="HBase进阶" target="_blank">HBase进阶</a>
+          </li>
+        
+          <li>
             <a href="/2020/10/15/Redis-4/" title="Redis中的跳表" target="_blank">Redis中的跳表</a>
           </li>
         
           <li>
             <a href="/2020/10/15/Redis-3/" title="Redis的一些问题" target="_blank">Redis的一些问题</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/09/Hive-8/" title="Distcp 跨集群同步" target="_blank">Distcp 跨集群同步</a>
           </li>
         
       </ul>

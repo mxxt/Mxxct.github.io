@@ -133,13 +133,13 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="HashMap 中的哈希值计算问题1. hash 计算JDK1.8HashMap源码 1234static final int hash(Object key) &amp;#123;    int h;    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &amp;gt;&amp;gt;&amp;gt; 16);&amp;#125;   右移16位相当于将高16位移入到低16位">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/984423/201907/984423-20190718113737330-625791541.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/984423/201907/984423-20190718114255570-1053064897.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/984423/201907/984423-20190718113737330-625791541.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/984423/201907/984423-20190718114255570-1053064897.png">
 <meta property="og:updated_time" content="2020-08-21T08:52:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap 中的哈希值计算问题">
 <meta name="twitter:description" content="HashMap 中的哈希值计算问题1. hash 计算JDK1.8HashMap源码 1234static final int hash(Object key) &amp;#123;    int h;    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &amp;gt;&amp;gt;&amp;gt; 16);&amp;#125;   右移16位相当于将高16位移入到低16位">
-<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/984423/201907/984423-20190718113737330-625791541.png">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/984423/201907/984423-20190718113737330-625791541.png">
 
 
 
@@ -466,10 +466,10 @@
         <h2 id="HashMap-中的哈希值计算问题"><a href="#HashMap-中的哈希值计算问题" class="headerlink" title="HashMap 中的哈希值计算问题"></a>HashMap 中的哈希值计算问题</h2><h3 id="1-hash-计算"><a href="#1-hash-计算" class="headerlink" title="1. hash 计算"></a>1. hash 计算</h3><p>JDK1.8<br>HashMap源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img2018.cnblogs.com/blog/984423/201907/984423-20190718113737330-625791541.png" alt></p>
+<p><img src="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/984423/201907/984423-20190718113737330-625791541.png" alt></p>
 <p>右移16位相当于将高16位移入到低16位，再与原hashcode做异或计算（位相同为0，不同为1）可以将高低位二进制特征混合起来 =&gt; 高16位没有发生变化，但是低16位改变了</p>
 <p>拿到的hash值会参与hashmap中数组槽位的计算，计算公式：(n - 1) &amp; hash，假设数组初始槽位16个，那么槽位计算如下：</p>
-<p><img src="https://img2018.cnblogs.com/blog/984423/201907/984423-20190718114255570-1053064897.png" alt></p>
+<p><img src="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/984423/201907/984423-20190718114255570-1053064897.png" alt></p>
 <p>高区的16位很有可能会被数组槽位数的二进制码锁屏蔽，<strong>如果我们不做刚才移位异或运算，那么在计算槽位时将丢失高区特征</strong></p>
 <p>虽然丢失了高区特征，不同hashcode也可以计算出不同的槽位来，但是如果两个hashcode很接近时，高区的特征差异可能会导致一次哈希碰撞。</p>
 <h3 id="2-使用异或运算的原因"><a href="#2-使用异或运算的原因" class="headerlink" title="2. 使用异或运算的原因"></a>2. 使用异或运算的原因</h3><p>异或运算能更好的保留各部分的特征，如果采用 &amp; 运算计算出来的值会向0靠拢，采用 | 运算计算出来的值会向1靠拢</p>
@@ -603,7 +603,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">109</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -692,15 +692,15 @@
         
         
           <li>
+            <a href="/2020/10/26/HBase-2/" title="HBase进阶" target="_blank">HBase进阶</a>
+          </li>
+        
+          <li>
             <a href="/2020/10/15/Redis-4/" title="Redis中的跳表" target="_blank">Redis中的跳表</a>
           </li>
         
           <li>
             <a href="/2020/10/15/Redis-3/" title="Redis的一些问题" target="_blank">Redis的一些问题</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/09/Hive-8/" title="Distcp 跨集群同步" target="_blank">Distcp 跨集群同步</a>
           </li>
         
       </ul>
