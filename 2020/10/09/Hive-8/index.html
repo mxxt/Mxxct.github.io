@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Distcp 跨集群同步1. 使用方法及原理12hadoop distcp srcPath tarPath会把srcPath和tarPath下的所有目录、文件信息放入到 _distcp_src_files 和 _distcp_dst_files 两个临时文件中，具体文件内容的拷贝工作交给多个map任务，会导致一个问题，就是文件过多那么map任务数就会很多，每个datanode有一个上限，极少数情况">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-10T09:45:00.000Z">
+<meta property="og:updated_time" content="2020-11-10T03:33:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Distcp 跨集群同步">
 <meta name="twitter:description" content="Distcp 跨集群同步1. 使用方法及原理12hadoop distcp srcPath tarPath会把srcPath和tarPath下的所有目录、文件信息放入到 _distcp_src_files 和 _distcp_dst_files 两个临时文件中，具体文件内容的拷贝工作交给多个map任务，会导致一个问题，就是文件过多那么map任务数就会很多，每个datanode有一个上限，极少数情况">
@@ -484,7 +484,26 @@
 <h3 id="2-几个问题"><a href="#2-几个问题" class="headerlink" title="2. 几个问题"></a>2. 几个问题</h3><h4 id="2-1-文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全"><a href="#2-1-文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全" class="headerlink" title="2.1 文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全"></a>2.1 文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全</h4><h4 id="2-2-提示信息非常少，如果是-调度器-gt-作业-gt-distcp-gt-mrJob，-此时输出的信息应该是-mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败"><a href="#2-2-提示信息非常少，如果是-调度器-gt-作业-gt-distcp-gt-mrJob，-此时输出的信息应该是-mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败" class="headerlink" title="2.2 提示信息非常少，如果是 调度器 -&gt; 作业 -&gt; distcp -&gt; mrJob， 此时输出的信息应该是 mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败"></a>2.2 提示信息非常少，如果是 调度器 -&gt; 作业 -&gt; distcp -&gt; mrJob， 此时输出的信息应该是 mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败</h4><h4 id="2-3-长尾问题-？"><a href="#2-3-长尾问题-？" class="headerlink" title="2.3 长尾问题 ？"></a>2.3 长尾问题 ？</h4><h3 id="3-分区表的跨集群同步问题"><a href="#3-分区表的跨集群同步问题" class="headerlink" title="3. 分区表的跨集群同步问题"></a>3. 分区表的跨集群同步问题</h3><p>不管是普通的表还是分区表，都需要刷新元数据，<code>invalidate metadata table xxx</code></p>
 <p>分区表还需要手动添加分区，<code>alter table xxx add if not exists partition(key1=&quot;value1&quot;, key2=&quot;value2&quot;) partition(key1=&quot;value3&quot;, key2=&quot;value4&quot;)</code></p>
 <p>hive shell 通过 <code>msck repair table xxx</code> 可以自动去读取hdfs下文件信息，来添加元数据中不存在的分区信息，但是存在jdbc连接时不识别 msck 指令的情况</p>
+<h3 id="4-hive同步phoenix"><a href="#4-hive同步phoenix" class="headerlink" title="4. hive同步phoenix"></a>4. hive同步phoenix</h3><p><a href="http://phoenix.apache.org/hive_storage_handler.html" target="_blank" rel="noopener">官网地址</a></p>
+<p>官网提供的一个方案是可以在hive创建表，然后存储上指定phoenix的一个方法，<code>org.apache.phoenix.hive.PhoenixStorageHandler</code>，通过一些配置来完成。但是会存在一些问题，比如hive与phoenix的数据类型转换问题，bigint、int；还有string的长度限制等</p>
+<p>∴ 跨集群表同步（parquet格式） + hive同步phoenix的方案解决如下</p>
+<ol>
+<li>首先将集群1的hive表通过元数据直接复制到集群2来创建</li>
+<li>对于未分区的表，直接复制文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FSDataInputStream input = batchClusterFS.open(path);</span><br><span class="line">FSDataOutputStream output = queryClusterFS.create(new Path(queryHiveTablePath,fileName), true);</span><br><span class="line">IOUtils.copyBytes(input, output,queryClusterFS.getConf(), true);</span><br></pre></td></tr></table></figure>
 
+<p>如果是分区的表（eg：impala），递归复制文件夹下的所有文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Arrays.stream(files).parallel().forEach(dirPath -&gt; &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        FileUtil.copy(batchClusterFS, dirPath.getPath(), queryClusterFS, new Path(queryHiveTable.getSd().getLocation()), false, queryClusterFS.getConf());</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        logger.error(&quot;&gt;&gt; 分区表拷贝失败 dirPath: &#123;&#125;, error: &#123;&#125; &quot;, dirPath, e);</span><br><span class="line">        table.setDistStatus(CrossClusterHiveTableCopy.FAIL_STATUS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>都需要刷新元数据信息</p>
+<ol start="3">
+<li>遍历集群2hive表对应的hdfs文件，需要将hive中字段的类型和phoenix类型进行转换，<code>org.apache.phoenix.schema.types</code>，比如hive的string转phoenix的varchar；hive的array转phoenix的VARCHAR[]。</li>
+</ol>
+<blockquote>
+<p>如果一个字段长度可能会一直变，考虑到不能随便修改phphonenix的字段长度，也不能把字段长度设置的太大，可以将hive的字段设置为array，对应phoenix的VARCHAR[]，这就是一个变长字符数组。<br>hive中的array类型，从hive元数据中可以查到以下信息：data_type=2003,column_size=0；对应phoenix的数据类型是VARCHAR[], column_size为null，是变长数组</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">这里的dataType是varchar[]；PVarcharArray 是 org.apache.phoenix.schema.types.PVarcharArray，是phoenix的类型</span><br><span class="line">if (dataType instanceof PVarcharArray) &#123;</span><br><span class="line">    // org.apache.hadoop.io.ArrayWritable</span><br><span class="line">    ArrayWritable aw = (ArrayWritable) value;</span><br><span class="line">    ArrayList strArr = new ArrayList();</span><br><span class="line">    for (Writable wr : aw.get()) &#123;</span><br><span class="line">        strArr.add(wr.toString());</span><br><span class="line">&#125;</span><br><span class="line">Array array = phoenixConn.createArrayOf(&quot;VARCHAR&quot;, strArr.toArray());</span><br><span class="line">JobLogger.log(&quot;&gt;&gt; type: varchar[] size &#123;&#125; &quot;, strArr.size());</span><br><span class="line">statement.setArray(i + 1, array);</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -612,7 +631,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -634,7 +653,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -701,15 +720,15 @@
         
         
           <li>
-            <a href="/2020/10/26/HBase-2/" title="HBase进阶" target="_blank">HBase进阶</a>
+            <a href="/2020/11/07/Lombok-1/" title="Lombok" target="_blank">Lombok</a>
           </li>
         
           <li>
-            <a href="/2020/10/15/Redis-4/" title="Redis中的跳表" target="_blank">Redis中的跳表</a>
+            <a href="/2020/11/07/Phoenix-4/" title="Phoenix 异步创建索引" target="_blank">Phoenix 异步创建索引</a>
           </li>
         
           <li>
-            <a href="/2020/10/15/Redis-3/" title="Redis的一些问题" target="_blank">Redis的一些问题</a>
+            <a href="/2020/10/29/JVM内存管理/" title="JVM内存管理" target="_blank">JVM内存管理</a>
           </li>
         
       </ul>
@@ -731,7 +750,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Distcp-跨集群同步"><span class="nav-text">Distcp 跨集群同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用方法及原理"><span class="nav-text">1. 使用方法及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-几个问题"><span class="nav-text">2. 几个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全"><span class="nav-text">2.1 文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-提示信息非常少，如果是-调度器-gt-作业-gt-distcp-gt-mrJob，-此时输出的信息应该是-mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败"><span class="nav-text">2.2 提示信息非常少，如果是 调度器 -&gt; 作业 -&gt; distcp -&gt; mrJob， 此时输出的信息应该是 mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-长尾问题-？"><span class="nav-text">2.3 长尾问题 ？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-分区表的跨集群同步问题"><span class="nav-text">3. 分区表的跨集群同步问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Distcp-跨集群同步"><span class="nav-text">Distcp 跨集群同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用方法及原理"><span class="nav-text">1. 使用方法及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-几个问题"><span class="nav-text">2. 几个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全"><span class="nav-text">2.1 文件数量过多，导致map过多，超过datanode上限，导致数据文件拷贝不全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-提示信息非常少，如果是-调度器-gt-作业-gt-distcp-gt-mrJob，-此时输出的信息应该是-mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败"><span class="nav-text">2.2 提示信息非常少，如果是 调度器 -&gt; 作业 -&gt; distcp -&gt; mrJob， 此时输出的信息应该是 mrJob的，也就是distcp的信息，而不是作业的信息，可能会导致调度器无法拿到作业执行信息从而导致作业调度失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-长尾问题-？"><span class="nav-text">2.3 长尾问题 ？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-分区表的跨集群同步问题"><span class="nav-text">3. 分区表的跨集群同步问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-hive同步phoenix"><span class="nav-text">4. hive同步phoenix</span></a></li></ol></li></ol></div>
             
 
           </div>
