@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Java,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -125,21 +125,16 @@
 
 
 
-<meta name="description" content="JVM内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JVM内存管理">
-<meta property="og:url" content="https://mxxct4git.github.io/2020/10/29/JVM内存管理/index.html">
+<meta name="description" content="君子不器">
+<meta property="og:type" content="website">
+<meta property="og:title" content="猫熊小才天の书院">
+<meta property="og:url" content="https://mxxct4git.github.io/tags/JVM/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="JVM内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短">
+<meta property="og:description" content="君子不器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
-<meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510003027516-1618059091.png">
-<meta property="og:updated_time" content="2020-10-29T09:10:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM内存管理">
-<meta name="twitter:description" content="JVM内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短">
-<meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
+<meta name="twitter:title" content="猫熊小才天の书院">
+<meta name="twitter:description" content="君子不器">
 
 
 
@@ -169,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://mxxct4git.github.io/2020/10/29/JVM内存管理/">
+  <link rel="canonical" href="https://mxxct4git.github.io/tags/JVM/">
 
 
 
 
 
-  <title>JVM内存管理 | 猫熊小才天の书院</title>
+  <title>标签: JVM | 猫熊小才天の书院</title>
   
 
 
@@ -196,7 +191,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -322,239 +317,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>JVM<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/10/29/JVM内存管理/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mxxct">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/panda-180.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="猫熊小才天の书院">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2020/10/29/JVM-1/" itemprop="url">
+              
+                <span itemprop="name">JVM内存管理</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">JVM内存管理</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-			
-			
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-29T16:30:00+08:00">
-                2020-10-29
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-10-29T16:30:00+08:00" content="2020-10-29">
+          10-29
+        </time>
+      </div>
 
-            
-			
-			
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/10/29/JVM内存管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/10/29/JVM内存管理/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/10/29/JVM内存管理/" class="leancloud_visitors" data-flag-title="JVM内存管理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-		  
-
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="JVM内存管理"><a href="#JVM内存管理" class="headerlink" title="JVM内存管理"></a>JVM内存管理</h2><p><a href="https://www.cnblogs.com/alsf/p/9017447.html" target="_blank" rel="noopener">参考文档</a></p>
-<h3 id="1-堆和栈"><a href="#1-堆和栈" class="headerlink" title="1. 堆和栈"></a>1. 堆和栈</h3><p>JVM内存划分：</p>
-<ol>
-<li>寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令）</li>
-<li>本地方法区</li>
-<li>方法区</li>
-<li>栈内存（stack）<ul>
-<li>由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量）</li>
-<li>先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短</li>
-</ul>
-</li>
-<li>堆内存（heap，不是数据结构中的堆）<ul>
-<li>由程序猿分配释放，如果程序猿不释放，程序结束时由GC回收</li>
-<li>存储的是数组和对象，凡是new的都在堆中，实体（对象）里面封装了多个数据，一个数据消失，实体不会消失，还可以用，所以堆不会随时释放，会由GC不定时回收</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>int[] arr = new int[3];<br>主函数进栈 -&gt; 在栈中定义一个 arr 变量 -&gt; 在堆里通过new开辟一个空间，这个空间会产生一个地址，这个地址下的所有所有会进行初始化 -&gt; 把内存的地址赋值给 arr<br>int[] arr = null; arr不做任何指向，null的作用就是取消引用数据类型的指向</p>
-</blockquote>
-<h4 id="1-1-堆"><a href="#1-1-堆" class="headerlink" title="1.1 堆"></a>1.1 堆</h4><p>堆又分为</p>
-<ul>
-<li>新生代<ul>
-<li>新生代又被进一步划分为Eden和Survivor区，最后Survivor由FromSpace和ToSpace组成</li>
-<li>新建的对象都是由新生代分配内存</li>
-<li>新生代大小可以由-Xmn来控制，也可以用-XX:SurvivorRatio来控制Eden和Survivor的比例</li>
-</ul>
-</li>
-<li>老年代<ul>
-<li>用于存放新生代中经过多次垃圾回收仍然存活的对象</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png" alt="堆结构"></p>
-<p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510003027516-1618059091.png" alt="堆结构"></p>
-<h4 id="1-2-栈"><a href="#1-2-栈" class="headerlink" title="1.2 栈"></a>1.2 栈</h4><p>每个线程执行每个方法的时候都会在栈中申请一个栈帧，每个栈帧包括局部变量区和操作数栈，用于存放此次方法调用过程中的临时变量、参数和中间结果</p>
-<h3 id="2-GC"><a href="#2-GC" class="headerlink" title="2. GC"></a>2. GC</h3><ol>
-<li>新生代GC<br> 新生代通常存活时间较短，因此基于<strong>复制算法</strong>来进行回收，所谓复制算法就是扫描出存活的对象，并复制到一块新的完全未使用的空间中<br> 新生代满了后，会把对象转移到旧生代，然后清空继续装载，当旧生代也满了后，就会报outofmemory的异常</li>
-<li>老年代GC<br> 老年代对象存活的时间比较长，比较稳定。因此采用<strong>标记（Mark）算法</strong>来进行回收，所谓标记就是扫描出存活的对象，然后再进行回收未被标记的对象，回收后对用空出的空间要么进行合并，要么标记出来便于下次进行分配，总之就是要减少内存碎片带来的效率损耗</li>
-</ol>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/10/26/HBase-2/" rel="next" title="HBase进阶">
-                <i class="fa fa-chevron-left"></i> HBase进阶
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/11/03/Mybatis-1/" rel="prev" title="MyBatis 查询结果自动封装为map，出现null而没有字段名">
-                MyBatis 查询结果自动封装为map，出现null而没有字段名 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -562,13 +370,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -591,17 +392,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -629,7 +421,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -640,7 +432,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -727,22 +519,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM内存管理"><span class="nav-text">JVM内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆和栈"><span class="nav-text">1. 堆和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-堆"><span class="nav-text">1.1 堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-栈"><span class="nav-text">1.2 栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GC"><span class="nav-text">2. GC</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -890,10 +666,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
