@@ -494,6 +494,9 @@
 <h3 id="4-修改字段长度"><a href="#4-修改字段长度" class="headerlink" title="4. 修改字段长度"></a>4. 修改字段长度</h3><p>当创建好phoenix的表后， 默认情况下phoenix不允许修改字段类型和长度。但是可以通过直接修改 SYSTEM.CATALOG 里的数据达到目的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upsert into SYSTEM.CATALOG (TENANT_ID,TABLE_SCHEM,TABLE_NAME,COLUMN_NAME,COLUMN_FAMILY,DATA_TYPE,COLUMN_SIZE) values(&apos;&apos;,&apos;库&apos;,&apos;表&apos;,&apos;字段&apos;,&apos;0&apos;,12,50);</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>注意 data_type 和 column_size<br>数据类型的转换在 org.apache.phoenix.schema.types</p>
+</blockquote>
 <p>测试发现，即使上面的上SQL执行成功，重新执行 upsert 往表里插入数据，DEBIT_AMOUNT(初始长度6)超过初始长度的还是不能成功</p>
 <p>经过查看源码发现，在 <code>SYSTEM.CATALOG</code> 上有协处理器， 这个里面有表元数据缓存，默认要三个小时过期</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.apache.phoenix.cache.GlobalCache</span><br><span class="line">long maxTTL = this.config.getLong(&quot;phoenix.coprocessor.maxMetaDataCacheTimeToLiveMs&quot;, 1800000L);</span><br><span class="line">          long maxSize = this.config.getLong(&quot;phoenix.coprocessor.maxMetaDataCacheSize&quot;, 20971520L);</span><br></pre></td></tr></table></figure>
@@ -627,7 +630,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -649,7 +652,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -724,7 +727,7 @@
           </li>
         
           <li>
-            <a href="/2020/10/29/JVM内存管理/" title="JVM内存管理" target="_blank">JVM内存管理</a>
+            <a href="/2020/11/03/Mybatis-1/" title="MyBatis 查询结果自动封装为map，出现null而没有字段名" target="_blank">MyBatis 查询结果自动封装为map，出现null而没有字段名</a>
           </li>
         
       </ul>

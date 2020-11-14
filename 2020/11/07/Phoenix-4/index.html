@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Phoenix 异步创建索引当表数据量过大的时候，创建索引会报错，可以修改服务器端的 hbase.rpc.timeout，默认是1分钟，可以自定义时间。也可以异步创建索引，通过在语句后面添加async 关键字。 需要注意的是：  异步创建索引只支持全局索引 执行async语句只是第一步，还需要通过执行jar包来保证索引真正的建立  1. 为什么只支持全局索引？首先是本地索引和全局索引的一些概念和区">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-07T11:16:00.000Z">
+<meta property="og:updated_time" content="2020-11-13T09:17:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phoenix 异步创建索引">
 <meta name="twitter:description" content="Phoenix 异步创建索引当表数据量过大的时候，创建索引会报错，可以修改服务器端的 hbase.rpc.timeout，默认是1分钟，可以自定义时间。也可以异步创建索引，通过在语句后面添加async 关键字。 需要注意的是：  异步创建索引只支持全局索引 执行async语句只是第一步，还需要通过执行jar包来保证索引真正的建立  1. 为什么只支持全局索引？首先是本地索引和全局索引的一些概念和区">
@@ -510,14 +510,6 @@
 <p>如果遇到 <code>java.io.IOException: Can&#39;t get Master Kerberos principal for use as renewer</code> 说明缺少yarn的配置文件</p>
 <p>如果遇到 <code>org.apache.hadoop.security.AccessControlException: Permission denied: user=phoenix, access=WRITE, inode=&quot;/user&quot;:hdfs:supergroup:drwxr-xr-x</code> 需要在 <code>hbase-site.xml</code> 文件里添加 <code>hbase.fs.tmp.dir</code> 配置项，值是hdfs上一个有读写权限的目录路径。<br>原因：从 org.apache.phoenix.mapreduce.index.IndexTool 开始追代码，会找到 org.apache.hadoop.hbase.mapreduce.HFileOutputFormat2，在配置mr作业的时候，<code>configurePartitioner()</code> 方法里 <code>String hbaseTmpFsDir = conf.get(&quot;hbase.fs.tmp.dir&quot;, HConstants.DEFAULT_TEMPORARY_HDFS_DIRECTORY);</code> 会去读取配置文件里的这个值，默认是 <code>&quot;/user/&quot; + System.getProperty(&quot;user.name&quot;) + &quot;/hbase-staging&quot;</code></p>
 <h3 id="3-附"><a href="#3-附" class="headerlink" title="3. 附"></a>3. 附</h3><ol>
-<li>在创建索引的过程中，发现了一个可能是版本bug的地方，已提官网issue，链接如下</li>
-</ol>
-<p><a href="https://issues.apache.org/jira/projects/PHOENIX/issues/PHOENIX-6215?filter=updatedrecently" target="_blank" rel="noopener">官网issue地址</a></p>
-<p>问题：如果一个字段有默认值，比如一个表有 abc 三个字段，ab是主键，c有默认值，<code>c tinyint default 0</code>，现在要根据b和c来查询，为了提高效率，那就需要针对b和c创建本地索引的时候，查看索引表（虽然本地索引不是一个表，只是一个映射），会自动把 a 字段也带入进去，这时候会发现 a 字段的值发生了变化；如果 c 没有默认值，那么重复这个操作不会有问题。如果 c 设置成 integer 的话，也没有问题，感觉是 tinyint 的某些实现有冲突。</p>
-<p>附：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PHOENIX_OPTS=&quot;-Dsun.security.krb5.principal=phoenix&quot;</span><br><span class="line">/usr/java/jdk1.8.0_121/bin/java $PHOENIX_OPTS  -cp &quot;/etc/hbase/conf:/etc/hbase/conf:/data/cloudera/parcels/PHOENIX-5.0.0-cdh6.2.0.p0.1308267/lib/phoenix/bin/../phoenix-5.0.0-cdh6.2.0-client.jar:::/etc/hadoop/conf:/etc/hadoop/conf:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop/.//*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/./:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/.//*:/data/cloudera/parcels/CDH/lib/hadoop-mapreduce/.//*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-yarn/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-yarn/.//*&quot; -Dlog4j.configuration=file:/data/penglin/log4j.properties sqlline.SqlLine -d org.apache.phoenix.jdbc.PhoenixDriver -u jdbc:phoenix:host241.slave.dev.cluster.enn.cn:2181:/hbase -n none -p none --color=true --fastConnect=false --verbose=true --incremental=false --isolation=TRANSACTION_READ_COMMITTED</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
 <li>查询执行计划，判断是否命中索引表</li>
 </ol>
 <table>
@@ -568,16 +560,13 @@
 <td align="center">收集查询信息的 epoch time</td>
 </tr>
 </tbody></table>
-<ol start="3">
-<li>如何命中索引</li>
+<ol start="2">
+<li>在创建索引的过程中，发现了一个可能是版本bug的地方，已提官网issue，链接如下</li>
 </ol>
-<ul>
-<li>select * 不会命中索引</li>
-<li>select 具体的字段 from table where col … // col 是第一个主键或者是索引里包含的字段</li>
-</ul>
-<p>如果 index 包含 a、b 三个字段，where 里有 a 和 c 两个字段，那么也不会走索引，因为c不在索引里，发现索引走不通，只能走全表</p>
-<p>如果 index 包含 a、b 三个字段，where 里有 a 字段，select 里有 a, c 字段，会走索引</p>
-
+<p><a href="https://issues.apache.org/jira/projects/PHOENIX/issues/PHOENIX-6215?filter=updatedrecently" target="_blank" rel="noopener">官网issue地址</a></p>
+<p>问题：如果在创建本地索引时，有一个字段设置了default value，在生成的索引表里就只会显示默认值，不管是什么类型；如果这个类型是tinyint的话，还可能会造成之后主键的数据，原表的数据是对的，但是索引表是错的，如果命中了索引表，那么就返回的是错误的数据。</p>
+<p>附：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PHOENIX_OPTS=&quot;-Dsun.security.krb5.principal=phoenix&quot;</span><br><span class="line">/usr/java/jdk1.8.0_121/bin/java $PHOENIX_OPTS  -cp &quot;/etc/hbase/conf:/etc/hbase/conf:/data/cloudera/parcels/PHOENIX-5.0.0-cdh6.2.0.p0.1308267/lib/phoenix/bin/../phoenix-5.0.0-cdh6.2.0-client.jar:::/etc/hadoop/conf:/etc/hadoop/conf:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop/.//*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/./:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/.//*:/data/cloudera/parcels/CDH/lib/hadoop-mapreduce/.//*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-yarn/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-yarn/.//*&quot; -Dlog4j.configuration=file:/data/penglin/log4j.properties sqlline.SqlLine -d org.apache.phoenix.jdbc.PhoenixDriver -u jdbc:phoenix:host241.slave.dev.cluster.enn.cn:2181:/hbase -n none -p none --color=true --fastConnect=false --verbose=true --incremental=false --isolation=TRANSACTION_READ_COMMITTED</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -609,8 +598,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/10/29/JVM内存管理/" rel="next" title="JVM内存管理">
-                <i class="fa fa-chevron-left"></i> JVM内存管理
+              <a href="/2020/11/03/Mybatis-1/" rel="next" title="MyBatis 查询结果自动封装为map，出现null而没有字段名">
+                <i class="fa fa-chevron-left"></i> MyBatis 查询结果自动封装为map，出现null而没有字段名
               </a>
             
           </div>
@@ -705,7 +694,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -727,7 +716,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -802,7 +791,7 @@
           </li>
         
           <li>
-            <a href="/2020/10/29/JVM内存管理/" title="JVM内存管理" target="_blank">JVM内存管理</a>
+            <a href="/2020/11/03/Mybatis-1/" title="MyBatis 查询结果自动封装为map，出现null而没有字段名" target="_blank">MyBatis 查询结果自动封装为map，出现null而没有字段名</a>
           </li>
         
       </ul>
