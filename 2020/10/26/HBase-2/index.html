@@ -125,19 +125,20 @@
 
 
 
-<meta name="description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构 master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create table">
+<meta name="description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create tabl">
 <meta name="keywords" content="Hadoop,HBase">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HBase进阶">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/10/26/HBase-2/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构 master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create table">
+<meta property="og:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create tabl">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402125111282-1966599087.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402130346713-706113248.png">
 <meta property="og:updated_time" content="2020-10-26T10:45:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase进阶">
-<meta name="twitter:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构 master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create table">
+<meta name="twitter:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create tabl">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402125111282-1966599087.png">
 
 
@@ -464,9 +465,10 @@
       
         <h2 id="HBase进阶"><a href="#HBase进阶" class="headerlink" title="HBase进阶"></a>HBase进阶</h2><p><a href="http://hbasefly.com/2017/07/02/hbase-sequenceid/" target="_blank" rel="noopener">HBase中的HLog</a><br><a href="http://hbasefly.com/2019/10/18/hbase-memstore-evolution/" target="_blank" rel="noopener">HBase中的MemStore</a></p>
 <h3 id="1-架构"><a href="#1-架构" class="headerlink" title="1. 架构"></a>1. 架构</h3><p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402125111282-1966599087.png" alt="架构图"></p>
+<p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402130346713-706113248.png" alt="物理存储"></p>
 <p>master负责管理多个region server，一个region server里有多个region。<br>一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region<br>一个表最终被保存在多个region server里</p>
-<p>hmaster挂了不影响读写，但是 create table 这种涉及元数据的操作，如果hmaster挂了就会报错</p>
-<p>一个region里有多个store，一个store代表一个列族。（region按照行键来划分，所以相当于每一行有几个列族就有几个store）<br>store包括两部分：内存中的memstore和磁盘的storefile。写数据会先写到memstore，当数据达到阈值（默认64M）后 region server 会启动 flushcache 进行将数据写到 storefile里，每次形成一个storefile<br>当storefile文件的数量增长到一定阈值后，系统会进行合并（minor、major ），在合并过程中会进行版本合并和删除工作（major），形成更大的storefile<br>当一个region所有storefile的大小和数量超过一定阈值后，会把当前的region分割为两个，并由hmaster分配到相应的regionserver，实现负载均衡<br>客户端检索数据，先在memstore找，找不到再去blockcache查找，找不到再找storefile，即：client-&gt;memstore-&gt;blockcache-&gt;storefile。如果读到了会把数据放到blockcache里缓存，方便下次读取</p>
+<p>hmaster挂了不影响读写，但是 create table 这种涉及元数据的操作，如果hmaster挂了就会报错（因为客户端可以直接跟zookeeper进行会话，拿到region sever地址，就可以直接读写访问对应的region）</p>
+<p>一个region里有多个store，一个store代表一个列族。（region按照行键来划分，所以相当于每一行有几个列族就有几个store）<br>store包括两部分：内存中的memstore和磁盘的storefile。写数据会先写到memstore，当数据达到阈值（默认64M）后 region server 会启动 flushcache 进行将数据写到 storefile里，每次形成一个storefile<br>当storefile文件的数量增长到一定阈值后，系统会进行合并（minor、major），在合并过程中会进行版本合并和删除工作（major），形成更大的storefile<br>当一个region所有storefile的大小和数量超过一定阈值后，会把当前的region分割为两个，并由hmaster分配到相应的regionserver，实现负载均衡<br>客户端检索数据，先在memstore找，找不到再去blockcache查找，找不到再找storefile，即：client-&gt;memstore-&gt;blockcache-&gt;storefile。如果读到了会把数据放到blockcache里缓存，方便下次读取</p>
 <p>Region是HBase中存储和负载均衡的最小单元,不同的Region可以分布在不同的 Region Server上<br>Region由一个或者多个Store组成，每个store保存一个columns family<br>每个Strore又由一个memStore和0至多个StoreFile组成<br>memstore为写入缓存，blockcache为读取缓存</p>
 <h3 id="2-写数据"><a href="#2-写数据" class="headerlink" title="2. 写数据"></a>2. 写数据</h3><ol>
 <li>Client 向 zk 发送请求，请求 meta 表所有的 regionServer</li>

@@ -125,20 +125,20 @@
 
 
 
-<meta name="description" content="Redis中的跳表参考网址1参考网址2 redis 数据类型 zset 实现有序集合，底层使用的数据结构是跳表。 源码在 src/t_zset.c 文件中 1. 跳表 SkipList查询链表时会从头到尾的遍历链表，最坏的时间复杂度是O(N)，这是一次比较一个值，如果跳着1个元素来进行比较（比较下标为2n+1的元素），那么就相当于一次性比较2个元素，效率就会提高 =&amp;gt; 跳表   跳表是牺牲空">
+<meta name="description" content="Redis中的跳表参考网址1参考网址2 redis 数据类型 zset 实现有序集合，底层使用的数据结构是跳表。 源码在 src/t_zset.c 文件中 元素有序的时候，如果是数组，可以通过二分查找来提速；如果是链表，如何提速？ =&amp;gt; 跳表，插入/删除/搜索 都是O(logn)  第一层索引 n/2 个节点，第二层 n/4 个节点，第三层 n/8，第K层 n/(2^k)假设第K层有2个节点">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis中的跳表">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/10/15/Redis-4/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Redis中的跳表参考网址1参考网址2 redis 数据类型 zset 实现有序集合，底层使用的数据结构是跳表。 源码在 src/t_zset.c 文件中 1. 跳表 SkipList查询链表时会从头到尾的遍历链表，最坏的时间复杂度是O(N)，这是一次比较一个值，如果跳着1个元素来进行比较（比较下标为2n+1的元素），那么就相当于一次性比较2个元素，效率就会提高 =&amp;gt; 跳表   跳表是牺牲空">
+<meta property="og:description" content="Redis中的跳表参考网址1参考网址2 redis 数据类型 zset 实现有序集合，底层使用的数据结构是跳表。 源码在 src/t_zset.c 文件中 元素有序的时候，如果是数组，可以通过二分查找来提速；如果是链表，如何提速？ =&amp;gt; 跳表，插入/删除/搜索 都是O(logn)  第一层索引 n/2 个节点，第二层 n/4 个节点，第三层 n/8，第K层 n/(2^k)假设第K层有2个节点">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/1365470/201811/1365470-20181120213521027-836921723.png">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/1365470/201811/1365470-20181120213055029-767111953.png">
-<meta property="og:updated_time" content="2020-10-19T09:58:00.000Z">
+<meta property="og:updated_time" content="2020-11-17T10:28:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis中的跳表">
-<meta name="twitter:description" content="Redis中的跳表参考网址1参考网址2 redis 数据类型 zset 实现有序集合，底层使用的数据结构是跳表。 源码在 src/t_zset.c 文件中 1. 跳表 SkipList查询链表时会从头到尾的遍历链表，最坏的时间复杂度是O(N)，这是一次比较一个值，如果跳着1个元素来进行比较（比较下标为2n+1的元素），那么就相当于一次性比较2个元素，效率就会提高 =&amp;gt; 跳表   跳表是牺牲空">
+<meta name="twitter:description" content="Redis中的跳表参考网址1参考网址2 redis 数据类型 zset 实现有序集合，底层使用的数据结构是跳表。 源码在 src/t_zset.c 文件中 元素有序的时候，如果是数组，可以通过二分查找来提速；如果是链表，如何提速？ =&amp;gt; 跳表，插入/删除/搜索 都是O(logn)  第一层索引 n/2 个节点，第二层 n/4 个节点，第三层 n/8，第K层 n/(2^k)假设第K层有2个节点">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/1365470/201811/1365470-20181120213521027-836921723.png">
 
 
@@ -455,16 +455,44 @@
         <h2 id="Redis中的跳表"><a href="#Redis中的跳表" class="headerlink" title="Redis中的跳表"></a>Redis中的跳表</h2><p><a href="https://www.cnblogs.com/lfri/p/9991925.html" target="_blank" rel="noopener">参考网址1</a><br><a href="https://www.cnblogs.com/hunternet/p/11248192.html" target="_blank" rel="noopener">参考网址2</a></p>
 <p>redis 数据类型 zset 实现有序集合，底层使用的数据结构是跳表。</p>
 <p>源码在 src/t_zset.c 文件中</p>
-<h3 id="1-跳表-SkipList"><a href="#1-跳表-SkipList" class="headerlink" title="1. 跳表 SkipList"></a>1. 跳表 SkipList</h3><p>查询链表时会从头到尾的遍历链表，最坏的时间复杂度是O(N)，这是一次比较一个值，如果跳着1个元素来进行比较（比较下标为2n+1的元素），那么就相当于一次性比较2个元素，效率就会提高 =&gt; 跳表</p>
+<p>元素有序的时候，如果是数组，可以通过二分查找来提速；如果是链表，如何提速？ =&gt; 跳表，插入/删除/搜索 都是O(logn)</p>
+<blockquote>
+<p>第一层索引 n/2 个节点，第二层 n/4 个节点，第三层 n/8，第K层 n/(2^k)<br>假设第K层有2个节点，即 n/(2^k) = 2 =&gt; k = log2(n) - 1</p>
+</blockquote>
+<h3 id="1-跳表-SkipList"><a href="#1-跳表-SkipList" class="headerlink" title="1. 跳表 SkipList"></a>1. 跳表 SkipList</h3><p>在 <code>java.util.concurrent.ConcurrentSkipListMap</code> 类中也有实现</p>
+<p>查询链表时会从头到尾的遍历链表，最坏的时间复杂度是O(N)，这是一次比较一个值，如果跳着1个元素来进行比较（比较下标为2n+1的元素），那么就相当于一次性比较2个元素，效率就会提高 =&gt; 跳表</p>
 <p><img src="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/1365470/201811/1365470-20181120213521027-836921723.png" alt="查询"></p>
 <blockquote>
-<p>跳表是牺牲空间来换取时间，除了最底层是最原始的数据外，其他的每一层，其实都相当于是一个索引，最理想的是按照第一层1级跳，第二层2级跳，第三层4级跳，第四层8级跳。。。但是犹豫有插入，如果插入的时候还要保证这个递增关系，那么就要调整当前的数据结构，时间太长，所以插入会有一个50%概率向上拓展的判断</p>
+<p>跳表是牺牲空间来换取时间，除了最底层是最原始的数据外，其他的每一层，其实都相当于是一个索引，最理想的是按照第一层1级跳，第二层2级跳，第三层4级跳，第四层8级跳。。。但是考虑到有插入，如果插入的时候还要保证这个递增关系，那么就要调整当前的数据结构，时间太长，所以插入会有一个50%概率向上拓展的判断</p>
 </blockquote>
 <p><img src="https://images.weserv.nl/?url=https://img2018.cnblogs.com/blog/1365470/201811/1365470-20181120213055029-767111953.png" alt="插入"></p>
 <blockquote>
-<p>插入有一个地方需要注意，最底层肯定是要插入数据的，然后产生一个随机数，从下往上，插入数据概率是50%向上拓展，因此每一个元素能有个 X 层的概率是 <code>0.5^(X-1)</code></p>
+<p>插入有一个地方需要注意，最底层肯定是要插入数据的，然后产生一个随机数，从下往上，插入数据概率是50%向上拓展，因此某元素是否能出现在第 X 层的概率是 <code>0.5^(X-1)</code></p>
 </blockquote>
 <h3 id="2-如何确定层数"><a href="#2-如何确定层数" class="headerlink" title="2. 如何确定层数"></a>2. 如何确定层数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int zslRandomLevel(void)&#123;</span><br><span class="line">    int level = 1;</span><br><span class="line">    while((random()&amp;0xFFFF) &lt; (ZSKIPLIST_P * 0xFFFF))</span><br><span class="line">        level += 1;</span><br><span class="line">    retrun (level &lt; ZSKIPLST_MAXLAVEL) ? level : ZSKIPLST_MAXLAVEL;</span><br><span class="line">&#125;</span><br><span class="line">// define ZSKIPLST_MAXLAVEL 64 常量值为64</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-为什么使用跳跃表，而不是平衡树等用来做有序元素的查找"><a href="#3-为什么使用跳跃表，而不是平衡树等用来做有序元素的查找" class="headerlink" title="3. 为什么使用跳跃表，而不是平衡树等用来做有序元素的查找"></a>3. 为什么使用跳跃表，而不是平衡树等用来做有序元素的查找</h3><ol>
+<li>跳跃表的时间复杂度和红黑树是一样的，而且实现简单</li>
+<li>在并发的情况下，红黑树在插入删除的时候可能需要做rebalance的操作，这样的操作可能会涉及到整个树的其他部分；而链表的操作就会相对局部，只需要关注插入删除的位置即可，只要多个线程操作的地方不一样，就不会产生冲突</li>
+</ol>
+<blockquote>
+<p>开发者的解释:<br>There are a few reasons:</p>
+<ol>
+<li>They are not very memory intensive. It’s up to you basically. Changing parameters about the probability of a node to have a given number of levels will make then less memory intensive than btrees.</li>
+<li>A sorted set is often target of many ZRANGE or ZREVRANGE operations, that is, traversing the skip list as a linked list. With this operation the cache locality of skip lists is at least as good as with other kind of balanced trees.</li>
+<li>They are simpler to implement, debug, and so forth. For instance thanks to the skip list simplicity I received a patch (already in Redis master) with augmented skip lists implementing ZRANK in O(log(N)). It required little changes to the code.<br>About the Append Only durability &amp; speed, I don’t think it is a good idea to optimize Redis at cost of more code and more complexity for a use case that IMHO should be rare for the Redis target (fsync() at every command). Almost no one is using this feature even with ACID SQL databases, as the performance hint is big anyway.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>About threads: our experience shows that Redis is mostly I/O bound. I’m using threads to serve things from Virtual Memory. The long term solution to exploit all the cores, assuming your link is so fast that you can saturate a single core, is running multiple instances of Redis (no locks, almost fully scalable linearly with number of cores), and using the “Redis Cluster” solution that I plan to develop in the future.</p>
+</blockquote>
+<p>在 src/t_zset.c 文件中，主要有两个结构，zskiplist 和 zskiplistNode，前者保存跳跃表信息（如表头节点、表尾节点、长度），而 zskiplistNode 用于保存节点<br>另外，跳跃表中的节点按照分值大小进行排序， 当分值相同时， 节点按照成员对象的大小进行排序。这一点也是redis针对跳表这个结构做出的优化之一。具体的优化点为：</p>
+<ul>
+<li>允许重复分值，即多个节点允许相同的分值，但是每个节点的成员对象必须是唯一的</li>
+<li>比较的时候不仅仅是分值，还有整个对象，即分值相同，按照成员对象大小排序</li>
+<li>在第一层有一个back指针，适用于 ZREVRANGE 方法，允许从尾部到头部来遍历列表</li>
+</ul>
+
       
     </div>
     
@@ -709,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis中的跳表"><span class="nav-text">Redis中的跳表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-跳表-SkipList"><span class="nav-text">1. 跳表 SkipList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-如何确定层数"><span class="nav-text">2. 如何确定层数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis中的跳表"><span class="nav-text">Redis中的跳表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-跳表-SkipList"><span class="nav-text">1. 跳表 SkipList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-如何确定层数"><span class="nav-text">2. 如何确定层数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-为什么使用跳跃表，而不是平衡树等用来做有序元素的查找"><span class="nav-text">3. 为什么使用跳跃表，而不是平衡树等用来做有序元素的查找</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Phoenix 异步创建索引当表数据量过大的时候，创建索引会报错，可以修改服务器端的 hbase.rpc.timeout，默认是1分钟，可以自定义时间。也可以异步创建索引，通过在语句后面添加async 关键字。 需要注意的是：  异步创建索引只支持全局索引 执行async语句只是第一步，还需要通过执行jar包来保证索引真正的建立  1. 为什么只支持全局索引？首先是本地索引和全局索引的一些概念和区">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-13T09:17:00.000Z">
+<meta property="og:updated_time" content="2020-11-20T07:17:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phoenix 异步创建索引">
 <meta name="twitter:description" content="Phoenix 异步创建索引当表数据量过大的时候，创建索引会报错，可以修改服务器端的 hbase.rpc.timeout，默认是1分钟，可以自定义时间。也可以异步创建索引，通过在语句后面添加async 关键字。 需要注意的是：  异步创建索引只支持全局索引 执行async语句只是第一步，还需要通过执行jar包来保证索引真正的建立  1. 为什么只支持全局索引？首先是本地索引和全局索引的一些概念和区">
@@ -565,6 +565,18 @@
 </ol>
 <p><a href="https://issues.apache.org/jira/projects/PHOENIX/issues/PHOENIX-6215?filter=updatedrecently" target="_blank" rel="noopener">官网issue地址</a></p>
 <p>问题：如果在创建本地索引时，有一个字段设置了default value，在生成的索引表里就只会显示默认值，不管是什么类型；如果这个类型是tinyint的话，还可能会造成之后主键的数据，原表的数据是对的，但是索引表是错的，如果命中了索引表，那么就返回的是错误的数据。</p>
+<p>可能的解：<code>RowKeyColumnExpression</code> 和 <code>RowKeyValueAccessor</code> 两个类。</p>
+<blockquote>
+<p>对表字段的修改，只能修改 char、varchar、decimal 等类型的长度，不可以直接修改类型，比如修改integer到bigint，会导致修改之后出现乱码，应该也是因为phoenix在对column index下标进行切分的时候，每个类型有自己的长度，随便修改类型，会导致数据转换错误</p>
+</blockquote>
+<ol start="3">
+<li>union all 在使用时遇到问题</li>
+</ol>
+<p>类似问题在 <a href="https://stackoverflow.com/questions/40100813/apache-phoenix-join-fails-encountered-exception-in-sub-plan-0-execution" target="_blank" rel="noopener">Encountered exception in sub plan [0] execution</a></p>
+<p>描述：<code>select user_id from (select user_id from table union all select user_id from table) where user_id in (select user_id from table)</code> 这个sql执行后报 NullPointerException；换成 <code>select t1.user_id from (select user_id from table union all select user_id from table)t1 inner join (select user_id from table)t2 on t1.user_id = t2.user_id</code> 也会报错，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Error: Encountered exception in sub plan [0] execution. (state=,code=0)</span><br><span class="line">java.sql.SQLException: Encountered exception in sub plan [0] execution.</span><br><span class="line">        at org.apache.phoenix.execute.HashJoinPlan.iterator(HashJoinPlan.java:209)</span><br><span class="line">        at org.apache.phoenix.execute.DelegateQueryPlan.iterator(DelegateQueryPlan.java:139)</span><br><span class="line">        at org.apache.phoenix.jdbc.PhoenixStatement$1.call(PhoenixStatement.java:291)</span><br><span class="line">        at org.apache.phoenix.jdbc.PhoenixStatement.execute(PhoenixStatement.java:1830)</span><br><span class="line">        ...</span><br><span class="line">Caused by: org.apache.phoenix.schema.TableNotFoundException: ERROR 1012 (42M03): Table undefined. tableName=unionSchemaName.unionTableName</span><br><span class="line">        at org.apache.phoenix.query.ConnectionQueryServicesImpl.getAllTableRegions(ConnectionQueryServicesImpl.java:604)</span><br><span class="line">        ....</span><br></pre></td></tr></table></figure>
+
+<p>参考链接写的那个方式，改成 <code>select /*+ USE_SORT_MERGE_JOIN */ t1.user_id from (select user_id from table union all select user_id from table)t1 inner join (select user_id from table)t2 on t1.user_id = t2.user_id</code> 就可以了，从官方文档上看，是将广播哈希连接替换成了排序合并连接。但是官网给的前提是<strong>当连接的两端都大于服务器端内存的容量时</strong>使用这一个hint，具体底层实现还不清楚。</p>
 <p>附：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PHOENIX_OPTS=&quot;-Dsun.security.krb5.principal=phoenix&quot;</span><br><span class="line">/usr/java/jdk1.8.0_121/bin/java $PHOENIX_OPTS  -cp &quot;/etc/hbase/conf:/etc/hbase/conf:/data/cloudera/parcels/PHOENIX-5.0.0-cdh6.2.0.p0.1308267/lib/phoenix/bin/../phoenix-5.0.0-cdh6.2.0-client.jar:::/etc/hadoop/conf:/etc/hadoop/conf:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop/.//*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/./:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-hdfs/.//*:/data/cloudera/parcels/CDH/lib/hadoop-mapreduce/.//*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-yarn/lib/*:/data/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/libexec/../../hadoop-yarn/.//*&quot; -Dlog4j.configuration=file:/data/penglin/log4j.properties sqlline.SqlLine -d org.apache.phoenix.jdbc.PhoenixDriver -u jdbc:phoenix:host241.slave.dev.cluster.enn.cn:2181:/hbase -n none -p none --color=true --fastConnect=false --verbose=true --incremental=false --isolation=TRANSACTION_READ_COMMITTED</span><br></pre></td></tr></table></figure>
       

@@ -518,14 +518,14 @@
 <ul>
 <li><p>数值可以按string保存，对于已经进行过计算的数值，在<code>encoding</code>里会把这个value设置为int，这样下次再计算的时候直接计算，而不需要判断是否能转换成数值。第一次进行计算的时候是需要进行判断的。</p>
 <ul>
-<li>比如对于秒杀场景，初始化值10是string，第一次-1会判断10能不能转换为数字，如果可以-1，并且把<code>encoding</code>设置为<code>int</code>（<code>encoding=raw</code> 表示字符串），下一次-1的时候直接-1，省略了判断的过程，提高效率</li>
+<li>比如对于秒杀场景，初始化值10是string，第一次-1会判断10能不能转换为数字，如果可以-1，就把<code>encoding</code>设置为<code>int</code>（<code>encoding=raw</code> 表示字符串），下一次-1的时候直接-1，省略了判断的过程，提高效率</li>
 </ul>
 </li>
 <li><p>bitmap 位图 8个比特位，首位默认是0，遵循ascii码。但是如果 offset 超过7，那么redis会自动拓展这个位图到设置的那个长度</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setbit k1 1 1 # 偏移量1的位置设置为1</span><br><span class="line">get k1 # 返回 &quot;@&quot; 01000000 二进制64，对应的是 @</span><br><span class="line">setbit k1 7 1 # 偏移量7的位置设置为1</span><br><span class="line">get k1 # 返回 &quot;A&quot; 01000001 二进制65，对应的是 A</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>bitcount 可以统计出value里有多少个7，换算到字节的话，长度/8，可以减少存储空间；</li>
+<li>bitcount 可以统计出value里有多少个1，换算到字节的话，长度/8，可以减少存储空间；</li>
 <li>bitop 可以进行二进制的与或非操作</li>
 <li>适用场景：<ol>
 <li>统计用户在一段时间内登陆次数，比如一年365，length就是365，登陆就置为1</li>
