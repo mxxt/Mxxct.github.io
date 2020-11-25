@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="m1ei8mEvXD">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flink,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构 storm    - 低延迟 毫秒级    - 消息保障能力弱，消息传输可能重复但不会丢失    - 吞吐量低spark streaming    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）    - 高延迟（秒级）    - 能够保证消息传输不会丢失也不会重复    - 高吞吐flink">
+<meta name="keywords" content="Flink">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink（暂时）">
+<meta property="og:url" content="https://mxxct4git.github.io/2020/10/20/Flink/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构 storm    - 低延迟 毫秒级    - 消息保障能力弱，消息传输可能重复但不会丢失    - 吞吐量低spark streaming    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）    - 高延迟（秒级）    - 能够保证消息传输不会丢失也不会重复    - 高吞吐flink">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://easyreadfs.nosdn.127.net/image_ce0fd6e4dc8c41d6b9b832e339d2b3ce">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/i-beta/1247221/202002/1247221-20200206122152873-34522436.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1247221/202002/1247221-20200206131937614-983019032.png">
+<meta property="og:updated_time" content="2020-11-12T09:57:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flink（暂时）">
+<meta name="twitter:description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构 storm    - 低延迟 毫秒级    - 消息保障能力弱，消息传输可能重复但不会丢失    - 吞吐量低spark streaming    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）    - 高延迟（秒级）    - 能够保证消息传输不会丢失也不会重复    - 高吞吐flink">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://easyreadfs.nosdn.127.net/image_ce0fd6e4dc8c41d6b9b832e339d2b3ce">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mxxct4git.github.io/2020/10/20/Flink/">
+
+
+
+
+
+  <title>Flink（暂时） | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/10/20/Flink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flink（暂时）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-20T16:20:00+08:00">
+                2020-10-20
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flink/" itemprop="url" rel="index">
+                    <span itemprop="name">Flink</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/10/20/Flink/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/10/20/Flink/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/10/20/Flink/" class="leancloud_visitors" data-flag-title="Flink（暂时）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h2><p>是一个框架和分布式处理引擎，用于对<strong>无界和有界数据流</strong>进行<strong>状态</strong>计算</p>
+<p>lambda架构<br><img src="https://images.weserv.nl/?url=https://easyreadfs.nosdn.127.net/image_ce0fd6e4dc8c41d6b9b832e339d2b3ce" alt="Lambda架构"></p>
+<p>storm<br>    - 低延迟 毫秒级<br>    - 消息保障能力弱，消息传输可能重复但不会丢失<br>    - 吞吐量低<br>spark streaming<br>    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）<br>    - 高延迟（秒级）<br>    - 能够保证消息传输不会丢失也不会重复<br>    - 高吞吐<br>flink<br>    - 支持原生流处理，即数据可以一条一条的进行处理<br>    - 低延迟 毫秒级<br>    - 能够保证消息传输不会丢失也不会重复<br>    - 高吞吐</p>
+<p>为什么是flink？1. 低延迟(毫秒级) 2. 高吞吐(每秒千万级) 3. 数据准确性（exactly-once） 4. 易用性（SQL/Table API/DataStream API）</p>
+<table>
+<thead>
+<tr>
+<th align="center">\</th>
+<th align="center">spark streaming</th>
+<th align="center">flink</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">流处理</td>
+<td align="center">数据需要打包成batch，这就会导致有延迟（秒级别），相当于一个伪实时</td>
+<td align="center">将数据全部当成流处理</td>
+</tr>
+<tr>
+<td align="center">数据模型</td>
+<td align="center">RDD，DStream实际上也是一组组小批数据RDD的集合</td>
+<td align="center">数据流，以及事件序列</td>
+</tr>
+<tr>
+<td align="center">运行时架构</td>
+<td align="center">批计算，将DAG划分为不同的stage，一个完成后才可以计算下一个</td>
+<td align="center">标准的流执行模式，一个事件在一个节点处理完后才可以直接发往下一个节点进行处理</td>
+</tr>
+</tbody></table>
+<p>流处理和批处理的区别？比如同样是max(温度)，spark streaming返回的是当前这一批有界数据的最大温度，而flink会返回从程序开始一直到此刻最大的温度 =&gt; 批是一种有界数据的概念，而流数据的话无界，最大最小值的话会考虑从头开始到现在的整个数据。同样，flink可以通过window api开窗，来做批处理</p>
+<p>SQL/Table API(dynamic tables)<br>DataStream API(streams, windows)<br>ProcessFunction(events, state, time)</p>
+<p>DataFlow 模型</p>
+<ul>
+<li>数据从上一个 Operation 节点直接 Push 到下一个 Operation 节点。</li>
+<li>各节点可以分布在不同的 Task 线程中运行，数据在 Operation 之间传递。</li>
+<li>同样具有 Shuffle 过程，但是数据不像 MapReduce 模型，Reduce 从 Map 端拉取数据，而是由上游把数据推给下游。</li>
+<li>实现框架有 Apache Storm 和 Apache Flink。</li>
+</ul>
+<p>watermark &amp;&amp; window &amp;&amp; allowedLatest</p>
+<ul>
+<li>watermark：由eventTime - 允许数据乱序的时间M秒得到，只增不减，即只有当当前数据对应的watermark大于之前的，才会更新watermark</li>
+<li>window：每N秒一段时间间隔</li>
+<li>allowedLatest：设置窗口销毁延迟时间，及到时间了，但是还允许一定时间内的数据迟到</li>
+</ul>
+<p>keyby(int… fields) // 0 代表第一个元素<br>keyby(String… fields) // 声明为public的字段名或类的get方法，主要是方便了datastream嵌套复合类型比如tuple或者pojo类的时候<br>keyby(new KeySelector&lt;T,K&gt;()) // 覆写getKey方法，来自定义返回key分组</p>
+<p>除了env可以设置并行度，每一个算子也都可以单独设置并行度，包括 <code>print().setParallelism()</code>。默认并行度是cpu核数。一般来说，一个流的并行度，可以认为是其所有算子的并行度里最大的那个并行度。</p>
+<p>一个流所需要的slot数量不一定就是流中所有算子的并行度的加和。事实上，flink 允许先后操作的算子放入到同一个slot里面（子任务共享slot），这样可以减少数据的shuffle；在共享slot的情况下，可能会出现一个slot实现了source、transformation到sink的所有操作，即保留了整个流的pipeline过程，这个在 flink-yarn.xml 里有注释说是允许的。</p>
+<p>flink运行时组件：</p>
+<ul>
+<li>jobmanager<ul>
+<li>拿到客户端提交的jar包，这个jar包包括：作业图（jobGraph）、逻辑数据流图（logical dataflow graph）和打包了所有的类、库等等；把jobgraph转换成一个物理层面的数据流图–执行图（executionGraph），包含了所有可以并发执行的任务；向rm申请slot资源，并分发到taskmanager上运行</li>
+<li>还负责维护类似检查点（checkpoint）这样的操作</li>
+</ul>
+</li>
+<li>taskmanager<ul>
+<li>taskmanager数量 * 每个taskmanager下面对应的slot数量 = 整个集群最大的能够运行任务数量</li>
+<li>在内存中划分出一部分，称为slot，用来运行task。宏观来理解的话，可以把taskmanager想成是一个jvm进程，每一个slot是运行在上面的线程，只是对内存进行隔离，每个slot有自己的内存资源</li>
+</ul>
+</li>
+<li>resourcemanager<ul>
+<li>主要是管理slot资源，每个taskmanager下面的slot都会在rm里进行注册</li>
+</ul>
+</li>
+<li>dispatcher<ul>
+<li>提供rest接口，提交app的时候会自动启动，把app交给jobmanager；</li>
+<li>webUI界面。并不是必需的</li>
+</ul>
+</li>
+</ul>
+<p>flink执行图可以分为四层，或者四个过程</p>
+<ul>
+<li>streamgraph：用户通过stream api编写的代码生成的最初的图，包含source、transformation、sink的一个拓扑结构</li>
+<li>jobgraph：客户端在提交作业到jobmanager之前，会自动根据streamgraph进行合并优化，将符合条件的多个任务合并在一起作为一个任务，减少数据传输</li>
+<li>executiongraph：jobmanager根据jobgraph来生成executiongraph，将任务拆成可并行化的过程，交给taskmanager；<strong>调度层最核心的数据结构</strong></li>
+<li>物理执行图：taskmanager上部署task后形成的图，并不是一个具体的数据结构</li>
+</ul>
+<p>数据传输形式</p>
+<ul>
+<li>one-to-one(forwarding)<ul>
+<li>map、filter、flatmap等算子都是one-to-one的关系，即可以直接在同一个slot上执行计算</li>
+<li>类似于spark的窄依赖</li>
+</ul>
+</li>
+<li>redistributing<ul>
+<li>stream的分区发生改变。每一个算子的子任务根据所选择的transformation然后发送数据到不同的分区</li>
+<li>比如keyby是基于hashcode重分区，而broadcast和rebalance会随机重新分区</li>
+<li>类似于spark的宽依赖，shuffle过程</li>
+</ul>
+</li>
+</ul>
+<p>什么样的任务可以被合并在一起？相同并行度的one-to-one操作，满足这两个条件，flink会把相邻的算子合并在一起，放在同一个slot里面进行计算，减少网络传输。通过在算子后面调用 <code>.filter(..).disableChaing()</code> 可以断开合并的任务链，<code>.filter(..).startNewChain()</code> 开始合并新的任务链。</p>
+<p>针对某一个算子过程，可能会很复杂或者有特殊需求，需要单独放在一个slot里运行？在算子后面调用 <code>slotSharingGroup(&quot;key&quot;)</code>，表示从当前算子开始，之后的所有操作都会放在一个slot里面，通过 key 来区分多个slot共享组。默认slot共享组的key是”dafault”。</p>
+<p>DataStream API</p>
+<ul>
+<li>source<ul>
+<li>env.addSource()</li>
+</ul>
+</li>
+<li>transformation<ul>
+<li>map</li>
+<li>flatmap</li>
+<li>filter</li>
+<li>keyby<ul>
+<li>同一个key肯定在同一个分区，<strong>但是同一个分区不一定只有一个key</strong>，2个key的数据经过hash可能被分到同一个分区里</li>
+</ul>
+</li>
+<li>滚动聚合算子（rollingAggregation）<ul>
+<li>针对KeyedStream每一个支流做聚合</li>
+<li>以min和minby为例，如果是min()只会返回指定字段的最小值，如果是minby则会返回指定字段的最小值对应的那一整个对象</li>
+<li>聚合算子（sum、max、min、maxBy、minBy）底层实现是调用 keyedStream.aggregate() 方法，只是创建的ComparableAggregator的AggregationType不一样，分别是SUM, MAX, MIN, MAXBY, MINBY。ComparableAggregator类继承了AggregationFunction，而AggregationFunction则实现了ReduceFunction接口，所以ComparableAggregator类实现了reduce方法，首先是通过Comparator来比较两个对象，然后会判断byAggregate是否为真，即是否是minby或maxby操作，如果是的话，再判断isfirst是否为真，即当出现多个同样值的时候，是返回第一个还是返回最后一个</li>
+</ul>
+</li>
+<li>reduce<ul>
+<li>自定义 reduce() 方法需要继承 ReduceFunction 类</li>
+</ul>
+</li>
+<li>split和select<ul>
+<li>split 将 DataStream 会转换成 SplitStream，select 从一个splitStream里通过tag来获取一个或多个DataStream</li>
+<li>被遗弃，使用 sideoutput 替代</li>
+</ul>
+</li>
+<li>connect和map<ul>
+<li>connect 将两个DataStream合并为一个ConnectedStreams。此时数据只是放在了一个流里，数据本身和形式并不发生任何的变化</li>
+<li>map、flatmap、keyby等算子实现的function，会单独作用于每一个datastream</li>
+</ul>
+</li>
+<li>union </li>
+</ul>
+</li>
+<li>sink<ul>
+<li>kafka<ul>
+<li>初始化FlinkKafkaProducer的时候有三个构造函数，不加kafkaProducersPoolSize、加kafkaProducersPoolSize和一个带着自定义分区的函数。一般用前两个就行，如果说业务数据需要根据某种条件将数据写入到N多个topic中，可以用第三个，实现KeyedSerializationSchema类getTargetTopic()方法，<a href="https://bbs.huaweicloud.com/blogs/148532" target="_blank" rel="noopener">参考地址</a></li>
+<li>FlinkKafkaConsumer 消费过程：<br>  父类FlinkKafkaConsumerBase<ol>
+<li>initializeState()：从最后一个成功的checkpoint中获取各个partition的offset到restoredState中。</li>
+<li>open()：从restoredState中获取这个subTask所消费的topic的partition的起始offset，保存到subscribedPartitionsToStartOffsets中；如果这是一个第一次向topic消费的job的subTask，那么Flink根据job的并行度以及这个subTask的index均匀的分配partition给这个subTask消费。此时，partition的起始offset就由我们在上文中介绍的配置来决定。</li>
+<li>run(): 如果subscribedPartitionsToStartOffsets不为空，创建KafkaFetcher，执行其runFetchLoop()。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>redis</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.jianshu.com/p/45b03390b258" target="_blank" rel="noopener">窗口和水位线的参考网址1</a><br><a href="https://www.cnblogs.com/shengyang17/p/11798549.html" target="_blank" rel="noopener">窗口和水位线的参考网址2</a></p>
+<p>Window类型</p>
+<ul>
+<li>时间窗口<ul>
+<li>滚动时间窗口 Tumbling Window<ul>
+<li>参数只有一个 window size，没有重叠；区间范围是左闭右开</li>
+</ul>
+</li>
+<li>滑动时间窗口 Sliding Window<ul>
+<li>参数有两个 window size 和 slide step，可以有重叠</li>
+</ul>
+</li>
+<li>会话窗口<ul>
+<li>设置一个timeout时间，如果一段时间没有接收到新的数据，就会生成一个新的窗口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>计数窗口<ul>
+<li>滚动计数窗口</li>
+<li>滑动计数窗口</li>
+</ul>
+</li>
+</ul>
+<p>Window API</p>
+<p>在<code>keyby()</code>之后调用<code>.window()</code>方法，或者<code>dataStream.windowAll()</code>。一般是前者。也可以直接调用 <code>.timeWindow()</code>，传一个参数就是滚动事件窗口，传两个参数就是滑动时间窗口。如果要用到offset，那就只能用window()。</p>
+<p><code>.countWindow()</code> 底层调用的是 GlobalWindows 方法，全局窗口是把所有数据都放在一个窗口里，需要设置 trigger 触发器和 evictor 移除器，来保证窗口是什么时候触发什么情况下移除数据</p>
+<p>org.apache.flink.streaming.api.windowing.assigners 包下面有各个窗口分配器的类，比如 TumblingEventTimeWindows、TumblingProcessingTimeWindows 等，在 window() 方法中，需要指定窗口分配器，比如 <code>window(TumblingProcessingTimeWindows.of(windowSize, offset))</code>，windowSize 就是窗口大小，offset是指和整点的偏移量，比如8点05到9点05，那就是偏移5分钟，Time.minutes(5)。offset的主要作用是时区</p>
+<p>窗口的意义：把无限的数据流进行切分，得到有限的数据集进行处理<br>窗口函数 WindowedStream 函数</p>
+<ul>
+<li>增量聚合函数<ul>
+<li>每条数据到来都会进行计算，保持一个简单的状态</li>
+<li>ReduceFunction, AggregateFunction</li>
+</ul>
+</li>
+<li>全量窗口函数<br>  -先把窗口所有数据收集起来，等到计算的时候再遍历所有的数据<ul>
+<li>ProcessWindowFunction</li>
+</ul>
+</li>
+</ul>
+<p>窗口相关的其他可选API</p>
+<ul>
+<li>trigger(): 触发器，定义window什么时候关闭，触发计算并输出结果</li>
+<li>evictor(): 移除器，定义移除某些数据的逻辑</li>
+<li>allowedLateness(): 允许一定时间内迟到的数据也划分在上一个窗口里进行计算，这个时间是以watermark为准，不是eventTime</li>
+<li>sideOutPutLateData(): 将迟到的数据放入侧输出流</li>
+<li>getSideOutPut(): 获取侧输出流，在所有计算完之后，dataStream.getSideOutPut(tag).print() 输出</li>
+</ul>
+<p><img src="https://images.weserv.nl/?url=https://img2018.cnblogs.com/i-beta/1247221/202002/1247221-20200206122152873-34522436.png" alt="Window API总览"></p>
+<p>时间语义</p>
+<ul>
+<li>eventTime: 事件创建的时间</li>
+<li>ingestionTime: 数据进入Flink的时间</li>
+<li>processTime: 执行操作算子的本地系统时间，与机器相关</li>
+</ul>
+<p>使用 eventTime</p>
+<ol>
+<li>env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);</li>
+<li>然后和watermark一起搭配使用，来处理乱序数据</li>
+</ol>
+<p>waterMark 的意义：解决乱序问题<br>waterMark 的传递：上游向下游传递是通过广播传递给它分区的所有下游，而下游会保存所有上游的watermark然后取最小的那个来计算。<br><img src="https://img2018.cnblogs.com/i-beta/1247221/202002/1247221-20200206131937614-983019032.png" alt="watermark的传递"></p>
+<p>watermark 的引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.assignTimestampsAndWatermarks(AssignerWithPeriodicWatermarks) // 隔一段时间，周期性生成waterMark，这个周期时间在env.setStreamTimeCharacteristic() 默认值是200毫秒，也可以自定义设置</span><br><span class="line">eg:</span><br><span class="line">.assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor(maxOutOfOrderness)) 去重写extractTimestamp()方法，提取eventTime，在BoundedOutOfOrdernessTimestampExtractor类下getCurrentWatermark()方法里，会先通过eventTime-maxOutOfOrderness得到一个时间戳，会和已有的watermark比较，取最大值。maxOutOfOrderness指的是一个窗口延迟时间，maxOutOfOrderness设置的太大，窗口计算的结果就太慢，太小的话计算的结果准确性就下降了</span><br><span class="line"></span><br><span class="line">.assignTimestampsAndWatermarks(AssignerWithPunctuatedWatermarks) // 每来一条数据都会生成一个watermark</span><br></pre></td></tr></table></figure>
+
+<p>窗口起始时间的确定<br>以 TumblingEventTimeWindows 为例，有一个 assignWindows() 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Collection&lt;TimeWindow&gt; assignWindows(Object element, long timestamp, WindowAssignerContext context) &#123;</span><br><span class="line">    if (timestamp &gt; Long.MIN_VALUE) &#123;</span><br><span class="line">        // Long.MIN_VALUE is currently assigned when no timestamp is present</span><br><span class="line">        // offset 默认是 0</span><br><span class="line">        long start = TimeWindow.getWindowStartWithOffset(timestamp, offset, size);</span><br><span class="line">        return Collections.singletonList(new TimeWindow(start, start + size));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        throw new RuntimeException(&quot;Record has Long.MIN_VALUE timestamp (= no timestamp marker). &quot; +</span><br><span class="line">                &quot;Is the time characteristic set to &apos;ProcessingTime&apos;, or did you forget to call &quot; +</span><br><span class="line">                &quot;&apos;DataStream.assignTimestampsAndWatermarks(...)&apos;?&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static long getWindowStartWithOffset(long timestamp, long offset, long windowSize) &#123;</span><br><span class="line">    return timestamp - (timestamp - offset + windowSize) % windowSize;</span><br><span class="line">    // offset默认是0，+windowSize再取余，相当于没加，所以相当于 timestamp - timestam%windowSize</span><br><span class="line">    // 相当于取了一个windowSize的整数倍</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>flink 有状态的数据流</p>
+<p>状态<br>比如聚合计算的一些结果，需要保存下来，这个就算是任务的状态。可以认为是一个本地变量，flink会进行状态管理，包括状态一致性、故障处理以及高效存储和访问</p>
+<ul>
+<li><p>算子状态 Operatior State</p>
+<ul>
+<li>作用范围限定为算子任务，由同一并行任务所处理的所有数据都可以访问到相同的状态，比如最小值，同一个task下的所有数据都可以访问到，但是不同的task访问不到，因为不在同一个内存下</li>
+<li>算子状态的数据结构<ul>
+<li>列表状态 list state: 将状态表示为一组数据的列表</li>
+<li>联合列表状态 union list state</li>
+<li>广播状态 broadcast state</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>键控状态 keyed State</p>
+<ul>
+<li>同一个分区下，可能有不同的key，针对这些key，会保存每一个key自己的一个状态实例</li>
+<li>键控状态的数据结构<ul>
+<li>值状态</li>
+<li>列表状态</li>
+<li>映射状态</li>
+<li>聚合状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>状态后端 State Backends</p>
+<ul>
+<li><p>主要负责本地的状态管理，以及将检查点状态写入远程存储</p>
+</li>
+<li><p>主要有3种</p>
+<ul>
+<li><p>MemoryStateBackend</p>
+<ul>
+<li>内存级的状态后端，会将键控状态作为内存中的对象进行管理，将它们存储在taskmanager的jvm堆上，而将checkpoint存储在jobmanager中</li>
+<li>特点：快速，低延迟，但不稳定</li>
+</ul>
+</li>
+<li><p>FsStateBackend</p>
+<ul>
+<li>将checkpoint存到远程的持久化文件系统，而对于本地状态，跟MemoryStateBackend一样，也会存在taskmanager的jvm堆上</li>
+<li>特点：同时拥有内存级的本地访问速度，和更好的容错保证。但是如果系统特别庞大，taskmanager堆上的内存都不足以存储下，就有第三种状态后端<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 状态后端</span><br><span class="line">// env.setStateBackend(new FsStateBackend(String checkpointDataUri, boolean asynchronousSnapshots));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>RocksDBStateBackend</p>
+<ul>
+<li>将所有状态序列化后，存入本地的RocksDB中存储。相当于落入磁盘，不会丢数，但是会影响速度</li>
+<li>需要再引入 flink-statebackend-rocksdb 依赖</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>从运行时上下文拿到状态 =&gt; 需要在 richFunction 里面去拿到上下文</p>
+<p>比如温度监控，同一个传感器如果这一次的温度和上一次的温度相差十度，就预警。需要把上一条数据的温度不断更新在状态里，然后进行比较。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">dataStream.keyBy().flatmap(new TempAlert(温度阈值))</span><br><span class="line"></span><br><span class="line">class TempAlert extends RichFlatMapFunction&#123;</span><br><span class="line">    private int threshold = 0;</span><br><span class="line">    private ValueState lastTempValueState = getRuntimeContext().getState(new ValueStateDescriptor(&quot;last-temp&quot;, Double.class));</span><br><span class="line">    public TempAlert(int i) &#123;</span><br><span class="line">        this.threshold = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void flatMap(Object value, Collector out) throws Exception &#123;</span><br><span class="line">        // 先获取上一条数据的温度值</span><br><span class="line">        double lastTemp = (double) lastTempValueState.value();</span><br><span class="line">        if(Math.abs(value.getTemp() - lastTemp) &gt;= threshold)&#123;</span><br><span class="line">            out.collect(&quot;预警信息&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 更新温度值</span><br><span class="line">        lastTempValueState.update(value.getTemp());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ProcessFunction<br>本身也继承了 AbstractRichFunction， 即实现了 RichFunction，即加强版的富函数，可以拿到各种上下文、变量、状态，还可以实现分流输出的效果</p>
+<p>context.timeService().registerEventTimeTimer(long time) // 注册一个定时器，然后重写 <code>onTimer(long timestamp, OnTimerContext ctx, Collector&lt;O&gt; out)</code>方法； 可以注册多个定时器，只要参数time不一样，就是不一样的定时器，但是实现的话都是 onTimer() 方法，通过判断timestamp（onTimer()方法被激活时的时间戳）的不一样，来执行不同的操作。类似于在同一个闹钟app设置定时，根据时间来区分，激活方法都是一样的，只是去判断当前timestamp是哪一个，来执行不同的操作</p>
+<p>比如连续N秒钟，温度一直上升，就发送预警信息。如果用滚动窗口或者滑动窗口的话，有一定问题：第一个窗口前1秒是下降，后面的N-1秒是上升；第二个窗口，前面N-1秒是上升，最后1秒是下降。这样两个窗口都不会报警，但是实际上是应该报警的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">dataStream.keyBy().process(new TempWarning(连续时长))</span><br><span class="line"></span><br><span class="line">class TempAlert2 extends KeyedProcessFunction &#123;</span><br><span class="line">    // 保存上一个温度值进行比较</span><br><span class="line">    private ValueState lastTempValueState = getRuntimeContext().getState(new ValueStateDescriptor(&quot;last-temp&quot;, Double.class));</span><br><span class="line"></span><br><span class="line">    // 保存上一个注册定时器的时间戳，用于删除</span><br><span class="line">    private ValueState timerTsValueState = getRuntimeContext().getState(new ValueStateDescriptor(&quot;timerTs&quot;, Long.class));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private int timeSpan = 0;</span><br><span class="line">    public TempAlert2(int i) &#123;</span><br><span class="line">        this.timeSpan = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void processElement(Object value, Context ctx, Collector out) throws Exception &#123;</span><br><span class="line">        // 取出状态</span><br><span class="line">        double lastTemp = (double) lastTempValueState.value();</span><br><span class="line">        long timerTs = (long) timerTsValueState.value();</span><br><span class="line"></span><br><span class="line">        // 更新上一次的温度值</span><br><span class="line">        lastTempValueState.update(lastTemp);</span><br><span class="line"></span><br><span class="line">        // 温度上升并且没有注册过定时器，那就注册一个以当前时间戳开始的一个定时器</span><br><span class="line">        // timerTs 默认值是0，所以等于0的时候说明是第一次进行判断</span><br><span class="line">        if(value.getTemp() &gt; lastTemp &amp;&amp; timerTs == 0)&#123;</span><br><span class="line">            // 按照当前处理时间 + timeSpan 作为时间戳来注册定时器，也可以按照eventTime来设置时间戳</span><br><span class="line">            long ts = ctx.timerService().currentProcessingTime() + this.timeSpan*1000;</span><br><span class="line">            ctx.timerService().registerProcessingTimeTimer(ts);</span><br><span class="line">            timerTsValueState.update(ts);</span><br><span class="line"></span><br><span class="line">        &#125;else if(value.getTemp() &lt; lastTemp)&#123;</span><br><span class="line">            // 如果温度下降，那么需要删除定时器</span><br><span class="line">            ctx.timerService().deleteProcessingTimeTimer(timerTs);</span><br><span class="line">            timerTsValueState.getClass();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onTimer(long timestamp, OnTimerContext ctx, Collector out) throws Exception &#123;</span><br><span class="line">        out.collect(&quot;传感器 &quot; + ctx.getCurrentKey() + &quot; 的温度在 &quot; + this.timeSpan/1000 + &quot;秒内连续上升&quot;);</span><br><span class="line">        // 清空这一次的定时器，至于温度状态是否清空，如果清空了，就相当于再重新走一遍流程</span><br><span class="line">        timerTsValueState.clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现分流输出的时候，通过 <code>ctx.output(OutputTag&lt;X&gt; outputTag, X value);</code> 方法来实现</p>
+<p>容错机制</p>
+<p>一致性检查点 checkpoints: 在某个时间点对<strong>所有任务</strong>的状态进行一次快照(一个任务的状态可能很快就可以被更新，但是所有任务都做完，所有状态合并出来的快照的时间可能就会比较慢)；这个时间点应该是所有任务都恰好处理完一个相同的输入数据的时候，比如针对偏移量5做快照，进行了keyby分区，那么应该保存所有分区在执行完偏移量5的数据之后的那个状态。当恢复的时候是恢复最近一次成功保存的检查点，然后会重新提交偏移量，这个就提供了 <strong>exactly-once</strong> 的一致性保证</p>
+<blockquote>
+<p>类似于 jvm 的 safepoint</p>
+</blockquote>
+<p>检查点的实现算法</p>
+<ul>
+<li>一种简单的想法<ul>
+<li>暂停应用，保存状态到检查点，再重新恢复应用</li>
+</ul>
+</li>
+<li>flink 的改进和实现<ul>
+<li>基于 Chandy-Lamport 算法的分布式快照</li>
+<li>将检查点的保存和数据处理分离开，不暂停整个应用，哪一个分区做完了就先做一个合照，等所有分区都做了合照之后再拼起来就可以了</li>
+</ul>
+</li>
+</ul>
+<p>检查点屏障 checkpoint barrier: 类似于watermark，在处理数据的时候会打上一个barrier，就可以把一条流上的数据按照不同的检查点分开。当前 barrier 前面到来的数据导致的状态更改，都会包含在当前 barrier 所属的检查点中；当前 barrier 后面到来的数据导致的状态更改，都会包含在后面的检查点</p>
+<p>jobmanager 会发送一个命令，告诉source，然后source会在数据里插入一个barrier，当task执行到对应的数据时，就知道这里需要做一次检查点保存。</p>
+<p>barrier 对齐: 类似于watermark会从上游广播到所有的下游，而下游会分区来保存所有的watermark，然后取最小值来计算。barrier也会从上游广播到所有的下游，对于下游来说，如果其中一个流source1的barrier先到，意味着这个流的数据已经计算完了，而其他流的barrier还没到，此时source1的数据如果继续到的话，会先缓存起来，要等其他流的barrier到，计算完了之后保存好状态，再从缓存的数据开始陆续计算。</p>
+<p>如果barrier不对齐，其中快的流的数据不断计算，状态就会不断更新，慢的流快照保存，再次恢复上一次成功检查点快照的时候，快的流那边就会重复消费数据，就变成了 <strong>At Least Once</strong>。</p>
+<blockquote>
+<p>前面说的都是 flink 内部的 <strong>Exactly-Once</strong> 和  <strong>At Least Once</strong>，如果每1分钟快照一次，处理数据之后提交给mysql，在chk-100成功快照一次之后，过了30秒，程序down了，恢复到chk-100时的状态，那么就会有30秒的数据会被重复提交到mysql，也就是说还需要一个<strong>端对端</strong>的<strong>精确一次</strong>实现</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// checkpoint 默认时间间隔是500L</span><br><span class="line">env.enableCheckpointing(1000L, CheckpointingMode.EXACTLY_ONCE);</span><br><span class="line">// checkpoint 超时时间，快的流等慢的流，超过这个时间就作废</span><br><span class="line">env.getCheckpointConfig().setCheckpointTimeout(60000L);</span><br><span class="line">// 最大同时checkpoint个数 默认是1</span><br><span class="line">env.getCheckpointConfig().setMaxConcurrentCheckpoints(5);</span><br><span class="line">// 两个checkpoint执行的最小间隔，如果配了这一个，上面的最大同时执行个数就不会生效</span><br><span class="line">env.getCheckpointConfig().setMinPauseBetweenCheckpoints(500L);</span><br><span class="line">// 能够允许checkpoint失败的次数</span><br><span class="line">env.getCheckpointConfig().setTolerableCheckpointFailureNumber(10);</span><br></pre></td></tr></table></figure>
+
+<p><code>env.setStateBackend(new FsStateBackend(String checkpointDataUri, boolean asynchronousSnapshots));</code> 在设置状态后端这里，FsStateBackend 还有第二个参数，是否异步快照，即如果为true，当快的流计算完了，会把自己的状态先缓存到文件里，然后继续执行下面的计算，当慢的流计算完了之后再去合并快照</p>
+<p>重启策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 重启3次，中间要间隔10秒</span><br><span class="line">env.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, 10000L));</span><br></pre></td></tr></table></figure>
+
+<p>保存点 SavePoint<br>类似于checkpoint的实现，savepoint是自定义设置的保存功能，需要写出来触发创建操作，会同时保存一些额外的元数据上下文的信息<br>作用：有计划的手动备份；暂停和重启应用；版本迁移等等<br>注意：要恢复savepoint的话需要保证计算流的拓扑结构是一样的，也就是算子应该是不变的，最好在算子后面添加 <code>.uid(String)</code>，这样在恢复的时候可以更有针对性</p>
+<p>状态一致性<br>每个算子任务都有自己的计算状态，一条数据不应该丢失，也不应该重复计算（重复计算指的是不能叠加计算）</p>
+<p>状态一致性分类</p>
+<ul>
+<li>at-most-once: 任务故障时，什么也不做，丢数就丢数。这样的话会没有快照的开销，速度会变快，准确性会下降。比如直播视频，因为网络问题，丢帧也是可以接受的，udp协议</li>
+<li>at-least-once: 数据不会丢，数据可能被处理多次，即计算结果可能会进行叠加计算</li>
+<li>exactly-onde: 数据不会丢，只会处理一次</li>
+</ul>
+<p>端到端的 exactly-once</p>
+<ul>
+<li>内部保证：checkpoint</li>
+<li>source：可重设数据的读取位置</li>
+<li>sink：从故障恢复时，数据不会重复写入到外部系统<ul>
+<li>幂等写入</li>
+<li>事务写入</li>
+</ul>
+</li>
+</ul>
+<p>幂等写入 Idempotent Writes<br>思路：e的导数还是e。<br>含义：一个操作，可以重复执行很多次，但只导致一次结果更改，也就是说，后面再重复执行的操作就不起作用了。<br>实现：类似于hashmap，数据修改是针对于同一个key的，修改再多次也只相当于是一次。比如redis、mysql提交的时候，按照key来写入数据，那重复写入的话也不会影响到数据的变化，相当于是一次更新<br>缺点：1-&gt;5-&gt;10-&gt;1-&gt;5-&gt;10 在第一个10的位置发生故障，导致数据重复发送，产生数据跳变</p>
+<p>事务写入 Transactional Writes<br>思路：事务对应这checkpoint，等到checkpoint真正完成的时候，才把所有对应的结果放入到sink端中<br>实现：1. 预写日志 2. 两阶段提交</p>
+<p>预写日志 Write-Ahead-Log WAL<br>实现：把结果数据先当成状态保存，然后在收到checkpoint完成的通知后，一次性批量写入sink端。DataStream API提供了一个模板类 GenericWriteAheadSink 来实现<br>缺点：由于checkpoint不能设置的太小（间隔太小的话，整个流就不断在做快照了，都没时间处理数据了），所以这一批数据到sink端会需要一定的时间，延迟性会比较高；另外从日志中批量写入到sink端时，如果写到一半sink端故障了，恢复的时候针对另一半没写入的日志数据如何处理也是一个问题</p>
+<p>两阶段提交 Two-Phase-Commit 2PC<br>实现：对于每一个checkpoint，sink端会启动一个事务，将所有计算得到的数据都放入到事务里，然后写入到外部系统，但是并不提交，只是预提交（此时如果checkpoint挂了可以回滚事务）。当收到checkpoint<strong>完成</strong>的通知后，再提交事务，数据就会真正写入。Flink提供了 TwoPhaseCommitSinkFunction 抽象类，eg: kafkaProducer<br>要求：对外部 sink 端的要求会比较高————需要支持事务；支持预写入；可以回滚；提交事务必须是幂等操作</p>
+<blockquote>
+<p>也许状态很多，需要等所有状态都合并成快照之后才能提交事务。而不是看到下一个barrier的时候就提交。看到新的barrier会继续新的计算，放在新的事务里，当checkpoint完成之后，才会提交上一个事务</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">sink\source</th>
+<th align="center">不可重置</th>
+<th align="center">可重置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">任意</td>
+<td align="center">At-most-once</td>
+<td align="center">At-least-once（故障恢复时会出现暂时的不一致，数据跳变）</td>
+</tr>
+<tr>
+<td align="center">幂等</td>
+<td align="center">At-most-once</td>
+<td align="center">Exactly-once</td>
+</tr>
+<tr>
+<td align="center">预写日志</td>
+<td align="center">At-most-once</td>
+<td align="center">At-least-once</td>
+</tr>
+<tr>
+<td align="center">两阶段提交</td>
+<td align="center">At-most-once</td>
+<td align="center">Exactly-once</td>
+</tr>
+</tbody></table>
+<p>Flink + Kafka 端到端状态一致性的保证</p>
+<ul>
+<li>内部：利用checkpoint机制，把状态存盘，发生故障的时候可以恢复</li>
+<li>source：kafka Consumer 作为source，可以把偏移量保存下来，故障恢复时可以重置偏移量，重新消费数据</li>
+<li>sink：FlinkKafkaProducer 底层继承了 TwoPhaseCommitSinkFunction 类</li>
+</ul>
+<p>综上：</p>
+<ol>
+<li>jobmanager在source数据流插入barrier</li>
+<li>task看到barrier，就开始保存自己的状态，把数据写入到sink的事务里</li>
+<li>sink看到barrier，创建新的事务，当上一个barrier完成的时候，提交上一个事务</li>
+</ol>
+<p>Table API 和 Flink SQL</p>
+<blockquote>
+<p>需要引入 flink-table-planner 依赖，会自动引入 bridge 依赖。可以引入 flink-table-planner-blink 版本，比flink-table-planner要更完善一些。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 创建table环境</span><br><span class="line">StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);</span><br><span class="line">// 从外部链接创建一张表</span><br><span class="line">①tableEnv.connect().createTemporaryTable(&quot;myTable1&quot;);</span><br><span class="line">// 从已有的数据流生成一张表</span><br><span class="line">②Table dataTable = tableEnv.fromDataStream(dataStream);</span><br><span class="line"></span><br><span class="line">// 基于 Table API 查询算子得到一张表 2种形式</span><br><span class="line">①Table resultTable1 = tableEnv.from(&quot;myTable1&quot;).select().filter()</span><br><span class="line">②Table resultTable1 = dataTable.select(&quot;id, temp&quot;).filter(&quot;id = \&quot;sensor_1\&quot;&quot;);</span><br><span class="line"></span><br><span class="line">// 基于SQL来查询得到一张表</span><br><span class="line">②tableEnv.createTemporaryView(&quot;myTable2&quot;, dataTable);</span><br><span class="line">②Table resultTable2 = tableEnv.sqlQuery(&quot;select * from myTable2&quot;); // 表名和创建的那个view的名字需要是一样的</span><br><span class="line"></span><br><span class="line">①Table resultTable2 = tableEnv.sqlQuery(&quot;select * from myTable1&quot;); // 因为前面指定了表名，所以这里直接写就可以了</span><br><span class="line"></span><br><span class="line">// 输出最后的结果</span><br><span class="line">DataStream&lt;Row&gt; rowDataStream = tableEnv.toAppendStream(resultTable, Types.ROW(Types.INT, Types.LONG));</span><br><span class="line">rowDataStream.print();</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flink/" rel="tag"><i class="fa fa-tag"></i> Flink</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/20/Redis-5/" rel="next" title="缓存穿透、缓存击穿、缓存雪崩">
+                <i class="fa fa-chevron-left"></i> 缓存穿透、缓存击穿、缓存雪崩
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/10/26/HBase-2/" rel="prev" title="HBase进阶">
+                HBase进阶 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mxxt" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/08/11/Thread-2/" title="同步队列" target="_blank">同步队列</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/07/08/Hive-5/" title="Hive源码解析" target="_blank">Hive源码解析</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/05/31/Sqoop/" title="Sqoop源码解析" target="_blank">Sqoop源码解析</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/11/25/Redis-6/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/16/HBase-3/" title="HBase WAL日志" target="_blank">HBase WAL日志</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/12/JVM-2/" title="JVM SafePoint" target="_blank">JVM SafePoint</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink"><span class="nav-text">Flink</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
