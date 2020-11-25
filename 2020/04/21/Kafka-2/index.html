@@ -133,13 +133,13 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Kafka1. 知识点 Kafka不能保证消息的全局有序，只能保证消息在partition内有序 每个partition对应于一个log文件，该log文件中存储的就是生产者生成的数据，生产者生成的数据会不断的追加到该log的文件末端，且每条数据都有自己的offset 由于生产者生产的消息会不断追加到log文件的末尾，为防止log文件过大导致数据定位效率低下，Kafka采用分片和索引的机制，将每个p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNY7luoaibgofCT7I03m40Ed4fVh0oQsGAJAYiaKERTkDOEVlibxc7LwW5Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
-<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNDQeh5h2rA2hfY6mF9DVXxrjXvicSw7lRsRg5ZatpYoT9YH4hF3FT14g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNY7luoaibgofCT7I03m40Ed4fVh0oQsGAJAYiaKERTkDOEVlibxc7LwW5Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNDQeh5h2rA2hfY6mF9DVXxrjXvicSw7lRsRg5ZatpYoT9YH4hF3FT14g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:updated_time" content="2020-06-15T03:22:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka">
 <meta name="twitter:description" content="Kafka1. 知识点 Kafka不能保证消息的全局有序，只能保证消息在partition内有序 每个partition对应于一个log文件，该log文件中存储的就是生产者生成的数据，生产者生成的数据会不断的追加到该log的文件末端，且每条数据都有自己的offset 由于生产者生产的消息会不断追加到log文件的末尾，为防止log文件过大导致数据定位效率低下，Kafka采用分片和索引的机制，将每个p">
-<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNY7luoaibgofCT7I03m40Ed4fVh0oQsGAJAYiaKERTkDOEVlibxc7LwW5Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNY7luoaibgofCT7I03m40Ed4fVh0oQsGAJAYiaKERTkDOEVlibxc7LwW5Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
 
 
@@ -469,8 +469,8 @@
 <li>由于生产者生产的消息会不断追加到log文件的末尾，为防止log文件过大导致数据定位效率低下，Kafka采用分片和索引的机制，将每个partition分为多个segment，每个segment对应2个文件—-index文件和log文件，这2个文件位于一个相同的文件夹下，文件夹的命名规则为topic名称+分区序号。也就是partition下有多个segment文件夹，里面都有两个文件–index和log文件。Index文件中存储的数据的索引信息，第一列是offset，第二列是这个数据所对应的log文件中的偏移量。如果要去消费offset为3的数据，首先通过二分法找到数据在哪个index文件中，然后在通过index中offset找到数据在log文件中的offset；这样就可以快速的定位到数据并消费。所以kakfa虽然把数据存储在磁盘中，但是他的读取速度还是非常快的（类似于hbase对于行键来划分region，然后做的索引一样）</li>
 <li>kafka如何保证数据可靠性呢？通过ack来保证。</li>
 </ol>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNY7luoaibgofCT7I03m40Ed4fVh0oQsGAJAYiaKERTkDOEVlibxc7LwW5Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt><br>为保证生产者发送的数据，能可靠的发送到指定的topic，topic的每个partition收到生产者发送的数据后，都需要向生产者发送ack（确认收到），如果生产者收到ack，就会进行下一轮的发送，否则重新发送数据。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNDQeh5h2rA2hfY6mF9DVXxrjXvicSw7lRsRg5ZatpYoT9YH4hF3FT14g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt><br>那么kafka什么时候向生产者发送ack？<br>确保follower（就相当于是partition的leader的副本，避免partition的leader挂了，导致无法获取数据）和leader同步完成，leader再发送ack给生产者，这样才能确保leader挂掉之后，能在follower中选举出新的leader后，数据不会丢失。kafka采用的是全部follower都返回ack后由leader发送给生产者。为了避免其中一个follower因为某种故障一直无法同步，leader会维护一个动态的节点列表，对于那些超过一定时间（时间可以自定义）还未返回ack的follower就移除列表。leader故障后，也会从这个列表中来选举新的leader。节点的选择主要是满足两点，一是与leader的网络通信时间应该低时延，二是与leader数据差距，消息条数默认是10000条</p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNY7luoaibgofCT7I03m40Ed4fVh0oQsGAJAYiaKERTkDOEVlibxc7LwW5Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt><br>为保证生产者发送的数据，能可靠的发送到指定的topic，topic的每个partition收到生产者发送的数据后，都需要向生产者发送ack（确认收到），如果生产者收到ack，就会进行下一轮的发送，否则重新发送数据。</p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhrm8TXCvosZOiccDGNicKmuQNDQeh5h2rA2hfY6mF9DVXxrjXvicSw7lRsRg5ZatpYoT9YH4hF3FT14g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt><br>那么kafka什么时候向生产者发送ack？<br>确保follower（就相当于是partition的leader的副本，避免partition的leader挂了，导致无法获取数据）和leader同步完成，leader再发送ack给生产者，这样才能确保leader挂掉之后，能在follower中选举出新的leader后，数据不会丢失。kafka采用的是全部follower都返回ack后由leader发送给生产者。为了避免其中一个follower因为某种故障一直无法同步，leader会维护一个动态的节点列表，对于那些超过一定时间（时间可以自定义）还未返回ack的follower就移除列表。leader故障后，也会从这个列表中来选举新的leader。节点的选择主要是满足两点，一是与leader的网络通信时间应该低时延，二是与leader数据差距，消息条数默认是10000条</p>
 <ol start="5">
 <li>Kafka如何保证消费数据的一致性？通过HW来保证。</li>
 </ol>
