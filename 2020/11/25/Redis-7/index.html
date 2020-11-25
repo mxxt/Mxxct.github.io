@@ -128,7 +128,7 @@
 <meta name="description" content="分布式锁实现 电商场景，当用户下单的时候，redis 里库存只有一件，并发执行的时候可能会造成库存超卖问题  通过在执行第二步加锁，可以保证并发请求在下单的时候操作是串行化的，但是并发增多，增加一台机器  此时还是会造成库存超卖问题。原因是：两个系统运行在两个不同的JVM里面，他们加的锁只对属于自己JVM里面的线程有效，对于其他JVM的线程是无效的。即 Java提供的原生锁机制在多机部署场景下失效">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis 和 MySQL 数据不一致性">
+<meta property="og:title" content="分布式锁实现">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/11/25/Redis-7/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="分布式锁实现 电商场景，当用户下单的时候，redis 里库存只有一件，并发执行的时候可能会造成库存超卖问题  通过在执行第二步加锁，可以保证并发请求在下单的时候操作是串行化的，但是并发增多，增加一台机器  此时还是会造成库存超卖问题。原因是：两个系统运行在两个不同的JVM里面，他们加的锁只对属于自己JVM里面的线程有效，对于其他JVM的线程是无效的。即 Java提供的原生锁机制在多机部署场景下失效">
@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/1J6IbIcPCLblQkicuWPYZicf1yqrpficlt2bhIqLu3VOmTM6qIyibrPc87X2dAoNibxOJ03vtJiaMKfKm0jic7l2rcSng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:updated_time" content="2020-11-25T09:40:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis 和 MySQL 数据不一致性">
+<meta name="twitter:title" content="分布式锁实现">
 <meta name="twitter:description" content="分布式锁实现 电商场景，当用户下单的时候，redis 里库存只有一件，并发执行的时候可能会造成库存超卖问题  通过在执行第二步加锁，可以保证并发请求在下单的时候操作是串行化的，但是并发增多，增加一台机器  此时还是会造成库存超卖问题。原因是：两个系统运行在两个不同的JVM里面，他们加的锁只对属于自己JVM里面的线程有效，对于其他JVM的线程是无效的。即 Java提供的原生锁机制在多机部署场景下失效">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtA3QWLj02ROzbS9Nc3Ws5nCNAXS0RoKfvGXzibXwHAcUSPrrQbouSnI9g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
@@ -177,7 +177,7 @@
 
 
 
-  <title>Redis 和 MySQL 数据不一致性 | 猫熊小才天の书院</title>
+  <title>分布式锁实现 | 猫熊小才天の书院</title>
   
 
 
@@ -355,7 +355,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis 和 MySQL 数据不一致性</h1>
+          <h1 class="post-title" itemprop="name headline">分布式锁实现</h1>
         
 
         <div class="post-meta">
@@ -421,7 +421,7 @@
 
           
           
-             <span id="/2020/11/25/Redis-7/" class="leancloud_visitors" data-flag-title="Redis 和 MySQL 数据不一致性">
+             <span id="/2020/11/25/Redis-7/" class="leancloud_visitors" data-flag-title="分布式锁实现">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -719,7 +719,7 @@
         
         
           <li>
-            <a href="/2020/11/25/Redis-7/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
+            <a href="/2020/11/25/Redis-7/" title="分布式锁实现" target="_blank">分布式锁实现</a>
           </li>
         
           <li>
