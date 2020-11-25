@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Redis,">
 
 
 
@@ -125,16 +125,23 @@
 
 
 
-<meta name="description" content="君子不器">
-<meta property="og:type" content="website">
-<meta property="og:title" content="猫熊小才天の书院">
-<meta property="og:url" content="https://mxxct4git.github.io/archives/page/7/index.html">
+<meta name="description" content="分布式锁实现 电商场景，当用户下单的时候，redis 里库存只有一件，并发执行的时候可能会造成库存超卖问题  通过在执行第二步加锁，可以保证并发请求在下单的时候操作是串行化的，但是并发增多，增加一台机器  此时还是会造成库存超卖问题。原因是：两个系统运行在两个不同的JVM里面，他们加的锁只对属于自己JVM里面的线程有效，对于其他JVM的线程是无效的。即 Java提供的原生锁机制在多机部署场景下失效">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 和 MySQL 数据不一致性">
+<meta property="og:url" content="https://mxxct4git.github.io/2020/11/25/Redis-7/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="君子不器">
+<meta property="og:description" content="分布式锁实现 电商场景，当用户下单的时候，redis 里库存只有一件，并发执行的时候可能会造成库存超卖问题  通过在执行第二步加锁，可以保证并发请求在下单的时候操作是串行化的，但是并发增多，增加一台机器  此时还是会造成库存超卖问题。原因是：两个系统运行在两个不同的JVM里面，他们加的锁只对属于自己JVM里面的线程有效，对于其他JVM的线程是无效的。即 Java提供的原生锁机制在多机部署场景下失效">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtA3QWLj02ROzbS9Nc3Ws5nCNAXS0RoKfvGXzibXwHAcUSPrrQbouSnI9g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtAOxHO6gxicqjzJAcGEVLiaibiafgnibsXbScFI9FewYrk20USwQ7HvaDjyWQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtA5AxlRwFCcEXicQqThGCeTmdWvybbFoSRJ4XFEWIkCAtEalQmjYWDQWg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/1J6IbIcPCLblQkicuWPYZicf1yqrpficlt2bhIqLu3VOmTM6qIyibrPc87X2dAoNibxOJ03vtJiaMKfKm0jic7l2rcSng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2020-11-25T09:40:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="猫熊小才天の书院">
-<meta name="twitter:description" content="君子不器">
+<meta name="twitter:title" content="Redis 和 MySQL 数据不一致性">
+<meta name="twitter:description" content="分布式锁实现 电商场景，当用户下单的时候，redis 里库存只有一件，并发执行的时候可能会造成库存超卖问题  通过在执行第二步加锁，可以保证并发请求在下单的时候操作是串行化的，但是并发增多，增加一台机器  此时还是会造成库存超卖问题。原因是：两个系统运行在两个不同的JVM里面，他们加的锁只对属于自己JVM里面的线程有效，对于其他JVM的线程是无效的。即 Java提供的原生锁机制在多机部署场景下失效">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtA3QWLj02ROzbS9Nc3Ws5nCNAXS0RoKfvGXzibXwHAcUSPrrQbouSnI9g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
 
 
@@ -164,13 +171,13 @@
 
 
 
-  <link rel="canonical" href="https://mxxct4git.github.io/archives/page/7/">
+  <link rel="canonical" href="https://mxxct4git.github.io/2020/11/25/Redis-7/">
 
 
 
 
 
-  <title>归档 | 猫熊小才天の书院</title>
+  <title>Redis 和 MySQL 数据不一致性 | 猫熊小才天の书院</title>
   
 
 
@@ -191,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -317,390 +324,249 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/11/25/Redis-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">Redis 和 MySQL 数据不一致性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-25T17:10:00+08:00">
+                2020-11-25
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
           
-        很好! 目前共计 122 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/25/Redis-7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/25/Redis-7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2020/11/25/Redis-7/" class="leancloud_visitors" data-flag-title="Redis 和 MySQL 数据不一致性">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/14/Python-3/" itemprop="url">
-              
-                <span itemprop="name">Python基础</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-12-14T08:47:49+08:00" content="2019-12-14">
-          12-14
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/07/Novel-8/" itemprop="url">
-              
-                <span itemprop="name">给二十年后的一封信</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-11-07T17:00:00+08:00" content="2019-11-07">
-          11-07
-        </time>
-      </div>
-
-    </header>
-  </article>
+          
+		  
 
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/27/Novel-7/" itemprop="url">
-              
-                <span itemprop="name">罗兰</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-27T07:25:00+08:00" content="2019-10-27">
-          10-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h2 id="分布式锁实现"><a href="#分布式锁实现" class="headerlink" title="分布式锁实现"></a>分布式锁实现</h2><p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtA3QWLj02ROzbS9Nc3Ws5nCNAXS0RoKfvGXzibXwHAcUSPrrQbouSnI9g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<p>电商场景，当用户下单的时候，redis 里库存只有一件，并发执行的时候可能会造成<strong>库存超卖问题</strong></p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtAOxHO6gxicqjzJAcGEVLiaibiafgnibsXbScFI9FewYrk20USwQ7HvaDjyWQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<p>通过在执行第二步加锁，可以保证并发请求在下单的时候操作是串行化的，但是并发增多，增加一台机器</p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZO3ZKMzm3Vmc5L6icEx7JtA5AxlRwFCcEXicQqThGCeTmdWvybbFoSRJ4XFEWIkCAtEalQmjYWDQWg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<p>此时还是会造成<strong>库存超卖问题</strong>。原因是：两个系统运行在两个不同的JVM里面，他们加的锁只对属于自己JVM里面的线程有效，对于其他JVM的线程是无效的。即 <strong>Java提供的原生锁机制在多机部署场景下失效了</strong></p>
+<p>分布式锁：redis 或 zookeeper</p>
+<h3 id="1-Redis-实现方式"><a href="#1-Redis-实现方式" class="headerlink" title="1. Redis 实现方式"></a>1. Redis 实现方式</h3><p>思路：在redis中设置一个值表示加了锁，然后释放锁的时候就把这个key删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 获取锁</span><br><span class="line">// NX是指如果key不存在就成功，key存在返回false，PX可以指定过期时间</span><br><span class="line">SET anyLock unique_value NX PX 30000</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 释放锁：通过执行一段lua脚本</span><br><span class="line">// 释放锁涉及到两条指令，这两条指令不是原子性的</span><br><span class="line">// 需要用到redis的lua脚本支持特性，redis执行lua脚本是原子性的</span><br><span class="line">if redis.call(&quot;get&quot;,KEYS[1]) == ARGV[1] then</span><br><span class="line">return redis.call(&quot;del&quot;,KEYS[1])</span><br><span class="line">else</span><br><span class="line">return 0</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 
-        
-        
+<p>需要注意的地方：</p>
+<ol>
+<li>一定要用SET key value NX PX milliseconds 命令<br> 如果不用，先设置了值，再设置过期时间，这个不是原子性操作，有可能在设置过期时间之前宕机，会造成死锁(key永久存在)</li>
+<li>value 要具有唯一性<br> 这个是为了在解锁的时候，需要验证value是和加锁的一致才删除key。<br> 这是避免了一种情况：假设A获取了锁，过期时间30s，此时35s之后，锁已经自动释放了，A去释放锁，但是此时可能B获取了锁。A客户端就不能删除B的锁了。</li>
+</ol>
+<p>这样有可能会有一个问题是：设置了key的过期时间，但是业务处理逻辑的时间可能大于过期时间，这样A获取了锁，但是处理超时了，key被过期，B获取了锁，也有可能会恶性循环</p>
+<p>组件 <em>Redission</em> 实现</p>
+<ol>
+<li>redisson所有指令都通过lua脚本执行，redis支持lua脚本原子性执行</li>
+<li>redisson中有一个watchdog的概念，翻译过来就是看门狗，它会在你获取锁之后，每隔10秒帮你把key的超时时间设为30s。这样的话，就算一直持有锁也不会出现key过期了，其他线程获取到锁的问题了。同时也保证了没有死锁的产生，哪怕机器宕机，key也会在时间到了之后自己过期</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">// 加锁逻辑</span><br><span class="line">private &lt;T&gt; RFuture&lt;Long&gt; tryAcquireAsync(long leaseTime, TimeUnit unit, final long threadId) &#123;</span><br><span class="line">    if (leaseTime != -1) &#123;</span><br><span class="line">        return tryLockInnerAsync(leaseTime, unit, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line">    &#125;</span><br><span class="line">    // 调用一段lua脚本，设置一些key、过期时间</span><br><span class="line">    RFuture&lt;Long&gt; ttlRemainingFuture = tryLockInnerAsync(commandExecutor.getConnectionManager().getCfg().getLockWatchdogTimeout(), TimeUnit.MILLISECONDS, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line">    ttlRemainingFuture.addListener(new FutureListener&lt;Long&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void operationComplete(Future&lt;Long&gt; future) throws Exception &#123;</span><br><span class="line">            if (!future.isSuccess()) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Long ttlRemaining = future.getNow();</span><br><span class="line">            // lock acquired</span><br><span class="line">            if (ttlRemaining == null) &#123;</span><br><span class="line">                // 看门狗逻辑</span><br><span class="line">                scheduleExpirationRenewal(threadId);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return ttlRemainingFuture;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;T&gt; RFuture&lt;T&gt; tryLockInnerAsync(long leaseTime, TimeUnit unit, long threadId, RedisStrictCommand&lt;T&gt; command) &#123;</span><br><span class="line">    internalLockLeaseTime = unit.toMillis(leaseTime);</span><br><span class="line"></span><br><span class="line">    return commandExecutor.evalWriteAsync(getName(), LongCodec.INSTANCE, command,</span><br><span class="line">              &quot;if (redis.call(&apos;exists&apos;, KEYS[1]) == 0) then &quot; +</span><br><span class="line">                  &quot;redis.call(&apos;hset&apos;, KEYS[1], ARGV[2], 1); &quot; +</span><br><span class="line">                  &quot;redis.call(&apos;pexpire&apos;, KEYS[1], ARGV[1]); &quot; +</span><br><span class="line">                  &quot;return nil; &quot; +</span><br><span class="line">              &quot;end; &quot; +</span><br><span class="line">              &quot;if (redis.call(&apos;hexists&apos;, KEYS[1], ARGV[2]) == 1) then &quot; +</span><br><span class="line">                  &quot;redis.call(&apos;hincrby&apos;, KEYS[1], ARGV[2], 1); &quot; +</span><br><span class="line">                  &quot;redis.call(&apos;pexpire&apos;, KEYS[1], ARGV[1]); &quot; +</span><br><span class="line">                  &quot;return nil; &quot; +</span><br><span class="line">              &quot;end; &quot; +</span><br><span class="line">              &quot;return redis.call(&apos;pttl&apos;, KEYS[1]);&quot;,</span><br><span class="line">                Collections.&lt;Object&gt;singletonList(getName()), internalLockLeaseTime, getLockName(threadId));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 看门狗最终会调用了这里</span><br><span class="line">private void scheduleExpirationRenewal(final long threadId) &#123;</span><br><span class="line">    if (expirationRenewalMap.containsKey(getEntryName())) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 这个任务会延迟10s执行</span><br><span class="line">    Timeout task = commandExecutor.getConnectionManager().newTimeout(new TimerTask() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run(Timeout timeout) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">            // 这个操作会将key的过期时间重新设置为30s</span><br><span class="line">            RFuture&lt;Boolean&gt; future = renewExpirationAsync(threadId);</span><br><span class="line"></span><br><span class="line">            future.addListener(new FutureListener&lt;Boolean&gt;() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void operationComplete(Future&lt;Boolean&gt; future) throws Exception &#123;</span><br><span class="line">                    expirationRenewalMap.remove(getEntryName());</span><br><span class="line">                    if (!future.isSuccess()) &#123;</span><br><span class="line">                        log.error(&quot;Can&apos;t update lock &quot; + getName() + &quot; expiration&quot;, future.cause());</span><br><span class="line">                        return;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    if (future.getNow()) &#123;</span><br><span class="line">                        // reschedule itself</span><br><span class="line">                        // 通过递归调用本方法，无限循环延长过期时间</span><br><span class="line">                        scheduleExpirationRenewal(threadId);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;, internalLockLeaseTime / 3, TimeUnit.MILLISECONDS);</span><br><span class="line"></span><br><span class="line">    if (expirationRenewalMap.putIfAbsent(getEntryName(), new ExpirationEntry(threadId, task)) != null) &#123;</span><br><span class="line">        task.cancel();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/18/QlikSense-5/" itemprop="url">
-              
-                <span itemprop="name">Qlik Sense插件及QRS接口补充</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-18T09:10:00+08:00" content="2019-10-18">
-          10-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<h3 id="2-ZooKeeper-实现方式"><a href="#2-ZooKeeper-实现方式" class="headerlink" title="2. ZooKeeper 实现方式"></a>2. ZooKeeper 实现方式</h3><p>Zookeeper是一种提供配置管理、分布式协同以及命名的中心化服务。</p>
+<p>zk的模型是这样的：zk包含一系列的节点，叫做znode，就好像文件系统一样每个znode表示一个目录，然后znode有一些特性：</p>
+<ul>
+<li>有序节点<ul>
+<li>假如当前有一个父节点为/lock，我们可以在这个父节点下面创建子节点<br>zookeeper提供了一个可选的有序特性，例如我们可以创建子节点“/lock/node-”并且指明有序，那么zookeeper在生成子节点时会根据当前的子节点数量自动添加整数序号<br>也就是说，如果是第一个创建的子节点，那么生成的子节点为/lock/node-0000000000，下一个节点则为/lock/node-0000000001，依次类推。</li>
+</ul>
+</li>
+<li>临时节点<ul>
+<li>客户端可以建立一个临时节点，在会话结束或者会话超时后，zookeeper会自动删除该节点。</li>
+</ul>
+</li>
+<li>事件监听<ul>
+<li>在读取数据时，我们可以同时对节点设置事件监听，当节点数据或结构变化时，zookeeper会通知客户端。当前zookeeper有如下四种事件：<ul>
+<li>节点创建</li>
+<li>节点删除</li>
+<li>节点数据修改</li>
+<li>子节点变更</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>实现分布式锁的思路</p>
+<ol>
+<li>使用zk的临时节点和有序节点，每个线程获取锁就是在zk创建一个临时有序的节点，比如在/lock/目录下。</li>
+<li>创建节点成功后，获取/lock目录下的所有临时节点，再判断当前线程创建的节点是否是所有的节点的序号最小的节点</li>
+<li>如果当前线程创建的节点是所有节点序号最小的节点，则认为获取锁成功。</li>
+<li>如果当前线程创建的节点不是所有节点序号最小的节点，则对节点序号的前一个节点添加一个事件监听。</li>
+</ol>
+<p>比如当前线程获取到的节点序号为 <code>/lock/003</code>，然后所有的节点列表为<code>[/lock/001,/lock/002,/lock/003]</code>，则对/lock/002这个节点添加一个事件监听器。<br>如果锁释放了，会唤醒下一个序号的节点，然后重新执行第3步，判断是否自己的节点序号是最小。比如<code>/lock/001</code>释放了，<code>/lock/002</code>监听到事件，此时节点集合为<code>[/lock/002,/lock/003]</code>，则<code>/lock/002</code>为最小序号节点，获取到锁。</p>
+<p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/1J6IbIcPCLblQkicuWPYZicf1yqrpficlt2bhIqLu3VOmTM6qIyibrPc87X2dAoNibxOJ03vtJiaMKfKm0jic7l2rcSng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/23/Java-2/" itemprop="url">
-              
-                <span itemprop="name">Java8 新特性</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-23T16:50:00+08:00" content="2019-09-23">
-          09-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/06/Java-1/" itemprop="url">
-              
-                <span itemprop="name">Java编程思想 笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-06T15:10:00+08:00" content="2019-09-06">
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/30/Hive-4/" itemprop="url">
-              
-                <span itemprop="name">Hive Sql的窗口函数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-30T11:02:37+08:00" content="2019-08-30">
-          08-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/07/Kafka-1/" itemprop="url">
-              
-                <span itemprop="name">Kafka概念</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-07T11:15:00+08:00" content="2019-08-07">
-          08-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/07/Scala-2/" itemprop="url">
-              
-                <span itemprop="name">Scala编程 笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-07T11:15:00+08:00" content="2019-08-07">
-          08-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/01/Scala-1/" itemprop="url">
-              
-                <span itemprop="name">Scala 特殊符号含义</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-01T11:15:27+08:00" content="2019-08-01">
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/25/Redis-6/" rel="next" title="Redis 和 MySQL 数据不一致性">
+                <i class="fa fa-chevron-left"></i> Redis 和 MySQL 数据不一致性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/13/">13</a><a class="extend next" rel="next" href="/archives/page/8/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -708,6 +574,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -730,8 +603,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -857,6 +739,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式锁实现"><span class="nav-text">分布式锁实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Redis-实现方式"><span class="nav-text">1. Redis 实现方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ZooKeeper-实现方式"><span class="nav-text">2. ZooKeeper 实现方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1004,6 +902,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
