@@ -133,12 +133,12 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink  flume 把内部的格式统一封装为 event，保存一些描述信息和具体数据 拦截器的位置在Source">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png">
 <meta property="og:updated_time" content="2020-06-15T03:16:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flume">
 <meta name="twitter:description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink  flume 把内部的格式统一封装为 event，保存一些描述信息和具体数据 拦截器的位置在Source">
-<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png">
 
 
 
@@ -470,7 +470,7 @@
 </ol>
 <p>flume 把内部的格式统一封装为 event，保存一些描述信息和具体数据</p>
 <p>拦截器的位置在Source和Channel之间，当我们为Source指定拦截器后，我们在拦截器中会得到event，根据需求我们可以对event进行保留还是抛弃，抛弃的数据不会进入Channel中。</p>
-<p><img src="https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png" alt></p>
+<p><img src="https://images.weserv.nl/?url=https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png" alt></p>
 <p>Flume可靠性在于Sink 必须在Event 被存入 Channel 后，或者，已经被传达到下一站agent里，又或者已经被存入外部数据目的地之后，才能把 Event 从 Channel 中 remove 掉。而Flume支持在本地保存一份文件 channel 作为备份，而memory channel 将event存在内存 queue 里，速度快，但丢失的话无法恢复。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">配置写到HDFS</span><br><span class="line">hdfs.rollCount = 10 // 相当于event采集到10条数据就写一次</span><br><span class="line">hdfs.batchSize = 100 // 相当于event在写数据的时候一批的数量</span><br><span class="line">hdfs.fileType = SequenceFile // 默认是SequenceFile，还有 DataStream（原始数据是什么，写完也是什么）</span><br><span class="line"></span><br><span class="line">tier1.sinks.hdfsSink_26.hdfs.path = hdfs://nameservice/user/flume/kafka/hehe/%&#123;topic&#125;/%Y%m%d</span><br></pre></td></tr></table></figure>
 
@@ -602,7 +602,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -691,15 +691,15 @@
         
         
           <li>
-            <a href="/2020/11/07/Lombok-1/" title="Lombok" target="_blank">Lombok</a>
+            <a href="/2020/11/25/Redis-6/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
           </li>
         
           <li>
-            <a href="/2020/11/07/Phoenix-4/" title="Phoenix 异步创建索引" target="_blank">Phoenix 异步创建索引</a>
+            <a href="/2020/11/16/HBase-3/" title="HBase WAL日志" target="_blank">HBase WAL日志</a>
           </li>
         
           <li>
-            <a href="/2020/11/03/Mybatis-1/" title="MyBatis 查询结果自动封装为map，出现null而没有字段名" target="_blank">MyBatis 查询结果自动封装为map，出现null而没有字段名</a>
+            <a href="/2020/11/12/JVM-2/" title="JVM SafePoint" target="_blank">JVM SafePoint</a>
           </li>
         
       </ul>

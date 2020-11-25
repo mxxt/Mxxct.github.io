@@ -125,20 +125,20 @@
 
 
 
-<meta name="description" content="JVM内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短">
+<meta name="description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很">
 <meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM内存管理">
+<meta property="og:title" content="JVM 内存管理">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/10/29/JVM-1/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="JVM内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短">
+<meta property="og:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510003027516-1618059091.png">
 <meta property="og:updated_time" content="2020-10-29T09:10:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM内存管理">
-<meta name="twitter:description" content="JVM内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短">
+<meta name="twitter:title" content="JVM 内存管理">
+<meta name="twitter:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
 
 
@@ -175,7 +175,7 @@
 
 
 
-  <title>JVM内存管理 | 猫熊小才天の书院</title>
+  <title>JVM 内存管理 | 猫熊小才天の书院</title>
   
 
 
@@ -353,7 +353,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JVM内存管理</h1>
+          <h1 class="post-title" itemprop="name headline">JVM 内存管理</h1>
         
 
         <div class="post-meta">
@@ -430,7 +430,7 @@
 
           
           
-             <span id="/2020/10/29/JVM-1/" class="leancloud_visitors" data-flag-title="JVM内存管理">
+             <span id="/2020/10/29/JVM-1/" class="leancloud_visitors" data-flag-title="JVM 内存管理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -463,7 +463,7 @@
       
 
       
-        <h2 id="JVM内存管理"><a href="#JVM内存管理" class="headerlink" title="JVM内存管理"></a>JVM内存管理</h2><p><a href="https://www.cnblogs.com/alsf/p/9017447.html" target="_blank" rel="noopener">参考文档</a></p>
+        <h2 id="JVM-内存管理"><a href="#JVM-内存管理" class="headerlink" title="JVM 内存管理"></a>JVM 内存管理</h2><p><a href="https://www.cnblogs.com/alsf/p/9017447.html" target="_blank" rel="noopener">参考文档</a></p>
 <h3 id="1-堆和栈"><a href="#1-堆和栈" class="headerlink" title="1. 堆和栈"></a>1. 堆和栈</h3><p>JVM内存划分：</p>
 <ol>
 <li>寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令）</li>
@@ -632,7 +632,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -721,15 +721,15 @@
         
         
           <li>
-            <a href="/2020/11/07/Lombok-1/" title="Lombok" target="_blank">Lombok</a>
+            <a href="/2020/11/25/Redis-6/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
           </li>
         
           <li>
-            <a href="/2020/11/07/Phoenix-4/" title="Phoenix 异步创建索引" target="_blank">Phoenix 异步创建索引</a>
+            <a href="/2020/11/16/HBase-3/" title="HBase WAL日志" target="_blank">HBase WAL日志</a>
           </li>
         
           <li>
-            <a href="/2020/11/03/Mybatis-1/" title="MyBatis 查询结果自动封装为map，出现null而没有字段名" target="_blank">MyBatis 查询结果自动封装为map，出现null而没有字段名</a>
+            <a href="/2020/11/12/JVM-2/" title="JVM SafePoint" target="_blank">JVM SafePoint</a>
           </li>
         
       </ul>
@@ -751,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM内存管理"><span class="nav-text">JVM内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆和栈"><span class="nav-text">1. 堆和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-堆"><span class="nav-text">1.1 堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-栈"><span class="nav-text">1.2 栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GC"><span class="nav-text">2. GC</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-内存管理"><span class="nav-text">JVM 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆和栈"><span class="nav-text">1. 堆和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-堆"><span class="nav-text">1.1 堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-栈"><span class="nav-text">1.2 栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GC"><span class="nav-text">2. GC</span></a></li></ol></li></ol></div>
             
 
           </div>
