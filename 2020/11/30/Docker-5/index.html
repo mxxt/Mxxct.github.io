@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="m1ei8mEvXD">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,Docker,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Docker 深入学习官方帮助文档 1. 命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374$ docker --help用法:  docker COMMAND">
+<meta name="keywords" content="Linux,Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 深入学习">
+<meta property="og:url" content="https://mxxct4git.github.io/2020/11/30/Docker-5/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="Docker 深入学习官方帮助文档 1. 命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374$ docker --help用法:  docker COMMAND">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4933701-c9c04d73e0eae5fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/935/format/webp">
+<meta property="og:updated_time" content="2020-12-07T07:35:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 深入学习">
+<meta name="twitter:description" content="Docker 深入学习官方帮助文档 1. 命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374$ docker --help用法:  docker COMMAND">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/4933701-c9c04d73e0eae5fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/935/format/webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mxxct4git.github.io/2020/11/30/Docker-5/">
+
+
+
+
+
+  <title>Docker 深入学习 | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/11/30/Docker-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker 深入学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-30T15:23:00+08:00">
+                2020-11-30
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/30/Docker-5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/30/Docker-5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/11/30/Docker-5/" class="leancloud_visitors" data-flag-title="Docker 深入学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Docker-深入学习"><a href="#Docker-深入学习" class="headerlink" title="Docker 深入学习"></a>Docker 深入学习</h2><p><a href="https://docs.docker.com/reference/" target="_blank" rel="noopener">官方帮助文档</a></p>
+<h3 id="1-命令"><a href="#1-命令" class="headerlink" title="1. 命令"></a>1. 命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">$ docker --help</span><br><span class="line">用法:  docker COMMAND                                                                                                             </span><br><span class="line">A self-sufficient runtime for containers                                                                                           </span><br><span class="line">选项:                                                                                                                           </span><br><span class="line">      --config string      Location of client config files (default                                                                </span><br><span class="line">                           &quot;C:\\Users\\junchow\\.docker&quot;)                                                                          </span><br><span class="line">  -D, --debug              开启debug模式</span><br><span class="line">  -H, --host list          Daemon socket(s) to connect to                                                                          </span><br><span class="line">  -l, --log-level string   设置日志级别，级别分为debug|info|warn|error|fatal，默认为info。                                                                             </span><br><span class="line">      --tls                Use TLS; implied by --tlsverify                                                                         </span><br><span class="line">      --tlscacert string   Trust certs signed only by this CA (default                                                             </span><br><span class="line">                           &quot;C:\\Users\\junchow\\.docker\\machine\\machines\\default\\ca.pem&quot;)                                      </span><br><span class="line">      --tlscert string     Path to TLS certificate file (default                                                                   </span><br><span class="line">                           &quot;C:\\Users\\junchow\\.docker\\machine\\machines\\default\\cert.pem&quot;)                                    </span><br><span class="line">      --tlskey string      Path to TLS key file (default                                                                           </span><br><span class="line">                           &quot;C:\\Users\\junchow\\.docker\\machine\\machines\\default\\key.pem&quot;)                                     </span><br><span class="line">      --tlsverify          Use TLS and verify the remote (default true)                                                            </span><br><span class="line">  -v, --version            终端打印显示版本信息并退出                                                                                                                                   </span><br><span class="line">管理命令:                                                                                                               </span><br><span class="line">  config      管理Docker配置</span><br><span class="line">  container   管理容器                                                                                                    </span><br><span class="line">  image       管理镜像</span><br><span class="line">  network     管理网络</span><br><span class="line">  node        管理Swarm节点</span><br><span class="line">  plugin      管理插件</span><br><span class="line">  secret      管理Docker安全</span><br><span class="line">  service     管理服务</span><br><span class="line">  swarm       管理Swarm集群</span><br><span class="line">  system      管理Docker系统</span><br><span class="line">  trust       Manage trust on Docker images                                                                                        </span><br><span class="line">  volume      管理卷</span><br><span class="line">                                                                                                                                   </span><br><span class="line">命令:                                                                                                                          </span><br><span class="line">  attach      将标准输入和标准输出连接到正在运行的容器                                        </span><br><span class="line">  build       使用dockerfile文件创建镜像                                                                                     </span><br><span class="line">  commit      从容器的修改项中创建新的镜像</span><br><span class="line">  cp          将容器的目录或文件复制到本地文件系统中</span><br><span class="line">  create      创建一个新的镜像</span><br><span class="line">  diff        检查容器文件系统的修改</span><br><span class="line">  events      实时输出docker服务器中发生的事件</span><br><span class="line">  exec        从外部运行容器内部的命令</span><br><span class="line">  export      将容器的文件系统到处为tat文件包</span><br><span class="line">  history     显示镜像的历史</span><br><span class="line">  images      输出镜像列表</span><br><span class="line">  import      从压缩为tar文件的文件系统中创建镜像</span><br><span class="line">  info        显示当前系统信息、docker容器与镜像个数、设置信息等</span><br><span class="line">  inspect     使用JSON格式显示容器与镜像的详细信息</span><br><span class="line">  kill        向容器发送kill信号关闭容器</span><br><span class="line">  load        从tar文件或标准输入中加载镜像</span><br><span class="line">  login       登录docker注册服务器</span><br><span class="line">  logout      退出docker注册服务器</span><br><span class="line">  logs        输出容器日志信息</span><br><span class="line">  pause       暂停容器中正在运行的所有进程</span><br><span class="line">  port        查看容器的端口是否处于开放状态</span><br><span class="line">  ps          输出容器列表</span><br><span class="line">  pull        从注册服务器中拉取一个镜像或仓库</span><br><span class="line">  push        将镜像推送到docker注册服务器</span><br><span class="line">  rename      重命名一个容器</span><br><span class="line">  restart     重启一个或多个容器</span><br><span class="line">  rm          删除一个或多个容器，若没有指定标签则删除lastest标签。</span><br><span class="line">  rmi         删除一个或多个镜像，若没有指定标签则删除lastest标签。                                                </span><br><span class="line">  run         在一个新容器中中运行命令，用于指定镜像创建容器。</span><br><span class="line">  save        将一个或多个镜像保存为tar包             </span><br><span class="line">  search      从Docker Hub中搜索镜像</span><br><span class="line">  start       启动一个或多个已经停止的容器</span><br><span class="line">  stats       查看各个容器占用内存、CPU的情况                                                     </span><br><span class="line">  stop        停止一个或多个正在运行的容器</span><br><span class="line">  tag         设置镜像标签</span><br><span class="line">  top         显示容器中正在运行的进程信息</span><br><span class="line">  unpause     重启pause命令暂停的容器</span><br><span class="line">  update      更新一个或多个容器的配置</span><br><span class="line">  version     显示docker版本信息</span><br><span class="line">  wait        等待容器终止然后输出退出码</span><br><span class="line">Run &apos;docker COMMAND --help&apos; for more information on a command.</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/4933701-c9c04d73e0eae5fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/935/format/webp" alt="命令小结"></p>
+<h4 id="1-1-镜像命令"><a href="#1-1-镜像命令" class="headerlink" title="1.1 镜像命令"></a>1.1 镜像命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker images   # 查询本机上所有的镜像</span><br><span class="line"></span><br><span class="line"># 可选项</span><br><span class="line">-a 显示全部</span><br><span class="line">-q 只显示镜像ID</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker search 镜像名</span><br><span class="line"></span><br><span class="line"># 可选项</span><br><span class="line">-f=stars=3000  # 搜索STARS大于3000的</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull 镜像名[:tag]</span><br><span class="line"></span><br><span class="line">针对不同版本，如果有一样的镜像文件，就不需要重复下载了</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker imi -f 镜像id                   # 删除指定镜像</span><br><span class="line">docker imi -f 镜像id 镜像id 镜像id      # 删除多个镜像</span><br><span class="line">docker imi -f $(docker images -q)     # 把$里面当成参数传递进去，获取所有的镜像id，然后全部删除</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-容器命令"><a href="#1-2-容器命令" class="headerlink" title="1.2 容器命令"></a>1.2 容器命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run [可选参数] image</span><br><span class="line"></span><br><span class="line"># 参数说明</span><br><span class="line">--name=&quot;Name&quot;   容器名字，用来区分容器</span><br><span class="line">-d              后台方式运行</span><br><span class="line">-i -t           使用交互方式运行，进入容器查看内容</span><br><span class="line">-p              指定容器的端口 -p 8080:8000</span><br><span class="line">    -p 主机端口:容器端口  # 进行映射</span><br><span class="line">    -p 容器端口</span><br><span class="line">-P              随机指定端口</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker ps # 列出所有正在运行的容器</span><br><span class="line"></span><br><span class="line"># 可选项</span><br><span class="line">-a      # 列出所有容器</span><br><span class="line">-n=?    # 列出前n个容器</span><br><span class="line">-q      # 只显示容器ID</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exit 退出容器并停止</span><br><span class="line">ctrl+P+Q 大写模式下，退出容器且不停止</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dcoker rm 容器ID</span><br><span class="line">docker rm -f $(docker ps -q) 删除所有的容器ID</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器ID</span><br><span class="line">docker restart 容器ID</span><br><span class="line">docker stop 容器ID</span><br><span class="line">docker kill 容器ID   # 强制停止容器</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-常用其他命令"><a href="#1-3-常用其他命令" class="headerlink" title="1.3 常用其他命令"></a>1.3 常用其他命令</h4><p>通过 <code>docker run -d 镜像名</code> 来启动，然后通过 <code>docker ps</code> 会发现容器停止了</p>
+<p>=&gt; docker 容器使用后台运行，就必须要有一个前台进程，docker 发现没有应用，就会自动停止<br>eg：nginx 容器启动后发现没有提供服务就会自动停止</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker logs     # 查看日志</span><br><span class="line"></span><br><span class="line"># 可选项</span><br><span class="line">-t  # 时间戳</span><br><span class="line">-f  # 持续输出日志</span><br><span class="line">    --tail number   # 显示最后的number条日志</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器ID   # 查看容器中的进程信息，其中pid是进程id，ppid是父进程id</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器ID/镜像ID   # 查看容器/镜像元数据，在下面有一个 layers 里面是镜像文件的每一层文件</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">很多容器都是后台运行，需要进入容器，修改一些配置</span><br><span class="line"></span><br><span class="line">方式一：</span><br><span class="line">docker exec -it 容器ID /bin/bash    # 以命令行的方式来进行交互</span><br><span class="line"># 进入容器后会开启一个新的终端，可以在终端里操作</span><br><span class="line"></span><br><span class="line">方式二：</span><br><span class="line">docker attach 容器ID    # 会进入到正在执行的终端，不会启动新的进程</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 容器ID:容器内的路径 主机路径  # 将容器中的文件拷贝到主机中</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4-测试安装tomcat"><a href="#1-4-测试安装tomcat" class="headerlink" title="1.4 测试安装tomcat"></a>1.4 测试安装tomcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker pull tomcat</span><br><span class="line">docker run -d -p 主机端口:8080 --name tomcat01 tomcat</span><br><span class="line"></span><br><span class="line">访问主机端口，发现404</span><br><span class="line">docker exec -it tomcat01 /bin/bash</span><br><span class="line">进入到webapps文件夹下面，发现是空的，原因是官方镜像删减了很多功能，只留下了能运行的最基本的功能</span><br><span class="line">解决方法：可以把 webapps.dist 下面的内容复制到 webapps 文件夹下即可</span><br><span class="line">但是这样的解决方法又太麻烦了，不能每次上线都进入容器部署 =&gt; 数据卷</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-5-测试安装ES"><a href="#1-5-测试安装ES" class="headerlink" title="1.5 测试安装ES"></a>1.5 测试安装ES</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker stats    # 查看各个容器占用内存、CPU的情况</span><br><span class="line">∵ es非常耗内存 ∴ 可以修改配置文件，来增加内存的限制，-e 设置最小内存和最大内存</span><br><span class="line"></span><br><span class="line">docker run -d --name elasticserch -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; -e ES_JAVA_OPTS=&quot;-Xms256m -Xms512m&quot; elasticsearch:7.6.2</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-可视化-portainer"><a href="#2-可视化-portainer" class="headerlink" title="2. 可视化 portainer"></a>2. 可视化 portainer</h3><p>一个可视化管理方案，直接用docker来安装即可，做好主机端口映射</p>
+<h3 id="3-联合文件系统"><a href="#3-联合文件系统" class="headerlink" title="3. 联合文件系统"></a>3. 联合文件系统</h3><p>镜像是一种轻量级、可执行的独立软件包，包含某个软件所需的所有内容，包括代码、运行时、库、环境变量和配置文件。</p>
+<p>UFS(UnionFS) 联合文件系统，是一种分层、轻量级并且高性能的文件系统，支持对文件系统的修改作为一次提交来一层层的叠加。类似于Git版本控制，每一次<strong>提交（操作）</strong>都记为一层。如果连个软件有共用的某一层文件，比如都基于linux，那么都可以去挂在这一层的linux的文件，就可以复用。</p>
+<p>ufs里面包含比如</p>
+<ul>
+<li>bootfs: 包含bootloader和kernel，bootloader主要是引导加载kernal，类似于启动系统的时候会有一个加载过程，当系统启动后，这个加载的程序就可以关闭了 =&gt; 加载的这部分就是可以复用的部分</li>
+<li>rootfs: 在bootfs之上，包含的就是典型的linux系统的 <code>/dev, /proc, /bin, /etc</code> 等标准目录和文件 =&gt; 比如linux的容器，占的内存很小，是因为镜像文件只需要包含rootfs里最基本的命令、工具即可，可以使用主机的kernel，这样的话可以提高效率</li>
+</ul>
+<p>所有的镜像都起始于一个基础镜像层，当进行修改或增加新的内容的时候，就会在当前镜像层之上，创建一个新的镜像层</p>
+<p>镜像都是只读的，当容器启动时，一个新的可写层（容器层）就会加载到镜像层的顶部</p>
+<p>通过 commit 来将容器层和镜像层进行合并打包，变成一个新的镜像文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m=&quot;提交的描述信息&quot; -a=&quot;作者&quot; 容器ID 目标镜像名[:tag]</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-数据卷"><a href="#5-数据卷" class="headerlink" title="5. 数据卷"></a>5. 数据卷</h3><ol>
+<li>每次修改配置文件都需要进入到容器很麻烦</li>
+<li>数据不应该放在容器中，否则删除容器，数据就丢失了</li>
+</ol>
+<p>=&gt; 在容器外部提供一个映射路径，类似于数据共享技术，通过卷技术，也就是目录的挂载，将容器内的目录，挂在到linux上面，来实现容器数据的持久化和同步操作，容器之间也可以数据共享。</p>
+<blockquote>
+<p>容器里面的目录就像是快捷方式，宿主机的文件才是真实的</p>
+</blockquote>
+<p>实现方式：</p>
+<ol>
+<li>直接使用命令来挂载 -v <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v 主机目录:容器内目录 镜像名 /bin/bash</span><br><span class="line"></span><br><span class="line">docker run --name mysql02 -e MYSQL_ROOT_PASSWORD=123456 -p 3310:3306 -v testconf2:/etc/mysql/conf.d -v /Users/mxxct/mysqldata:/var/lib/mysql -d mysql:5.7</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>通过 <code>docker inspect 容器ID</code> 查看元数据，在 <code>Mounts</code> 里可以看到挂载的详细信息</p>
+<ul>
+<li>匿名挂载<br>  不指定主机名，直接写容器内目录 <code>-v 容器内目录</code></li>
+<li>具名挂载<br>  也可以分为两种<ul>
+<li>指定主机目录 <code>-v 主机目录:容器内目录</code></li>
+<li>不指定主机目录，只是写一个名字 <code>-v xxx:容器内目录</code> 这时候会默认映射到主机 <code>/var/lib/docker/volumes/xxx/_data</code> 这个文件夹下面（在MacOS下面没找到这个路径）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker volume ls    # 查看所有的卷</span><br><span class="line">docker volume inspect 卷名字    # 查看具体数据卷的信息，这里卷名字是指具名挂载的那个名字</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以在容器内目录后面添加权限控制<br>eg: -v 主机目录:容器内目录:ro/rw<br>ro readonly; rw readwrite 默认是rw，如果是ro就表示这个路径只能从主机上来操作，容器内只是读权限</p>
+</blockquote>
+<ol start="2">
+<li>通过 DockerFile 在构建镜像是指定 VOLUME</li>
+</ol>
+<blockquote>
+<p>这里是一个匿名挂载</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">VOLUME [&quot;vol1&quot;, &quot;vol2&quot;]</span><br><span class="line">CMD echo &quot;---- end ----&quot;</span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>直接创建文件然后执行 <code>docker build</code> 可能会提示 <code>error checking context：can&#39;t stat xxx</code> 错误，这个提示基本是权限不够外加目录结构不对<br>解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">mkdir dockerfile</span><br><span class="line">chmod 777 dockerfile</span><br><span class="line">touch file1</span><br><span class="line">vi file1</span><br><span class="line">docker build -f /Users/mxxct/dockerfile/file1 -t test/centos:1.0 .</span><br><span class="line"></span><br><span class="line">(base) localhost:dockerfile mxxct$ docker build -f /Users/mxxct/dockerfile/file1 -t test/centos:1.0 .</span><br><span class="line">Sending build context to Docker daemon  2.048kB</span><br><span class="line">Step 1/4 : FROM centos</span><br><span class="line">latest: Pulling from library/centos</span><br><span class="line">3c72a8ed6814: Pull complete </span><br><span class="line">Digest: sha256:76d24f3ba3317fa945743bb3746fbaf3a0b752f10b10376960de01da70685fbd</span><br><span class="line">Status: Downloaded newer image for centos:latest</span><br><span class="line"> ---&gt; 0d120b6ccaa8</span><br><span class="line">Step 2/4 : VOLUME [&quot;vol1&quot;, &quot;vol2&quot;]</span><br><span class="line"> ---&gt; Running in 7cc3997837d7</span><br><span class="line">Removing intermediate container 7cc3997837d7</span><br><span class="line"> ---&gt; b55d348b6981</span><br><span class="line">Step 3/4 : CMD echo &quot;---- end ----&quot;</span><br><span class="line"> ---&gt; Running in 083ad85879af</span><br><span class="line">Removing intermediate container 083ad85879af</span><br><span class="line"> ---&gt; 11c45d147425</span><br><span class="line">Step 4/4 : CMD /bin/bash</span><br><span class="line"> ---&gt; Running in e7d39262c201</span><br><span class="line">Removing intermediate container e7d39262c201</span><br><span class="line"> ---&gt; ee8398f6597c</span><br><span class="line">Successfully built ee8398f6597c</span><br><span class="line">Successfully tagged test/centos:1.0</span><br></pre></td></tr></table></figure>
+
+<p>创建好镜像后，执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">docker run -it ee8398f6597c /bin/bash</span><br><span class="line"></span><br><span class="line">[root@2adb0cbdc19f /]# ls -l</span><br><span class="line">total 56</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 bin -&gt; usr/bin</span><br><span class="line">drwxr-xr-x   5 root root  360 Dec  1 06:23 dev</span><br><span class="line">drwxr-xr-x   1 root root 4096 Dec  1 06:23 etc</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 home</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 lib -&gt; usr/lib</span><br><span class="line">lrwxrwxrwx   1 root root    9 May 11  2019 lib64 -&gt; usr/lib64</span><br><span class="line">drwx------   2 root root 4096 Aug  9 21:40 lost+found</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 media</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 mnt</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 opt</span><br><span class="line">dr-xr-xr-x 159 root root    0 Dec  1 06:23 proc</span><br><span class="line">dr-xr-x---   2 root root 4096 Aug  9 21:40 root</span><br><span class="line">drwxr-xr-x  11 root root 4096 Aug  9 21:40 run</span><br><span class="line">lrwxrwxrwx   1 root root    8 May 11  2019 sbin -&gt; usr/sbin</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 srv</span><br><span class="line">dr-xr-xr-x  12 root root    0 Dec  1 06:23 sys</span><br><span class="line">drwxrwxrwt   7 root root 4096 Aug  9 21:40 tmp</span><br><span class="line">drwxr-xr-x  12 root root 4096 Aug  9 21:40 usr</span><br><span class="line">drwxr-xr-x  20 root root 4096 Aug  9 21:40 var</span><br><span class="line">drwxr-xr-x   2 root root 4096 Dec  1 06:23 vol1</span><br><span class="line">drwxr-xr-x   2 root root 4096 Dec  1 06:23 vol2</span><br></pre></td></tr></table></figure>
+
+<p>这里有 vol1 和 vol2 两个目录，然后去查看容器的元数据信息，会发现在 Mounts 这里已经把两个卷给挂在出去了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&quot;Mounts&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;Type&quot;: &quot;volume&quot;,</span><br><span class="line">        &quot;Name&quot;: &quot;baeff06c4bf78f14c8135dbdc5ae238bb513cf8375af699b47c602d3e3a0a529&quot;,</span><br><span class="line">        &quot;Source&quot;: &quot;/var/lib/docker/volumes/baeff06c4bf78f14c8135dbdc5ae238bb513cf8375af699b47c602d3e3a0a529/_data&quot;,</span><br><span class="line">        &quot;Destination&quot;: &quot;vol1&quot;,</span><br><span class="line">        &quot;Driver&quot;: &quot;local&quot;,</span><br><span class="line">        &quot;Mode&quot;: &quot;&quot;,</span><br><span class="line">        &quot;RW&quot;: true,</span><br><span class="line">        &quot;Propagation&quot;: &quot;&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;Type&quot;: &quot;volume&quot;,</span><br><span class="line">        &quot;Name&quot;: &quot;4cbbd6edd2093b5098b6d9994bc380c992445842c1b19a942816b090a8841e13&quot;,</span><br><span class="line">        &quot;Source&quot;: &quot;/var/lib/docker/volumes/4cbbd6edd2093b5098b6d9994bc380c992445842c1b19a942816b090a8841e13/_data&quot;,</span><br><span class="line">        &quot;Destination&quot;: &quot;vol2&quot;,</span><br><span class="line">        &quot;Driver&quot;: &quot;local&quot;,</span><br><span class="line">        &quot;Mode&quot;: &quot;&quot;,</span><br><span class="line">        &quot;RW&quot;: true,</span><br><span class="line">        &quot;Propagation&quot;: &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-数据卷容器"><a href="#6-数据卷容器" class="headerlink" title="6. 数据卷容器"></a>6. 数据卷容器</h3><blockquote>
+<p>容器数据卷是容器实现数据持久化的一种机制，数据卷容器是一种特殊的容器<br>这个主要是通过类似，用于容器间的数据同步，不是容器和主机之间。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name docker01 imageID</span><br><span class="line">docker run -it --name docker02 --volumes-from docker01 imageID</span><br><span class="line"></span><br><span class="line">docker01中有挂载的文件夹</span><br><span class="line">通过 --volumes-from 让docker02继承docker01的挂载文件夹，此时docker01挂载出去的文件夹里的数据的任何修改在docker02也可以看到，同时在docker02上做的修改docker01也可以看到。docker01就是数据卷容器。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>删除docker01的话，挂载的文件夹数据依然存在，本质是因为他们都挂载到主机的目录下，只要主机对应目录存在，数据就不会丢失<br>docker01相当于映射主机数据目录的地址（想成一个快捷方式），docker02拿到这个映射地址（快捷方式），放到自己的mount里面</p>
+</blockquote>
+<h3 id="7-DockerFile"><a href="#7-DockerFile" class="headerlink" title="7. DockerFile"></a>7. DockerFile</h3><blockquote>
+<p>通过 docker history imageID 可以查看一个镜像的构建过程</p>
+</blockquote>
+<p>基础知识</p>
+<ol>
+<li>每个关键字指令都必须是大写</li>
+<li>按顺序从上到下执行</li>
+<li><code>#</code> 是注释</li>
+<li>每一个指令都会创建并提交一个新的镜像层。（docker run之后会创建一个可写容器）</li>
+</ol>
+<p>指令说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">FROM        # 指定基础镜像</span><br><span class="line">MAINtAINER  # 指定维护者信息，姓名+邮箱</span><br><span class="line">RUN         # 镜像构建的时候需要运行的命令</span><br><span class="line">ADD         # 添加内容，会自动解压，比如tomcat压缩包</span><br><span class="line">WORKDIR     # 镜像的工作目录</span><br><span class="line">VOLUME      # 设置卷，挂载主机目录</span><br><span class="line">EXPOSE      # 指定暴露的端口，或者通过 -p 指定</span><br><span class="line">CMD         # 指定容器启动时要运行的命令，只有最后一个会生效，可被替代 </span><br><span class="line">ENTRYPOINT  # 指定容器启动时要运行的命令，可以追加命令</span><br><span class="line">ONBUILD     # 当构建一个被继承 DockerFile 这个时候会运行ONBUILD的指令，触发指令</span><br><span class="line">COPY        # 类似ADD，将文件拷贝到镜像中</span><br><span class="line">ENV         # 构建的时候设置环境变量</span><br></pre></td></tr></table></figure>
+
+<p><code>CMD [&quot;ls&quot;, &quot;-a&quot;]</code> 这时候的命令相当于 “ls -a”。只有当执行 <code>docker run imageID</code> 的时候才会执行最后一个CMD的命令。(<code>docker run -it imageID</code>这时候是通过命令行交互，所以不会执行CMD)</p>
+<p>如果执行 <code>docker run imageID -l</code> 想执行 <code>ls -al</code> 命令会报错，即CMD命令会被替代，不会追加。<br>换成 <code>ENTRYPOINT</code> 再执行 <code>docker run imageID -l</code> 就可以执行 <code>ls -al</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">COPY 主机路径/readme.txt 容器内路径</span><br><span class="line">ADD 主机路径/xxxx.tar 容器内路径    # ADD添加的文件会自动解压</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line"></span><br><span class="line">ENV MYPATH /user/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">ENV JAVA_HOME /user/local/jdk1.8.0_11</span><br><span class="line">ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">ENV CATALINA_HOME /user/local/apache-tomcat-9.0.22</span><br><span class="line">ENV CATALINA_BASH /user/local/apache-tomcat-9.0.22</span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin</span><br><span class="line"></span><br><span class="line">EXPOSE 8080</span><br><span class="line"></span><br><span class="line">CMD /user/local/apache-tomcat-9.0.22/bin/startup.sh &amp;&amp; tail -f /user/local/apache-tomcat-9.0.22/bin/logs/catalinas.out</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-Docker-网络"><a href="#8-Docker-网络" class="headerlink" title="8. Docker 网络"></a>8. Docker 网络</h3><p>每次启动一个程序，Linux 就会相应创建一个新的网卡地址 =&gt; veth-pair 一对虚拟设备接口，一端连着协议，一端彼此相连 =&gt; 每启动一个容器，docker会创建一对网卡连接地址，一端在主机，一端在容器</p>
+<blockquote>
+<p>Linux 虚拟网络设别 veth-pair。三个经典实验，直接相连、通过 Bridge 相连和通过 OVS 相连</p>
+</blockquote>
+<p>两个docker容器进行通信，需要先走到docker0，也就是类似于docker的路由器，通过广播或注册的方式，路由器会知道下一个容器的网络地址，然后转发请求连接。Docker0就相当于一个网桥的角色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --link 通过link可以将两个容器网络连接起来，但是这是单向的，A link B, 只是A可以连接B，想B连接A的话还需要再配置B</span><br><span class="line">link 操作相当于在容器内的 hosts 文件中写进去映射关系</span><br></pre></td></tr></table></figure>
+
+<p>不推荐 <code>--link</code>。因为 link 用的是 docker0，而docker0不支持容器名称映射，只能写死ip，如果牵扯到ip迁移，就需要重新配置一遍</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network ls   # 查看所有的docker网络</span><br></pre></td></tr></table></figure>
+
+<p>网络模式</p>
+<ul>
+<li><p>bridge： 桥接（docker默认）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --net bridge     # 不写的话也默认有这个bridge</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>none：不配置</p>
+</li>
+<li><p>host：和主机共享网络</p>
+</li>
+<li><p>container：容器网络连通（用得少，局限很大）</p>
+</li>
+</ul>
+<p>自定义创建网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 mynet</span><br></pre></td></tr></table></figure>
+
+<p>创建的容器基于各自不同的网络，可以保证同一类容器使用的是自己的网络ip。但是如果是两类容器想互相连接呢？网络打通。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network connect [option] container network   # 将一个容器连接到一个网关上，相当于一个容器两个ip地址。</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Docker-Compose"><a href="#9-Docker-Compose" class="headerlink" title="9. Docker Compose"></a>9. Docker Compose</h3><p>目的：定义运行多个容器，避免一个个的运维容器<br>步骤：</p>
+<ol>
+<li>DockerFile</li>
+<li>docker-compose.yml</li>
+<li>run <code>docker-compose up</code></li>
+</ol>
+<blockquote>
+<p>配置项里有一个 deploy.replicas 可以设置副本，集群部署的时候使用这个参数</p>
+</blockquote>
+<p>单机</p>
+<h3 id="10-Docker-Swam"><a href="#10-Docker-Swam" class="headerlink" title="10. Docker Swam"></a>10. Docker Swam</h3><p>相当于是搭建一个小集群，有manager有worker。</p>
+<p>集群</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker swarm init		# 初始化节点</span><br><span class="line">docker swarm join-token manager		# 加入一个节点，并将该节点作为manager</span><br><span class="line">docker swarm join-token worker		# 加入一个节点，并将该节点作为worker</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Raft-协议"><a href="#11-Raft-协议" class="headerlink" title="11. Raft 协议"></a>11. Raft 协议</h3><blockquote>
+<p>拜占庭将军问题：很久很久以前，拜占庭是东罗马帝国的首都。那个时候罗马帝国国土辽阔，为了防御目的，因此每个军队都分隔很远，将军与将军之间只能靠信使传递消息。在打仗的时候，拜占庭军队内所有将军必需达成一致的共识，才能更好地赢得胜利。但是，在军队内有可能存有叛徒，扰乱将军们的决定。这时候，在已知有成员不可靠的情况下，其余忠诚的将军需要在不受叛徒或间谍的影响下达成一致的协议。莱斯利·兰伯特（ Leslie Lamport ）通过这个比喻，表达了计算机网络中所存在的一致性问题。这个问题被称为拜占庭将军问题。</p>
+</blockquote>
+<blockquote>
+<p>二将军问题：白军驻扎在沟渠里，蓝军则分散在沟渠两边。白军比任何一支蓝军都更为强大，但是蓝军若能同时合力进攻则能够打败白军。他们不能够远程的沟通，只能派遣通信兵穿过沟渠去通知对方蓝军协商进攻时间。是否存在一个能使蓝军必胜的通信协议，这就是两将军问题。</p>
+</blockquote>
+<blockquote>
+<p>二将军问题探讨的是不可靠信道下两方的通信准确性问题，而拜占庭将军问题探讨的是多方通信结果一致性和决策正确性的问题。<br>准确性是指发送的是什么，接收的就是什么；一致性是在节点更多的情况下的准确性；正确性是无论收到的通信结果是否有干扰（不完全满足一致性），正常工作的节点能够做出正确的决策。</p>
+</blockquote>
+<p>=&gt; 二将军问题可以通过TCP3次握手来解决；拜占庭将军问题可以通过Raft/Paxos（谷哥Chubby）/ZAB（zookeeper）/PBFT（区块链）几种算法解决。另外 PS：raft，zab，paxos解决的是节点故障问题，而非拜占庭问题(节点故意欺骗)。PBFT解决了拜占庭问题。</p>
+<p><a href="https://mp.weixin.qq.com/s/bMY5unx7OijlaDmj6fVKOA" target="_blank" rel="noopener">Raft协议 </a></p>
+<p>Raft 协议的具体流程：</p>
+<ol>
+<li>在最初，还没有一个主节点的时候，所有节点的身份都是Follower。每一个节点都有自己的计时器，当计时达到了超时时间（Election Timeout），该节点会转变为Candidate。</li>
+<li>成为Candidate的节点，会首先给自己投票，然后向集群中其他所有的节点发起请求，要求大家都给自己投票。</li>
+<li>其他收到投票请求且还未投票的Follower节点会向发起者投票，发起者收到反馈通知后，票数增加。</li>
+<li>当得票数超过了集群节点数量的一半，该节点晋升为Leader节点。Leader节点会立刻向其他节点发出通知，告诉大家自己才是老大。收到通知的节点全部变为Follower，并且各自的计时器清零。</li>
+</ol>
+<p>这里需要说明一点，每个节点的超时时间都是不一样的。比如A节点的超时时间是3秒，B节点的超时时间是5秒，C节点的超时时间是4秒。这样一来，A节点将会最先发起投票请求，而不是所有节点同时发起。为什么这样设计呢？设想如果所有节点同时发起投票，必然会导致大家的票数差不多，形成僵局，谁也当不成老大。</p>
+<p>那么，成为Leader的节点是否就坐稳了老大的位置呢？并不是。Leader节点需要每隔一段时间向集群其他节点发送心跳通知，表明你们的老大还活着。一旦Leader节点挂掉，发不出通知，那么计时达到了超时时间的Follower节点会转变为Candidate节点，发起选主投票，周而复始……</p>
+<p>数据同步的流程：</p>
+<ol>
+<li>由客户端提交数据到Leader节点</li>
+<li>由Leader节点把数据复制到集群内所有的Follower节点。如果一次复制失败，会不断进行重试</li>
+<li>Follower节点们接收到复制的数据，会反馈给Leader节点</li>
+<li>如果Leader节点接收到超过半数的Follower反馈，表明复制成功。于是提交自己的数据，并通知客户端数据提交成功。</li>
+<li>由Leader节点通知集群内所有的Follower节点提交数据，从而完成数据同步流程。</li>
+</ol>
+<p><a href="https://www.jianshu.com/p/2bceacd60b8a" target="_blank" rel="noopener">ZAB协议</a></p>
+<h3 id="12-容器服务"><a href="#12-容器服务" class="headerlink" title="12. 容器服务"></a>12. 容器服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker service create -p ip:端口 --name my-service xxx</span><br><span class="line"><span class="meta">#</span> 和 docker run 的区别是，run是容器启动，不具备扩缩容的概念；service是服务启动，可以自动扩缩容</span><br><span class="line"></span><br><span class="line">docker service ps my-service	# 查看服务进程</span><br><span class="line">docker service ls		# 查看服务列表，这里有一个 replicas，表示当前服务的副本</span><br><span class="line">docker servie update --replicas N my-service	# 将 my-service 自动扩容到 N 个副本</span><br><span class="line">docker service scale my-service=N		# 将 my-service 自动扩容到 N 个副本</span><br><span class="line"></span><br><span class="line">有一个 --mode 参数，默认是 replicated，可以改成 global</span><br><span class="line">replicated 只能在worker节点中运行，global的话manager节点也可以运行</span><br></pre></td></tr></table></figure>
+
+<p>灰度发布：金丝雀发布</p>
+<p>命令 -&gt; manager节点调用api -&gt; schedule api -&gt; worker节点创建并维护容器服务</p>
+<p>镜像使用的os版本不统一，比如Linux基于的os不一样，版本不一样，命令缺失，阉割版和增肥版都不统一，数据文件可能都修改了位置等等</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/29/Arthas/" rel="next" title="Arthas">
+                <i class="fa fa-chevron-left"></i> Arthas
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/08/LFU/" rel="prev" title="LFU">
+                LFU <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mxxt" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/08/11/Thread-2/" title="同步队列" target="_blank">同步队列</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/07/08/Hive-5/" title="Hive源码解析" target="_blank">Hive源码解析</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/05/31/Sqoop/" title="Sqoop源码解析" target="_blank">Sqoop源码解析</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/12/09/Java-4/" title="JAVA 容器" target="_blank">JAVA 容器</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/08/LFU/" title="LFU" target="_blank">LFU</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-深入学习"><span class="nav-text">Docker 深入学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-命令"><span class="nav-text">1. 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-镜像命令"><span class="nav-text">1.1 镜像命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-容器命令"><span class="nav-text">1.2 容器命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-常用其他命令"><span class="nav-text">1.3 常用其他命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-测试安装tomcat"><span class="nav-text">1.4 测试安装tomcat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-测试安装ES"><span class="nav-text">1.5 测试安装ES</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可视化-portainer"><span class="nav-text">2. 可视化 portainer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-联合文件系统"><span class="nav-text">3. 联合文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-数据卷"><span class="nav-text">5. 数据卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-数据卷容器"><span class="nav-text">6. 数据卷容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-DockerFile"><span class="nav-text">7. DockerFile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Docker-网络"><span class="nav-text">8. Docker 网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Docker-Compose"><span class="nav-text">9. Docker Compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Docker-Swam"><span class="nav-text">10. Docker Swam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Raft-协议"><span class="nav-text">11. Raft 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-容器服务"><span class="nav-text">12. 容器服务</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

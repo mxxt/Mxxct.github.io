@@ -125,19 +125,19 @@
 
 
 
-<meta name="description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink  flume 把内部的格式统一封装为 event，保存一些描述信息和具体数据 拦截器的位置在Source">
+<meta name="description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink   source Exec Source：实时搜集一个文件中新增的数据，不支持断点续传 Spooling">
 <meta name="keywords" content="Hadoop,Flume">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flume">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/03/31/Flume/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink  flume 把内部的格式统一封装为 event，保存一些描述信息和具体数据 拦截器的位置在Source">
+<meta property="og:description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink   source Exec Source：实时搜集一个文件中新增的数据，不支持断点续传 Spooling">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png">
 <meta property="og:updated_time" content="2020-06-15T03:16:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flume">
-<meta name="twitter:description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink  flume 把内部的格式统一封装为 event，保存一些描述信息和具体数据 拦截器的位置在Source">
+<meta name="twitter:description" content="Flume1. Flume日志采集  读数据 组件是 resource 缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件 写数据 组件是 sink   source Exec Source：实时搜集一个文件中新增的数据，不支持断点续传 Spooling">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png">
 
 
@@ -468,6 +468,26 @@
 <li>缓存数据 channel 原因是读写速度的不一致，可以缓存在内存或本地文件，临时储存。看做一个数据的缓冲区（数据队列），它可以将事件暂存到内存中也可以持久化到本地磁盘上， 直到Sink处理完该事件</li>
 <li>写数据 组件是 sink</li>
 </ol>
+<ul>
+<li>source<ul>
+<li>Exec Source：实时搜集一个文件中新增的数据，不支持断点续传</li>
+<li>Spooling Directory Source：监控目录，新的文件，不支持断点续传</li>
+<li>TailDir Source：flume1.7 新加入的组件，支持断点续传</li>
+</ul>
+</li>
+<li>channel<ul>
+<li>memory channel：保存在内存，速度快，可能丢数据</li>
+<li>file channel：保存在磁盘的文件中，不会丢数据，速度慢</li>
+<li>kafka channel：省去sink，下一级必须是kafka，即直接传给kafka</li>
+</ul>
+</li>
+<li>sink</li>
+</ul>
+<p>拦截器</p>
+<ul>
+<li>ETL拦截器：清洗</li>
+<li>类型拦截器：分类</li>
+</ul>
 <p>flume 把内部的格式统一封装为 event，保存一些描述信息和具体数据</p>
 <p>拦截器的位置在Source和Channel之间，当我们为Source指定拦截器后，我们在拦截器中会得到event，根据需求我们可以对event进行保留还是抛弃，抛弃的数据不会进入Channel中。</p>
 <p><img src="https://images.weserv.nl/?url=https://images2017.cnblogs.com/blog/999804/201711/999804-20171108132026106-567951153.png" alt></p>
@@ -602,7 +622,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">122</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +633,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -624,7 +644,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -691,15 +711,15 @@
         
         
           <li>
-            <a href="/2020/11/25/Redis-7/" title="分布式锁实现" target="_blank">分布式锁实现</a>
+            <a href="/2020/12/09/Java-4/" title="JAVA 容器" target="_blank">JAVA 容器</a>
           </li>
         
           <li>
-            <a href="/2020/11/25/Redis-6/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
+            <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
           </li>
         
           <li>
-            <a href="/2020/11/16/HBase-3/" title="HBase WAL日志" target="_blank">HBase WAL日志</a>
+            <a href="/2020/12/08/LFU/" title="LFU" target="_blank">LFU</a>
           </li>
         
       </ul>

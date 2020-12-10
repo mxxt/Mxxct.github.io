@@ -468,22 +468,32 @@
 </ol>
 <h3 id="1-为什么只支持全局索引？"><a href="#1-为什么只支持全局索引？" class="headerlink" title="1. 为什么只支持全局索引？"></a>1. 为什么只支持全局索引？</h3><p>首先是本地索引和全局索引的一些概念和区别</p>
 <ul>
-<li>本地索引<ul>
+<li><p>本地索引</p>
+<ul>
 <li>适合写多读少的情况</li>
 <li>索引数据直接写在原表里，<strong>不会新建一张表</strong>。在 <code>phoenix-sqlline</code> 里执行 <code>!tables</code> 的确会发现创建的本地索引表，但是那个只是一个映射，并不是单独存在的。由于索引数据直接写在表里，所以原表的数据量=原始数据+索引数据。</li>
 <li>本地索引rowkey的设计规则: 原数据region的start key+”\x00”+二级索引字段1+”\x00”+二级索引字段2(复合索引)…+”\x00”+原rowkey。</li>
 <li>索引数据和真实数据存放在同一台机器上，减少了网络传输的开销。同理，创建索引后的rowkey的最开始的部分是 <em>原数据region的start key</em>，这样在通过二级索引定位到数据后，可以在当前的region中直接找到数据，减少网络开销。减少网络开销，也意味着写入的速度会变快。但是多了一步通过rowkey查找数据的过程，所以读的过程就不如直接读取列族里的数据的速度快。</li>
 </ul>
 </li>
-<li>全局索引<ul>
-<li>适合读多写少的情况</li>
-<li>索引数据会单独存在一张表里。</li>
-<li>全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。<blockquote>
+<li><p>全局索引</p>
+<ul>
+<li><p>适合读多写少的情况</p>
+</li>
+<li><p>索引数据会单独存在一张表里。</p>
+</li>
+<li><p>全局索引必须是查询语句中所有列都包含在全局索引中，它才会生效。</p>
+<blockquote>
 <p>Select * 不会命中索引<br>select 具体的字段 from table where col …<br>col 必须是第一个主键或者是索引里包含的字段才会命中索引<br>如果索引表包含 a、b 三个字段，where 里有 a 和 c 两个字段，那么也不会走索引，因为c不在索引里，发现索引走不通，只能走全表</p>
 </blockquote>
 </li>
-<li>为了命中索引，要把需要查询的字段通过 include 关键字来一起写入索引表里，也就是覆盖索引。</li>
-<li>写入数据的同时需要往索引表同步写数据，而索引表是分布在不同的数据节点上的，跨节点的数据传输带来了较大的性能消耗，所以写慢；但是查询的时候，如果命中了索引表，那就直接把数据带出来了，读会快。</li>
+<li><p>为了命中索引，要把需要查询的字段通过 include 关键字来一起写入索引表里，也就是覆盖索引。</p>
+<blockquote>
+<p>Phoenix 不能保证主表和索引表对应Region的本地化，所以也就无法根据索引表的结果再去查主表</p>
+</blockquote>
+</li>
+<li><p>写入数据的同时需要往索引表同步写数据，而索引表是分布在不同的数据节点上的，跨节点的数据传输带来了较大的性能消耗，所以写慢；但是查询的时候，如果命中了索引表，那就直接把数据带出来了，读会快。</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -706,7 +716,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">122</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -717,7 +727,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -728,7 +738,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -795,15 +805,15 @@
         
         
           <li>
-            <a href="/2020/11/25/Redis-7/" title="分布式锁实现" target="_blank">分布式锁实现</a>
+            <a href="/2020/12/09/Java-4/" title="JAVA 容器" target="_blank">JAVA 容器</a>
           </li>
         
           <li>
-            <a href="/2020/11/25/Redis-6/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
+            <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
           </li>
         
           <li>
-            <a href="/2020/11/16/HBase-3/" title="HBase WAL日志" target="_blank">HBase WAL日志</a>
+            <a href="/2020/12/08/LFU/" title="LFU" target="_blank">LFU</a>
           </li>
         
       </ul>

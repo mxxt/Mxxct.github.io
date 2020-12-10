@@ -469,6 +469,11 @@
 </blockquote>
 <p>删除表 <code>drop table 库.表;</code><br>查看表结构 <code>!describe &quot;METRIC_AGGREGATE&quot;</code><br>创建表 <code>create table if not exists 库.表(id integer primary key,name varchar(20));</code><br>插入&amp;更新 <code>upsert into 库.表(id,name) values(1,&#39;zhangsan&#39;);</code></p>
 <p>CREATE TABLE IF NOT EXISTS TEST4PHOENIX.testdata (<br>   tag_id char(10) NOT NULL,<br>   user_id char(10) NOT NULL,<br>   val char(10),<br>   update_time char(30),<br>   CONSTRAINT pk PRIMARY KEY (tag_id, user_id)<br>);</p>
+<p>添加字段 <code>alter table 库.表 add xxx 类型 (default 默认值);</code></p>
+<p>修改字段信息 <code>upsert into SYSTEM.CATALOG (TENANT_ID,TABLE_SCHEM,TABLE_NAME,COLUMN_NAME,COLUMN_FAMILY,DATA_TYPE,COLUMN_SIZE) values(&#39;&#39;,&#39;库&#39;,&#39;表&#39;,&#39;字段&#39;,&#39;0&#39;,12,15);</code> </p>
+<blockquote>
+<p>data_type 12 字符串 4 int -6 tinyint 修改为数值类型的时候就不需要column_size了</p>
+</blockquote>
 <h3 id="2-预分区"><a href="#2-预分区" class="headerlink" title="2. 预分区"></a>2. 预分区</h3><p>HBase 默认分区规则<br>memstore.flush.size=128MB<br>max.store.size=10G</p>
 <p>分区规则：Min(R^2 * “hbase.hregion.memstore.flush.size”, “hbase.hregion.max.filesize”)</p>
 <p>第一次拆分大小为：min(10G，1<em>1</em>128M)=128M // 一开始的时候就一个region，当数据量达到128M时，会一分为二，变成2个region，然后会往第二个region里写数据，但是第一个不会写，处于半满状态 =&gt; 之前分裂的region都不会再被写入数据，处于半满状态<br>第二次拆分大小为：min(10G，3<em>3</em>128M)=1152M<br>第三次拆分大小为：min(10G，5<em>5</em>128M)=3200M<br>第四次拆分大小为：min(10G，7<em>7</em>128M)=6272M<br>第五次拆分大小为：min(10G，9<em>9</em>128M)=10G<br>第五次拆分大小为：min(10G，11<em>11</em>128M)=10G // 最大是10G</p>
@@ -606,7 +611,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">122</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -617,7 +622,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -628,7 +633,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -695,15 +700,15 @@
         
         
           <li>
-            <a href="/2020/11/25/Redis-7/" title="分布式锁实现" target="_blank">分布式锁实现</a>
+            <a href="/2020/12/09/Java-4/" title="JAVA 容器" target="_blank">JAVA 容器</a>
           </li>
         
           <li>
-            <a href="/2020/11/25/Redis-6/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
+            <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
           </li>
         
           <li>
-            <a href="/2020/11/16/HBase-3/" title="HBase WAL日志" target="_blank">HBase WAL日志</a>
+            <a href="/2020/12/08/LFU/" title="LFU" target="_blank">LFU</a>
           </li>
         
       </ul>

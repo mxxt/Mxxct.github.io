@@ -505,6 +505,9 @@
 <p><img src="https://images.weserv.nl/?url=http://hbasefly.com/wp-content/uploads/2017/07/18.png" alt></p>
 <p>在All-CF Flush策略下，我们以HLog-Entry为粒度进行数据回放没有任何问题，但是在Per-CF Flush策略下就不再行得通。因为一个HLog-Entry中多个CF的KeyValue是混在一起的，可能部分KV已经落盘，其他部分还没有。因此需要将回放粒度减小到KeyValue级别，一个一个KeyValue分别进行检查回放。</p>
 <p>回放粒度问题摸清了，再来关注哪些KeyValue需要被回放，哪些会被skip。上文说过，每次flush的时候对应的oldestUnflushedSequenceId会被持久化到HFile的元数据中。在All-CF Flush策略下，一次flush操作中整个region所有store所持久化的oldestUnflushedSequenceId都相同，因此回放的时候HLog-Entry的sequenceId只需要与这一个oldestUnflushedSequenceId比较就可以，大的话就需要回放，小的话就skip。但在Per-CF的场景下又不再行得通，一个region中不同store都有自己独立的oldestUnflushedSequenceId，因此回放的时候需要根据KeyValue找到对应store，在与该store中的oldestUnflushedSequenceId比较，大的话需要回放，小的话skip。</p>
+<blockquote>
+<p>hbase shell 中查看原始数据<br>scan ‘MODEL_GROUP_STRUCTURE:STRUCTURE_COMPLAINT_LABEL_H’, {FORMATTER =&gt; ‘toString’, LIMIT =&gt; 10}</p>
+</blockquote>
 
       
     </div>
@@ -633,7 +636,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">122</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -644,7 +647,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -655,7 +658,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -722,15 +725,15 @@
         
         
           <li>
-            <a href="/2020/11/25/Redis-7/" title="分布式锁实现" target="_blank">分布式锁实现</a>
+            <a href="/2020/12/09/Java-4/" title="JAVA 容器" target="_blank">JAVA 容器</a>
           </li>
         
           <li>
-            <a href="/2020/11/25/Redis-6/" title="Redis 和 MySQL 数据不一致性" target="_blank">Redis 和 MySQL 数据不一致性</a>
+            <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
           </li>
         
           <li>
-            <a href="/2020/11/16/HBase-3/" title="HBase WAL日志" target="_blank">HBase WAL日志</a>
+            <a href="/2020/12/08/LFU/" title="LFU" target="_blank">LFU</a>
           </li>
         
       </ul>
