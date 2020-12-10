@@ -332,7 +332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/12/09/Java-4/">
+    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/11/12/JVM-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mxxct">
@@ -351,7 +351,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/09/Java-4/" itemprop="url">JAVA 容器</a></h1>
+                <a class="post-title-link" href="/2020/11/12/JVM-2/" itemprop="url">JVM SafePoint</a></h1>
         
 
         <div class="post-meta">
@@ -365,8 +365,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-09T14:22:23+08:00">
-                2020-12-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-12T17:58:00+08:00">
+                2020-11-12
               </time>
             
 
@@ -401,8 +401,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/Collection/" itemprop="url" rel="index">
-                    <span itemprop="name">Collection</span>
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -419,8 +419,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/12/09/Java-4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/12/09/Java-4/" itemprop="commentCount"></span>
+                <a href="/2020/11/12/JVM-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/12/JVM-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,7 +428,7 @@
 
           
           
-             <span id="/2020/12/09/Java-4/" class="leancloud_visitors" data-flag-title="JAVA 容器">
+             <span id="/2020/11/12/JVM-2/" class="leancloud_visitors" data-flag-title="JVM SafePoint">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -463,21 +463,16 @@
       
         
           
-          JAVA 容器
-Collection
-List：可以重复
-CopyOnWriteArrayList
-Vector
-ArrayList
-LinkedList
+          JVM SafePoint在多线程环境下，为了能正确回收不再使用的内存，安全回收需要满足以下两个条件
 
+堆内存的变化是受控制的，最好所有的线程都停止
+堆中的对象是已知的，不再使用的对象都可以找到
 
-Set：不可重复
-HashSet &amp; LinkedHashSet：HashSet无序，哈希表；LinkedHashSet 通过链表可
+∴ JVM 是在 SafePoint 点时才进行回收，所谓 SafePoint 即Java线程执行到某
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/12/09/Java-4/#more" rel="contents">
+            <a class="btn" href="/2020/11/12/JVM-2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
