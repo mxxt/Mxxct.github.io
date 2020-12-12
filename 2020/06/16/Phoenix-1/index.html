@@ -470,9 +470,14 @@
 <p>删除表 <code>drop table 库.表;</code><br>查看表结构 <code>!describe &quot;METRIC_AGGREGATE&quot;</code><br>创建表 <code>create table if not exists 库.表(id integer primary key,name varchar(20));</code><br>插入&amp;更新 <code>upsert into 库.表(id,name) values(1,&#39;zhangsan&#39;);</code></p>
 <p>CREATE TABLE IF NOT EXISTS TEST4PHOENIX.testdata (<br>   tag_id char(10) NOT NULL,<br>   user_id char(10) NOT NULL,<br>   val char(10),<br>   update_time char(30),<br>   CONSTRAINT pk PRIMARY KEY (tag_id, user_id)<br>);</p>
 <p>添加字段 <code>alter table 库.表 add xxx 类型 (default 默认值);</code></p>
-<p>修改字段信息 <code>upsert into SYSTEM.CATALOG (TENANT_ID,TABLE_SCHEM,TABLE_NAME,COLUMN_NAME,COLUMN_FAMILY,DATA_TYPE,COLUMN_SIZE) values(&#39;&#39;,&#39;库&#39;,&#39;表&#39;,&#39;字段&#39;,&#39;0&#39;,12,15);</code> </p>
+<p>修改字段信息 <code>upsert into SYSTEM.CATALOG (TENANT_ID,TABLE_SCHEM,TABLE_NAME,COLUMN_NAME,COLUMN_FAMILY,DATA_TYPE,COLUMN_SIZE) values(&#39;&#39;,&#39;库&#39;,&#39;表&#39;,&#39;字段&#39;,&#39;列族&#39;,12,15);</code> </p>
 <blockquote>
-<p>data_type 12 字符串 4 int -6 tinyint 修改为数值类型的时候就不需要column_size了</p>
+<p>data_type 12 字符串 4 int -6 tinyint 修改为数值类型的时候就不需要column_size了<br>COLUMN_FAMILY 列族，有可能是空有可能是0，这个最好修改之前先查看一下元数据表，尤其是修改已存在的字段信息</p>
+</blockquote>
+<p>查看元数据表 <code>select COLUMN_FAMILY, TENANT_ID, COLUMN_NAME, DATA_TYPE, COLUMN_SIZE from SYSTEM.CATALOG where TABLE_SCHEM = &#39;库&#39; and TABLE_NAME = &#39;表&#39;;</code></p>
+<p>设置字段默认值 <code>upsert into SYSTEM.CATALOG (TENANT_ID,TABLE_SCHEM,TABLE_NAME,COLUMN_NAME,COLUMN_FAMILY,COLUMN_DEF) values(&#39;&#39;,&#39;库&#39;,&#39;表&#39;,&#39;字段&#39;,&#39;&#39;,&#39;\&#39;xxx\&#39;&#39;);</code></p>
+<blockquote>
+<p>字段如果字符串类型，默认值应该填 ‘&#39;xxx&#39;‘，需要对’进行转义；如果是数值类型，可以直接写 ‘123’，默认值对应的是CATALOG表中的COLUMN_DEF字段<br>修改默认值有一个场景可以用，比如之前的主键做了修改，不想删表重建，那么就把之前的主键加默认值，这样sql里就不需要带着主键字段了<br>对元数据表的修改可能需要重启客户端甚至重启hbase才可以生效</p>
 </blockquote>
 <h3 id="2-预分区"><a href="#2-预分区" class="headerlink" title="2. 预分区"></a>2. 预分区</h3><p>HBase 默认分区规则<br>memstore.flush.size=128MB<br>max.store.size=10G</p>
 <p>分区规则：Min(R^2 * “hbase.hregion.memstore.flush.size”, “hbase.hregion.max.filesize”)</p>
