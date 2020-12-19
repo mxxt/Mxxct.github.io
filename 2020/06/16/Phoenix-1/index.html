@@ -468,7 +468,8 @@
 <p>如果不加双引号，会自动将小写转为大写<br>phoenix/hbase对表名、字段名都是大小写敏感，如果直接写小写字母，不加双引号，则默认会被转换成大写字母</p>
 </blockquote>
 <p>删除表 <code>drop table 库.表;</code><br>查看表结构 <code>!describe &quot;METRIC_AGGREGATE&quot;</code><br>创建表 <code>create table if not exists 库.表(id integer primary key,name varchar(20));</code><br>插入&amp;更新 <code>upsert into 库.表(id,name) values(1,&#39;zhangsan&#39;);</code></p>
-<p>CREATE TABLE IF NOT EXISTS TEST4PHOENIX.testdata (<br>   tag_id char(10) NOT NULL,<br>   user_id char(10) NOT NULL,<br>   val char(10),<br>   update_time char(30),<br>   CONSTRAINT pk PRIMARY KEY (tag_id, user_id)<br>);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS TEST4PHOENIX.testdata (</span><br><span class="line">   tag_id char(10) NOT NULL,</span><br><span class="line">   user_id char(10) NOT NULL,</span><br><span class="line">   val char(10),</span><br><span class="line">   update_time char(30),</span><br><span class="line">   CONSTRAINT pk PRIMARY KEY (tag_id, user_id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
 <p>添加字段 <code>alter table 库.表 add xxx 类型 (default 默认值);</code></p>
 <p>修改字段信息 <code>upsert into SYSTEM.CATALOG (TENANT_ID,TABLE_SCHEM,TABLE_NAME,COLUMN_NAME,COLUMN_FAMILY,DATA_TYPE,COLUMN_SIZE) values(&#39;&#39;,&#39;库&#39;,&#39;表&#39;,&#39;字段&#39;,&#39;列族&#39;,12,15);</code> </p>
 <blockquote>
@@ -616,7 +617,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -627,7 +628,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -638,7 +639,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -705,15 +706,15 @@
         
         
           <li>
+            <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
+          </li>
+        
+          <li>
             <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
           </li>
         
           <li>
             <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/08/LFU/" title="LFU" target="_blank">LFU</a>
           </li>
         
       </ul>
