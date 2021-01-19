@@ -125,20 +125,20 @@
 
 
 
-<meta name="description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create tabl">
+<meta name="description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 HMaster 负责元数据信息    1. 表结构信息">
 <meta name="keywords" content="Hadoop,HBase">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HBase进阶">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/10/26/HBase-2/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create tabl">
+<meta property="og:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 HMaster 负责元数据信息    1. 表结构信息">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402125111282-1966599087.png">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402130346713-706113248.png">
-<meta property="og:updated_time" content="2020-10-26T10:45:00.000Z">
+<meta property="og:updated_time" content="2021-01-19T12:46:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase进阶">
-<meta name="twitter:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 hmaster挂了不影响读写，但是 create tabl">
+<meta name="twitter:description" content="HBase进阶HBase中的HLogHBase中的MemStore 1. 架构  master负责管理多个region server，一个region server里有多个region。一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region一个表最终被保存在多个region server里 HMaster 负责元数据信息    1. 表结构信息">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402125111282-1966599087.png">
 
 
@@ -467,9 +467,21 @@
 <h3 id="1-架构"><a href="#1-架构" class="headerlink" title="1. 架构"></a>1. 架构</h3><p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402125111282-1966599087.png" alt="架构图"></p>
 <p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/1228818/201804/1228818-20180402130346713-706113248.png" alt="物理存储"></p>
 <p>master负责管理多个region server，一个region server里有多个region。<br>一个表会划分多个region，起初只有一个，数据增多，region增大到一定程度会拆分成2个region<br>一个表最终被保存在多个region server里</p>
-<p>hmaster挂了不影响读写，但是 create table 这种涉及元数据的操作，如果hmaster挂了就会报错（因为客户端可以直接跟zookeeper进行会话，拿到region sever地址，就可以直接读写访问对应的region）</p>
-<p>一个region里有多个store，一个store代表一个列族。（region按照行键来划分，所以相当于每一行有几个列族就有几个store）<br>store包括两部分：内存中的memstore和磁盘的storefile。写数据会先写到memstore，当数据达到阈值（默认64M）后 region server 会启动 flushcache 进行将数据写到 storefile里，每次形成一个storefile<br>当storefile文件的数量增长到一定阈值后，系统会进行合并（minor、major），在合并过程中会进行版本合并和删除工作（major），形成更大的storefile<br>当一个region所有storefile的大小和数量超过一定阈值后，会把当前的region分割为两个，并由hmaster分配到相应的regionserver，实现负载均衡<br>客户端检索数据，先在memstore找，找不到再去blockcache查找，找不到再找storefile，即：client-&gt;memstore-&gt;blockcache-&gt;storefile。如果读到了会把数据放到blockcache里缓存，方便下次读取</p>
-<p>Region是HBase中存储和负载均衡的最小单元,不同的Region可以分布在不同的 Region Server上<br>Region由一个或者多个Store组成，每个store保存一个columns family<br>每个Strore又由一个memStore和0至多个StoreFile组成<br>memstore为写入缓存，blockcache为读取缓存</p>
+<p>HMaster 负责元数据信息<br>    1. 表结构信息<br>    2. 表的region分布信息<br>都由hmaster来管理。当hmaster宕机后，对元数据的修改不能做了，比如表结构的更改，region的拆分合并等等</p>
+<p>一个region里有多个store，一个store代表一个列族。（region按照行键来划分，所以相当于每一行有几个列族就有几个store）</p>
+<p>store包括两部分：内存中的memstore和磁盘的 storefile。写数据会先写到memstore，当数据达到阈值（默认64M）后 region server 会启动 </p>
+<blockquote>
+<p>storefile 是逻辑概念，hfile 是物理概念</p>
+</blockquote>
+<p>flushcache 进行将数据写到 storefile 里，每次形成一个storefile。当storefile文件的数量增长到一定阈值后，系统会进行合并（minor、major），在合并过程中会进行版本合并和删除工作（major），形成更大的storefile。当一个region所有storefile的大小和数量超过一定阈值后，会把当前的region分割为两个，并由hmaster分配到相应的regionserver，实现负载均衡</p>
+<p>客户端检索数据，先在memstore找，找不到再去blockcache查找，找不到再找storefile，即：client-&gt;memstore-&gt;blockcache-&gt;storefile。如果读到了会把数据放到blockcache里缓存，方便下次读取</p>
+<p>Region是HBase中存储和负载均衡的最小单元,不同的Region可以分布在不同的 Region Server上</p>
+<p>Region由一个或者多个Store组成，每个store保存一个columns family。每个Strore又由一个memStore和0至多个StoreFile组成</p>
+<p>memstore为写入缓存，blockcache为读取缓存</p>
+<blockquote>
+<p>memstore 是通过 ConcurrentSkipListMap 来实现的</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/u011598442/article/details/105571034" target="_blank" rel="noopener">MemStore的优化</a></p>
 <h3 id="2-写数据"><a href="#2-写数据" class="headerlink" title="2. 写数据"></a>2. 写数据</h3><ol>
 <li>Client 向 zk 发送请求，请求 meta 表所有的 regionServer</li>
 <li>zk 返回 regionServer 地址</li>
@@ -493,7 +505,7 @@
 </ul>
 <p>写数据时会先向hlog写（方便memstore里的数据丢失后根据hlog恢复，向hlog中写数据的时候也是优先写入内存，后台会有一个线程定期异步刷写数据到hdfs，如果hlog的数据也写入失败，那么数据就会发生丢失）<br>频繁的溢写会导致产生很多的小文件，因此会进行文件的合并，文件在合并的时候有两种方式，minor和major，minor表示小范围文件的合并，major表示将所有的storefile文件都合并成一个</p>
 <h3 id="3-Flush-过程"><a href="#3-Flush-过程" class="headerlink" title="3. Flush 过程"></a>3. Flush 过程</h3><p>当写数据到一定程度之后，会把内存中的数据flush到磁盘，配置项在 hbase-default.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. habse.regionserver.global.memstore.size</span><br><span class="line">默认大小为内存大小的0.4。当regionserver的所有的memstore的大小超过这个值的时候，会阻塞客户端的读写</span><br><span class="line">2. habse.regionserver.global.memstore.size.lower.limit</span><br><span class="line">默认大小为第一个配置项的大小的0.95。即从这个值开始flush到内存，如果写数据过快，超过flush的速度，导致memstore逐渐变大，达到堆大小的0.4，那么就会暂停读写操作，专注于flush，直到memstore的大小下降</span><br><span class="line">3. hbase.regionserver.optionalcacheflushinterval</span><br><span class="line">默认为1个小时（当前内存最后一次编辑时间+1个小时），自动flush到磁盘</span><br><span class="line"></span><br><span class="line">4. hbase.hregion.memstore.flush.size</span><br><span class="line">单个region里memstore大小。默认为128M，超过这个大小就会刷写</span><br><span class="line"></span><br><span class="line">5. hbase.regionserver.max.logs</span><br><span class="line">如果wal的文件数量达到这个值（默认32），就会刷写</span><br><span class="line"></span><br><span class="line">6. hbase.regionserver.hlog.blocksize</span><br><span class="line">默认HDFS 2.x版本默认的blocksize大小</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. hbase.regionserver.global.memstore.size</span><br><span class="line">默认大小为内存大小的0.4。当regionserver的所有的memstore的大小超过这个值的时候，会阻塞客户端的读写</span><br><span class="line">2. hbase.regionserver.global.memstore.size.lower.limit</span><br><span class="line">默认大小为第一个配置项的大小的0.95。即从这个值开始flush到内存，如果写数据过快，超过flush的速度，导致memstore逐渐变大，达到堆大小的0.4，那么就会暂停读写操作，专注于flush，直到memstore的大小下降</span><br><span class="line">3. hbase.regionserver.optionalcacheflushinterval</span><br><span class="line">默认为1个小时（当前内存最后一次编辑时间+1个小时），自动flush到磁盘</span><br><span class="line"></span><br><span class="line">4. hbase.hregion.memstore.flush.size</span><br><span class="line">单个region里memstore大小。默认为128M，超过这个大小就会刷写</span><br><span class="line"></span><br><span class="line">5. hbase.regionserver.max.logs</span><br><span class="line">如果wal的文件数量达到这个值（默认32），就会刷写</span><br><span class="line"></span><br><span class="line">6. hbase.regionserver.hlog.blocksize</span><br><span class="line">默认HDFS 2.x版本默认的blocksize大小</span><br></pre></td></tr></table></figure>
 
 <h3 id="4-读数据"><a href="#4-读数据" class="headerlink" title="4. 读数据"></a>4. 读数据</h3><ol>
 <li>Client 向 zk 发送请求，请求 meta 表所有的 regionServer</li>
@@ -512,11 +524,20 @@
 <p>compact 会 rewrite hfile to a single storefile 重写的过程会下载hdfs文件，然后重新写入，所以很消耗资源</p>
 </blockquote>
 <p><code>hbase.hstore.compactionThreshold</code> 是一个store（列族）允许的hfile个数，超过这个个数就会合并</p>
+<p>HFile中的每一个keyvalue对象的数据结构分成10段，其中有一个是 keyType，有两个值：put或delete<br>=&gt; 所有的增删都是append操作，真正的删除是在hfile做合并的时候，如果数据是在内存中，那么内存中的数据删除是即时的。如果是在两个hfile，那么在hfile做compact的时候会去做删除</p>
 <h3 id="6-region-split-切分"><a href="#6-region-split-切分" class="headerlink" title="6. region split 切分"></a>6. region split 切分</h3><p>region 交给不同服务器，缓解热点问题 =&gt; hfile 不断拆分，文件越来越大，到最后有可能还是会导致热点问题的存在，因为有的文件特别大，查的数据都在这个文件里 =&gt; 建表的时候实现 预分区</p>
 <p>HBase 默认分区规则<br>memstore.flush.size=128MB<br>max.store.size=10G</p>
 <p>分区规则：Min(R^2 * “hbase.hregion.memstore.flush.size”, “hbase.hregion.max.filesize”)</p>
 <p>第一次拆分大小为：min(10G，11128M)=128M // 一开始的时候就一个region，当数据量达到128M时，会一分为二，变成2个region，然后会往第二个region里写数据，但是第一个不会写，处于半满状态 =&gt; 之前分裂的region都不会再被写入数据，处于半满状态<br>第二次拆分大小为：min(10G，33128M)=1152M<br>第三次拆分大小为：min(10G，55128M)=3200M<br>第四次拆分大小为：min(10G，77128M)=6272M<br>第五次拆分大小为：min(10G，99128M)=10G<br>第五次拆分大小为：min(10G，1111128M)=10G // 最大是10G</p>
 <p>官方建议使用一个列族，避免的问题是：有的列族很多数据，有的列族可能只有几条数，按照region切分，然后flush到磁盘，可能会产生很多的小文件</p>
+<h3 id="7-LSM"><a href="#7-LSM" class="headerlink" title="7. LSM"></a>7. LSM</h3><p>LSM不是一个具体的树，是一个存储结构或者体系。数据写入是先写入到内存（缓存），满足一定条件后flush到磁盘。为了保住数据不丢失，写入内存之前，先写到log文件中（WAL）。磁盘的顺序写速度要大于随机写的速度。写入到内存中的数据会按照key来进行排序（用到的是 concurrentSkipListMap），这样在flush到hfile的时候就是一个有序的树了。当hfile的个数超过一定个数，为了减少寻址，就会做一次compact。由于结构变成了内存+磁盘，如果内存中没数据，要多读一次磁盘；而写数据则是直接追加即可。所以读要慢一点，写会快一点。</p>
+<p>由于这时候内存的数据已经flush到磁盘，那么hlog是不是可以删除？默认hlog最大数量是8，如何知道hlog中的数据其实对应在内存中的数据都已经flush到磁盘？hlog是rs独有的，是rs下的多个region共享的。在往hlog中追加的时候，会写入一个sequenceid，对应的是region级别的一次事务的自增序号（具体应该是针对store）。rs会为每一个region维护一个变量 oldestUnflushedSequenceId （实际是为每一个store），表示这个id前的数据都已经落盘。同时这个 oldestUnflushedSequenceId也会一起被flush到hfile中的元数据里，这样在rs宕机后去按照hlog恢复数据，只需要去读取hfile中的元数据，然后去回放hlog即可。</p>
+<h3 id="8-优化"><a href="#8-优化" class="headerlink" title="8. 优化"></a>8. 优化</h3><ol>
+<li>预分区</li>
+<li>Bulkload 批量插入，通过mr直接生成hfile，导入到hbase表，可能会产生数据不一致，可以重新跑程序，保证数据的最终一致性</li>
+<li>rokwey的优化：长度不能太长；唯一；散列 =&gt; 期望每个region的负载是一样的，具体体现在如果是扫描少量的数据，尽量在一个region里面，那么就需要是同一个rowkey或者相邻的rowkey；如果是大量的数据，就不能让一个region来处理请求</li>
+<li>防止数据倾斜：加盐；时间戳反转；反转部分数据做rowkey</li>
+</ol>
 
       
     </div>
@@ -645,7 +666,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -734,15 +755,15 @@
         
         
           <li>
+            <a href="/2021/01/19/Linux-3/" title="Linux 常用命令" target="_blank">Linux 常用命令</a>
+          </li>
+        
+          <li>
             <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
           </li>
         
           <li>
             <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
           </li>
         
       </ul>
@@ -764,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase进阶"><span class="nav-text">HBase进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-架构"><span class="nav-text">1. 架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-写数据"><span class="nav-text">2. 写数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Flush-过程"><span class="nav-text">3. Flush 过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-读数据"><span class="nav-text">4. 读数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-compact-合并"><span class="nav-text">5. compact 合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-region-split-切分"><span class="nav-text">6. region split 切分</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase进阶"><span class="nav-text">HBase进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-架构"><span class="nav-text">1. 架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-写数据"><span class="nav-text">2. 写数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Flush-过程"><span class="nav-text">3. Flush 过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-读数据"><span class="nav-text">4. 读数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-compact-合并"><span class="nav-text">5. compact 合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-region-split-切分"><span class="nav-text">6. region split 切分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-LSM"><span class="nav-text">7. LSM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-优化"><span class="nav-text">8. 优化</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -791,7 +812,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

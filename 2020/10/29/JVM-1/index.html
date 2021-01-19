@@ -125,20 +125,20 @@
 
 
 
-<meta name="description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很">
+<meta name="description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义">
 <meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM 内存管理">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/10/29/JVM-1/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很">
+<meta property="og:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510003027516-1618059091.png">
-<meta property="og:updated_time" content="2020-10-29T09:10:00.000Z">
+<meta property="og:updated_time" content="2021-01-19T12:20:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM 内存管理">
-<meta name="twitter:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区 方法区 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很">
+<meta name="twitter:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
 
 
@@ -467,8 +467,8 @@
 <h3 id="1-堆和栈"><a href="#1-堆和栈" class="headerlink" title="1. 堆和栈"></a>1. 堆和栈</h3><p>JVM内存划分：</p>
 <ol>
 <li>寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令）</li>
-<li>本地方法区</li>
-<li>方法区</li>
+<li>本地方法区（本地方法栈）：主要是调用native方法</li>
+<li>方法区：记录类的信息，常量等</li>
 <li>栈内存（stack）<ul>
 <li>由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量）</li>
 <li>先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短</li>
@@ -500,9 +500,25 @@
 <p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510003027516-1618059091.png" alt="堆结构"></p>
 <h4 id="1-2-栈"><a href="#1-2-栈" class="headerlink" title="1.2 栈"></a>1.2 栈</h4><p>每个线程执行每个方法的时候都会在栈中申请一个栈帧，每个栈帧包括局部变量区和操作数栈，用于存放此次方法调用过程中的临时变量、参数和中间结果</p>
 <p>当一个方法执行结束的时候，方法会出栈，方法内部的变量也会跟着出栈，当局部变量出栈之后，堆中new出来的内存空间就会变的不可达，当GC回收的时候就会去回收那些不可达的区域</p>
-<h3 id="2-GC"><a href="#2-GC" class="headerlink" title="2. GC"></a>2. GC</h3><ol>
-<li>新生代GC<br> 新生代通常存活时间较短，因此基于<strong>复制算法</strong>来进行回收，所谓复制算法就是扫描出存活的对象，并复制到一块新的完全未使用的空间中<br> 新生代满了后，会把对象转移到旧生代，然后清空继续装载，当旧生代也满了后，就会报outofmemory的异常</li>
+<h3 id="2-GC"><a href="#2-GC" class="headerlink" title="2. GC"></a>2. GC</h3><p><a href="https://mp.weixin.qq.com/s/8rj70QaU4ypZ0W5yqpkwvQ" target="_blank" rel="noopener">文档1</a><br><a href="https://www.cnblogs.com/aspirant/p/8662690.html" target="_blank" rel="noopener">文档2</a></p>
+<h4 id="2-1-垃圾回收算法"><a href="#2-1-垃圾回收算法" class="headerlink" title="2.1 垃圾回收算法"></a>2.1 垃圾回收算法</h4><ol>
+<li>引用计数法：有引用就+1，引用失效就-1，等于0的时候清除。缺点：很难解决对象之间互相循环引用的问题。</li>
+<li>标记清除法：先标记哪一些需要回收，再清除被标记的对象。缺点：容易产生内存碎片，碎片太多的话后续过程中为大对象分配空间时无法找到足够的空间从而会提前触发一次垃圾回收动作</li>
+<li>复制算法：两部分内存，每次只使用一块内存。回收时将a1内存中还存活的对象复制到a2，然后清空整个a1内存。优点：在复制过去的时候相当于有一次整理的动作，不会产生内存碎片，运行高效。缺点：会使可用内存缩减到原来的一半。</li>
+<li>标记整理法：先标记，然后把存货的对象移动到一端整理，最后清理掉端边界以外的内存。优点：不产生内存碎片。缺点：成本高</li>
+</ol>
+<h4 id="2-2-新生代和老年代的GC算法"><a href="#2-2-新生代和老年代的GC算法" class="headerlink" title="2.2 新生代和老年代的GC算法"></a>2.2 新生代和老年代的GC算法</h4><ol>
+<li>新生代GC<br> 新生代通常存活时间较短，因此基于<strong>复制算法</strong>来进行回收。新生代内存空间划分为 Eden + S1 + S2（8:1:1），当进行回收的时候，把Eden和S1存活的对象复制到S2上，然后清理掉Eden和S1。</li>
 <li>老年代GC<br> 老年代对象存活的时间比较长，比较稳定。因此采用<strong>标记（Mark）算法</strong>来进行回收，所谓标记就是扫描出存活的对象，然后再进行回收未被标记的对象，回收后对用空出的空间要么进行合并，要么标记出来便于下次进行分配，总之就是要减少内存碎片带来的效率损耗</li>
+</ol>
+<h4 id="2-3-如何是老年代？"><a href="#2-3-如何是老年代？" class="headerlink" title="2.3 如何是老年代？"></a>2.3 如何是老年代？</h4><ol>
+<li>大对象直接进入老年代（大对象是指需要大量连续内存空间的对象）。这样做的目的是避免在Eden和S1S2区产生大量的内存拷贝</li>
+<li>长期存活的对象进入老年代。对象每经过一次YGC年龄都会+1，默认阈值是15，达到阈值的对象进入老年代。阈值可以通过 -XX:MaxTenuringThreshold 设置</li>
+<li>动态判断对象的年龄。如果Survivor区中存在相同年龄的对象，年龄从小到大进行累加，当加入某个年龄的对象后，累加和超过了Survivor区域大小* TargetSurvivorRatio（默认50%）的时候，从这个年龄往上的所有对象都会挪到老年代。例：年龄1占了33%，年龄2占了33%，年龄3占了34%，因为年龄1+年龄2累加超过了50%，那么年龄2和年龄3都挪到老年代。</li>
+</ol>
+<h4 id="2-4-什么时候触发GC？"><a href="#2-4-什么时候触发GC？" class="headerlink" title="2.4 什么时候触发GC？"></a>2.4 什么时候触发GC？</h4><ol>
+<li>新对象生成，并在Eden申请空间失败时，会触发minorGC即YGC</li>
+<li>老年代被写满；持久代被写满；system.gc() 被显示调用；会触发full gc。</li>
 </ol>
 
       
@@ -632,7 +648,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -721,15 +737,15 @@
         
         
           <li>
+            <a href="/2021/01/19/Linux-3/" title="Linux 常用命令" target="_blank">Linux 常用命令</a>
+          </li>
+        
+          <li>
             <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
           </li>
         
           <li>
             <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/08/Java-3/" title="Java 引用" target="_blank">Java 引用</a>
           </li>
         
       </ul>
@@ -751,7 +767,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-内存管理"><span class="nav-text">JVM 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆和栈"><span class="nav-text">1. 堆和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-堆"><span class="nav-text">1.1 堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-栈"><span class="nav-text">1.2 栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GC"><span class="nav-text">2. GC</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-内存管理"><span class="nav-text">JVM 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆和栈"><span class="nav-text">1. 堆和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-堆"><span class="nav-text">1.1 堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-栈"><span class="nav-text">1.2 栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GC"><span class="nav-text">2. GC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-垃圾回收算法"><span class="nav-text">2.1 垃圾回收算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-新生代和老年代的GC算法"><span class="nav-text">2.2 新生代和老年代的GC算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-如何是老年代？"><span class="nav-text">2.3 如何是老年代？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-什么时候触发GC？"><span class="nav-text">2.4 什么时候触发GC？</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -778,7 +794,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
