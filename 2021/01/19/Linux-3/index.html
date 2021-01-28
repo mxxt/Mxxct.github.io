@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="Linux 常用命令1. vim dd 删除一整行，下一行提上来；D删除一整行，光标在行头 S删除一整行并插入，相当于D+i；s 删除当前位置的字符并插入 I 到行首插入；i 在当前光标位置插入 :set nu 行号；:set nonu 取消行号 J 合并当前行和下一行  2. 端口2.1 lsof=list open fileslsof -i:3306 2.1 netstatnetstat -a">
+<meta name="description" content="Linux 常用命令1. vim dd 删除一整行，下一行提上来；D删除一整行，光标在行头 S删除一整行并插入，相当于D+i；s 删除当前位置的字符并插入 I 到行首插入；i 在当前光标位置插入 :set nu 行号；:set nonu 取消行号 J 合并当前行和下一行 ctrl+f 向下翻页 ctrl+b 向上翻页 n 向下查找匹配项 N 向上查找匹配项  2. 端口2.1 lsof=list">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 常用命令">
 <meta property="og:url" content="https://mxxct4git.github.io/2021/01/19/Linux-3/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Linux 常用命令1. vim dd 删除一整行，下一行提上来；D删除一整行，光标在行头 S删除一整行并插入，相当于D+i；s 删除当前位置的字符并插入 I 到行首插入；i 在当前光标位置插入 :set nu 行号；:set nonu 取消行号 J 合并当前行和下一行  2. 端口2.1 lsof=list open fileslsof -i:3306 2.1 netstatnetstat -a">
+<meta property="og:description" content="Linux 常用命令1. vim dd 删除一整行，下一行提上来；D删除一整行，光标在行头 S删除一整行并插入，相当于D+i；s 删除当前位置的字符并插入 I 到行首插入；i 在当前光标位置插入 :set nu 行号；:set nonu 取消行号 J 合并当前行和下一行 ctrl+f 向下翻页 ctrl+b 向上翻页 n 向下查找匹配项 N 向上查找匹配项  2. 端口2.1 lsof=list">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2021-01-19T12:49:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 常用命令">
-<meta name="twitter:description" content="Linux 常用命令1. vim dd 删除一整行，下一行提上来；D删除一整行，光标在行头 S删除一整行并插入，相当于D+i；s 删除当前位置的字符并插入 I 到行首插入；i 在当前光标位置插入 :set nu 行号；:set nonu 取消行号 J 合并当前行和下一行  2. 端口2.1 lsof=list open fileslsof -i:3306 2.1 netstatnetstat -a">
+<meta name="twitter:description" content="Linux 常用命令1. vim dd 删除一整行，下一行提上来；D删除一整行，光标在行头 S删除一整行并插入，相当于D+i；s 删除当前位置的字符并插入 I 到行首插入；i 在当前光标位置插入 :set nu 行号；:set nonu 取消行号 J 合并当前行和下一行 ctrl+f 向下翻页 ctrl+b 向上翻页 n 向下查找匹配项 N 向上查找匹配项  2. 端口2.1 lsof=list">
 
 
 
@@ -455,10 +455,17 @@
 <li>I 到行首插入；i 在当前光标位置插入</li>
 <li>:set nu 行号；:set nonu 取消行号</li>
 <li>J 合并当前行和下一行</li>
+<li>ctrl+f 向下翻页</li>
+<li>ctrl+b 向上翻页</li>
+<li>n 向下查找匹配项</li>
+<li>N 向上查找匹配项</li>
 </ol>
 <h3 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h3><h4 id="2-1-lsof-list-open-files"><a href="#2-1-lsof-list-open-files" class="headerlink" title="2.1 lsof=list open files"></a>2.1 lsof=list open files</h4><p>lsof -i:3306</p>
 <h4 id="2-1-netstat"><a href="#2-1-netstat" class="headerlink" title="2.1 netstat"></a>2.1 netstat</h4><p>netstat -anu/-ant</p>
-<p>-a 全部<br>-n 显示ip，不是域名<br>-t tcp协议<br>-u udp协议</p>
+<p>-a 全部<br>-n 显示ip，不是域名<br>-t tcp协议<br>-u udp协议<br>-l或–listening 显示监控中的服务器的Socket<br>-p或–programs 显示正在使用Socket的程序识别码和程序名称</p>
+<p>查看网络连接状况<br>netstat -an</p>
+<p>如何统计系统当前进程连接数<br>netstat -an | grep ESTABLISHED | wc -l</p>
+<p>用 netstat 命令配合其他命令，按照源 IP 统计所有到 80 端口的 ESTABLISHED 状态链接的个数<br>netstat -an|grep ESTABLISHED|grep “:80”|awk ‘BEGIN{FS=”[[:space:]:]+”}{print $4}’|sort|uniq -c|sort -nr</p>
 <h3 id="3-jvm相关的命令"><a href="#3-jvm相关的命令" class="headerlink" title="3. jvm相关的命令"></a>3. jvm相关的命令</h3><p><a href="https://blog.csdn.net/samyang1/article/details/80557619?utm_medium=distribute.wap_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.wap_blog_relevant_pic&depth_1-utm_source=distribute.wap_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.wap_blog_relevant_pic" target="_blank" rel="noopener">参考文档</a></p>
 <ol>
 <li>jps：显示系统内所有的jvm进程</li>
@@ -469,6 +476,55 @@
 <li>jstack：显示jvm的线程快照</li>
 <li>jconsole： 一个java GUI监视工具，可以以图表化的形式显示各种数据。并可通过远程连接监视远程的服务器VM</li>
 </ol>
+<p>jcmd 替换 jmap<br>jcmd pid help 查看可以支持的一些option选项<br>jcmd pid </p>
+<h3 id="4-find"><a href="#4-find" class="headerlink" title="4. find"></a>4. find</h3><p>查找指定文件名的文件（不区分大小写）<br>find -iname “xxx”</p>
+<p>对找到的文件执行某个命令<br>find -iname “xxx” -exec md5sum {} \</p>
+<p>查找home目录下所有空文件<br>find ~ -empty</p>
+<p>在/usr目录下找出大小超过10M的文件<br>find /usr -type f -size +10240k</p>
+<p>在/var目录下找出90天之内未被访问过的文件<br>find /var ! -atime -90</p>
+<p>在/home目录下找出120天之前被修改过的文件<br>find /home -mtime +120</p>
+<p>在整个目录树下查找文件，如果发现直接删除<br>find / -name “xxx” -exec rm {} \</p>
+<h3 id="5-du"><a href="#5-du" class="headerlink" title="5. du"></a>5. du</h3><p>找出磁盘上占空间大的文件或文件夹<br>du -a /var | sort -n -r | head -n 10</p>
+<h3 id="6-ls-ll"><a href="#6-ls-ll" class="headerlink" title="6. ls/ll"></a>6. ls/ll</h3><p>按照最后修改时间升序列出文件<br>ll -tr 或者 ls -ltr</p>
+<h3 id="7-rsync"><a href="#7-rsync" class="headerlink" title="7. rsync"></a>7. rsync</h3><p>每周一下午3点定时将 /tmp/logs 目录下所有后缀为 <em>.log 的文件同步到备份服务器同样的目录下<br>crontab -e<br>0 15 * * 1 rsync -avzp /tmp/logs/</em>.log root@ip:/tmp/logs</p>
+<h3 id="8-top"><a href="#8-top" class="headerlink" title="8. top"></a>8. top</h3><p>实时监控系统的cpu和内存，3s刷新一次</p>
+<p>包含了前面好几个命令的检查的内容。比如系统负载情况（uptime）、系统内存使用情况（free）、系统 CPU 使用情况（vmstat）等</p>
+<h3 id="9-free"><a href="#9-free" class="headerlink" title="9. free"></a>9. free</h3><p>查看内存大小，使用多少，剩余多少</p>
+<h3 id="10-less"><a href="#10-less" class="headerlink" title="10. less"></a>10. less</h3><p>打开大文件，vi 会卡，less可以在不加载整个文件的前提下显示文件内容</p>
+<p>ctrl+f 上页<br>ctrl+b 下页<br>命令和vi类似</p>
+<h3 id="11-grep"><a href="#11-grep" class="headerlink" title="11. grep"></a>11. grep</h3><p>统计文件中包含匹配项的行数<br>grep -c “xxx” file</p>
+<p>列出包含匹配项的文件名称<br>grep -l “xxx” file1 file2 file3</p>
+<p>正则匹配<br>grep -E “[1-9]+” file</p>
+<p>匹配多个内容<br>grep -e “xx” -e “xxxx” file</p>
+<h3 id="12-sed"><a href="#12-sed" class="headerlink" title="12. sed"></a>12. sed</h3><p>用 sed 命令将指定的路径 /usr/local/http 替换成为 /usr/src/local/http<br>echo “/usr/local/http” | sed ‘s#/usr/local/http#/usr/src/local/http#’</p>
+<p>echo ‘/a’ | sed -e ‘s///x/g’ -e ‘s/a/y/g’<br>等价于<br>echo ‘/a’ | sed ‘s//a/xy/g’</p>
+<blockquote>
+<p># 貌似是把一些特殊字符的转义给省略了。方便直接去做替换</p>
+</blockquote>
+<p>打印 /etc/ssh/sshd_config 的第一百行<br>sed -n ‘100p’ /etc/ssh/sshd_config</p>
+<p>打印第1到3行<br>sed -n ‘1,3p’ /etc/passwd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> dateTime=$(date +%Y%m%d_%H%M%S);</span><br><span class="line"><span class="meta">#</span> curl url &gt; $dateTime.txt</span><br><span class="line"><span class="meta">#</span> t1=$(sed -n '196p' $dateTime.txt | sed 's/[[:space:]]//g');</span><br><span class="line"><span class="meta">#</span> t2=$(sed -n '205p' $dateTime.txt | sed 's/[[:space:]]//g');</span><br><span class="line"><span class="meta">#</span> echo $dateTime Memory Used: $t1 -- VCores Used: $t2 &gt;&gt; monitor4yarn.txt</span><br><span class="line"><span class="meta">#</span> rm -r $dateTime.txt</span><br><span class="line"></span><br><span class="line">t1=1.07TB</span><br><span class="line">unit=$&#123;t1:0-2&#125;;</span><br><span class="line">val=$(echo $&#123;t1&#125; | sed "s/$&#123;unit&#125;//g");</span><br><span class="line">newVal=$(echo "scale=2;$&#123;val&#125;*1024"|bc)</span><br><span class="line">if [ $unit == "TB" ]</span><br><span class="line">then t1=$&#123;newVal&#125;"GB"</span><br><span class="line">fi </span><br><span class="line">echo $t1</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-awk"><a href="#13-awk" class="headerlink" title="13. awk"></a>13. awk</h3><p>打印第1到3行<br>awk ‘NR&gt;=1&amp;&amp;NR&lt;=3{print $0}’ /etc/passwd</p>
+<p>awk 可以把文件行内容通过分隔符来划分成不同的域，用 $1 $2 表示，$0 表示整行内容</p>
+<h3 id="14-xargs"><a href="#14-xargs" class="headerlink" title="14. xargs"></a>14. xargs</h3><p>将所有图片文件拷贝到外部驱动器<br>ls *.jpg | xargs -n1 -i cp {} /external-hard-drive/directory</p>
+<p>将系统中所有 jpg 文件压缩打包<br>find / -name *.jpg -type f -print | xargs tar -cvzf images.tar.gz</p>
+<p>下载文件中列出的所有 url 对应的页面<br>cat url-list.txt | xargs wget –c</p>
+<p>把当前目录下所有后缀名为 .txt 的文件的权限修改为 777<br>find ./ -type f -name “<em>.txt” |xargs chmod 777<br>find ./ -type f -name “</em>.txt” -exec chmod 777 {}</p>
+<h3 id="15-man"><a href="#15-man" class="headerlink" title="15. man"></a>15. man</h3><p>显示某个命令的帮助手册<br>man crontab</p>
+<p>一个命令也许有好几个man页面，可以先通过 whatis xx 查看命令 xx 有哪些类型，然后通过 man selectNumber xx 查看对应类型号的命令xx的man页面</p>
+<h3 id="16-curl"><a href="#16-curl" class="headerlink" title="16. curl"></a>16. curl</h3><p>ping 测试某个地址能否连接，curl 测试某个url是否可以访问</p>
+<h3 id="17-shell-脚本"><a href="#17-shell-脚本" class="headerlink" title="17. shell 脚本"></a>17. shell 脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if 条件</span><br><span class="line">then 命令1</span><br><span class="line">else</span><br><span class="line">if 条件</span><br><span class="line">then 命令2</span><br><span class="line">else</span><br><span class="line">命令3</span><br><span class="line">fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>大于 -gt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">case 变量 in </span><br><span class="line">值1)</span><br><span class="line">命令1</span><br><span class="line">;;</span><br><span class="line">值2)</span><br><span class="line">命令2</span><br><span class="line">;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for 变量 in item1 itme2 ... itemN</span><br><span class="line">do</span><br><span class="line">命令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while 条件</span><br><span class="line">do</span><br><span class="line">命令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="18-如何将标准输出和错误输出同时重定向到同一位置"><a href="#18-如何将标准输出和错误输出同时重定向到同一位置" class="headerlink" title="18. 如何将标准输出和错误输出同时重定向到同一位置"></a>18. 如何将标准输出和错误输出同时重定向到同一位置</h3><p>2&gt;&amp;1<br>ls /usr/share/doc &gt; out.txt 2&gt;&amp;1</p>
+<p>&amp;&gt;<br>ls /usr/share/doc &amp;&gt; out.txt</p>
 
       
     </div>
@@ -499,8 +555,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/12/13/DW/" rel="next" title="数仓架构">
-                <i class="fa fa-chevron-left"></i> 数仓架构
+              <a href="/2021/01/13/Flink2/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -591,7 +647,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-count">131</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -684,11 +740,11 @@
           </li>
         
           <li>
-            <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
+            <a href="/2021/01/13/Flink2/" title target="_blank"></a>
           </li>
         
           <li>
-            <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
+            <a href="/2020/12/28/Interview/" title target="_blank"></a>
           </li>
         
       </ul>
@@ -710,7 +766,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-常用命令"><span class="nav-text">Linux 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-vim"><span class="nav-text">1. vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-端口"><span class="nav-text">2. 端口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-lsof-list-open-files"><span class="nav-text">2.1 lsof=list open files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-netstat"><span class="nav-text">2.1 netstat</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-jvm相关的命令"><span class="nav-text">3. jvm相关的命令</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-常用命令"><span class="nav-text">Linux 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-vim"><span class="nav-text">1. vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-端口"><span class="nav-text">2. 端口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-lsof-list-open-files"><span class="nav-text">2.1 lsof=list open files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-netstat"><span class="nav-text">2.1 netstat</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-jvm相关的命令"><span class="nav-text">3. jvm相关的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-find"><span class="nav-text">4. find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-du"><span class="nav-text">5. du</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-ls-ll"><span class="nav-text">6. ls/ll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-rsync"><span class="nav-text">7. rsync</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-top"><span class="nav-text">8. top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-free"><span class="nav-text">9. free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-less"><span class="nav-text">10. less</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-grep"><span class="nav-text">11. grep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-sed"><span class="nav-text">12. sed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-awk"><span class="nav-text">13. awk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-xargs"><span class="nav-text">14. xargs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-man"><span class="nav-text">15. man</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-curl"><span class="nav-text">16. curl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-shell-脚本"><span class="nav-text">17. shell 脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-如何将标准输出和错误输出同时重定向到同一位置"><span class="nav-text">18. 如何将标准输出和错误输出同时重定向到同一位置</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -125,20 +125,22 @@
 
 
 
-<meta name="description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义">
+<meta name="description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 这个方法区在jdk8之前是叫永久代，存储一些类的信息，方法的信息等类似元数据信息一样的东西，如果程序加载的类过多，也可能会导致OOM。JDK8 把这个区域挪出来，不再保存在虚拟机中，">
 <meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM 内存管理">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/10/29/JVM-1/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义">
+<meta property="og:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 这个方法区在jdk8之前是叫永久代，存储一些类的信息，方法的信息等类似元数据信息一样的东西，如果程序加载的类过多，也可能会导致OOM。JDK8 把这个区域挪出来，不再保存在虚拟机中，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510003027516-1618059091.png">
-<meta property="og:updated_time" content="2021-01-19T12:20:52.000Z">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbudaM15Rw47UHovZzmRX7EqHu1cZME2niaJJR0Yf4toicqZvDGV4JIdLFwHRIMR20YwkSgu3omBP1fbA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbudaM15Rw47UHovZzmRX7EqHK7474OjbTGA7w5tK8VAGI534XdwcSK8HfsnRsZ3Mw7XHCK5hPMrrsQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2021-01-27T02:46:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM 内存管理">
-<meta name="twitter:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 栈内存（stack） 由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量） 先加载函数才能进行局部变量的定义">
+<meta name="twitter:description" content="JVM 内存管理参考文档 1. 堆和栈JVM内存划分：  寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令） 本地方法区（本地方法栈）：主要是调用native方法 方法区：记录类的信息，常量等 这个方法区在jdk8之前是叫永久代，存储一些类的信息，方法的信息等类似元数据信息一样的东西，如果程序加载的类过多，也可能会导致OOM。JDK8 把这个区域挪出来，不再保存在虚拟机中，">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510001611099-127788676.png">
 
 
@@ -468,7 +470,10 @@
 <ol>
 <li>寄存器（程序计数器PC拿到指令地址，放入指令寄存器IR中，cpu执行指令）</li>
 <li>本地方法区（本地方法栈）：主要是调用native方法</li>
-<li>方法区：记录类的信息，常量等</li>
+<li>方法区：记录类的信息，常量等<blockquote>
+<p>这个方法区在jdk8之前是叫永久代，存储一些类的信息，方法的信息等类似元数据信息一样的东西，如果程序加载的类过多，也可能会导致OOM。JDK8 把这个区域挪出来，不再保存在虚拟机中，而是本地内存，叫做元空间，这样就不局域于jvm可使用的系统内存。</p>
+</blockquote>
+</li>
 <li>栈内存（stack）<ul>
 <li>由编译器自动分配，存放函数的参数值，局部变量的值（定义在方法中的都是局部变量，方法外的是全局变量，for循环内部也是局部变量）</li>
 <li>先加载函数才能进行局部变量的定义，所以方法先进栈，再定义变量，变量离开作用域后释放，生命周期都很短</li>
@@ -500,7 +505,8 @@
 <p><img src="https://images.weserv.nl/?url=https://images2018.cnblogs.com/blog/779030/201805/779030-20180510003027516-1618059091.png" alt="堆结构"></p>
 <h4 id="1-2-栈"><a href="#1-2-栈" class="headerlink" title="1.2 栈"></a>1.2 栈</h4><p>每个线程执行每个方法的时候都会在栈中申请一个栈帧，每个栈帧包括局部变量区和操作数栈，用于存放此次方法调用过程中的临时变量、参数和中间结果</p>
 <p>当一个方法执行结束的时候，方法会出栈，方法内部的变量也会跟着出栈，当局部变量出栈之后，堆中new出来的内存空间就会变的不可达，当GC回收的时候就会去回收那些不可达的区域</p>
-<h3 id="2-GC"><a href="#2-GC" class="headerlink" title="2. GC"></a>2. GC</h3><p><a href="https://mp.weixin.qq.com/s/8rj70QaU4ypZ0W5yqpkwvQ" target="_blank" rel="noopener">文档1</a><br><a href="https://www.cnblogs.com/aspirant/p/8662690.html" target="_blank" rel="noopener">文档2</a></p>
+<h3 id="2-GC"><a href="#2-GC" class="headerlink" title="2. GC"></a>2. GC</h3><p><a href="https://mp.weixin.qq.com/s/8rj70QaU4ypZ0W5yqpkwvQ" target="_blank" rel="noopener">文档1</a><br><a href="https://www.cnblogs.com/aspirant/p/8662690.html" target="_blank" rel="noopener">文档2</a><br><a href="https://blog.csdn.net/shlgyzl/article/details/95041113" target="_blank" rel="noopener">文档3</a></p>
+<p>怎么确定哪些对象应该回收？引用计数方法和可达性分析<br>什么时候回收？cpu空闲自动回收；堆内存满了；主动调用 system.gc()<br>如何回收？四种垃圾回收算法</p>
 <h4 id="2-1-垃圾回收算法"><a href="#2-1-垃圾回收算法" class="headerlink" title="2.1 垃圾回收算法"></a>2.1 垃圾回收算法</h4><ol>
 <li>引用计数法：有引用就+1，引用失效就-1，等于0的时候清除。缺点：很难解决对象之间互相循环引用的问题。</li>
 <li>标记清除法：先标记哪一些需要回收，再清除被标记的对象。缺点：容易产生内存碎片，碎片太多的话后续过程中为大对象分配空间时无法找到足够的空间从而会提前触发一次垃圾回收动作</li>
@@ -520,6 +526,124 @@
 <li>新对象生成，并在Eden申请空间失败时，会触发minorGC即YGC</li>
 <li>老年代被写满；持久代被写满；system.gc() 被显示调用；会触发full gc。</li>
 </ol>
+<h4 id="2-5-垃圾回收器"><a href="#2-5-垃圾回收器" class="headerlink" title="2.5 垃圾回收器"></a>2.5 垃圾回收器</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbudaM15Rw47UHovZzmRX7EqHu1cZME2niaJJR0Yf4toicqZvDGV4JIdLFwHRIMR20YwkSgu3omBP1fbA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="垃圾回收器"></p>
+<ol>
+<li>serial<br> <strong>采取复制算法</strong>，用于新生代，单线程收集器，所以在他工作时会产生StopTheWorld。单线程情况下效率更高，比如用于GUI小程序<br> 可以与CMS垃圾回收器一起搭配工作</li>
+<li>ParNew<br> <strong>采取复制算法</strong>，用于新生代，是Serial的多线程版本，多个GC线程同时工作，但是也会产生StopTheWorld，因此不能和工作线程并行。<br> 可以与CMS垃圾回收器一起搭配工作</li>
+<li>Parallel Scavenge<br> <strong>采取复制算法</strong>，用于新生代，和ParNew一样，所以也会产生STW，多线程收集器，他是吞吐量优先的收集器，提供了很多参数来调节吞吐量。<br> 可以与 Serial Old ， Parallel Old 垃圾回收器一起搭配工作</li>
+<li>Serial Old<br> <strong>采取标记整理算法</strong>，用于老年代，单线程收集器，所以在他工作时会产生StopTheWorld。单线程情况下效率更高，比如用于GUI小程序</li>
+<li>Parallel Old<br> <strong>采取标记整理算法</strong>，用于老年代，Parallel Scavenge收集器的老年代版本，吞吐量优先。</li>
+<li>CMS<br> <strong>采取标记清除算法</strong>，老年代并行收集器，号称以最短STW时间为目标的收集器，并发高、停顿低、STW时间短的优点。主流垃圾收集器之一。</li>
+<li>G1<br> <strong>采取标记整理算法</strong>，并行收集器。对比CMS的好处之一就是不会产生内存碎片，此外，G1收集器不同于之前的收集器的一个重要特点是：G1回收的范围是整个Java堆(包括新生代，老年代)，而前六种收集器回收的范围仅限于新生代或老年代。而且他的STW停顿时间是可以手动控制一个长度为M毫秒的时间片段（可以用JVM参数 -XX:MaxGCPauseMillis指定），设置完后垃圾收集的时长不得超过这个（近实时）。</li>
+</ol>
+<blockquote>
+<p>新生代都会产生 STW，老年代可能更倾向于 CMS</p>
+</blockquote>
+<h4 id="2-6-CMS-回收器"><a href="#2-6-CMS-回收器" class="headerlink" title="2.6 CMS 回收器"></a>2.6 CMS 回收器</h4><p>采用标记清除，老年代并行收集器。分为四个阶段</p>
+<ol>
+<li>初始标记：只是标记一下 GC Roots 能直接关联的对象，速度很快，仍然需要暂停所有的工作线程。所以此阶段会产生STW，但时间很短。</li>
+<li>并发标记：进行 GC Roots 跟踪的过程，和用户线程一起工作，不需要暂停工作线程。不会STW。</li>
+<li>重新标记：为了修正在并发标记期间，因用户程序继续运行而导致标记产生变动的那一部分对象的标记记录，仍然需要暂停所有的工作线程。STW时间会比第一阶段稍微长点，但是远比并发标记短，效率也很高。</li>
+<li>并发清除：清除GC Roots不可达对象，和用户线程一起工作，不需要暂停工作线程。<blockquote>
+<p>会产生两次 STW</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbudaM15Rw47UHovZzmRX7EqHK7474OjbTGA7w5tK8VAGI534XdwcSK8HfsnRsZ3Mw7XHCK5hPMrrsQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="CMS"></p>
+<p>优点：</p>
+<ol>
+<li>并发高</li>
+<li>停顿短</li>
+<li>STW时间短</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>对cpu资源敏感，并发标记会和用户进程一起占用cpu资源，竞争激烈的话会导致程序变慢</li>
+<li>会产生浮动垃圾碎片，在最后一个阶段因为用户进程还在执行，这时候产生的垃圾只能下次再处理</li>
+<li>内存碎片问题（因为是标记清除算法）。当剩余内存不能满足程序运行要求时，系统将会出现 Concurrent Mode Failure，临时 CMS 会采用 Serial Old 回收器进行垃圾清除，此时的性能将会被降低。</li>
+</ol>
+<blockquote>
+<p>针对这个内存碎片，有这个开关参数 -XX:+UseCMSCompactAtFullCollection 作用是在full gc 后会做一次碎片整理，但是会导致停顿时间增长，此时就需要另一个参数 -XX:CMSFullGCsBeforeCompaction 这个参数用于设置在执行多少次不压缩的Full GC后,跟着来一次带压缩的</p>
+</blockquote>
+<blockquote>
+<p>CMS 不等于Full GC，我们可以看到CMS分为多个阶段，只有stop the world的阶段被计算到了Full GC的次数和时间，而和业务线程并发的GC的次数和时间则不被认为是Full GC。CMS主要可以分为initial mark(stop the world), concurrent mark, remark(stop the world), concurrent sweep几个阶段，其中initial mark和remark会stop the world。</p>
+</blockquote>
+<blockquote>
+<p>Full GC本身不会先进行Minor GC，我们可以配置，让Full GC之前先进行一次Minor GC，因为老年代很多对象都会引用到新生代的对象，先进行一次Minor GC可以提高老年代GC的速度。比如老年代使用CMS时，设置CMSScavengeBeforeRemark优化，让CMS remark之前先进行一次Minor GC。</p>
+</blockquote>
+<h4 id="2-7-G1-回收器"><a href="#2-7-G1-回收器" class="headerlink" title="2.7 G1 回收器"></a>2.7 G1 回收器</h4><p>采用标记整理，是针对整个堆的垃圾回收器。分为四个阶段</p>
+<ol>
+<li>初始标记：仅仅标记GCRoots能直接关联到的对象，且修改TAMS的值让下一阶段用户程序并发运行时能正确可用的Region中创建的新对象。速度很快，会STW。</li>
+<li>并发标记：进行 GC Roots 跟踪的过程，和用户线程一起工作，不需要暂停工作线程。不会STW。</li>
+<li>最终标记：为了修正在并发标记期间，因用户程序继续运行而导致标记产生变动的那一部分对象的标记记录，仍然需要暂停所有的工作线程。STW时间会比第一阶段稍微长点，但是远比并发标记短，效率也很高。</li>
+<li>筛选回收：首先对各个Region的回收价值和成本进行排序，根据用户所期望的GC停顿时间来制定回收计划。</li>
+</ol>
+<p>特点：</p>
+<ul>
+<li>并行与并发执行：利用多CPU的优势来缩短STW时间，在GC工作的时候，用户线程可以并行执行。</li>
+<li>分代收集：无需其他收集器配合，自己G1会进行分代收集。</li>
+<li>空间整合：不会像CMS那样产生内存碎片。</li>
+<li>可预测的停顿：可以手动控制一个长度为M毫秒的时间片段（可以用JVM参数 -XX:MaxGCPauseMillis指定），设置完后垃圾收集的时长不得超过这个（近实时）。</li>
+</ul>
+<p>原理：<br>G1并不是简单的把堆内存分为新生代和老年代两部分，而是把整个堆划分为多个大小相等的独立区域（Region），新生代和老年代也是一部分不需要连续Region的集合。G1跟踪各个Region里面的垃圾堆积的价值大小，在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。</p>
+<h3 id="3-JVM-调优"><a href="#3-JVM-调优" class="headerlink" title="3. JVM 调优"></a>3. JVM 调优</h3><ol>
+<li><p>一个程序默认的最大堆大小是系统内存的1/4，最小堆大小是系统内存的1/64</p>
+<blockquote>
+<p>free -h 查看服务器内存大小<br>jcmd pid help 查看可选的option列表<br>jcmd pid VM.flags 查看当前进程的jvm参数信息<br>-XX:MaxHeapSize=memory的四分之一</p>
+</blockquote>
+</li>
+<li><p>如果一个服务器内存32G，运行了100个程序，每一个程序的最大堆大小都是8G，最小堆</p>
+</li>
+<li><p>一般什么时候去调整 JVM 参数</p>
+</li>
+</ol>
+<ul>
+<li>需要大的吞吐量</li>
+<li>需要低时延<br>总结来说，原因就是需要快速的响应需求接口，但是如果 GC 的时间特别长，那么就需要去调整堆大小、年轻代大小、老年代大小</li>
+</ul>
+<ol start="4">
+<li><p>查看 GC 信息<br><code>jstat -gc pid</code> 查看进程在此刻的GC相关信息，主要看最后几个参数<br><code>YGC: 次数; YGCT: 时间(秒); FGC: 次数; FGCT: 时间(秒); GCT: 等于前面两个时间之和</code></p>
+</li>
+<li><p>默认空余堆内存小于40%时，JVM就会增大堆直到-Xmx的最大限制；空余堆内存大于70%时，JVM会减少堆直到 -Xms的最小限制<br>=&gt; 所以，一般最小堆大小和最大堆大小设置为相等，避免每次GC后要去调整堆的大小</p>
+</li>
+</ol>
+<h4 id="3-1-一些JVM参数"><a href="#3-1-一些JVM参数" class="headerlink" title="3.1 一些JVM参数"></a>3.1 一些JVM参数</h4><ol>
+<li><p>堆设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-Xms:初始（最小）堆大小</span><br><span class="line">-Xmx:最大堆大小</span><br><span class="line">-Xmn:新生代大小 默认是最小堆的1/3，即年轻代和老年代的比例默认是 1:2</span><br><span class="line">-XX:NewRatio:设置新生代和老年代的比值。如：为3，表示年轻代与老年代比值为1：3</span><br><span class="line">-XX:SurvivorRatio:新生代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如：为3，表示Eden：Survivor=3：2，一个Survivor区占整个新生代的1/5  </span><br><span class="line"></span><br><span class="line">-XX:MaxTenuringThreshold:设置转入老年代的存活次数。如果是0，则直接跳过新生代进入老年代</span><br><span class="line">-XX:PermSize、-XX:MaxPermSize:分别设置永久代最小大小与最大大小（Java8以前）</span><br><span class="line">-XX:MetaspaceSize、-XX:MaxMetaspaceSize:分别设置元空间最小大小与最大大小（Java8以后）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>收集器设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseSerialGC:设置串行收集器</span><br><span class="line">-XX:+UseParNewGC</span><br><span class="line"></span><br><span class="line">-XX:+UseParallelGC:设置并行收集器</span><br><span class="line">-XX:+UseParalledlOldGC:设置并行老年代收集器</span><br><span class="line">-XX:+UseConcMarkSweepGC:设置并发收集器</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>垃圾回收统计信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-XX:+PrintGC</span><br><span class="line">-XX:+PrintGCDetails</span><br><span class="line">-XX:+PrintGCTimeStamps 打印从启动到发生gc这段时间的一个秒数</span><br><span class="line">-XX:+PrintGCDateStamps 会打印详细的时间信息</span><br><span class="line">-Xloggc:filename</span><br><span class="line">-XX:GCLogFileSize=256M</span><br><span class="line">-XX:+UseGCLogFileRotation</span><br><span class="line">-XX:NumberOfGCLogFiles=5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>并行收集器设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-XX:ParallelGCThreads=n:设置并行收集器收集时使用的CPU数。并行收集线程数。</span><br><span class="line">-XX:MaxGCPauseMillis=n:设置并行收集最大暂停时间</span><br><span class="line">-XX:GCTimeRatio=n:设置垃圾回收时间占程序运行时间的百分比。公式为1/(1+n)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>并发收集器设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+CMSIncrementalMode:设置为增量模式。适用于单CPU情况。</span><br><span class="line">-XX:ParallelGCThreads=n:设置并发收集器新生代收集方式为并行收集时，使用的CPU数。并行收集线程数。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="3-3-栈溢出"><a href="#3-3-栈溢出" class="headerlink" title="3.3 栈溢出"></a>3.3 栈溢出</h4><p>栈溢出一般是因为存在循环递归的情况，有几种优化</p>
+<ol>
+<li><code>-Xss</code> 这是每个栈可使用的内存大小，即栈大小，如果这个值过小，可能导致栈溢出；如果过大，可能会影响到创建栈的数量，在多线程的情况下，依旧可能溢出</li>
+<li>递归的优化 =&gt; 尾递归，参考斐波那契的写法。程序会自动优化尾递归，每次循环最后一个栈帧会被替换，而不会多开辟空间。需要有辅助记录的变量。相当于在执行到 base case 的时候，之前的答案也传递过来了，那么就直接 return 就行</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n &lt; <span class="number">2</span> ? <span class="number">1</span> : F(n - <span class="number">1</span>) + F(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">优化后</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> a1,<span class="keyword">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? a1 : F(n - <span class="number">1</span>, a2, a1 + a2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4-HBase-JVM"><a href="#3-4-HBase-JVM" class="headerlink" title="3.4 HBase JVM"></a>3.4 HBase JVM</h4><p>regionServer 向 zk 发送心跳，zk有一个maxSessionTimeout，client自己也会传一个时间，不过zk本身会去做一个计算，来得到一个心跳时间，如果在心跳时间内 rs 没有发送心跳，那么就会认为 rs 下线了。</p>
+<p>rs 下线前是在 full gc，而时间过长，导致gc时间超过了心跳时间。</p>
+<p>24G<br>-Xmn配置6G， 4-5s一次 minor gc,  耗时300-400ms<br>-Xmn配置2G， 2s左右一次 minor gc,  耗时110ms左右<br>-Xmn配置1G， 1s左右一次或两次 minor gc,  耗时70ms左右</p>
+<p>还有一种情况，接口获取的大多是明细数据，会导致数据存放在blockcache中，在数据量大的时候，同时去访问，会导致内存不够。此时需要去调大堆大小。</p>
+<blockquote>
+<p>blockcache 有两种策略，堆内LruBlockCache和堆外BucketCache</p>
+</blockquote>
+<h4 id="3-5-Java-程序"><a href="#3-5-Java-程序" class="headerlink" title="3.5 Java 程序"></a>3.5 Java 程序</h4><p>memory 32G<br>程序 堆最大8g 最小512M<br>9521次  146.591秒  60次/秒<br>-Xmn配置1G， 1s左右一次或两次 minor gc,  耗时70ms左右</p>
+<p>memory 16G<br>程序 堆最大4g 最小256M<br>1294次 9.388秒 138次/秒 刚运行没多久就这么多次</p>
+<p>2g<br>357次 3.383秒 1天时间内回收了357次，full gc出现2次</p>
+<p>-Xmn6g -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=15 -XX:CMSInitiatingOccupancyFraction=70 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/data1/log/hbase/gc-hbase.log  -XX:ReservedCodeCacheSize=256m -XX:GCLogFileSize=256M -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5</p>
+<p>nohup java -Xms2048m -Xmx2048m -Xmn712m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Xloggc:/data/label_engine/logs/gc.log -XX:GCLogFileSize=256M -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -jar label-0.0.1-SNAPSHOT.jar –server.port=8082  &gt; /dev/null 2&gt;&amp;1 &amp;</p>
 
       
     </div>
@@ -648,7 +772,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-count">131</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -741,11 +865,11 @@
           </li>
         
           <li>
-            <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
+            <a href="/2021/01/13/Flink2/" title target="_blank"></a>
           </li>
         
           <li>
-            <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
+            <a href="/2020/12/28/Interview/" title target="_blank"></a>
           </li>
         
       </ul>
@@ -767,7 +891,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-内存管理"><span class="nav-text">JVM 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆和栈"><span class="nav-text">1. 堆和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-堆"><span class="nav-text">1.1 堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-栈"><span class="nav-text">1.2 栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GC"><span class="nav-text">2. GC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-垃圾回收算法"><span class="nav-text">2.1 垃圾回收算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-新生代和老年代的GC算法"><span class="nav-text">2.2 新生代和老年代的GC算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-如何是老年代？"><span class="nav-text">2.3 如何是老年代？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-什么时候触发GC？"><span class="nav-text">2.4 什么时候触发GC？</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-内存管理"><span class="nav-text">JVM 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆和栈"><span class="nav-text">1. 堆和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-堆"><span class="nav-text">1.1 堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-栈"><span class="nav-text">1.2 栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GC"><span class="nav-text">2. GC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-垃圾回收算法"><span class="nav-text">2.1 垃圾回收算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-新生代和老年代的GC算法"><span class="nav-text">2.2 新生代和老年代的GC算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-如何是老年代？"><span class="nav-text">2.3 如何是老年代？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-什么时候触发GC？"><span class="nav-text">2.4 什么时候触发GC？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-垃圾回收器"><span class="nav-text">2.5 垃圾回收器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-CMS-回收器"><span class="nav-text">2.6 CMS 回收器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-G1-回收器"><span class="nav-text">2.7 G1 回收器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-JVM-调优"><span class="nav-text">3. JVM 调优</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-一些JVM参数"><span class="nav-text">3.1 一些JVM参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-栈溢出"><span class="nav-text">3.3 栈溢出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-HBase-JVM"><span class="nav-text">3.4 HBase JVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-Java-程序"><span class="nav-text">3.5 Java 程序</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

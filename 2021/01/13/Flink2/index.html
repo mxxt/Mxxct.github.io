@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="m1ei8mEvXD">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/panda-180-3.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/panda-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/panda-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/panda.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Flink1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数据先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="猫熊小才天の书院">
+<meta property="og:url" content="https://mxxct4git.github.io/2021/01/13/Flink2/index.html">
+<meta property="og:site_name" content="猫熊小才天の书院">
+<meta property="og:description" content="Flink1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数据先">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-14T04:29:58.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="猫熊小才天の书院">
+<meta name="twitter:description" content="Flink1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数据先">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mxxct4git.github.io/2021/01/13/Flink2/">
+
+
+
+
+
+  <title> | 猫熊小才天の书院</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">猫熊小才天の书院</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2021/01/13/Flink2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mxxct">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda-180.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="猫熊小才天の书院">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-13T21:22:24+08:00">
+                2021-01-13
+              </time>
+            
+
+            
+			
+			
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/01/13/Flink2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/01/13/Flink2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/01/13/Flink2/" class="leancloud_visitors" data-flag-title>
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+		  
+
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h2><h3 id="1-状态一致性"><a href="#1-状态一致性" class="headerlink" title="1. 状态一致性"></a>1. 状态一致性</h3><ul>
+<li>at most once</li>
+<li>at least once</li>
+<li>exactly once</li>
+</ul>
+<h3 id="2-端到端的状态一致性"><a href="#2-端到端的状态一致性" class="headerlink" title="2. 端到端的状态一致性"></a>2. 端到端的状态一致性</h3><ul>
+<li>source端（可重设数据的读取位置）<ul>
+<li>kafka 可以根据offset回放数据</li>
+</ul>
+</li>
+<li>内部保证（checkpoint）<ul>
+<li>每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数据先缓存下来，如果是最少一次，那就会加入到计算当中。barrier会广播到下游，所有的task遇到barrier之后都会对自己的状态进行保存，下游收到所有的上游过来的barrier之后，才会进行ck。</li>
+<li>同时设置的还有两次ck的时间间隔、允许几个ck存在、超时时间等</li>
+<li>ck的保存位置有三种：memory、filesystem、rocksDB。内存中主要是开发测试用，速度快，但是不稳定；放到文件中访问速度快，状态信息不会丢失，但是大小会受到 TaskManager 内存限制（默认是5M），生产可用；rocksDB会先放到数据库，类似于key-value数据存储，当最终ck的时候会放到文件中，缺点是访问的速度下降，但是可以存储大量的状态信息</li>
+</ul>
+</li>
+<li>sink端（从故障恢复时数据不会重复写入外部系统，比如幂等写入，事务写入）<ul>
+<li>如果是redis、hbase，通过幂等性，可以保证至少一次 =&gt; 精确一次</li>
+<li>如果是kafka通过二阶段提交，在sink的时候会先预提交，然后去做ck状态保存，ck失败没关系，因为预提交用户看不到数据；ck成功之后再真正提交，如果这时候提交失败，当flink去做下一次计算的时候会发现commit失败了，会先去进行commit，然后再做计算。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-kafka"><a href="#3-kafka" class="headerlink" title="3. kafka"></a>3. kafka</h3><p>0.8版本kafka：offset是保存在zookeeper中的，但是由于zk不支持高并发，当consumer多了之后，可能会出现问题<br>=&gt; 0.10版本kafka：在kafka中有一个 _consumer_offset 的 topic，可以自己去保存</p>
+<p>在 FlinkKafkaConsumerBase 类里，有一个 ListState ，即 flink 本身就保存了kafka的offset，然后kafka又有一个topic里保存offset。那么flink默认是使用自己的 ListState，当ck成功之后会去同步到kafka，通过 setCommitOffsetsOnCheckpoints 这个配置来设置是否当ck成功后offset会同步kafka</p>
+<h3 id="4-watermark"><a href="#4-watermark" class="headerlink" title="4. watermark"></a>4. watermark</h3><p>通过 assignTimestampsAndWatermarks 方法来设置如何提取事件时间，以及允许的最大乱序时间。默认是周期性每200毫秒生成一次。也可以不要周期性，每来一条数据就尝试获取一次。</p>
+<p>当watermark时间大于窗口时间，那么窗口就会被激活，然后进行计算，输出结果。通过 allowLateness() 可以延长窗口被销毁的时间，如果有延迟很久的数据的话，可以再更新窗口</p>
+<p>只有当watermark更新了之后，才会去触发 onTimer 定时器</p>
+<h3 id="5-savepoint"><a href="#5-savepoint" class="headerlink" title="5. savepoint"></a>5. savepoint</h3><p>相当于重量级的checkpoint，需要用户手动触发，主要用于 作业升级、代码修改等，需要针对每一个算子来设置uid，flink默认的uid生成是根据代码结构，如果uid不一样了就无法获得之前的状态。</p>
+<h3 id="6-QueryableState"><a href="#6-QueryableState" class="headerlink" title="6. QueryableState"></a>6. QueryableState</h3><p>每一个状态都保存下来了，然后还需要写入到sink端，如果state是可查询的，那么直接就可以不用写，而把state去当成一个类似数据库一样的东西去使用</p>
+<h3 id="7-state类型"><a href="#7-state类型" class="headerlink" title="7. state类型"></a>7. state类型</h3><ul>
+<li>Operator State：state是task级别的state，说白了就是每个task对应一个state<ul>
+<li>ListState等，一般不使用，比如kafkaconsumer里有一个liststate保存offset partition等信息</li>
+</ul>
+</li>
+<li>KeyedState：主要用前三个<ul>
+<li>ValueState</li>
+<li>ListState</li>
+<li>MapState</li>
+<li>ReducingState</li>
+<li>AggregatingState</li>
+</ul>
+</li>
+</ul>
+<p>使用思路就是</p>
+<ol>
+<li>不管是open() 方法也好，还是哪个位置，需要先注册，通过 <code>getRuntimeContext().get...(stateDescriptor)</code> 来注册，标明name和其中的类型</li>
+<li>在使用的时候，先进行初始化的判断，然后更新，如果是通过定时器的方式来实现的，比如是继承了 processFunction 的方式来实现，那么就需要在 onTimer() 方法中去清空所有的状态</li>
+</ol>
+<h3 id="8-案例"><a href="#8-案例" class="headerlink" title="8. 案例"></a>8. 案例</h3><h4 id="8-1-热门商品的统计-TopN"><a href="#8-1-热门商品的统计-TopN" class="headerlink" title="8.1 热门商品的统计 TopN"></a>8.1 热门商品的统计 TopN</h4><ol>
+<li>设置时间语义和最大乱序时间即watermark</li>
+<li>数据进行过滤，然后按照 keyBy(“itemId”).timeWindow(窗口大小，滑动距离).aggerate(窗口增量函数，全窗口函数) 分组后，开滑动窗口，然后去自定义实现 aggerate 方法，增量函数就是一个点击量的累加，即每当来一条数据的时候就会去计算一次，全窗口函数就是对当前窗口内的所有数据去进行一个封装</li>
+<li>根据同一窗口的所有数据，再根据窗口时间进行分组，即 keyBy(“windowEnd”).process(new topN(N的大小)) 实现对同一个窗口中的数据进行排序去topN的功能。在 open 方法中去注册一个state，保存窗口内所有输出的数据；在 processElement 方法中每来一条数据，就add进state中，并且去更新定时器，这里的定时器就用当前的窗口时间+1即可 ctx.timeService().registerEventTimer(windowEnd + 1)。flink底层去注册时间戳，是按照时间戳来区分的，如果时间戳一样，那么不管注册多少次，都是一个定时器。在 onTimer() 方法中拿到所有的数据，转换成 arrayList，通过list.sort 方法排序，然后去封装数据</li>
+</ol>
+<p>保存在listState会存在一定的问题，在处理延迟数据的时候，可能会导致重复数据的输出<br>换成mapState</p>
+<h4 id="8-2-dau-uv"><a href="#8-2-dau-uv" class="headerlink" title="8.2 dau/uv"></a>8.2 dau/uv</h4><p>思路</p>
+<ol>
+<li><p>按人进行keyby</p>
+</li>
+<li><p>自定义实现继承 processFunction 方法，在open方法里去初始化两个state，一个是负责浏览次数累加，一个是定时器</p>
+</li>
+<li><p>在 processElement 方法中初始化定时器，设置为当天的零点，在 onTimer 方法中每当激活了定时器就需要输出</p>
+</li>
+<li><p>设置时间语义和最大乱序时间即watermark</p>
+</li>
+<li><p>timewindow定义在1小时，然后实现自定义trigger，每来一条数据处理一次或每20s处理一次，通过布隆过滤器来实现去重。去重不使用set是因为如果数据量很大，会导致内存溢出；然后去实现processFunction，每当一条数据来的时候就会触发process方法，可以去连续redis或者去保存中间的状态</p>
+</li>
+</ol>
+<h3 id="9-定时器"><a href="#9-定时器" class="headerlink" title="9. 定时器"></a>9. 定时器</h3><p>如果要用到延迟处理，一般都需要用到 KeyedProcessFunction。定时器的分类是根据注册的时间戳不同来分类，同一个时间戳，不管注册几次，都是一个定时器。底层通过小顶堆，获取到当前所有时间戳最小的那一个，然后去触发，触发结束后删除，再进行排序</p>
+<h3 id="10-窗口"><a href="#10-窗口" class="headerlink" title="10. 窗口"></a>10. 窗口</h3><p>window的属性只有两个，start和end，当数据来了之后，跟wm进行比较，判断在哪一个区间内，然后去激活窗口的process方法做处理。</p>
+<p>对于窗口来说，window本身没有意义（两个字段只是划分区间），window里面的中间计算结果才是有意义的（中间的状态保存最重要）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/28/Interview/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/19/Linux-3/" rel="prev" title="Linux 常用命令">
+                Linux 常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda-180.png" alt="Mxxct">
+            
+              <p class="site-author-name" itemprop="name">Mxxct</p>
+              <p class="site-description motion-element" itemprop="description">君子不器</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">131</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mxxt" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:386965035@qq.com" target="_blank" title="邮箱">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮箱</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/08/11/Thread-2/" title="同步队列" target="_blank">同步队列</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/07/08/Hive-5/" title="Hive源码解析" target="_blank">Hive源码解析</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mxxt.github.io/2020/05/31/Sqoop/" title="Sqoop源码解析" target="_blank">Sqoop源码解析</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2021/01/19/Linux-3/" title="Linux 常用命令" target="_blank">Linux 常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/13/Flink2/" title target="_blank"></a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/28/Interview/" title target="_blank"></a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink"><span class="nav-text">Flink</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-状态一致性"><span class="nav-text">1. 状态一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-端到端的状态一致性"><span class="nav-text">2. 端到端的状态一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-kafka"><span class="nav-text">3. kafka</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-watermark"><span class="nav-text">4. watermark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-savepoint"><span class="nav-text">5. savepoint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-QueryableState"><span class="nav-text">6. QueryableState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-state类型"><span class="nav-text">7. state类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-案例"><span class="nav-text">8. 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-热门商品的统计-TopN"><span class="nav-text">8.1 热门商品的统计 TopN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-dau-uv"><span class="nav-text">8.2 dau/uv</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-定时器"><span class="nav-text">9. 定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-窗口"><span class="nav-text">10. 窗口</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mxxct</span>
+
+	
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	<br>
+    <i class="fa fa-user"></i><span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i><span id="busuanzi_container_site_uv">总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+	
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz',
+        appKey: 'TJ9vKn2xQ16geSxRr80seK0S',
+        placeholder: '来说点什么吧~~~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FeVPpNOBXhL1P240cNkmAKc3-gzGzoHsz", "TJ9vKn2xQ16geSxRr80seK0S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

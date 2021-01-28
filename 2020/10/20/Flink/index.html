@@ -125,21 +125,22 @@
 
 
 
-<meta name="description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构 storm    - 低延迟 毫秒级    - 消息保障能力弱，消息传输可能重复但不会丢失    - 吞吐量低spark streaming    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）    - 高延迟（秒级）    - 能够保证消息传输不会丢失也不会重复    - 高吞吐flink">
+<meta name="description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构  storm 低延迟 毫秒级 消息保障能力弱，消息传输可能重复但不会丢失 吞吐量低   spark streaming 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批） 高延迟（秒级） 能够保证消息传输不会丢失也不会重复 高吞吐   flink 支持原生流处理，即数据可以一条一条的进行处理 低延迟 毫">
 <meta name="keywords" content="Flink">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flink（暂时）">
 <meta property="og:url" content="https://mxxct4git.github.io/2020/10/20/Flink/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构 storm    - 低延迟 毫秒级    - 消息保障能力弱，消息传输可能重复但不会丢失    - 吞吐量低spark streaming    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）    - 高延迟（秒级）    - 能够保证消息传输不会丢失也不会重复    - 高吞吐flink">
+<meta property="og:description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构  storm 低延迟 毫秒级 消息保障能力弱，消息传输可能重复但不会丢失 吞吐量低   spark streaming 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批） 高延迟（秒级） 能够保证消息传输不会丢失也不会重复 高吞吐   flink 支持原生流处理，即数据可以一条一条的进行处理 低延迟 毫">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://easyreadfs.nosdn.127.net/image_ce0fd6e4dc8c41d6b9b832e339d2b3ce">
+<meta property="og:image" content="https://images.hnbian.cn/FgMgQCTcV_g-0OWucipswMz4C3tN">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://img2018.cnblogs.com/i-beta/1247221/202002/1247221-20200206122152873-34522436.png">
 <meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1247221/202002/1247221-20200206131937614-983019032.png">
 <meta property="og:updated_time" content="2020-11-12T09:57:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink（暂时）">
-<meta name="twitter:description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构 storm    - 低延迟 毫秒级    - 消息保障能力弱，消息传输可能重复但不会丢失    - 吞吐量低spark streaming    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）    - 高延迟（秒级）    - 能够保证消息传输不会丢失也不会重复    - 高吞吐flink">
+<meta name="twitter:description" content="Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行状态计算 lambda架构  storm 低延迟 毫秒级 消息保障能力弱，消息传输可能重复但不会丢失 吞吐量低   spark streaming 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批） 高延迟（秒级） 能够保证消息传输不会丢失也不会重复 高吞吐   flink 支持原生流处理，即数据可以一条一条的进行处理 低延迟 毫">
 <meta name="twitter:image" content="https://images.weserv.nl/?url=https://easyreadfs.nosdn.127.net/image_ce0fd6e4dc8c41d6b9b832e339d2b3ce">
 
 
@@ -455,7 +456,28 @@
       
         <h2 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h2><p>是一个框架和分布式处理引擎，用于对<strong>无界和有界数据流</strong>进行<strong>状态</strong>计算</p>
 <p>lambda架构<br><img src="https://images.weserv.nl/?url=https://easyreadfs.nosdn.127.net/image_ce0fd6e4dc8c41d6b9b832e339d2b3ce" alt="Lambda架构"></p>
-<p>storm<br>    - 低延迟 毫秒级<br>    - 消息保障能力弱，消息传输可能重复但不会丢失<br>    - 吞吐量低<br>spark streaming<br>    - 以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）<br>    - 高延迟（秒级）<br>    - 能够保证消息传输不会丢失也不会重复<br>    - 高吞吐<br>flink<br>    - 支持原生流处理，即数据可以一条一条的进行处理<br>    - 低延迟 毫秒级<br>    - 能够保证消息传输不会丢失也不会重复<br>    - 高吞吐</p>
+<ul>
+<li>storm<ul>
+<li>低延迟 毫秒级</li>
+<li>消息保障能力弱，消息传输可能重复但不会丢失</li>
+<li>吞吐量低</li>
+</ul>
+</li>
+<li>spark streaming<ul>
+<li>以固定时间间隔（几秒钟）处理一段段的批处理作业（微批）</li>
+<li>高延迟（秒级）</li>
+<li>能够保证消息传输不会丢失也不会重复</li>
+<li>高吞吐</li>
+</ul>
+</li>
+<li>flink<ul>
+<li>支持原生流处理，即数据可以一条一条的进行处理</li>
+<li>低延迟 毫秒级</li>
+<li>能够保证消息传输不会丢失也不会重复</li>
+<li>高吞吐</li>
+</ul>
+</li>
+</ul>
 <p>为什么是flink？1. 低延迟(毫秒级) 2. 高吞吐(每秒千万级) 3. 数据准确性（exactly-once） 4. 易用性（SQL/Table API/DataStream API）</p>
 <table>
 <thead>
@@ -496,7 +518,10 @@
 <li>window：每N秒一段时间间隔</li>
 <li>allowedLatest：设置窗口销毁延迟时间，及到时间了，但是还允许一定时间内的数据迟到</li>
 </ul>
-<p>keyby(int… fields) // 0 代表第一个元素<br>keyby(String… fields) // 声明为public的字段名或类的get方法，主要是方便了datastream嵌套复合类型比如tuple或者pojo类的时候<br>keyby(new KeySelector&lt;T,K&gt;()) // 覆写getKey方法，来自定义返回key分组</p>
+<blockquote>
+<p>形象化理解为 水位线上涨，淹没了一个窗口，就会触发窗口的计算<br>多个并行度的话，算子会取最小的那个水位线来生效</p>
+</blockquote>
+<p>keyby(int… fields) // 0 代表第一个元素<br>keyby(String… fields) // 声明为public的字段名或类的get方法，主要是方便了datastream嵌套复合类型比如tuple或者pojo类的时候<br>keyby(new KeySelector&lt;T,K&gt;()) // 覆写getKey方法，自定义返回key分组</p>
 <p>除了env可以设置并行度，每一个算子也都可以单独设置并行度，包括 <code>print().setParallelism()</code>。默认并行度是cpu核数。一般来说，一个流的并行度，可以认为是其所有算子的并行度里最大的那个并行度。</p>
 <p>一个流所需要的slot数量不一定就是流中所有算子的并行度的加和。事实上，flink 允许先后操作的算子放入到同一个slot里面（子任务共享slot），这样可以减少数据的shuffle；在共享slot的情况下，可能会出现一个slot实现了source、transformation到sink的所有操作，即保留了整个流的pipeline过程，这个在 flink-yarn.xml 里有注释说是允许的。</p>
 <p>flink运行时组件：</p>
@@ -521,12 +546,33 @@
 </ul>
 </li>
 </ul>
-<p>flink执行图可以分为四层，或者四个过程</p>
+<p>flink执行图可以分为四层，或者四个过程，或者四层模型</p>
 <ul>
 <li>streamgraph：用户通过stream api编写的代码生成的最初的图，包含source、transformation、sink的一个拓扑结构</li>
 <li>jobgraph：客户端在提交作业到jobmanager之前，会自动根据streamgraph进行合并优化，将符合条件的多个任务合并在一起作为一个任务，减少数据传输</li>
 <li>executiongraph：jobmanager根据jobgraph来生成executiongraph，将任务拆成可并行化的过程，交给taskmanager；<strong>调度层最核心的数据结构</strong></li>
 <li>物理执行图：taskmanager上部署task后形成的图，并不是一个具体的数据结构</li>
+</ul>
+<p>数据分发策略<br><img src="https://images.hnbian.cn/FgMgQCTcV_g-0OWucipswMz4C3tN" alt="分发器继承图"></p>
+<blockquote>
+<p>ChannelSelector 是一个接口，为输入的数据提供一个逻辑的channel<br>StreamPartitioner 是所有分区器的基类</p>
+<ul>
+<li>GlobalPartitioner：将所有的数据都发送到下游 0 号分区中</li>
+<li>ShufflePartitioner：将数据随机分发到一个分区</li>
+<li>RebalancePartitioner：将数据循环分发到下游</li>
+<li>RescalePartitioner：基于上下游并行度分发，下游2个上游四个，那么上游的2个会分发到同一个下游分区</li>
+<li>BroadcastPartitioner：广播，将数据分发到下游的所有分区</li>
+<li>ForwardPartitioner：上下游分区是一一对应的</li>
+<li>KeyGroupStreamPartitioner：keyby操作，相同key分发到同一个下游分区</li>
+<li>CustomPartitionerWrapper：自定义分区策略</li>
+</ul>
+</blockquote>
+<p>数据传输策略</p>
+<ul>
+<li>forward strategy：一个task的输出只发送给一个task作为输入，如果两个task在同一个jvm里，可以避免网络传输</li>
+<li>key based strategy：数据按key分组，相同的key数据传输到同一个task处理</li>
+<li>broadcast strategy：广播</li>
+<li>random strategy：数据从一个task随机传输给下一个算子的task</li>
 </ul>
 <p>数据传输形式</p>
 <ul>
@@ -542,8 +588,8 @@
 </ul>
 </li>
 </ul>
-<p>什么样的任务可以被合并在一起？相同并行度的one-to-one操作，满足这两个条件，flink会把相邻的算子合并在一起，放在同一个slot里面进行计算，减少网络传输。通过在算子后面调用 <code>.filter(..).disableChaing()</code> 可以断开合并的任务链，<code>.filter(..).startNewChain()</code> 开始合并新的任务链。</p>
-<p>针对某一个算子过程，可能会很复杂或者有特殊需求，需要单独放在一个slot里运行？在算子后面调用 <code>slotSharingGroup(&quot;key&quot;)</code>，表示从当前算子开始，之后的所有操作都会放在一个slot里面，通过 key 来区分多个slot共享组。默认slot共享组的key是”dafault”。</p>
+<p>什么样的任务可以被合并在一起？相同并行度的one-to-one操作，满足这两个条件，flink会把相邻的算子合并在一起，放在同一个slot里面进行计算，减少网络传输。通过在算子后面调用 <code>.filter(..).disableChain()</code> 可以断开合并的任务链，<code>.filter(..).startNewChain()</code> 开始合并新的任务链。</p>
+<p>针对某一个算子过程，可能会很复杂或者有特殊需求，需要单独放在一个slot里运行？在算子后面调用 <code>slotSharingGroup(&quot;key&quot;)</code>，表示从当前算子开始，之后的所有操作都会放在一个slot里面，通过 key 来区分多个slot共享组。默认slot共享组的key是”default”。</p>
 <p>DataStream API</p>
 <ul>
 <li>source<ul>
@@ -584,12 +630,7 @@
 <li>sink<ul>
 <li>kafka<ul>
 <li>初始化FlinkKafkaProducer的时候有三个构造函数，不加kafkaProducersPoolSize、加kafkaProducersPoolSize和一个带着自定义分区的函数。一般用前两个就行，如果说业务数据需要根据某种条件将数据写入到N多个topic中，可以用第三个，实现KeyedSerializationSchema类getTargetTopic()方法，<a href="https://bbs.huaweicloud.com/blogs/148532" target="_blank" rel="noopener">参考地址</a></li>
-<li>FlinkKafkaConsumer 消费过程：<br>  父类FlinkKafkaConsumerBase<ol>
-<li>initializeState()：从最后一个成功的checkpoint中获取各个partition的offset到restoredState中。</li>
-<li>open()：从restoredState中获取这个subTask所消费的topic的partition的起始offset，保存到subscribedPartitionsToStartOffsets中；如果这是一个第一次向topic消费的job的subTask，那么Flink根据job的并行度以及这个subTask的index均匀的分配partition给这个subTask消费。此时，partition的起始offset就由我们在上文中介绍的配置来决定。</li>
-<li>run(): 如果subscribedPartitionsToStartOffsets不为空，创建KafkaFetcher，执行其runFetchLoop()。</li>
-</ol>
-</li>
+<li>FlinkKafkaConsumer 消费过程：<br>  父类 FlinkKafkaConsumerBase<br>  1.initializeState()：从最后一个成功的checkpoint中获取各个partition的offset到restoredState中。<br>  2.open()：从restoredState中获取这个subTask所消费的topic的partition的起始offset，保存到subscribedPartitionsToStartOffsets中；如果这是一个第一次向topic消费的job的subTask，那么Flink根据job的并行度以及这个subTask的index均匀的分配partition给这个subTask消费。此时，partition的起始offset就由我们在上文中介绍的配置来决定。<br>  3.run(): 如果subscribedPartitionsToStartOffsets不为空，创建KafkaFetcher，执行其runFetchLoop()。</li>
 </ul>
 </li>
 <li>redis</li>
@@ -658,10 +699,10 @@
 </ol>
 <p>waterMark 的意义：解决乱序问题<br>waterMark 的传递：上游向下游传递是通过广播传递给它分区的所有下游，而下游会保存所有上游的watermark然后取最小的那个来计算。<br><img src="https://img2018.cnblogs.com/i-beta/1247221/202002/1247221-20200206131937614-983019032.png" alt="watermark的传递"></p>
 <p>watermark 的引用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.assignTimestampsAndWatermarks(AssignerWithPeriodicWatermarks) // 隔一段时间，周期性生成waterMark，这个周期时间在env.setStreamTimeCharacteristic() 默认值是200毫秒，也可以自定义设置</span><br><span class="line">eg:</span><br><span class="line">.assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor(maxOutOfOrderness)) 去重写extractTimestamp()方法，提取eventTime，在BoundedOutOfOrdernessTimestampExtractor类下getCurrentWatermark()方法里，会先通过eventTime-maxOutOfOrderness得到一个时间戳，会和已有的watermark比较，取最大值。maxOutOfOrderness指的是一个窗口延迟时间，maxOutOfOrderness设置的太大，窗口计算的结果就太慢，太小的话计算的结果准确性就下降了</span><br><span class="line"></span><br><span class="line">.assignTimestampsAndWatermarks(AssignerWithPunctuatedWatermarks) // 每来一条数据都会生成一个watermark</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.assignTimestampsAndWatermarks(AssignerWithPeriodicWatermarks) <span class="comment">// 隔一段时间，周期性生成waterMark，这个周期时间在env.setStreamTimeCharacteristic() 默认值是200毫秒，也可以自定义设置</span></span><br><span class="line"><span class="comment">// eg:</span></span><br><span class="line">.assignTimestampsAndWatermarks(<span class="keyword">new</span> BoundedOutOfOrdernessTimestampExtractor(maxOutOfOrderness)) 去重写extractTimestamp()方法，提取eventTime，在BoundedOutOfOrdernessTimestampExtractor类下getCurrentWatermark()方法里，会先通过eventTime-maxOutOfOrderness得到一个时间戳，会和已有的watermark比较，取最大值。maxOutOfOrderness指的是一个窗口延迟时间，maxOutOfOrderness设置的太大，窗口计算的结果就太慢，太小的话计算的结果准确性就下降了</span><br><span class="line"></span><br><span class="line">.assignTimestampsAndWatermarks(AssignerWithPunctuatedWatermarks) <span class="comment">// 每来一条数据都会生成一个watermark</span></span><br></pre></td></tr></table></figure>
 
 <p>窗口起始时间的确定<br>以 TumblingEventTimeWindows 为例，有一个 assignWindows() 方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Collection&lt;TimeWindow&gt; assignWindows(Object element, long timestamp, WindowAssignerContext context) &#123;</span><br><span class="line">    if (timestamp &gt; Long.MIN_VALUE) &#123;</span><br><span class="line">        // Long.MIN_VALUE is currently assigned when no timestamp is present</span><br><span class="line">        // offset 默认是 0</span><br><span class="line">        long start = TimeWindow.getWindowStartWithOffset(timestamp, offset, size);</span><br><span class="line">        return Collections.singletonList(new TimeWindow(start, start + size));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        throw new RuntimeException(&quot;Record has Long.MIN_VALUE timestamp (= no timestamp marker). &quot; +</span><br><span class="line">                &quot;Is the time characteristic set to &apos;ProcessingTime&apos;, or did you forget to call &quot; +</span><br><span class="line">                &quot;&apos;DataStream.assignTimestampsAndWatermarks(...)&apos;?&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static long getWindowStartWithOffset(long timestamp, long offset, long windowSize) &#123;</span><br><span class="line">    return timestamp - (timestamp - offset + windowSize) % windowSize;</span><br><span class="line">    // offset默认是0，+windowSize再取余，相当于没加，所以相当于 timestamp - timestam%windowSize</span><br><span class="line">    // 相当于取了一个windowSize的整数倍</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Collection&lt;TimeWindow&gt; <span class="title">assignWindows</span><span class="params">(Object element, <span class="keyword">long</span> timestamp, WindowAssignerContext context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timestamp &gt; Long.MIN_VALUE) &#123;</span><br><span class="line">        <span class="comment">// Long.MIN_VALUE is currently assigned when no timestamp is present</span></span><br><span class="line">        <span class="comment">// offset 默认是 0</span></span><br><span class="line">        <span class="keyword">long</span> start = TimeWindow.getWindowStartWithOffset(timestamp, offset, size);</span><br><span class="line">        <span class="keyword">return</span> Collections.singletonList(<span class="keyword">new</span> TimeWindow(start, start + size));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Record has Long.MIN_VALUE timestamp (= no timestamp marker). "</span> +</span><br><span class="line">                <span class="string">"Is the time characteristic set to 'ProcessingTime', or did you forget to call "</span> +</span><br><span class="line">                <span class="string">"'DataStream.assignTimestampsAndWatermarks(...)'?"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getWindowStartWithOffset</span><span class="params">(<span class="keyword">long</span> timestamp, <span class="keyword">long</span> offset, <span class="keyword">long</span> windowSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> timestamp - (timestamp - offset + windowSize) % windowSize;</span><br><span class="line">    <span class="comment">// offset默认是0，+windowSize再取余，相当于没加，所以相当于 timestamp - timestam%windowSize</span></span><br><span class="line">    <span class="comment">// 相当于取了一个windowSize的整数倍</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>flink 有状态的数据流</p>
 <p>状态<br>比如聚合计算的一些结果，需要保存下来，这个就算是任务的状态。可以认为是一个本地变量，flink会进行状态管理，包括状态一致性、故障处理以及高效存储和访问</p>
@@ -698,20 +739,23 @@
 <li><p>MemoryStateBackend</p>
 <ul>
 <li>内存级的状态后端，会将键控状态作为内存中的对象进行管理，将它们存储在taskmanager的jvm堆上，而将checkpoint存储在jobmanager中</li>
-<li>特点：快速，低延迟，但不稳定</li>
+<li>有点：开发测试方便</li>
+<li>缺点：但只能保存数据量小的状态；状态数据有可能丢失</li>
 </ul>
 </li>
 <li><p>FsStateBackend</p>
 <ul>
 <li>将checkpoint存到远程的持久化文件系统，而对于本地状态，跟MemoryStateBackend一样，也会存在taskmanager的jvm堆上</li>
-<li>特点：同时拥有内存级的本地访问速度，和更好的容错保证。但是如果系统特别庞大，taskmanager堆上的内存都不足以存储下，就有第三种状态后端<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 状态后端</span><br><span class="line">// env.setStateBackend(new FsStateBackend(String checkpointDataUri, boolean asynchronousSnapshots));</span><br></pre></td></tr></table></figure>
+<li>特点：同时拥有内存级的本地访问速度，和更好的容错保证。但是如果系统特别庞大，taskmanager堆上的内存（默认是5M）都不足以存储下，就有第三种状态后端<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 状态后端</span><br><span class="line">// env.setStateBackend(new FsStateBackend(String checkpointDataUri, boolean asynchronousSnapshots));</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>RocksDBStateBackend</p>
 <ul>
-<li>将所有状态序列化后，存入本地的RocksDB中存储。相当于落入磁盘，不会丢数，但是会影响速度</li>
+<li>类似于key-value数据存储，将所有状态序列化后，存入本地的RocksDB中存储。相当于落入磁盘，不会丢数，但是会影响速度</li>
 <li>需要再引入 flink-statebackend-rocksdb 依赖</li>
+<li>优点：可以存储超大量的状态信息；状态信息不会丢失</li>
+<li>缺点：状态访问速度有所下降</li>
 </ul>
 </li>
 </ul>
@@ -957,7 +1001,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-count">131</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1050,11 +1094,11 @@
           </li>
         
           <li>
-            <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
+            <a href="/2021/01/13/Flink2/" title target="_blank"></a>
           </li>
         
           <li>
-            <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
+            <a href="/2020/12/28/Interview/" title target="_blank"></a>
           </li>
         
       </ul>
