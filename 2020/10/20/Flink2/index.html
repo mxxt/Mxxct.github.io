@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Flink,">
 
 
 
@@ -125,17 +125,18 @@
 
 
 
-<meta name="description" content="Flink1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数据先">
+<meta name="description" content="Flink总结1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数">
+<meta name="keywords" content="Flink">
 <meta property="og:type" content="article">
-<meta property="og:title" content="猫熊小才天の书院">
-<meta property="og:url" content="https://mxxct4git.github.io/2021/01/13/Flink2/index.html">
+<meta property="og:title" content="Flink总结">
+<meta property="og:url" content="https://mxxct4git.github.io/2020/10/20/Flink2/index.html">
 <meta property="og:site_name" content="猫熊小才天の书院">
-<meta property="og:description" content="Flink1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数据先">
+<meta property="og:description" content="Flink总结1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-14T04:29:58.561Z">
+<meta property="og:updated_time" content="2021-01-12T09:57:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="猫熊小才天の书院">
-<meta name="twitter:description" content="Flink1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数据先">
+<meta name="twitter:title" content="Flink总结">
+<meta name="twitter:description" content="Flink总结1. 状态一致性 at most once at least once exactly once  2. 端到端的状态一致性 source端（可重设数据的读取位置） kafka 可以根据offset回放数据   内部保证（checkpoint） 每隔一段时间去做一次ck，jobManager会在数据流中加入一个barrier，上游的计算可能有快有慢，如果是精确一次，计算快的算子会把数">
 
 
 
@@ -165,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://mxxct4git.github.io/2021/01/13/Flink2/">
+  <link rel="canonical" href="https://mxxct4git.github.io/2020/10/20/Flink2/">
 
 
 
 
 
-  <title> | 猫熊小才天の书院</title>
+  <title>Flink总结 | 猫熊小才天の书院</title>
   
 
 
@@ -332,7 +333,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2021/01/13/Flink2/">
+    <link itemprop="mainEntityOfPage" href="https://mxxct4git.github.io/2020/10/20/Flink2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mxxct">
@@ -349,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">Flink总结</h1>
         
 
         <div class="post-meta">
@@ -363,8 +364,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-13T21:22:24+08:00">
-                2021-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-20T16:20:00+08:00">
+                2020-10-20
               </time>
             
 
@@ -376,6 +377,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flink/" itemprop="url" rel="index">
+                    <span itemprop="name">Flink</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -384,8 +407,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/01/13/Flink2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2021/01/13/Flink2/" itemprop="commentCount"></span>
+                <a href="/2020/10/20/Flink2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/10/20/Flink2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,7 +416,7 @@
 
           
           
-             <span id="/2021/01/13/Flink2/" class="leancloud_visitors" data-flag-title>
+             <span id="/2020/10/20/Flink2/" class="leancloud_visitors" data-flag-title="Flink总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -426,7 +449,7 @@
       
 
       
-        <h2 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h2><h3 id="1-状态一致性"><a href="#1-状态一致性" class="headerlink" title="1. 状态一致性"></a>1. 状态一致性</h3><ul>
+        <h2 id="Flink总结"><a href="#Flink总结" class="headerlink" title="Flink总结"></a>Flink总结</h2><h3 id="1-状态一致性"><a href="#1-状态一致性" class="headerlink" title="1. 状态一致性"></a>1. 状态一致性</h3><ul>
 <li>at most once</li>
 <li>at least once</li>
 <li>exactly once</li>
@@ -511,6 +534,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Flink/" rel="tag"><i class="fa fa-tag"></i> Flink</a>
+          
+        </div>
+      
 
       
       
@@ -520,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/12/28/Interview/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2020/10/20/Flink/" rel="next" title="Flink（暂时）">
+                <i class="fa fa-chevron-left"></i> Flink（暂时）
               </a>
             
           </div>
@@ -530,8 +559,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/01/19/Linux-3/" rel="prev" title="Linux 常用命令">
-                Linux 常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/10/26/HBase-2/" rel="prev" title="HBase进阶">
+                HBase进阶 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -616,7 +645,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">131</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -709,11 +738,11 @@
           </li>
         
           <li>
-            <a href="/2021/01/13/Flink2/" title target="_blank"></a>
+            <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
           </li>
         
           <li>
-            <a href="/2020/12/28/Interview/" title target="_blank"></a>
+            <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
           </li>
         
       </ul>
@@ -735,7 +764,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink"><span class="nav-text">Flink</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-状态一致性"><span class="nav-text">1. 状态一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-端到端的状态一致性"><span class="nav-text">2. 端到端的状态一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-kafka"><span class="nav-text">3. kafka</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-watermark"><span class="nav-text">4. watermark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-savepoint"><span class="nav-text">5. savepoint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-QueryableState"><span class="nav-text">6. QueryableState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-state类型"><span class="nav-text">7. state类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-案例"><span class="nav-text">8. 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-热门商品的统计-TopN"><span class="nav-text">8.1 热门商品的统计 TopN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-dau-uv"><span class="nav-text">8.2 dau/uv</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-定时器"><span class="nav-text">9. 定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-窗口"><span class="nav-text">10. 窗口</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink总结"><span class="nav-text">Flink总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-状态一致性"><span class="nav-text">1. 状态一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-端到端的状态一致性"><span class="nav-text">2. 端到端的状态一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-kafka"><span class="nav-text">3. kafka</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-watermark"><span class="nav-text">4. watermark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-savepoint"><span class="nav-text">5. savepoint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-QueryableState"><span class="nav-text">6. QueryableState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-state类型"><span class="nav-text">7. state类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-案例"><span class="nav-text">8. 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-热门商品的统计-TopN"><span class="nav-text">8.1 热门商品的统计 TopN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-dau-uv"><span class="nav-text">8.2 dau/uv</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-定时器"><span class="nav-text">9. 定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-窗口"><span class="nav-text">10. 窗口</span></a></li></ol></li></ol></div>
             
 
           </div>
