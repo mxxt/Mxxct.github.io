@@ -133,13 +133,13 @@
 <meta property="og:site_name" content="猫熊小才天の书院">
 <meta property="og:description" content="Redis的一些问题Remote Dictionary Server 底层C写的 类似于 mysql，可以把最近的query和对应的结果保存下来 =&amp;gt; hashquery 存入到缓存里，如果其他用户的query的hash值是一样的，说明查询是一样的，直接从缓存里读出来结果 =&amp;gt; 多级缓存，目的是将最初的query进行过滤、优化，尽可能只让最后的事务操作落到DB中，缓解DB压力 1. r">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mxxct4git.github.io/2020/10/15/Redis-3/(https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGtia3JscZOBWk5Cy36uVXUIF2Cuw5qpS8ZqX0t8LVjHPxSl6zFHY7dSg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGtia3JscZOBWk5Cy36uVXUIF2Cuw5qpS8ZqX0t8LVjHPxSl6zFHY7dSg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGHyjmYQe6zWSnq4IxhKFJaZENND5L6pC70xYU3Suh8O8fpYXXFGTrTg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:updated_time" content="2020-10-19T10:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis的一些问题">
 <meta name="twitter:description" content="Redis的一些问题Remote Dictionary Server 底层C写的 类似于 mysql，可以把最近的query和对应的结果保存下来 =&amp;gt; hashquery 存入到缓存里，如果其他用户的query的hash值是一样的，说明查询是一样的，直接从缓存里读出来结果 =&amp;gt; 多级缓存，目的是将最初的query进行过滤、优化，尽可能只让最后的事务操作落到DB中，缓解DB压力 1. r">
-<meta name="twitter:image" content="https://mxxct4git.github.io/2020/10/15/Redis-3/(https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGtia3JscZOBWk5Cy36uVXUIF2Cuw5qpS8ZqX0t8LVjHPxSl6zFHY7dSg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta name="twitter:image" content="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGtia3JscZOBWk5Cy36uVXUIF2Cuw5qpS8ZqX0t8LVjHPxSl6zFHY7dSg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
 
 
@@ -633,7 +633,7 @@
 <li>Y轴：按照业务切分，比如分业务分库</li>
 <li>Z轴：数据分区（切片）</li>
 </ul>
-<h3 id="13-Redis-问题画像"><a href="#13-Redis-问题画像" class="headerlink" title="13. Redis 问题画像"></a>13. Redis 问题画像</h3><p><img src="(https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGtia3JscZOBWk5Cy36uVXUIF2Cuw5qpS8ZqX0t8LVjHPxSl6zFHY7dSg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<h3 id="13-Redis-问题画像"><a href="#13-Redis-问题画像" class="headerlink" title="13. Redis 问题画像"></a>13. Redis 问题画像</h3><p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGtia3JscZOBWk5Cy36uVXUIF2Cuw5qpS8ZqX0t8LVjHPxSl6zFHY7dSg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
 <p><img src="https://images.weserv.nl/?url=https://mmbiz.qpic.cn/mmbiz_jpg/HXiabut2oicnMyMyOXqNMBnsfPlk3KNRkGHyjmYQe6zWSnq4IxhKFJaZENND5L6pC70xYU3Suh8O8fpYXXFGTrTg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
 
       
@@ -761,7 +761,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-count">131</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -772,7 +772,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -783,7 +783,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -854,11 +854,11 @@
           </li>
         
           <li>
-            <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
+            <a href="/2020/12/28/Interview-1/" title="Interview-1" target="_blank">Interview-1</a>
           </li>
         
           <li>
-            <a href="/2020/12/09/Java-4/" title="Java 容器" target="_blank">Java 容器</a>
+            <a href="/2020/12/13/DW/" title="数仓架构" target="_blank">数仓架构</a>
           </li>
         
       </ul>
